@@ -1,0 +1,80 @@
+@font-face {
+    src: url(FredokaOne-Regular.ttf);
+    font-family: 'yeet';
+}
+body {
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    background-color: #232323;
+    /* make the text centered*/
+    text-align: center;
+    color: #fff;
+    font-family: 'yeet', sans-serif;
+}
+h1,h2,h3,h4,h5,h6 {
+    /* make the text bigger */
+    font-size: 300%;
+    /* make the text color white */
+    color: #fff;
+    /* make the text underlined */
+    text-decoration: underline;
+}
+/* make body on hover double the size
+h1:hover {
+    color: #ffc400;
+}
+*/
+p{
+/* make the text bigger */
+    font-size: 200%;
+/* make the text color white */
+    color: #fff;
+    /* Add padding of 200   padding: 200px;*/
+
+    /* Center the text in the center of the height*/
+    margin-top: 100px;
+    margin-left: auto;
+
+}
+
+
+/* on hover make image double the size */
+a:hover {
+    /* remove underline of link   crosshair     cursor: ; */
+    text-decoration: none;
+
+}
+
+a{
+    font-size: 200%;
+    padding-left: 100px;
+    padding-right: 100px;
+    color: #00ffa6;
+}
+div{
+    font-size: 300%;
+}
+.top:hover{
+    color: #00ffa6;
+/* font-size: 250%; */
+}
+.mid:hover{
+    color: #00a6ff;
+    /* font-size: 250%; */
+}
+.bot:hover{
+    color: #c800ff;
+    /* font-size: 250%; */
+}
+
+video {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+ul {
+    font-size: 200%;
+}
