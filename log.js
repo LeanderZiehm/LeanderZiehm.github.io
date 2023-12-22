@@ -1,6 +1,3 @@
-// console.log("log");
-
-
 function getTimeDateString() {
   let date = new Date();
   let time = date.toLocaleTimeString();
@@ -26,7 +23,7 @@ function addCurrentDateToLocalStorage(key) {
   } else {
     localValue = [];
   }
-  // console.log(localValue);
+
   localValue.push(getTimeDateString());
   localStorage.setItem(key, JSON.stringify(localValue));
 }
@@ -76,7 +73,7 @@ async function save() {
       fetchedJson = [];
     }
 
-    console.log(fetchedJson);
+
     const userCount = fetchedJson.length;
     const userAgenString = window.navigator.userAgent;
     const ipRequest = await fetch("https://api.ipify.org");
@@ -145,7 +142,6 @@ async function save() {
         branch: branch,
       }),
     });
-    // console.log("logged");
   } catch (error) {
     console.error("Error:", error);
   }
