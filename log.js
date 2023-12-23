@@ -24,7 +24,7 @@ function addCurrentDateToLocalStorage(key) {
     localValue = [];
   }
 
-  localValue.push(getTimeDateString());
+  localValue.unshift(getTimeDateString());
   localStorage.setItem(key, JSON.stringify(localValue));
 }
 
@@ -100,7 +100,7 @@ async function save() {
         localVisitCount: 0,
         pageLinks: [],
       };
-      fetchedJson.push(user);
+      fetchedJson.unshift(user);
     } else {
       user = fetchedJson[userID];
     }
@@ -108,13 +108,13 @@ async function save() {
     addCurrentDateToLocalStorage("localVisitDates");
     incrementLocalStorageInt("localVisitCount");
 
-    user["visitDates"].push(getTimeDateString());
+    user["visitDates"].unshift(getTimeDateString());
     user["localVisitDates"] = JSON.parse(
       localStorage.getItem("localVisitDates")
     );
     user["visitCount"] = user["visitCount"] + 1;
     user["localVisitCount"] = parseInt(localStorage.getItem("localVisitCount"));
-    user["pageLinks"].push(window.location.href);
+    user["pageLinks"].unshift(window.location.href);
 
     // fetchedJson = [user];
 
