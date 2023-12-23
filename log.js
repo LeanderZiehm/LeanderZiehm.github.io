@@ -54,16 +54,16 @@ async function save() {
   let x = "jlscXJ4Tjzz{I}KF9f<Glvy{yyJEjX7tWX4~88Lr";
   x = de(x);
   const owner = "Circulai";
-  const repo = "Circulai.github.io";
+  const repo = "Database";
   const branch = "main"; // or the branch you want to commit to
-  const path = "visitsLog.json"; // path to your JSON file
-  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+  const fileName = "visitsLog.json"; // path to your JSON file
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
 
   try {
     const r = await fetch(
-      `https://raw.githubusercontent.com/Circulai/Circulai.github.io/main/${path}`
+       `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${fileName}`
     );
-    //https://raw.githubusercontent.com/Circulai/Circulai.github.io/main/visitsLog.json
+
     let fetchedJson = await r.json();
 
     const RESET_DATA = false;
