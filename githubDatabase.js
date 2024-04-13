@@ -133,13 +133,16 @@ async function mainSave(){
         userData.comments = comments;
 
 
+        const actionHistory = get('actionHistory',[]);
+
+
         // const actionHistoryElement = {
         //     "action": "view",
         //     "url": window.location.href,
         //     "date": getTimeDateString()
         // }
 
-        // userData.actionHistory.unshift(actionHistoryElement);
+        userData.actionHistory = actionHistory;
     }
 
     console.log(JSON.stringify(jsonData));
