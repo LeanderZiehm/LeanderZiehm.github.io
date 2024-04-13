@@ -23,10 +23,29 @@
    border-radius: 100%;
    aspect-ratio: 1;
    margin: 0px;
+   /*position:*/
    /*font-size: 30px;*/
     /*place-items: center;*/
-    
+
 }
+
+
+
+#backwardButton img{
+
+  padding-top: 5px;
+  padding-right: 3px;
+  opacity: 0.5;
+}
+
+#forwardButton img{
+  padding-top: 5px;
+  padding-left: 3px;
+  opacity: 0.5;
+}
+
+
+
 #forwardButton{
    float: right;
 }
@@ -102,12 +121,12 @@ color: var(--offWhite);
 
   <div id="textContainer">
     <div class="text" id="task">Exercise 1: Write a program that represents the colors red, green, and blue as Clingo atoms.</div>
-    <div class="text" id="tip">~~Do not use pooling, just write the atoms down manually like atom(info).</div>
-    <div class="text" id="solution">~~color(red). color(green). color(blue).</div>
+    <div class="text" id="tip"></div>
+    <div class="text" id="solution"></div>
   </div>
 </div>
-<button id="backwardButton">🠜</button>  
-<button id="forwardButton">🠞</button>
+<button id="backwardButton"><img src="icons/backward.png" height="20"/></button> <!-- 🠜  -->
+<button id="forwardButton"><img src="icons/forward.png" height="20"/></button><!-- 🠞 -->
 
 </div>
 
@@ -135,6 +154,9 @@ color: var(--offWhite);
     hideElementByID('commentsButton');
     }
 
+    hideElementByID('tip');
+    hideElementByID('solution');
+
     document.getElementById('menuButton').addEventListener('click',function(){  window.location.href = 'ExerciseSelection.html'});
     // document.getElementById('commentsButton').addEventListener('click',function(){  window.location.href = 'Comments.html'});
     document.getElementById('commentsButton').addEventListener('click',function(){  window.open('Comments.html', '_blank').focus(); });
@@ -151,10 +173,15 @@ color: var(--offWhite);
       exerciseIndex = 0;
     }
 
-    console.log(exerciseIndex);
+    // console.log(exerciseIndex);
 
     const exercise = exercises[exerciseIndex];
-    console.log(exercise);
+    // console.log(exercise);
+
+    if (exercise.tip == "") {
+          hideElementByID('tipButton');
+    }
+
 
     document.getElementById('task').innerHTML = exercise.task;
     document.getElementById('tip').innerHTML = exercise.tip;
@@ -164,17 +191,13 @@ color: var(--offWhite);
     solution = solution.trim().split("\n").join('<br>');;
     document.getElementById('solution').innerHTML = solution;
 
-    hideElementByID('tip');
-    hideElementByID('solution');
+ 
 
     document.getElementById('tipButton').addEventListener('click',function(){hideElementByID('tip',false);});
     document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
 
 
-    if (exercise.tip == "") {
-          hideElementByID('tipButton');
-        }
-
+ 
     function loadExercise(index){
 
       if(index < 0 || index == exercises.length){
