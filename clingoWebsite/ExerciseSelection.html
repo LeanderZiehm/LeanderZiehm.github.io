@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clingo Exercises</title>
+
+    <script src="exercises.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="colors.css">
+    <!-- <link rel="stylesheet" href="css.css"> -->
+  <script>
+    let exerciseIndex = 0;
+
+    function main() {
+    console.log("MAIN");
+   
+
+    for (let index = 0; index < exercises.length; index++) {
+        const exerciseButton = document.createElement('button');
+        const indexParameter = index + 1;
+
+        exerciseButton.textContent = `Exercise ${index + 1}`;
+        exerciseButton.addEventListener('click',function(){  window.location.href = 'Exercise.html?exercise=' + indexParameter;});
+        // exerciseButton.addEventListener('click',function(){  window.location.href = '/Exercise?exercise=' + index;});
+        document.body.appendChild(exerciseButton);
+    }
+}
+
+
+
+window.addEventListener('load', main);
+
+  </script>
+
+  <style>
+    
+  body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  background: #2e2a23;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+body * {
+  font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
+  color: rgba(255,255,255,.8);
+  font-size: 1.2rem;
+}
+button {
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,.2);
+    padding: 10px;
+}
+
+.hidden{
+    display: none;
+}
+
+  </style>
+  </head>
+<body></body>
+</html>

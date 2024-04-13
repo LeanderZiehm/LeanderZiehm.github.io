@@ -1,3 +1,8 @@
+:root{
+    --green: #00ffa6;
+}
+
+
 @font-face {
     src: url(FredokaOne-Regular.ttf);
     font-family: 'yeet';
@@ -51,7 +56,7 @@ a{
     font-size: 200%;
     padding-left: 100px;
     padding-right: 100px;
-    color: #00ffa6;
+    color: var(--green);
 }
 div{
     font-size: 300%;

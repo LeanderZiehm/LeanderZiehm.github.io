@@ -1,0 +1,43 @@
+  :root {
+    --bodyBackground: rgba(46, 42, 35, 1.0);
+    /*--bodyBackground: rgba(3, 27, 35, 1.0);*/
+    --button: rgba(255,255,255,.2);
+    /*--button: rgba(0, 0, 0, 0.15);*/
+    --text: rgba(255, 255, 255, 0.8);
+    --div: rgba(0,0,0,.15);
+
+    --task:  rgba(153, 217, 250, 0.8);
+
+    /*--task:  rgba(200, 255, 255, 0.8);*/
+    --tip: rgb(208, 142, 39,0.8);
+    /*--tip:  rgba(220, 220, 150, 0.8);*/
+    --solution: rgb(94, 214, 90, 0.8);
+    --offWhite: rgb(100, 100, 100, 0.5);
+    /*--solution: rgb(61, 138, 58);*/
+    /*--solution: rgba(12, 164, 147, 1.0);*/
+
+  }
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  background: var(--bodyBackground);/* #2e2a23;*/
+  display: grid;
+  place-items: center;
+}
+
+
+body * {
+  font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
+  color: var(--text);
+
+}
+button {
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+    background: var(--button);/*rgba(255,255,255,.2);*/
+    padding: 10px;
+  }

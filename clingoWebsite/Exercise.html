@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clingo Exercises</title>
+    <script src="exercises.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="colors.css">
+  <style>
+
+#menuButton {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+#commentsButton{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+#backwardButton, #forwardButton{
+   border-radius: 100%;
+}
+
+
+div{
+   border-radius: 20px;
+   background: var(--div);
+}
+
+
+
+.text{
+  padding: 10px;
+}
+.hidden{
+    display: none;
+}
+
+#container{
+  position: relative;
+  /*max-width: 80%;*/
+  /*width: 60hv;*/
+  width: 60vw;
+  /*margin: 20px;*/
+  padding: 30px;
+
+}
+
+#exerciseContainer{
+    height: 60vh;
+}
+
+
+#task{
+color: var(--task);
+}
+#tip,#tipButton{
+color: var(--tip);
+}
+#solution,#solutionButton{
+color: var(--solution);
+}
+
+#solution{
+padding-top: 20px;
+}
+
+
+#forwardButton{
+  /*position: absolute;*/
+  /*right:30px; */
+   float: right;
+}
+
+
+
+#shortcutInfo{
+position: absolute;
+bottom:10px;
+color: var(--offWhite);
+}
+
+  </style>
+  </head>
+<body>
+
+  <button id="menuButton">Menu</button>
+  <button id="commentsButton">Comments</button>
+
+
+<div id="container">
+  <div id="exerciseContainer">
+    <button id="tipButton">Tip</button>
+    <button id="solutionButton" class="">Solution</button>
+    <button id="nextExerciseButton" class="hidden">Next Exercise</button>
+
+  <div id="textContainer">
+    <div class="text" id="task">Exercise 1: Write a program that represents the colors red, green, and blue as Clingo atoms.</div>
+    <div class="text" id="tip">~~Do not use pooling, just write the atoms down manually like atom(info).</div>
+    <div class="text" id="solution">~~color(red). color(green). color(blue).</div>
+  </div>
+</div>
+<button id="backwardButton">🠜</button>  
+<button id="forwardButton">🠞</button>
+
+</div>
+
+
+<span id="shortcutInfo"> Keyboard shortcuts: Tip [T or Space] Solution [S or Enter] Next Exercise [Arrow Right or D] Previous Exercise [Arrow Left or A] </span>
+
+
+  <script>
+
+
+    function hideElementByID(id,hide = true){
+
+      if(hide == true){
+        document.getElementById(id).classList.add('hidden');
+      }else{
+        document.getElementById(id).classList.remove('hidden');
+      }
+        
+    }
+
+    const DEV = true;
+
+
+    if(DEV == false){
+    hideElementByID('commentsButton');
+    }
+
+    document.getElementById('menuButton').addEventListener('click',function(){  window.location.href = 'ExerciseSelection.html'});
+    // document.getElementById('commentsButton').addEventListener('click',function(){  window.location.href = 'Comments.html'});
+    document.getElementById('commentsButton').addEventListener('click',function(){  window.open('Comments.html', '_blank').focus(); });
+
+
+
+
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const exerciseParameter = urlParams.get('exercise');
+    let exerciseIndex = exerciseParameter-1;
+
+    if(exerciseParameter == undefined || exerciseIndex < 0){
+      exerciseIndex = 0;
+    }
+
+    console.log(exerciseIndex);
+
+    const exercise = exercises[exerciseIndex];
+    console.log(exercise);
+
+    document.getElementById('task').innerHTML = exercise.task;
+    document.getElementById('tip').innerHTML = exercise.tip;
+
+
+    let solution = exercise.solution;
+    solution = solution.trim().split("\n").join('<br>');;
+    document.getElementById('solution').innerHTML = solution;
+
+    hideElementByID('tip');
+    hideElementByID('solution');
+
+    document.getElementById('tipButton').addEventListener('click',function(){hideElementByID('tip',false);});
+    document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
+
+
+    if (exercise.tip == "") {
+          hideElementByID('tipButton');
+        }
+
+    function loadExercise(index){
+
+      if(index < 0 || index == exercises.length){
+        return;
+      }
+
+      const indexParameter = index + 1; 
+      window.location.href = 'Exercise.html?exercise=' + indexParameter;
+    }
+
+
+
+
+    document.getElementById('backwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex-1); });
+    document.getElementById('forwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex+1); });
+
+
+
+    if (exerciseIndex == 0) {
+      hideElementByID('backwardButton');
+        }
+
+    if (exerciseIndex == exercises.length - 1) {
+      hideElementByID('forwardButton');
+
+        }
+
+
+
+  document.addEventListener('keydown', function(event) {
+   
+    if (event.key === 'ArrowLeft'||event.key === 'a' || event.key === 'A') {
+      console.log("LEFT");
+         loadExercise(exerciseIndex-1);
+    }
+    
+
+    if (event.key === 'ArrowRight'||event.key === 'd' || event.key === 'D') {
+         console.log("ArrowRight");
+      loadExercise(exerciseIndex+1);
+    }
+
+    if (event.key === 't' || event.key === 'T'|| event.key === ' ') {
+        document.getElementById('tip').classList.remove('hidden');
+    }
+
+
+    if (event.key === 's' || event.key === 'S'|| event.key === 'Enter' ) {
+        document.getElementById('solution').classList.remove('hidden');
+    }
+});
+
+  </script>
+
+</body>
+</html>

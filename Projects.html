@@ -5,15 +5,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link href="FredokaOne-Regular.ttf" rel="stylesheet">
       <link rel="stylesheet" href="css.css">
-      <script defer src="loadLog.js"></script> 
+      <!-- <script defer src="loadLog.js"></script>  -->
+      <!-- <script src="logging.js"></script>  -->
       <title>Leander Ziehm</title>
-      <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         
-         gtag('config', 'G-NZNJFWFRJ2');
-      </script>
       <style>
          body {
          margin: 0px;
@@ -24,6 +18,7 @@
          grid-template-columns: auto auto;
          padding: 10px;
          }
+
          .grid-item {
          margin: 0px;
          border: 20px solid rgba(61, 59, 59, 0.8);
@@ -48,10 +43,30 @@
          padding-top: 10px;
          padding-bottom: 10px;
          }
+
+         #buttonLink{
+            display: inline-block;
+            background-color:  var(--green);
+            color: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            text-decoration: none;
+            margin: 30px;
+            padding: 100px;
+            /*font-size: 70px;*/
+            /*padding-top: 50px;*/
+         }
       </style>
    <body>
       <h1>Leander Ziehms Projects</h1>
       <div class="grid-container">
+         <div class="grid-item">
+            <p>Website to teach Bachelor AI studentes the programming language called Clingo.</p>
+            <!-- <button>Check it out!</button> -->
+            <!-- <p> </p> -->
+            <a id="buttonLink" href="ClingoWebsite/ExerciseSelection.html">Check it out!</a>
+         </div>
+
+
          <div class="grid-item">
             <p>Artificial Intelligence Tracks Hands And Face</p>
             <video src="vids/me.mp4"controls width="640" height="360"> </video>
