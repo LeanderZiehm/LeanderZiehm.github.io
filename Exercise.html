@@ -7,56 +7,10 @@
     <link href="FredokaOne-Regular.ttf" rel="stylesheet">
   <style>
 
-#menuButton {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-}
-
-#commentsButton{
-  position: absolute;
-  right: 0px;
-  top: 0px;
-}
-
-#backwardButton, #forwardButton{
-   border-radius: 100%;
-   aspect-ratio: 1;
-   margin: 0px;
-   /*position:*/
-   /*font-size: 30px;*/
-    /*place-items: center;*/
-
-}
-
-
-
-#backwardButton img{
-
-  padding-top: 5px;
-  padding-right: 3px;
-  opacity: 0.5;
-}
-
-#forwardButton img{
-  padding-top: 5px;
-  padding-left: 3px;
-  opacity: 0.5;
-}
-
-
-
-#forwardButton{
-   float: right;
-}
-
-
 div{
    border-radius: 20px;
    background: var(--div);
 }
-
-
 
 .text{
   padding: 10px;
@@ -78,14 +32,22 @@ div{
 #exerciseContainer{
     height: 60vh;
 }
-
+#shortcutInfo{
+position: absolute;
+bottom:10px;
+color: var(--offWhite);
+}
 
 #task{
 color: var(--task);
 }
-#tip,#tipButton{
+#tip{
 color: var(--tip);
 }
+#tipButton{
+background-color: var(--tip);
+}
+
 #solution,#solutionButton{
 color: var(--solution);
 }
@@ -95,15 +57,56 @@ padding-top: 20px;
 }
 
 
-
-
-
-
-#shortcutInfo{
-position: absolute;
-bottom:10px;
-color: var(--offWhite);
+#menuButton {
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
+
+#commentsButton{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+#backwardButton, #forwardButton{
+   border-radius: 100%;
+   aspect-ratio: 1;
+   margin: 0px;
+}
+
+
+#backwardButton img,#forwardButton img{
+  height: 20px;
+  padding-top: 5px;  
+  opacity: 0.5;
+  /*background-color: rgba(255, 0, 0, 0.5); */
+}
+#backwardButton img{
+  padding-right: 3px;
+}
+
+#forwardButton img{
+  padding-left: 3px;
+}
+
+#forwardButton{
+   float: right;
+}
+
+
+#tipButton img{
+  height: 20px;
+  opacity: 0.5;
+  /*filter : hue-rotate(180deg);*/
+}
+
+
+
+
+
+
+
 
   </style>
   </head>
@@ -115,7 +118,7 @@ color: var(--offWhite);
 
 <div id="container">
   <div id="exerciseContainer">
-    <button id="tipButton">Tip</button>
+    <button id="tipButton"><img src="icons/tip.png"></button><!-- Tip -->
     <button id="solutionButton" class="">Solution</button>
     <button id="nextExerciseButton" class="hidden">Next Exercise</button>
 
@@ -125,8 +128,8 @@ color: var(--offWhite);
     <div class="text" id="solution"></div>
   </div>
 </div>
-<button id="backwardButton"><img src="icons/backward.png" height="20"/></button> <!-- 🠜  -->
-<button id="forwardButton"><img src="icons/forward.png" height="20"/></button><!-- 🠞 -->
+<button id="backwardButton"><img src="icons/backward.png"/></button> <!-- 🠜  -->
+<button id="forwardButton"><img src="icons/forward.png"/></button><!-- 🠞 -->
 
 </div>
 
