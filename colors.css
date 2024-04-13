@@ -18,6 +18,11 @@
 
   }
 
+@font-face {
+    src: url(FredokaOne-Regular.ttf);
+    font-family: 'myImportedFont';
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -29,7 +34,8 @@ body {
 
 
 body * {
-  font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
+  /*font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;*/
+  font-family: 'myImportedFont', sans-serif;
   font-size: 1.2rem;
   color: var(--text);
 
@@ -39,5 +45,5 @@ button {
     border-radius: 10px;
     border: none;
     background: var(--button);/*rgba(255,255,255,.2);*/
-    padding: 10px;
+    padding: 12px 20px;
   }

@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="colors.css">
-<script defer src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
-<title>Todo List Manager</title>
+<!-- <script defer src="githubDatabase.js" type="text/javascript" charset="utf-8"></script> -->
+<title>Feature requests/Bug fixes</title>
 <style>
     body {
         font-family: Arial, sans-serif;
         color: black;
+        overflow-y: auto !important;
     }
 
     body * {
@@ -17,7 +18,8 @@
 
 }
     .container {
-        max-width: 400px;
+        /*max-width: 400px;*/
+        width: 40vw;
         margin: 0 auto;
         padding: 20px;
         border: 1px solid #ccc;
@@ -64,11 +66,10 @@
         background-color: #007bff;
         margin-left: 10px;
     }
-    .edit-panel {
-        display: none;
+    #editPanel {
         margin-top: 10px;
     }
-    .edit-panel textarea {
+    #editPanel textarea {
         width: 100%;
         padding: 5px;
         margin-bottom: 5px;
@@ -76,102 +77,172 @@
         border-radius: 5px;
         box-sizing: border-box;
     }
-    .edit-panel button {
+    #editPanel button {
         margin-right: 5px;
     }
 
    #addButton{
     background-color: #4CAF50;
+    display: inline-block;
+   }
+
+   .disabledButton{
+    background-color: gray;
+   }
+    
+    .hidden{
+    display: none !important; 
+   }
+
+   #saveButton{
+        background-color: rgba(55,255,55,0.8);
+   }
+
+   #deleteButton{
+        background-color: rgba(255, 55, 55, 0.8);
    }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Todo List Manager</h2>
-    <div style=""> <input type="text" id="todoInput" placeholder="Enter a new todo">
-    <button id="addButton" onclick="addTodo()" style="display: none;">➤</button></div><!-- &#10148; -->
-   
-    <ul id="todoList">
+    <h2>Feature requests / Bug fixes</h2>
+      <ul id="todoList">
     </ul>
+    <div style=""> <input type="text" id="todoInput" placeholder="Enter a new request...">
+    <button id="addButton" onclick="addTodoFromInput()">➤</button></div><!-- &#10148; -->
+   
+  
 </div>
 
-<div id="editPanel" class="edit-panel">
+<div id="editPanel">
     <textarea id="editText"></textarea>
-    <button onclick="saveEdit()">Save</button>
-    <button onclick="cancelEdit()">Cancel</button>
-    <button onclick="deleteItem()">Delete</button>
+    <button id="saveButton" onclick="saveEdit()">💾</button>
+
+    <button id="deleteButton" onclick="deleteItem()" >🗑️</button>
+        <button onclick="cancelEdit()">Cancel</button>
 </div>
 
 <script>
     var editIndex = -1;
 
-    function addTodo() {
+
+    function hideElementByID(id,hide = true){
+
+      if(hide == true){
+        document.getElementById(id).classList.add('hidden');
+      }else{
+        document.getElementById(id).classList.remove('hidden');
+      }
+        
+    }
+
+
+    hideElementByID("addButton");
+    hideElementByID("editPanel");
+
+
+    function addTodoFromInput(){
+
         var inputValue = document.getElementById("todoInput").value;
         if (inputValue === '') {
             alert("Please enter a todo.");
             return;
         }
 
+    addTodo(inputValue)
+    document.getElementById("addButton").style.display = "none";
+    document.getElementById("todoInput").value = "";
+
+
+    }
+
+
+    function getUserID(){
+        return 420
+    }
+    function getUniqueTodoID(){
+        return 123
+    }
+       function getTodoItems(){
+        return []
+    }
+
+
+
+    function addTodo(todoText,upvotes = 1,loadedUserID = undefined) {
+
+
+
+        const ID = getUniqueTodoID();
+        const userID = getUserID();
 
         var li = document.createElement("li");
-        li.setAttribute("data-votes", "0");
+        li.id = ID;
 
-          var voteButton = document.createElement("button");
+        li.setAttribute("userID",userID);
+
+
+        var voteButton = document.createElement("button");
         voteButton.classList.add("vote-button");
-        voteButton.innerHTML = "▲";//&#9650;
+        voteButton.innerHTML = "▲";
         voteButton.onclick = function() {
-            var listItem = this.parentElement;
-            var currentVotes = parseInt(listItem.getAttribute("data-votes")) || 1;
-            currentVotes++;
-            listItem.setAttribute("data-votes", currentVotes);
-            listItem.querySelector(".vote-count").innerText = currentVotes;
+            var voteCount = this.parentElement.querySelector(".vote-count")
+            voteCount.innerText =  parseInt(voteCount.innerText) + 1;
             reorderTodoList();
         };
         li.appendChild(voteButton);
 
         var voteCount = document.createElement("span");
         voteCount.classList.add("vote-count");
-        voteCount.innerText = "1";
+        voteCount.innerText = upvotes;
         li.appendChild(voteCount);
 
+        var todoTextElement = document.createElement("span");
+        todoTextElement.classList.add("todoText");
+        todoTextElement.innerText = todoText;
+        li.appendChild(todoTextElement);
 
-        var textNode = document.createTextNode(inputValue);
-        li.appendChild(textNode);
-        document.getElementById("todoList").appendChild(li);
-        document.getElementById("todoInput").value = "";
 
-      
 
         var editButton = document.createElement("button");
-        editButton.innerHTML = "✎";//&#9998;
-        editButton.onclick = function() {
-            var listItem = this.parentElement;
-            var index = Array.from(listItem.parentElement.children).indexOf(listItem);
-            editItem(index, listItem.textContent.trim());
-        };
+      
+
         li.appendChild(editButton);
 
+        const isYourOwnTodo = (loadedUserID ==  userID || loadedUserID == undefined);
+        if(isYourOwnTodo){
 
-        document.getElementById("addButton").style.display = "none";
+
+            editButton.innerHTML = "✎";
+            editButton.onclick = function() {
+                var listItem = this.parentElement;
+                const todoText = listItem.querySelector(".todoText").innerText;
+                editIndex = Array.from(listItem.parentElement.children).indexOf(listItem);
+                document.getElementById("editText").value = todoText;
+                hideElementByID("editPanel",false);
+                };
+
+        }else{
+            editButton.innerHTML = "🤵🏻";//웃🕴️⬤ "ᴼᴥᴼ"
+            editButton.classList.add("disabledButton")
+        }
+        document.getElementById("todoList").appendChild(li);
+
     }
 
     function reorderTodoList() {
         var todoList = document.getElementById("todoList");
         var items = Array.from(todoList.children);
         items.sort((a, b) => {
-            var votesA = parseInt(a.getAttribute("data-votes")) || 0;
-            var votesB = parseInt(b.getAttribute("data-votes")) || 0;
+            var votesA = parseInt(a.querySelector(".vote-count").innerText);
+            var votesB = parseInt(b.querySelector(".vote-count").innerText);
             return votesB - votesA;
         });
         items.forEach(item => todoList.appendChild(item));
     }
 
-    function editItem(index, text) {
-        editIndex = index;
-        document.getElementById("editText").value = text;
-        document.getElementById("editPanel").style.display = "block";
-    }
+
 
     function saveEdit() {
         var newText = document.getElementById("editText").value;
@@ -179,28 +250,72 @@
             alert("Please enter a todo.");
             return;
         }
-        var todoList = document.getElementById("todoList");
-        var listItem = todoList.children[editIndex];
-        listItem.textContent = newText;
 
-        document.getElementById("editPanel").style.display = "none";
+        if (confirm("Are you sure you want to save your changes?") == true) {
+            document.getElementById("todoList").children[editIndex].querySelector(".todoText").innerText = newText;
+            hideElementByID("editPanel");
+    }
+        
     }
 
     function cancelEdit() {
-        document.getElementById("editPanel").style.display = "none";
+
+        hideElementByID("editPanel");
     }
 
     function deleteItem() {
+
         var todoList = document.getElementById("todoList");
         var listItem = todoList.children[editIndex];
+
+        const listItemText = listItem.querySelector(".todoText").innerText;
+        const listItemUpvotes = listItem.querySelector(".vote-count").innerText;
+
+
+        if (confirm(`Are you sure you want to delete "${listItemText}" with ${listItemUpvotes} upvotes?`) == true) {
         todoList.removeChild(listItem);
-        document.getElementById("editPanel").style.display = "none";
+        hideElementByID("editPanel");
+    }
+   
     }
 
     document.getElementById("todoInput").addEventListener("input", function() {
-        var addButton = document.getElementById("addButton");
-        addButton.style.display = this.value.trim() !== '' ? "block" : "none";
+
+        if(this.value.trim() == ''){
+            hideElementByID("addButton");
+        }else{
+            hideElementByID("addButton",false);
+        }
+
+
     });
+
+
+    loadedTodoItems = getTodoItems();
+
+
+
+    addTodo("add one",100)
+    addTodo("add two",200,13)
+    addTodo("add trescientos",300)
+
+    reorderTodoList();
+
+
+
+  document.addEventListener('keydown', function(event) {
+   
+
+    // if (event.key === 'e' || event.key === 'E') {
+    //     document.getElementById('tip').classList.remove('hidden');
+    // }
+
+
+    if (event.key === 'Enter') {
+        addTodoFromInput()
+    }
+});
+
 </script>
 
 </body>
