@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0"/> -->
     <title>Clingo Exercises</title>
     <script src="exercises.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="colors.css">
@@ -93,7 +93,7 @@ padding-top: 20px;
 #exerciseContainer{
     height: 60vh;
     padding: 15px;
-    drop-shadow(#e23 0.5rem 0.5rem 1rem);
+    /*drop-shadow(#e23 0.5rem 0.5rem 1rem);*/
     /*padding-top: 20px;*/
 }
 
@@ -155,6 +155,7 @@ padding-top: 20px;
 
 
   <script>
+
 
 
     function hideElementByID(id,hide = true){
@@ -244,6 +245,18 @@ padding-top: 20px;
       hideElementByID('forwardButton');
 
         }
+
+
+
+  const isMobile = (navigator.maxTouches > 0 && /Android|iPhone/i.test(navigator.userAgent));
+
+
+  if(isMobile){
+    hideElementByID('shortcutInfo');
+  }
+
+    
+
 
 
 
