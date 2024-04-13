@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="colors.css">
 <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
-<title>Feature requests/Bug fixes</title>
+<title>Comments</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -19,6 +19,7 @@
 }
     .container {
         /*max-width: 400px;*/
+        min-width: 400px;
         width: 40vw;
         margin: 0 auto;
         padding: 20px;
@@ -106,7 +107,7 @@
 <body>
 
 <div class="container">
-    <h2>Feature requests / Bug fixes</h2>
+    <h2>[Comments | Feature requests | Bug fixes]</h2>
       <ul id="todoList">
     </ul>
     <div style=""> <input type="text" id="todoInput" placeholder="Enter a new request...">
@@ -127,18 +128,6 @@
 <script>
     var editIndex = -1;
 
-    function addComment(text,upvotes){
-
-        const commentID = get('commentID',0);
-        set('commentID',commentID+1);
-
-        let comments = get('comments',[]);
-        console.log(comments);
-        const comment = {"text":text, "upvotes":upvotes, "created":getTimeDateString(),"commentID":commentID};
-        comments.unshift(comment);
-        console.log(comments);
-        set('comments',comments,true);  
-    }
 
 
     function hideElementByID(id,hide = true){
@@ -164,10 +153,10 @@
             return;
         }
 
-    addTodo(inputValue)
-    addComment(inputValue,1);
 
-    document.getElementById("addButton").style.display = "none";
+    addComment(inputValue);
+
+    hideElementByID('addButton');
     document.getElementById("todoInput").value = "";
 
 
@@ -175,20 +164,52 @@
 
 
 
+    function addComment(text,upvotes=1,loadedID = null){
 
 
-
-    function addTodo(todoText,upvotes = 1,loadedUserID = undefined) {
-   
         const userID = get('userID');
-        const commentID = get('commentID',1);
 
+        if(loadedID == null){
+
+        const commentID = get('commentID',0);
+        const ID = userID+"_"+commentID;
+        set('commentID',commentID+1);
+
+
+        createComment(text, upvotes,ID);
+ 
+         const comments = get('comments',[]);
+        const comment = {"text":text, "upvotes":upvotes, "ID":ID, "created":getTimeDateString()};
+        comments.unshift(comment);
+        set('comments',comments,true); 
+
+        }else{
+
+            const loadedUserID = loadedID.split('_')[0]
+            const isYourOwnComment = (loadedUserID ==  userID)
+
+            // if(loadedUserID !=  userID){
+                createComment(text, upvotes,loadedID,isYourOwnComment);
+            // }
+        }
+
+  
+     
+
+       
+       
+   
+
+
+  
+    }
+
+
+
+    function createComment(todoText,upvotes,ID,isYourOwnComment=true) {
+   
         var li = document.createElement("li");
-        li.id = userID+"_"+commentID;
-
-        // li.setAttribute('commentID',userID);
-
-
+        li.id = ID;
         var voteButton = document.createElement("button");
         voteButton.classList.add("vote-button");
         voteButton.innerHTML = "▲";
@@ -209,15 +230,12 @@
         todoTextElement.innerText = todoText;
         li.appendChild(todoTextElement);
 
-
-
         var editButton = document.createElement("button");
       
-
         li.appendChild(editButton);
 
-        const isYourOwnTodo = (loadedUserID ==  userID || loadedUserID == undefined);
-        if(isYourOwnTodo){
+  
+        if(isYourOwnComment){
 
 
             editButton.innerHTML = "✎";
@@ -234,7 +252,6 @@
             editButton.classList.add("disabledButton")
         }
         document.getElementById("todoList").appendChild(li);
-
     }
 
     function reorderTodoList() {
@@ -299,16 +316,29 @@
 
     const comments = get('comments',[]);
 
-    comments.forEach((comment) => addTodo(comment.text,comment.upvotes));
+    comments.forEach((comment) => addComment(comment.text,comment.upvotes,comment.ID));
    // const comment = {"text":text, "upvotes":upvotes, "created":getTimeDateString(),"commentID":commentID};
 
 
 
+   async function loadComments(){
+
+    const jsonData = await getJsonDatabase();
+
+    users = jsonData.users.forEach((user) => user.comments.forEach((comment) => addComment(comment.text,comment.upvotes,comment.ID)))
+
+    // jsonData
+
+    //    addComment("add one",100)
+    // addComment("add two",200,13)
+    // addComment("add trescientos",300)
+
+   }
 
 
-    addTodo("add one",100)
-    addTodo("add two",200,13)
-    addTodo("add trescientos",300)
+   loadComments()
+
+ 
 
     reorderTodoList();
 

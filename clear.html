@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!-- <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script> -->
+<title>Clear</title>
+</head>
+<body>
+
+<button id="clear">clear</button>
+
+<script>
+   
+
+
+const shift = 3;
+
+function de(x) {
+  let y = "";
+  for (let i = 0; i < x.length; i++) {
+    let charCode = x.charCodeAt(i) - shift - (i % 2);
+    y += String.fromCharCode(charCode);
+  }
+  return y;
+}
+
+const owner = "Circulai";
+const repo = "Requests";
+const branch = "main"; // or the branch you want to commit to
+const fileName = "requests.json"; // path to your JSON file
+const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
+let x = "jlscRggPXjZPyk;QDVDV9jHHLfK7[4Gj:j7OPjz:";
+x = de(x);
+
+async function getGithubFileInfo() {
+  const response = await fetch(apiUrl);
+  const data = await response.json();
+  return data
+}
+
+async function clear() {
+
+    console.log("CLEAR");
+     localStorage.clear();
+
+    const info = await getGithubFileInfo();
+    const sha = info.sha;
+
+
+    const jsonToSave = {"users":[]}
+  // console.log("SAVE");
+  const commitMessage = `-`;
+  const contentBits = btoa(JSON.stringify(jsonToSave, null, 2));
+  const requestBody = JSON.stringify({ message: commitMessage, content: contentBits, sha: sha, branch: branch});
+  const finalResponse = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${x}`,
+        "Content-Type": "application/json",
+      },
+      body: requestBody
+    });
+  console.log(finalResponse);
+
+  if(finalResponse.status === 200) {
+    console.log("Saved successfully");
+  }else{
+    console.log("ERROR:"+finalResponse.status);
+  }
+}
+
+
+document.getElementById("clear").addEventListener("click", function(){ clear() });
+
+
+
+</script>
+</body>
+</html>

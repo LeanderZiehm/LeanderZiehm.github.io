@@ -18,13 +18,13 @@
 
         if(value == null){
 
-            console.log("init localStoage: "+key)
+            // console.log("init localStoage: "+key)
             set(key,defaultValue,json);   
             return defaultValue;
         }else if(defaultValueIsNumber){
             return parseInt(value);
         }else if(json || defaultValueIsArray || defaultValueIsObject ){
-            console.log("[JSON] defaultValue:"+JSON.stringify(defaultValue)+" defaultValueIsArray:"+defaultValueIsArray+" defaultValueIsObject:"+defaultValueIsObject+"|| KEY:"+key+" VALUE:"+value);
+            // console.log("[JSON] defaultValue:"+JSON.stringify(defaultValue)+" defaultValueIsArray:"+defaultValueIsArray+" defaultValueIsObject:"+defaultValueIsObject+"|| KEY:"+key+" VALUE:"+value);
 
                 return JSON.parse(value);
         }else{
@@ -40,11 +40,11 @@
         if(json){
               localStorage.setItem(key,JSON.stringify(value));  
 
-              console.log(key+": "+JSON.stringify(value));
+              // console.log(key+": "+JSON.stringify(value));
 
         }else{
               localStorage.setItem(key,value);  
-              console.log(key+": "+value);
+              // console.log(key+": "+value);
         }      
 
 
@@ -57,14 +57,18 @@
 
 ///////////////////// Database syncing local storage to github
 
-syncIntervalMillisec = 120000 // 60000 milliseconds = 1 minute
+syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
 
 // localStorage.clear();
 
 async function main(){
 
+ // const actionHistoryElement = {
+ //            "url": window.location.href,
+ //            "date": getTimeDateString()
+ //        }
+
  const actionHistoryElement = {
-            "action": "view",
             "url": window.location.href,
             "date": getTimeDateString()
         }
@@ -111,41 +115,25 @@ async function mainSave(){
     const fileInfo = await getGithubFileInfo();
     const stringOfJsonDatabase = atob(fileInfo.content);
     const jsonData = JSON.parse(stringOfJsonDatabase);
-    console.log(stringOfJsonDatabase);
+    // console.log(stringOfJsonDatabase);
         
     const userID = get('userID');
 
-    const userData = jsonData.users.find(user => user.userID == userID)
+    let userData = jsonData.users.find(user => user.userID == userID)
     const isNewUser = (userData == undefined)
 
     if(isNewUser){
-        const newUserData = {"userID":userID, "device":window.navigator.userAgent, "startDate":getTimeDateString(), "comments":[], "actionHistory" :[]}
-        jsonData.users.unshift(newUserData);
+        userData = {"userID":userID, "device":window.navigator.userAgent, "startDate":getTimeDateString(), "comments":[], "views" :[]}
+        jsonData.users.unshift(userData);
 
-    }else{
-
-
-
-        const comments = get('comments',[],true);
-        // console.log(userData);
-        // // const comments = localStorage.getItem('comments');
-        // const comment = {text:"I AM A GOD!", upvotes:1, created:getTimeDateString()};
-        userData.comments = comments;
-
-
-        const actionHistory = get('actionHistory',[]);
-
-
-        // const actionHistoryElement = {
-        //     "action": "view",
-        //     "url": window.location.href,
-        //     "date": getTimeDateString()
-        // }
-
-        userData.actionHistory = actionHistory;
     }
+    
+    const comments = get('comments',[],true);
+    userData.comments = comments;
+    const actionHistory = get('actionHistory',[]);
+    userData.actionHistory = actionHistory;
 
-    console.log(JSON.stringify(jsonData));
+    // console.log(JSON.stringify(jsonData));
 
     saveJsonToGithub(jsonData,fileInfo.sha);
 }
@@ -261,12 +249,15 @@ async function saveJsonToGithub(jsonToSave,sha) {
       },
       body: requestBody
     });
-  console.log(finalResponse);
+  // console.log(finalResponse);
 
   if(finalResponse.status === 200) {
     console.log("Saved successfully");
   }else{
+    
+    console.log(finalResponse);
     console.log("ERROR:"+finalResponse.status);
+
   }
 }
 
