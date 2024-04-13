@@ -127,6 +127,19 @@
 <script>
     var editIndex = -1;
 
+    function addComment(text,upvotes){
+
+        const commentID = get('commentID',0);
+        set('commentID',commentID+1);
+
+        let comments = get('comments',[]);
+        console.log(comments);
+        const comment = {"text":text, "upvotes":upvotes, "created":getTimeDateString(),"commentID":commentID};
+        comments.unshift(comment);
+        console.log(comments);
+        set('comments',comments,true);  
+    }
+
 
     function hideElementByID(id,hide = true){
 
@@ -152,6 +165,8 @@
         }
 
     addTodo(inputValue)
+    addComment(inputValue,1);
+
     document.getElementById("addButton").style.display = "none";
     document.getElementById("todoInput").value = "";
 
@@ -159,29 +174,19 @@
     }
 
 
-    function getUserID(){
-        return 420
-    }
-    function getUniqueTodoID(){
-        return 123
-    }
-       function getTodoItems(){
-        return []
-    }
+
 
 
 
     function addTodo(todoText,upvotes = 1,loadedUserID = undefined) {
-
-
-
-        const ID = getUniqueTodoID();
-        const userID = getUserID();
+   
+        const userID = get('userID');
+        const commentID = get('commentID',1);
 
         var li = document.createElement("li");
-        li.id = ID;
+        li.id = userID+"_"+commentID;
 
-        li.setAttribute("userID",userID);
+        // li.setAttribute('commentID',userID);
 
 
         var voteButton = document.createElement("button");
@@ -292,7 +297,12 @@
     });
 
 
-    loadedTodoItems = getTodoItems();
+    const comments = get('comments',[]);
+
+    comments.forEach((comment) => addTodo(comment.text,comment.upvotes));
+   // const comment = {"text":text, "upvotes":upvotes, "created":getTimeDateString(),"commentID":commentID};
+
+
 
 
 

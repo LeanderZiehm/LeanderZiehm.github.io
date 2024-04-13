@@ -1,17 +1,96 @@
-///////////////////// Database related code
+///////////////////// local storage helper functions
 
-syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
+// localStorage.clear()
+
+  function get(key,defaultValue=1){
+        const defaultValueIsNumber = (typeof defaultValue === 'number')
+        const defaultValueIsArray = (defaultValue.constructor === [].constructor)
+        const defaultValueIsObject = (defaultValue.constructor ===  ({}).constructor)
+
+
+        let json = false;
+
+        if((defaultValueIsNumber == false) && (defaultValueIsArray||defaultValueIsObject) ){
+          json = true;
+        }
+
+        const value = localStorage.getItem(key);
+
+        if(value == null){
+
+            console.log("init localStoage: "+key)
+            set(key,defaultValue,json);   
+            return defaultValue;
+        }else if(defaultValueIsNumber){
+            return parseInt(value);
+        }else if(json || defaultValueIsArray || defaultValueIsObject ){
+            console.log("[JSON] defaultValue:"+JSON.stringify(defaultValue)+" defaultValueIsArray:"+defaultValueIsArray+" defaultValueIsObject:"+defaultValueIsObject+"|| KEY:"+key+" VALUE:"+value);
+
+                return JSON.parse(value);
+        }else{
+                return value;
+            }
+
+        
+        }
+
+        
+    function set(key,value,json = false){
+
+        if(json){
+              localStorage.setItem(key,JSON.stringify(value));  
+
+              console.log(key+": "+JSON.stringify(value));
+
+        }else{
+              localStorage.setItem(key,value);  
+              console.log(key+": "+value);
+        }      
+
+
+        
+    }
+
+
+
+
+
+///////////////////// Database syncing local storage to github
+
+syncIntervalMillisec = 120000 // 60000 milliseconds = 1 minute
 
 // localStorage.clear();
 
+async function main(){
+
+ const actionHistoryElement = {
+            "action": "view",
+            "url": window.location.href,
+            "date": getTimeDateString()
+        }
+
+  const actionHistory = get('actionHistory',[]);
+  actionHistory.unshift(actionHistoryElement);
+  set('actionHistory',actionHistory,true);
 
 
-// async function main(){
-function main(){
+
+
+
+
+   let userID = localStorage.getItem('userID');
+    
+    if (userID === null) {
+
+        const jsonData = await getJsonDatabase()
+        userID = createIncrementalUserID(jsonData);
+        localStorage.setItem('userID',userID);
+    }
+
+
   checkIfItsTimeToSyncUserData();
 }
 
-// async function checkIfItsTimeToSyncUserData() {
 function checkIfItsTimeToSyncUserData() {
   var currentTime = new Date().getTime();
   var lastSyncTime = localStorage.getItem('lastSyncTime');
@@ -27,22 +106,14 @@ function checkIfItsTimeToSyncUserData() {
   }
 }
 
-
-
 async function mainSave(){
 
     const fileInfo = await getGithubFileInfo();
     const stringOfJsonDatabase = atob(fileInfo.content);
     const jsonData = JSON.parse(stringOfJsonDatabase);
     console.log(stringOfJsonDatabase);
-    
-    
-    let userID = localStorage.getItem('userID');
-
-    if (userID === null) {
-        userID = createIncrementalUserID(jsonData);
-        localStorage.setItem('userID',userID);
-    }
+        
+    const userID = get('userID');
 
     const userData = jsonData.users.find(user => user.userID == userID)
     const isNewUser = (userData == undefined)
@@ -52,10 +123,14 @@ async function mainSave(){
         jsonData.users.unshift(newUserData);
 
     }else{
+
+
+
+        const comments = get('comments',[],true);
         // console.log(userData);
         // // const comments = localStorage.getItem('comments');
         // const comment = {text:"I AM A GOD!", upvotes:1, created:getTimeDateString()};
-        // userData.comments.unshift(comment);
+        userData.comments = comments;
 
 
         // const actionHistoryElement = {
@@ -87,7 +162,7 @@ function createIncrementalUserID(jsonData) {
 
 
 
-///////////////////// Github Related helper functions
+///////////////////// Metadata functions for Github push
 
 const shift = 3;
 
@@ -124,13 +199,6 @@ function getTimeDateString() {
   return date.toLocaleString('en-GB', options);
 }
 
-// function getTimeDateString() {
-//   let date = new Date();
-//   let time = date.toLocaleTimeString();
-//   let dateString = date.toLocaleDateString();
-//   return dateString + " " + time;
-// }
-
 async function getJsonDatabaseDelayed(){
   const response = await fetch("https://raw.githubusercontent.com/Circulai/Requests/main/requests.json");
   const json = await response.json();
@@ -164,6 +232,17 @@ async function getGithubFileInfo() {
   const data = await response.json();
   return data
 }
+
+async function getJsonDatabase(){
+
+    const fileInfo = await getGithubFileInfo();
+    const stringOfJsonDatabase = atob(fileInfo.content);
+    const jsonData = JSON.parse(stringOfJsonDatabase);
+
+    return jsonData;
+}
+
+
 
 async function saveJsonToGithub(jsonToSave,sha) {
   // console.log("SAVE");
