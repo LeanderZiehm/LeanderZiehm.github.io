@@ -1,3 +1,94 @@
+///////////////////// Database related code
+
+syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
+
+// localStorage.clear();
+
+
+
+// async function main(){
+function main(){
+  checkIfItsTimeToSyncUserData();
+}
+
+// async function checkIfItsTimeToSyncUserData() {
+function checkIfItsTimeToSyncUserData() {
+  var currentTime = new Date().getTime();
+  var lastSyncTime = localStorage.getItem('lastSyncTime');
+
+
+  const milliseconds = (currentTime - lastSyncTime)
+  if (!lastSyncTime || milliseconds > syncIntervalMillisec) { 
+      console.log('Syncing data with github...');
+      mainSave();
+      localStorage.setItem('lastSyncTime', currentTime);
+  } else {
+      console.log('No need to sync yet. Milliseconds left: ' + (syncIntervalMillisec - milliseconds)) ;
+  }
+}
+
+
+
+async function mainSave(){
+
+    const fileInfo = await getGithubFileInfo();
+    const stringOfJsonDatabase = atob(fileInfo.content);
+    const jsonData = JSON.parse(stringOfJsonDatabase);
+    console.log(stringOfJsonDatabase);
+    
+    
+    let userID = localStorage.getItem('userID');
+
+    if (userID === null) {
+        userID = createIncrementalUserID(jsonData);
+        localStorage.setItem('userID',userID);
+    }
+
+    const userData = jsonData.users.find(user => user.userID == userID)
+    const isNewUser = (userData == undefined)
+
+    if(isNewUser){
+        const newUserData = {"userID":userID, "device":window.navigator.userAgent, "startDate":getTimeDateString(), "comments":[], "actionHistory" :[]}
+        jsonData.users.unshift(newUserData);
+
+    }else{
+        // console.log(userData);
+        // // const comments = localStorage.getItem('comments');
+        // const comment = {text:"I AM A GOD!", upvotes:1, created:getTimeDateString()};
+        // userData.comments.unshift(comment);
+
+
+        // const actionHistoryElement = {
+        //     "action": "view",
+        //     "url": window.location.href,
+        //     "date": getTimeDateString()
+        // }
+
+        // userData.actionHistory.unshift(actionHistoryElement);
+    }
+
+    console.log(JSON.stringify(jsonData));
+
+    saveJsonToGithub(jsonData,fileInfo.sha);
+}
+
+function createIncrementalUserID(jsonData) {
+
+    let maxUserID = 0;
+    jsonData.users.forEach(user => {
+
+        let userID = parseInt(user.userID)
+        if (userID > maxUserID) {
+            maxUserID = userID;
+        }
+    });
+    return maxUserID + 1;
+}
+
+
+
+///////////////////// Github Related helper functions
+
 const shift = 3;
 
 function en(x) {
@@ -21,12 +112,32 @@ function de(x) {
 
 function getTimeDateString() {
   let date = new Date();
-  let time = date.toLocaleTimeString();
-  let dateString = date.toLocaleDateString();
-  return dateString + " " + time;
+  let options = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true, 
+  };
+  return date.toLocaleString('en-GB', options);
 }
 
-function getTimeDateStringWithSeconds() {
+// function getTimeDateString() {
+//   let date = new Date();
+//   let time = date.toLocaleTimeString();
+//   let dateString = date.toLocaleDateString();
+//   return dateString + " " + time;
+// }
+
+async function getJsonDatabaseDelayed(){
+  const response = await fetch("https://raw.githubusercontent.com/Circulai/Requests/main/requests.json");
+  const json = await response.json();
+  return json
+}
+
+function getTimeDateStringMilliseconds() {
   let date = new Date();
   let hours = date.getHours().toString().padStart(2, '0');
   let minutes = date.getMinutes().toString().padStart(2, '0');
@@ -38,32 +149,29 @@ function getTimeDateStringWithSeconds() {
 }
 
 
-async function save(toSave) {
+///////////////////// GITHUB STUFF
 
-  console.log("SAVE");
-  let x = "jlscRggPXjZPyk;QDVDV9jHHLfK7[4Gj:j7OPjz:";
-  x = de(x);
+const owner = "Circulai";
+const repo = "Requests";
+const branch = "main"; // or the branch you want to commit to
+const fileName = "requests.json"; // path to your JSON file
+const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
+let x = "jlscRggPXjZPyk;QDVDV9jHHLfK7[4Gj:j7OPjz:";
+x = de(x);
 
-  const owner = "Circulai";
-  const repo = "Requests";
-  const branch = "main"; // or the branch you want to commit to
-  const fileName = "requests.json"; // path to your JSON file
-  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
-
-
+async function getGithubFileInfo() {
   const response = await fetch(apiUrl);
   const data = await response.json();
-  const sha = data.sha;
-  console.log(data);
+  return data
+}
 
-  const dateString = getTimeDateStringWithSeconds();
+async function saveJsonToGithub(jsonToSave,sha) {
+  // console.log("SAVE");
+  const dateString = getTimeDateStringMilliseconds();
   const commitMessage = `${dateString}`;
-  let newJson = `{"hello":"${dateString}"}`
-  const contentBits = btoa(JSON.stringify(newJson, null, 2));
-
+  const contentBits = btoa(JSON.stringify(jsonToSave, null, 2));
   const requestBody = JSON.stringify({ message: commitMessage, content: contentBits, sha: sha, branch: branch});
-
-  const finalRespone = await fetch(apiUrl, {
+  const finalResponse = await fetch(apiUrl, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${x}`,
@@ -71,10 +179,18 @@ async function save(toSave) {
       },
       body: requestBody
     });
+  console.log(finalResponse);
 
-  console.log(finalRespone);
-
+  if(finalResponse.status === 200) {
+    console.log("Saved successfully");
+  }else{
+    console.log("ERROR:"+finalResponse.status);
+  }
 }
 
-console.log("hi")
-save();
+
+
+////////////////////// MAIN
+
+
+main();

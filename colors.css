@@ -23,7 +23,7 @@
     font-family: 'myImportedFont';
 }
 
-html, body, * { touch-action: manipulation }
+html, body, * { touch-action: manipulation; }
 
 body {
   margin: 0;
