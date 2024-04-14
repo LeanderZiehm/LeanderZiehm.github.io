@@ -103,10 +103,16 @@
    #deleteButton{
         background-color: rgba(255, 55, 55, 0.8);
    }
+
+#menuButton {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
 </style>
 </head>
 <body>
-
+ <button id="menuButton">Menu</button>
 <div class="container">
     <h2>[Comments | Feature requests | Bug fixes]</h2>
       <ul id="todoList">
@@ -345,10 +351,14 @@ function onClickUpvoteButton() {
    }
    loadComments();
 
+    document.getElementById('menuButton').addEventListener('click',function(){  window.location.href = 'ExerciseSelection.html'});
+
    document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         addTodoFromInput()
     }
+
+
 });
 
 </script>
