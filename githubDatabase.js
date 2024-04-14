@@ -1,35 +1,39 @@
 const SYNC_TO_GITHUB = true; 
-
+const syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
 ///////////////////// Buttons
 
 function addClick(element,type) {
 
 
     const clicks = get('clicks',{});
+
+    console.log(clicks)
     const url = window.location.href;
 
     if(clicks[url] == undefined){
-      clicks[url] = []
+      clicks[url] = {}
     }
-
-
-    
-    var clickObject = {
-        date: getDateTimeString(),
-        type: type
-    };
-    // console.log(element);
+    let buttonID; 
     if (element.id) {
-        clickObject.id = element.id;
+       buttonID = element.id;
+    }else{
+        buttonID = element.textContent.trim().replace(/[^\x00-\x7F]/g, '*');
     }
-    // clickObject.text = element.textContent.trim();
-    clickObject.text = element.textContent.trim().replace(/[^\x00-\x7F]/g, '*');
 
 
-    clicks[url].unshift(clickObject);
-    // add('clicks',clickObject);
+    console.log("clicked:"+buttonID)
+
+
+    const pageClicks = clicks[url]
+    if(pageClicks[buttonID] == undefined){
+      pageClicks[buttonID] = []
+    }
+
+    pageClicks[buttonID].unshift(getDateTimeString());
+
+    console.log(pageClicks[buttonID])
+    console.log(clicks)
     set('clicks',clicks,true);
-    // console.log(JSON.stringify(clickObject));
 }
 
 function addClickListeners() {
@@ -37,14 +41,14 @@ function addClickListeners() {
   var buttons = document.querySelectorAll('button');
     buttons.forEach(function(button) {
         button.addEventListener('click', function(event) {
-            addClick(button, 'button'); //.nodeName  .tagName .localName 
+            addClick(button); //.nodeName  .tagName .localName 
         });
     });
 
   var links = document.querySelectorAll('a');
   links.forEach(function(link) {
       link.addEventListener('click', function(event) {
-         addClick(link, 'link');
+         addClick(link);
       });
   });
 
@@ -60,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ///////////////////// Database syncing local storage to github
 
-const syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
+
 
 async function main(){
 
@@ -133,10 +137,10 @@ async function mainSave(){
     const comments = get('comments',[],true);
     userData.comments = comments;
 
-    const views = get('views',[]);
+    const views = get('views',{});
     userData['views'] = views;
 
-    const clicks = get('clicks',[]);
+    const clicks = get('clicks',{});
     userData['clicks'] = clicks;
 
     // console.log(JSON.stringify(jsonData));
@@ -284,7 +288,10 @@ async function getJsonDatabase(){
 
 
 async function saveJsonToGithub(jsonToSave,sha) {
-  // console.log("SAVE");
+
+
+  try{
+      // console.log("SAVE");
   const dateString = getDateTimeStringMilliseconds();
   const commitMessage = `${dateString}`;
   const contentBits = btoa(JSON.stringify(jsonToSave, null, 2));
@@ -307,6 +314,17 @@ async function saveJsonToGithub(jsonToSave,sha) {
     console.log("ERROR:"+finalResponse.status);
 
   }
+}catch(e){
+      console.log("ERROR:"+e);
+
+      console.log("couldn't push to github. trying again in "+syncIntervalMillisec)
+
+      setTimeout(checkIfItsTimeToSyncUserData, syncIntervalMillisec);
+
 }
+
+  }
+
+
 ////////////////////// MAIN
 main();
