@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<button id="clearCashe">clearCashe</button>
+<!-- <button id="clearGithub">clear</button> -->
 <button id="clear">clear</button>
 
 <script>
@@ -42,11 +44,11 @@ async function getGithubFileInfo() {
 
 
 
-function appendText(text,color="black") {
+function appendText(text,size="50",color="black") {
     var errorMessage = document.createElement("span");
     errorMessage.textContent = text;
     errorMessage.style.color = color;
-    errorMessage.style.fontSize = "50px";
+    errorMessage.style.fontSize = size+"px";
     document.body.appendChild(errorMessage);
 }
 
@@ -88,6 +90,11 @@ async function clear() {
       appendText(errorMessage);
   }
 }
+
+// document.getElementById("clearSyncTimer").addEventListener("click", function() {localStorage.clear(); appendText("clearedSyncTimer",25)});
+document.getElementById("clearCashe").addEventListener("click", function() {localStorage.clear(); appendText("cahseCleared",25)});
+
+
 
 document.getElementById("clear").addEventListener("click", function() {
     var result = window.confirm("Are you sure you want to clear?");

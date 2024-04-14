@@ -53,13 +53,25 @@ const syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
 
 async function main(){
 
-  // const viewsElement = {"url": window.location.href, "date": getDateTimeString()}
-  const viewsElement = {}
 
-  viewsElement[window.location.href] =  getDateTimeString()
+  const views = get('views',{})
+  const url = window.location.href
+
+  if(views[url] == undefined){
+    views[url] = []
+  }
+
+  views[url].unshift(getDateTimeString())
+  // const viewsElement = {"url": window.location.href, "date": getDateTimeString()}
+  // const viewsElement = {}
+
+  // viewsElement[window.location.href] =  getDateTimeString()
   // "url": window.location.href, "date": getDateTimeString()
 
-  add('views',viewsElement);
+  // add('views',viewsElement);
+  set('views',views,true);
+
+
 
   let userID = localStorage.getItem('userID');
     
