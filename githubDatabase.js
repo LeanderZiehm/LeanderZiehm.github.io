@@ -1,5 +1,3 @@
-// userData = {"userID":userID, "device":window.navigator.userAgent, "startDate":getDateTimeString(), "comments":[], "views" :[], "clicks":[]}
-
 const SYNC_TO_GITHUB = true; 
 
 ///////////////////// Buttons
@@ -55,7 +53,11 @@ const syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
 
 async function main(){
 
-  const viewsElement = {"url": window.location.href, "date": getDateTimeString()}
+  // const viewsElement = {"url": window.location.href, "date": getDateTimeString()}
+  const viewsElement = {}
+
+  viewsElement[window.location.href] =  getDateTimeString()
+  // "url": window.location.href, "date": getDateTimeString()
 
   add('views',viewsElement);
 
