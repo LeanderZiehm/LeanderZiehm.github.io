@@ -3,9 +3,19 @@ const SYNC_TO_GITHUB = true;
 ///////////////////// Buttons
 
 function addClick(element,type) {
+
+
+    const clicks = get('clicks',{});
+    const url = window.location.href;
+
+    if(clicks[url] == undefined){
+      clicks[url] = []
+    }
+
+
+    
     var clickObject = {
-        clickTime: getDateTimeString(),
-        currentUrl: window.location.href,
+        date: getDateTimeString(),
         type: type
     };
     // console.log(element);
@@ -16,8 +26,9 @@ function addClick(element,type) {
     clickObject.text = element.textContent.trim().replace(/[^\x00-\x7F]/g, '*');
 
 
-
-    add('clicks',clickObject);
+    clicks[url].unshift(clickObject);
+    // add('clicks',clickObject);
+    set('clicks',clicks,true);
     // console.log(JSON.stringify(clickObject));
 }
 
@@ -114,7 +125,7 @@ async function mainSave(){
     const isNewUser = (userData == undefined)
 
     if(isNewUser){
-        userData = {"userID":userID, "device":window.navigator.userAgent, "joined":getDateTimeString(), "comments":[], "views" :[], "clicks":[]}
+        userData = {"userID":userID, "device":window.navigator.userAgent, "joined":getDateTimeString(), "comments":[], "views" :{}, "clicks":{}}
         jsonData.users.unshift(userData);
 
     }

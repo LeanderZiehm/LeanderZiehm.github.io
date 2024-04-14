@@ -118,7 +118,7 @@
 <div id="editPanel">
     <textarea id="editText"></textarea>
     <button id="deleteButton" onclick="deleteItem()" >🗑️</button>
-    <button onclick="cancelEdit()">Cancel</button>
+    <button onclick="cancelEdit()">Cancel</button> <!-- id="cancelButton" -->
     <button id="saveButton" onclick="clickSaveEdit()">💾</button>      
 </div>
 
@@ -201,6 +201,8 @@ function onClickUpvoteButton() {
         var upvoteButton = document.createElement("button");
         upvoteButton.classList.add("vote-button");
         upvoteButton.innerHTML = "▲";
+        upvoteButton.id = "upvoteButton"+id;
+
 
         upvoteButton.onclick = onClickUpvoteButton.bind(upvoteButton);
         li.appendChild(upvoteButton);
@@ -220,6 +222,7 @@ function onClickUpvoteButton() {
         li.appendChild(editButton);
         if(isYourOwnComment){
             editButton.innerHTML = "✎";
+            editButton.id = "editButton"+id;
             editButton.onclick = function() {
                 var listItem = this.parentElement;
                 const commentText = listItem.querySelector(".commentText").innerText;
