@@ -12,7 +12,7 @@
 
 <script>
    
-
+// localStorage.clear();
 
 const shift = 3;
 
@@ -38,6 +38,18 @@ async function getGithubFileInfo() {
   const data = await response.json();
   return data
 }
+
+
+
+
+function appendText(text,color="black") {
+    var errorMessage = document.createElement("span");
+    errorMessage.textContent = text;
+    errorMessage.style.color = color;
+    errorMessage.style.fontSize = "50px";
+    document.body.appendChild(errorMessage);
+}
+
 
 async function clear() {
 
@@ -65,13 +77,29 @@ async function clear() {
 
   if(finalResponse.status === 200) {
     console.log("Saved successfully");
+    document.body.style.backgroundColor = "green";
+    appendText("success");
   }else{
-    console.log("ERROR:"+finalResponse.status);
+
+    const errorMessage = "ERROR:"+finalResponse.status
+    console.log(errorMessage);
+
+      document.body.style.backgroundColor = "red";
+      appendText(errorMessage);
   }
 }
 
+document.getElementById("clear").addEventListener("click", function() {
+    var result = window.confirm("Are you sure you want to clear?");
+    if (result) {
+        clear();
+    } else {
+        console.log("Clear operation cancelled.");
+    }
+});
 
-document.getElementById("clear").addEventListener("click", function(){ clear() });
+
+
 
 
 

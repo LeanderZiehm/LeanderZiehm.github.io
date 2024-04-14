@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="colors.css">
 <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
+<script src="popup.js" type="text/javascript" charset="utf-8"></script>
 <title>Comments</title>
 <style>
     body {
@@ -112,23 +113,20 @@
     </ul>
     <div style=""> <input type="text" id="todoInput" placeholder="Enter a new request...">
     <button id="addButton" onclick="addTodoFromInput()">➤</button></div><!-- &#10148; -->
-   
-  
 </div>
 
 <div id="editPanel">
     <textarea id="editText"></textarea>
     <button id="deleteButton" onclick="deleteItem()" >🗑️</button>
     <button onclick="cancelEdit()">Cancel</button>
-    <button id="saveButton" onclick="saveEdit()">💾</button>
-
-      
+    <button id="saveButton" onclick="clickSaveEdit()">💾</button>      
 </div>
 
 <script>
-    var editIndex = -1;
 
 
+
+    let editID;
 
     function hideElementByID(id,hide = true){
 
@@ -140,10 +138,8 @@
         
     }
 
-
     hideElementByID("addButton");
     hideElementByID("editPanel");
-
 
     function addTodoFromInput(){
 
@@ -152,103 +148,87 @@
             alert("Please enter a todo.");
             return;
         }
-
-
     addComment(inputValue);
-
     hideElementByID('addButton');
     document.getElementById("todoInput").value = "";
-
-
     }
-
-
-
-    function addComment(text,upvotes=1,loadedID = null){
-
+    function addComment(text,upvotes=1,loadedID = null,addedFrom = 'input'){
 
         const userID = get('userID');
+        const ID_SEPERATOR = '.';
 
-        if(loadedID == null){
+        if(addedFrom == 'input'){
 
-        const commentID = get('commentID',0);
-        const ID = userID+"_"+commentID;
-        set('commentID',commentID+1);
+            const commentID = get('commentID',0);
+        
+            const id = userID+ID_SEPERATOR+commentID;
+            set('commentID',commentID+1);
 
-
-        createComment(text, upvotes,ID);
- 
-         const comments = get('comments',[]);
-        const comment = {"text":text, "upvotes":upvotes, "ID":ID, "created":getTimeDateString()};
-        comments.unshift(comment);
-        set('comments',comments,true); 
-
-        }else{
-
-            const loadedUserID = loadedID.split('_')[0]
-            const isYourOwnComment = (loadedUserID ==  userID)
-
-            // if(loadedUserID !=  userID){
-                createComment(text, upvotes,loadedID,isYourOwnComment);
-            // }
-        }
-
-  
+            createComment(text, upvotes,id);
      
+            const comments = get('comments',[]);
+            const comment = {"text":text, "upvotes":upvotes, "id":id, "date":getDateTimeString()};
+            comments.unshift(comment);
+            set('comments',comments,true); 
 
-       
-       
-   
+        }else if (addedFrom == 'comments') {
 
-
-  
+            const loadedUserID = loadedID.split(ID_SEPERATOR)[0];
+            const isYourOwnComment = (loadedUserID ==  userID);
+            createComment(text, upvotes,loadedID,isYourOwnComment);
+        }
     }
 
+function onClickUpvoteButton() {
+    const listItem = this.parentElement;
+    const listItemID = listItem['id'];
+    let savedComments = get('comments',[]);
+    const savedComment = savedComments.find(obj => obj.id === listItemID);
 
-
-    function createComment(todoText,upvotes,ID,isYourOwnComment=true) {
+    if(savedComment){
+        savedComment['upvotes'] += 1; 
+    }
+    console.log(savedComment);
+    set('comments',savedComments,true);
+    var voteCount = listItem.querySelector(".vote-count");
+    voteCount.innerText =  parseInt(voteCount.innerText) + 1;
+    reorderTodoList();
+}
+    function createComment(commentText,upvotes,id,isYourOwnComment=true) {
    
         var li = document.createElement("li");
-        li.id = ID;
-        var voteButton = document.createElement("button");
-        voteButton.classList.add("vote-button");
-        voteButton.innerHTML = "▲";
-        voteButton.onclick = function() {
-            var voteCount = this.parentElement.querySelector(".vote-count")
-            voteCount.innerText =  parseInt(voteCount.innerText) + 1;
-            reorderTodoList();
-        };
-        li.appendChild(voteButton);
+        li['id'] = id;
+        var upvoteButton = document.createElement("button");
+        upvoteButton.classList.add("vote-button");
+        upvoteButton.innerHTML = "▲";
+
+        upvoteButton.onclick = onClickUpvoteButton.bind(upvoteButton);
+        li.appendChild(upvoteButton);
 
         var voteCount = document.createElement("span");
         voteCount.classList.add("vote-count");
         voteCount.innerText = upvotes;
         li.appendChild(voteCount);
 
-        var todoTextElement = document.createElement("span");
-        todoTextElement.classList.add("todoText");
-        todoTextElement.innerText = todoText;
-        li.appendChild(todoTextElement);
+        var commentTextElement = document.createElement("span");
+        commentTextElement.classList.add("commentText");
+        commentTextElement.innerText = commentText;
+        li.appendChild(commentTextElement);
 
         var editButton = document.createElement("button");
       
         li.appendChild(editButton);
-
-  
         if(isYourOwnComment){
-
-
             editButton.innerHTML = "✎";
             editButton.onclick = function() {
                 var listItem = this.parentElement;
-                const todoText = listItem.querySelector(".todoText").innerText;
-                editIndex = Array.from(listItem.parentElement.children).indexOf(listItem);
-                document.getElementById("editText").value = todoText;
+                const commentText = listItem.querySelector(".commentText").innerText;
+                editID = listItem['id']
+                document.getElementById("editText").value = commentText;
                 hideElementByID("editPanel",false);
                 };
-
         }else{
-            editButton.innerHTML = "🤵🏻";//웃🕴️⬤ "ᴼᴥᴼ"
+            editButton.innerHTML = "🤵🏻";//"ᴼᴥᴼ"
             editButton.classList.add("disabledButton")
         }
         document.getElementById("todoList").appendChild(li);
@@ -265,43 +245,85 @@
         items.forEach(item => todoList.appendChild(item));
     }
 
-
-
-    function saveEdit() {
-        var newText = document.getElementById("editText").value;
-        if (newText === '') {
+    function clickSaveEdit() {
+        var editText = document.getElementById("editText").value;
+        if (editText === '') {
             alert("Please enter a todo.");
             return;
         }
+        var textBefore = document.getElementById(editID).querySelector(".commentText").innerText;
+        const textIsDifferent = (textBefore != editText);
+        if(textIsDifferent){
 
-        if (confirm("Are you sure you want to save your changes?") == true) {
-            document.getElementById("todoList").children[editIndex].querySelector(".todoText").innerText = newText;
+
+               if (confirm(`Are you sure you want to save your changes?`) == true) {
+
+                  saveEdit(editText);
+               }
+
+
+            //  createCustomPopup(
+            // "Save", 
+            // "Are you sure you want to save your changes?", 
+            // function(){
+            //     console.log("yes");
+            //     saveEdit(editText);
+            // }
+            // );
+        }else{
+            hideElementByID("editPanel");
+        }
+
+       
+    }
+
+       function saveEdit(editedText) {
+
+            var editListItem = document.getElementById(editID);
+            editListItem.querySelector(".commentText").innerText = editedText;
+
+            let savedComments = get('comments',[]);
+            const savedComment = savedComments.find(obj => obj.id === editID);
+
+            if(savedComment){
+                if(savedComment['modified'] == undefined){
+                    savedComment['modified'] = []
+                }
+                savedComment['modified'].unshift({'text':savedComment['text'], 'upvotes':savedComment['upvotes'],'date':savedComment['date']})
+                savedComment['text'] = editedText;
+                savedComment['date'] = getDateTimeString();
+            }
+            console.log(savedComment);
+            set('comments',savedComments,true);
             hideElementByID("editPanel");
     }
-        
-    }
+
+
 
     function cancelEdit() {
-
         hideElementByID("editPanel");
     }
 
     function deleteItem() {
-
-        var todoList = document.getElementById("todoList");
-        var listItem = todoList.children[editIndex];
-
-        const listItemText = listItem.querySelector(".todoText").innerText;
-        const listItemUpvotes = listItem.querySelector(".vote-count").innerText;
-
-
+        var editListItem = document.getElementById(editID);
+        const listItemText = editListItem.querySelector(".commentText").innerText;
+        const listItemUpvotes = editListItem.querySelector(".vote-count").innerText;
         if (confirm(`Are you sure you want to delete "${listItemText}" with ${listItemUpvotes} upvotes?`) == true) {
-        todoList.removeChild(listItem);
-        hideElementByID("editPanel");
-    }
-   
-    }
+            editListItem.remove();
+            let savedComments = get('comments',[]);
+            const savedComment = savedComments.find(obj => obj.id === editID);
+            if(savedComment){
+                // console.log(savedComment)
+                // console.log(savedComments)
+                // savedComments.delete(savedComment)
 
+                savedComments = savedComments.filter(item => item.id !== editID);
+            }
+            console.log(savedComment);
+            set('comments',savedComments,true);
+            hideElementByID("editPanel");
+    }
+    }
     document.getElementById("todoInput").addEventListener("input", function() {
 
         if(this.value.trim() == ''){
@@ -309,49 +331,18 @@
         }else{
             hideElementByID("addButton",false);
         }
-
-
     });
-
-
     const comments = get('comments',[]);
-
-    comments.forEach((comment) => addComment(comment.text,comment.upvotes,comment.ID));
-   // const comment = {"text":text, "upvotes":upvotes, "created":getTimeDateString(),"commentID":commentID};
-
-
+    comments.forEach((comment) => addComment(comment.text,comment.upvotes,comment.id,'comments'));
 
    async function loadComments(){
-
     const jsonData = await getJsonDatabase();
-
-    users = jsonData.users.forEach((user) => user.comments.forEach((comment) => addComment(comment.text,comment.upvotes,comment.ID)))
-
-    // jsonData
-
-    //    addComment("add one",100)
-    // addComment("add two",200,13)
-    // addComment("add trescientos",300)
-
-   }
-
-
-   loadComments()
-
- 
-
+    users = jsonData.users.forEach((user) => user.comments.forEach((comment) => addComment(comment.text,comment.upvotes,comment.id,'github')));
     reorderTodoList();
+   }
+   loadComments();
 
-
-
-  document.addEventListener('keydown', function(event) {
-   
-
-    // if (event.key === 'e' || event.key === 'E') {
-    //     document.getElementById('tip').classList.remove('hidden');
-    // }
-
-
+   document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         addTodoFromInput()
     }
