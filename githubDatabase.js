@@ -1,13 +1,122 @@
 const SYNC_TO_GITHUB = true; 
-const syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
+const syncIntervalMillisec = 10000 // 60000 milliseconds = 1 minute
+// const syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
+
+///////////////////// Database syncing local storage to github
+
+async function main(){
+
+  // console.log(get('quits',{})) 
+
+  const views = get('views',{})
+  const url = window.location.href
+
+  if(views[url] == undefined){
+    views[url] = []
+  }
+  views[url].unshift("+"+getDateTimeString())
+  set('views',views,true);
+  let userID = localStorage.getItem('userID');
+    if (userID === null) {
+        const jsonData = await getJsonDatabase()
+        userID = createIncrementalUserID(jsonData);
+        localStorage.setItem('userID',userID);
+    }
+
+
+    window.addEventListener("beforeunload", storeViewEnd);
+
+  if(SYNC_TO_GITHUB == true){
+      checkIfItsTimeToSyncUserData();
+  }
+}
+
+function storeViewEnd(){
+
+  const views = get('views',{})
+  const url = window.location.href
+
+  if(views[url] == undefined){
+    views[url] = []
+  }
+  views[url].unshift("-"+getDateTimeString())
+  set('views',views,true);
+}
+
+
+
+function checkIfItsTimeToSyncUserData() {
+  var currentTime = new Date().getTime();
+  var lastSyncTime = localStorage.getItem('lastSyncTime');
+
+
+  const milliseconds = (currentTime - lastSyncTime)
+  if (!lastSyncTime || milliseconds > syncIntervalMillisec) { 
+      console.log('Syncing data with github...');
+      saveToGithub();
+      localStorage.setItem('lastSyncTime', currentTime);
+  } else {
+      console.log('No need to sync yet. Milliseconds left: ' + (syncIntervalMillisec - milliseconds)) ;
+  }
+}
+
+async function saveToGithub(){
+
+    const fileInfo = await getGithubFileInfo();
+    const stringOfJsonDatabase = atob(fileInfo.content);
+    const jsonData = JSON.parse(stringOfJsonDatabase);        
+    const userID = get('userID');
+    let userData = jsonData.users.find(user => user.userID == userID)
+    const isNewUser = (userData == undefined)
+
+    if(isNewUser){
+        userData = {"userID":userID,"name":"","work":"", "device":window.navigator.userAgent, "joined":getDateTimeString(), "comments":[], "views" :{}, "clicks":{}}
+        jsonData.users.unshift(userData);
+
+    }
+    
+    const comments = get('comments',[],true);
+    userData.comments = comments;
+
+    const views = get('views',{});
+    userData['views'] = views;
+
+    const workName = get('workName',{});
+    if(workName){
+    userData['name'] = workName['name'];
+    userData['work'] = workName['work'];
+    }
+
+    // console.log(quits)
+
+    const clicks = get('clicks',{});
+    userData['clicks'] = clicks;
+
+    // console.log(JSON.stringify(jsonData));
+      saveJsonToGithub(jsonData,fileInfo.sha);
+}
+
+function createIncrementalUserID(jsonData) {
+
+    let maxUserID = 0;
+    jsonData.users.forEach(user => {
+
+        let userID = parseInt(user.userID)
+        if (userID > maxUserID) {
+            maxUserID = userID;
+        }
+    });
+    return maxUserID + 1;
+}
+
+
 ///////////////////// Buttons
 
 function addClick(element,type) {
 
-
     const clicks = get('clicks',{});
 
-    console.log(clicks)
+    // console.log(clicks)
     const url = window.location.href;
 
     if(clicks[url] == undefined){
@@ -20,8 +129,7 @@ function addClick(element,type) {
         buttonID = element.textContent.trim().replace(/[^\x00-\x7F]/g, '*');
     }
 
-
-    console.log("clicked:"+buttonID)
+    // console.log("clicked:"+buttonID)
 
 
     const pageClicks = clicks[url]
@@ -31,8 +139,8 @@ function addClick(element,type) {
 
     pageClicks[buttonID].unshift(getDateTimeString());
 
-    console.log(pageClicks[buttonID])
-    console.log(clicks)
+    // console.log(pageClicks[buttonID])
+    // console.log(clicks)
     set('clicks',clicks,true);
 }
 
@@ -54,111 +162,10 @@ function addClickListeners() {
 
 }
 
-
-
-
 document.addEventListener("DOMContentLoaded", function() {
     // console.log("Everything is loaded!");
     addClickListeners();
 });
-
-///////////////////// Database syncing local storage to github
-
-
-
-async function main(){
-
-
-  const views = get('views',{})
-  const url = window.location.href
-
-  if(views[url] == undefined){
-    views[url] = []
-  }
-
-  views[url].unshift(getDateTimeString())
-  // const viewsElement = {"url": window.location.href, "date": getDateTimeString()}
-  // const viewsElement = {}
-
-  // viewsElement[window.location.href] =  getDateTimeString()
-  // "url": window.location.href, "date": getDateTimeString()
-
-  // add('views',viewsElement);
-  set('views',views,true);
-
-
-
-  let userID = localStorage.getItem('userID');
-    
-    if (userID === null) {
-
-        const jsonData = await getJsonDatabase()
-        userID = createIncrementalUserID(jsonData);
-        localStorage.setItem('userID',userID);
-    }
-
-  if(SYNC_TO_GITHUB == true){
-      checkIfItsTimeToSyncUserData();
-  }
-
-
-}
-
-function checkIfItsTimeToSyncUserData() {
-  var currentTime = new Date().getTime();
-  var lastSyncTime = localStorage.getItem('lastSyncTime');
-
-
-  const milliseconds = (currentTime - lastSyncTime)
-  if (!lastSyncTime || milliseconds > syncIntervalMillisec) { 
-      console.log('Syncing data with github...');
-      mainSave();
-      localStorage.setItem('lastSyncTime', currentTime);
-  } else {
-      console.log('No need to sync yet. Milliseconds left: ' + (syncIntervalMillisec - milliseconds)) ;
-  }
-}
-
-async function mainSave(){
-
-    const fileInfo = await getGithubFileInfo();
-    const stringOfJsonDatabase = atob(fileInfo.content);
-    const jsonData = JSON.parse(stringOfJsonDatabase);        
-    const userID = get('userID');
-    let userData = jsonData.users.find(user => user.userID == userID)
-    const isNewUser = (userData == undefined)
-
-    if(isNewUser){
-        userData = {"userID":userID, "device":window.navigator.userAgent, "joined":getDateTimeString(), "comments":[], "views" :{}, "clicks":{}}
-        jsonData.users.unshift(userData);
-
-    }
-    
-    const comments = get('comments',[],true);
-    userData.comments = comments;
-
-    const views = get('views',{});
-    userData['views'] = views;
-
-    const clicks = get('clicks',{});
-    userData['clicks'] = clicks;
-
-    // console.log(JSON.stringify(jsonData));
-      saveJsonToGithub(jsonData,fileInfo.sha);
-}
-
-function createIncrementalUserID(jsonData) {
-
-    let maxUserID = 0;
-    jsonData.users.forEach(user => {
-
-        let userID = parseInt(user.userID)
-        if (userID > maxUserID) {
-            maxUserID = userID;
-        }
-    });
-    return maxUserID + 1;
-}
 
 
 ///////////////////// local storage helper functions
@@ -284,8 +291,6 @@ async function getJsonDatabase(){
 
     return jsonData;
 }
-
-
 
 async function saveJsonToGithub(jsonToSave,sha) {
 

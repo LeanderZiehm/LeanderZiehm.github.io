@@ -8,6 +8,16 @@
 <script src="popup.js" type="text/javascript" charset="utf-8"></script>
 <title>Comments</title>
 <style>
+
+    :root{
+        --gray: rgb(204, 204, 204);
+        --white: rgb(255, 255, 255);
+        --offWhite: rgb(242, 242, 242);        /*--offWhite2: rgb(249, 249, 249);*/
+        --blue: rgb(0, 123, 255);
+        --green: rgba(55,255,55,0.8);
+        --orange: rgb(230, 130, 0);
+        --red: rgba(255, 55, 55, 0.8);
+    }
     body {
         font-family: Arial, sans-serif;
         color: black;
@@ -16,17 +26,15 @@
 
     body * {
   color: black;
-
 }
     .container {
-        /*max-width: 400px;*/
         min-width: 400px;
         width: 40vw;
         margin: 0 auto;
         padding: 20px;
-        border: 1px solid #ccc;
+        border: 1px solid var(--gray);
         border-radius: 5px;
-        background-color: #f9f9f9;
+        background-color: var(--offWhite);
     }
     h2 {
         text-align: center;
@@ -35,7 +43,7 @@
         width: calc(100% - 75px);
         padding: 10px;
         margin-bottom: 10px;
-        border: 1px solid #ccc;
+        border: 1px solid var(--gray);
         border-radius: 5px;
         box-sizing: border-box;
     }
@@ -45,8 +53,8 @@
     }
     li {
         padding: 10px;
-        background-color: #fff;
-        border: 1px solid #ccc;
+        background-color: var(--white);
+        border: 1px solid var(--gray);
         border-radius: 5px;
         margin-bottom: 5px;
         display: flex;
@@ -54,18 +62,18 @@
         align-items: center;
     }
     li:hover {
-        background-color: #f2f2f2;
+        background-color: var(--offWhite);
     }
     button {
         padding: 10px;
-        background-color: rgb(230, 130, 0);/*  #4CAF50;*/
-        color: #fff;
+        background-color:  var(--orange);/*  #4CAF50;*/
+        color: var(--white);
         border: none;
         border-radius: 5px;
         cursor: pointer;
     }
     .vote-button {
-        background-color: #007bff;
+        background-color: var(--blue);  
         margin-left: 10px;
     }
     #editPanel {
@@ -75,7 +83,7 @@
         width: 100%;
         padding: 5px;
         margin-bottom: 5px;
-        border: 1px solid #ccc;
+        border: 1px solid var(--gray);
         border-radius: 5px;
         box-sizing: border-box;
     }
@@ -97,11 +105,11 @@
    }
 
    #saveButton{
-        background-color: rgba(55,255,55,0.8);
+        background-color:  var(--green); 
    }
 
    #deleteButton{
-        background-color: rgba(255, 55, 55, 0.8);
+        background-color: var(--red);
    }
 
 #menuButton {
@@ -109,10 +117,18 @@
   left: 0px;
   top: 0px;
 }
+
+#nameButton {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background-color: var(--blue);
+}
 </style>
 </head>
 <body>
  <button id="menuButton">Menu</button>
+ <button id="nameButton">Name</button>
 <div class="container">
     <h2>[Comments | Feature requests | Bug fixes]</h2>
       <ul id="todoList">
@@ -129,11 +145,7 @@
 </div>
 
 <script>
-
-
-
     let editID;
-
     function hideElementByID(id,hide = true){
 
       if(hide == true){
@@ -141,12 +153,10 @@
       }else{
         document.getElementById(id).classList.remove('hidden');
       }
-        
     }
 
     hideElementByID("addButton");
     hideElementByID("editPanel");
-
     function addTodoFromInput(){
 
         var inputValue = document.getElementById("todoInput").value;
@@ -157,6 +167,8 @@
     addComment(inputValue);
     hideElementByID('addButton');
     document.getElementById("todoInput").value = "";
+
+    saveToGithub();
     }
     function addComment(text,upvotes=1,loadedID = null,addedFrom = 'input'){
 
@@ -352,6 +364,7 @@ function onClickUpvoteButton() {
    loadComments();
 
     document.getElementById('menuButton').addEventListener('click',function(){  window.location.href = 'ExerciseSelection.html'});
+    document.getElementById('nameButton').addEventListener('click',function(){  window.location.href = 'Name.html'});
 
    document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
