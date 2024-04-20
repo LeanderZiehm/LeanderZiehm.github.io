@@ -1,16 +1,12 @@
-const SYNC_TO_GITHUB = true; 
+// set('shouldSyncToGithub','false');
+let shouldSyncToGithub = get('shouldSyncToGithub',"true");
 const syncIntervalMillisec = 10000 // 60000 milliseconds = 1 minute
-// const syncIntervalMillisec = 60000 // 60000 milliseconds = 1 minute
 
 ///////////////////// Database syncing local storage to github
-
 async function main(){
-
-  // console.log(get('quits',{})) 
 
   const views = get('views',{})
   const url = window.location.href
-
   if(views[url] == undefined){
     views[url] = []
   }
@@ -23,11 +19,12 @@ async function main(){
         localStorage.setItem('userID',userID);
     }
 
-
     window.addEventListener("beforeunload", storeViewEnd);
 
-  if(SYNC_TO_GITHUB == true){
+  if(shouldSyncToGithub === "true"){
       checkIfItsTimeToSyncUserData();
+  }else{
+    console.log("shouldSyncToGithub: "+shouldSyncToGithub);
   }
 }
 
@@ -43,12 +40,9 @@ function storeViewEnd(){
   set('views',views,true);
 }
 
-
-
 function checkIfItsTimeToSyncUserData() {
   var currentTime = new Date().getTime();
   var lastSyncTime = localStorage.getItem('lastSyncTime');
-
 
   const milliseconds = (currentTime - lastSyncTime)
   if (!lastSyncTime || milliseconds > syncIntervalMillisec) { 
@@ -72,7 +66,6 @@ async function saveToGithub(){
     if(isNewUser){
         userData = {"userID":userID,"name":"","work":"", "device":window.navigator.userAgent, "joined":getDateTimeString(), "comments":[], "views" :{}, "clicks":{}}
         jsonData.users.unshift(userData);
-
     }
     
     const comments = get('comments',[],true);
@@ -86,14 +79,9 @@ async function saveToGithub(){
     userData['name'] = workName['name'];
     userData['work'] = workName['work'];
     }
-
-    // console.log(quits)
-
     const clicks = get('clicks',{});
     userData['clicks'] = clicks;
-
-    // console.log(JSON.stringify(jsonData));
-      saveJsonToGithub(jsonData,fileInfo.sha);
+    saveJsonToGithub(jsonData,fileInfo.sha);
 }
 
 function createIncrementalUserID(jsonData) {
@@ -109,14 +97,11 @@ function createIncrementalUserID(jsonData) {
     return maxUserID + 1;
 }
 
-
 ///////////////////// Buttons
 
 function addClick(element,type) {
 
     const clicks = get('clicks',{});
-
-    // console.log(clicks)
     const url = window.location.href;
 
     if(clicks[url] == undefined){
@@ -128,19 +113,11 @@ function addClick(element,type) {
     }else{
         buttonID = element.textContent.trim().replace(/[^\x00-\x7F]/g, '*');
     }
-
-    // console.log("clicked:"+buttonID)
-
-
     const pageClicks = clicks[url]
     if(pageClicks[buttonID] == undefined){
       pageClicks[buttonID] = []
     }
-
     pageClicks[buttonID].unshift(getDateTimeString());
-
-    // console.log(pageClicks[buttonID])
-    // console.log(clicks)
     set('clicks',clicks,true);
 }
 
@@ -161,12 +138,10 @@ function addClickListeners() {
   });
 
 }
-
 document.addEventListener("DOMContentLoaded", function() {
     // console.log("Everything is loaded!");
     addClickListeners();
 });
-
 
 ///////////////////// local storage helper functions
 
@@ -175,7 +150,6 @@ function add(key,element){
   theList.unshift(element);
   set(key,theList,true);
 }
-
 
 function get(key,defaultValue=1){
       const defaultValueIsNumber = (typeof defaultValue === 'number')
@@ -190,14 +164,11 @@ function get(key,defaultValue=1){
       const value = localStorage.getItem(key);
 
       if(value == null){
-
-          // console.log("init localStoage: "+key)
           set(key,defaultValue,json);   
           return defaultValue;
       }else if(defaultValueIsNumber){
           return parseInt(value);
       }else if(json || defaultValueIsArray || defaultValueIsObject ){
-          // console.log("[JSON] defaultValue:"+JSON.stringify(defaultValue)+" defaultValueIsArray:"+defaultValueIsArray+" defaultValueIsObject:"+defaultValueIsObject+"|| KEY:"+key+" VALUE:"+value);
               return JSON.parse(value);
       }else{
               return value;
@@ -207,10 +178,8 @@ function get(key,defaultValue=1){
   function set(key,value,json = false){
       if(json){
             localStorage.setItem(key,JSON.stringify(value));  
-            // console.log(key+": "+JSON.stringify(value));
       }else{
             localStorage.setItem(key,value);  
-            // console.log(key+": "+value);
       }      
   }
 ///////////////////// Metadata functions for Github push
@@ -234,7 +203,6 @@ function de(x) {
   }
   return y;
 }
-
 
 function getDateTimeString() {
   let date = new Date();
@@ -294,7 +262,6 @@ async function getJsonDatabase(){
 
 async function saveJsonToGithub(jsonToSave,sha) {
 
-
   try{
       // console.log("SAVE");
   const dateString = getDateTimeStringMilliseconds();
@@ -309,27 +276,19 @@ async function saveJsonToGithub(jsonToSave,sha) {
       },
       body: requestBody
     });
-  // console.log(finalResponse);
 
   if(finalResponse.status === 200) {
     console.log("Saved successfully");
   }else{
     
-    // console.log(finalResponse);
     console.log("ERROR:"+finalResponse.status);
 
   }
 }catch(e){
       console.log("ERROR:"+e);
-
       console.log("couldn't push to github. trying again in "+syncIntervalMillisec)
-
       setTimeout(checkIfItsTimeToSyncUserData, syncIntervalMillisec);
-
+      }
 }
-
-  }
-
-
 ////////////////////// MAIN
 main();

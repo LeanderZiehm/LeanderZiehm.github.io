@@ -3,6 +3,7 @@
   <head>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0"/> -->
     <title>Clingo Exercises</title>
+    <!-- <link rel="shortcut icon" type="image/png" href="icons/me.png" />   "icons/me.png" -->
     <script src="exercises.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="colors.css">
     <!-- <link href="FredokaOne-Regular.ttf" rel="stylesheet"> -->
@@ -33,6 +34,21 @@ color: var(--task);
 #tip{
 color: var(--tip);
 }
+#example{
+color: var(--example);
+}
+
+#description{
+  color: var(--description);
+}
+
+#exerciseNumber{
+  color: var(--exerciseNumber);
+  display: inline;
+  /*margin: auto; */
+  margin-left: 35%; 
+}
+
 #tipButton{
 background-color: var(--tip);
 }
@@ -44,7 +60,9 @@ color: var(--solution);
 #solution{
 padding-top: 20px;
 }
-
+#output{
+color: var(--solution);
+}
 
 #menuButton {
   position: absolute;
@@ -83,39 +101,33 @@ padding-top: 20px;
    float: right;
 }
 
-
 #tipButton img{
   height: 20px;
   opacity: 0.5;
   /*filter : hue-rotate(180deg);*/
 }
 
-
 #exerciseContainer{
     height: 60vh;
     padding: 15px;
     /*drop-shadow(#e23 0.5rem 0.5rem 1rem);*/
     /*padding-top: 20px;*/
-
 }
-
 
 #container{
   margin: 0;
-  position: relative;
-  top: 10%;
-  /*transform: translateY(-10%);*/
-  /*max-width: 80%;*/
-  /*width: 60hv;*/
+  margin-top: 2%;
   width: 60vw;
-  /*margin: 20px;*/
   padding: 7px;
-   box-shadow: 10px 10px 5px 12px rgba(0, 0, 0, 0.5);
-
+  box-shadow: 10px 10px 5px 12px rgba(0, 0, 0, 0.5);
 
 }
-
-
+#commentSection{
+  margin-top: 5%;
+}
+#commentSection{
+  margin-top: 50px;
+}
 
 #textContainer{
   margin-top: 10px;
@@ -123,10 +135,11 @@ padding-top: 20px;
   margin-left: 0px;
 }
 
-
-
-
-
+.transparent{
+    opacity: 0.0; /*!important;*/
+    /*color: rgba(0, 0, 0, 0.0)!important;*/
+    /*display: none !important;*/
+}
 
   </style>
   </head>
@@ -138,119 +151,137 @@ padding-top: 20px;
 
 <div id="container">
   <div id="exerciseContainer">
-    <button id="tipButton"><img src="icons/tip.png"></button><!-- Tip -->
+    <button id="tipButton"><img src="icons/tip.png"></button>
     <button id="solutionButton" class="">Solution</button>
     <button id="nextExerciseButton" class="hidden">Next Exercise</button>
 
   <div id="textContainer">
-    <div class="text" id="task">Exercise 1: Write a program that represents the colors red, green, and blue as Clingo atoms.</div>
+    <div class="text" id="description"></div>
+    <div class="text" id="task">Exercise 420: There is an error in the html and therefore I wasn't able to load an exercise.</div>
     <div class="text" id="tip"></div>
+    <div class="text" id="example"></div>
     <div class="text" id="solution"></div>
+    <div class="text" id="output"></div>
+ 
   </div>
 </div>
-<button id="backwardButton"><img src="icons/backward.png"/></button> <!-- 🠜  -->
-<button id="forwardButton"><img src="icons/forward.png"/></button><!-- 🠞 -->
-
+  <button id="backwardButton"><img src="icons/backward.png"/></button>
+  <div class="text" id="exerciseNumber">Exercise: 1</div>
+  <button id="forwardButton"><img src="icons/forward.png"/></button>
 </div>
 
+<div id='commentSection'>
+  <button id='commentSectionButton'>
+    <div class="text" id="exerciseNumber">Comments [DOWN ARROW]</div>
+  </button>
+</div>
 
 <span id="shortcutInfo"> Keyboard shortcuts: Tip [T or Space] Solution [S or Enter] Next Exercise [Arrow Right or D] Previous Exercise [Arrow Left or A] </span>
 
-
   <script>
+    hideElementByID('example');
+    // hideElementByID('exerciseNumber');
+    hideElementByID('description');
+
+    hideElementByID('tip');
+    hideElementByID('solution');
+    hideElementByID('output');
+    //
+    hideElementByID('commentSection');  // TODO IMPLEMENT COMMENT SECTION
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const exerciseParameter = urlParams.get('exercise') || 1;
+    let exerciseIndex = exerciseParameter-1;
+    const exercise = exercises[exerciseIndex];
+
+    document.getElementById('task').innerHTML = insertBreakAfterPeriods(exercise.task);
+    document.getElementById('tip').innerHTML = insertBreakAfterPeriods(exercise.tip);
+    document.getElementById('example').innerHTML = "Example: " + insertBreakAfterPeriods(exercise.example);
+    document.getElementById('solution').innerHTML = insertBreakAfterPeriods(exercise.solution);
+    document.getElementById('description').innerHTML = insertBreakAfterPeriods(exercise.description);
+    document.getElementById('output').innerHTML = insertBreakAfterPeriods(exercise.output);
+    document.getElementById('exerciseNumber').innerHTML =  "Exercise "+(exerciseIndex+1);
+
+    document.getElementById('tipButton').addEventListener('click',showTip);
+    document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
+    document.getElementById('menuButton').addEventListener('click',function(){  window.location.href = 'ExerciseSelection.html'});
+    document.getElementById('commentsButton').addEventListener('click',function(){  window.open('Comments.html', '_blank').focus(); });
+    document.getElementById('commentSectionButton').addEventListener('click',clickCommentSectionButton);
 
 
+    function clickCommentSectionButton(){
+      console.log("clickCommentSectionButton");
+       document.getElementById('commentSectionButton').style.paddingBottom = "100px";
+    }
 
+
+    function showTip(){
+      hideElementByID('tip',false);
+      hideElementByID('example',false);
+    }
+
+    function removeLastBr(inputString) {
+    const lastIndex = inputString.lastIndexOf('<br>');
+    if (lastIndex !== -1) {
+      // console.log(inputString.substring(0, lastIndex) +"|||"+ inputString.substring(lastIndex + 4));
+        return inputString.substring(0, lastIndex) + inputString.substring(lastIndex + 4);
+    } else {
+        return inputString; // No <br> tag found, return the original string
+    }
+}
+
+
+    function insertBreakAfterPeriods(inputString) {
+    // Replace '.' with '.<br>' using regular expression
+    // return inputString.replace(/\./g, '.<br>');
+
+
+    let newLineToBr = inputString.trim().split("\n").join('<br>');
+
+    let periodWithBr = newLineToBr.replace(/\./g, '.<br>');
+
+    let final = removeLastBr(periodWithBr);
+
+     return final;
+    }
+
+    // function insertBreakAfterPeriods(textWithNewLineCharacters){
+    //   textWithNewLineCharacters = textWithNewLineCharacters.
+    //  return textWithNewLineCharacters.trim().split("\n").join('<br>');
+    // }
     function hideElementByID(id,hide = true){
 
       if(hide == true){
-        document.getElementById(id).classList.add('hidden');
+        document.getElementById(id).classList.add('hidden'); //hidden
       }else{
-        document.getElementById(id).classList.remove('hidden');
+        document.getElementById(id).classList.remove('hidden');//hidden
       }
         
     }
 
-    const DEV = true;
-
-
-    if(DEV == false){
-    hideElementByID('commentsButton');
-    }
-
-    hideElementByID('tip');
-    hideElementByID('solution');
-
-    document.getElementById('menuButton').addEventListener('click',function(){  window.location.href = 'ExerciseSelection.html'});
-    // document.getElementById('commentsButton').addEventListener('click',function(){  window.location.href = 'Comments.html'});
-    document.getElementById('commentsButton').addEventListener('click',function(){  window.open('Comments.html', '_blank').focus(); });
-
-
-
-
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const exerciseParameter = urlParams.get('exercise');
-    let exerciseIndex = exerciseParameter-1;
-
-    if(exerciseParameter == undefined || exerciseIndex < 0){
-      exerciseIndex = 0;
-    }
-
-    // console.log(exerciseIndex);
-
-    const exercise = exercises[exerciseIndex];
-    // console.log(exercise);
-
-    if (exercise.tip == "") {
-          hideElementByID('tipButton');
-    }
-
-
-    document.getElementById('task').innerHTML = exercise.task;
-    document.getElementById('tip').innerHTML = exercise.tip;
-
-
-    let solution = exercise.solution;
-    solution = solution.trim().split("\n").join('<br>');;
-    document.getElementById('solution').innerHTML = solution;
-
- 
-
-    document.getElementById('tipButton').addEventListener('click',function(){hideElementByID('tip',false);});
-    document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
-
-
- 
     function loadExercise(index){
 
       if(index < 0 || index == exercises.length){
         return;
       }
-
       const indexParameter = index + 1; 
       window.location.href = 'Exercise.html?exercise=' + indexParameter;
     }
-
-
-
 
     document.getElementById('backwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex-1); });
     document.getElementById('forwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex+1); });
 
 
-
     if (exerciseIndex == 0) {
-      hideElementByID('backwardButton');
+      // hideElementByID('backwardButton');
+       document.getElementById('backwardButton').classList.add('transparent'); 
         }
 
     if (exerciseIndex == exercises.length - 1) {
-      hideElementByID('forwardButton');
+      // hideElementByID('forwardButton');
+      document.getElementById('forwardButton').classList.add('transparent'); 
 
         }
-
-
-
   const isMobile = (navigator.maxTouches > 0 && /Android|iPhone/i.test(navigator.userAgent));
 
 
@@ -258,33 +289,57 @@ padding-top: 20px;
     hideElementByID('shortcutInfo');
   }
 
-    
-
-
-
-
   document.addEventListener('keydown', function(event) {
    
     if (event.key === 'ArrowLeft'||event.key === 'a' || event.key === 'A') {
-      console.log("LEFT");
+      // console.log("LEFT");
          loadExercise(exerciseIndex-1);
     }
     
 
     if (event.key === 'ArrowRight'||event.key === 'd' || event.key === 'D') {
-         console.log("ArrowRight");
+         // console.log("ArrowRight");
       loadExercise(exerciseIndex+1);
     }
 
     if (event.key === 't' || event.key === 'T'|| event.key === ' ') {
-        document.getElementById('tip').classList.remove('hidden');
+        showTip();
     }
 
 
     if (event.key === 's' || event.key === 'S'|| event.key === 'Enter' ) {
-        document.getElementById('solution').classList.remove('hidden');
+        // document.getElementById('solution').classList.remove('hidden');
+          hideElementByID('solution',false);
     }
 });
+
+
+
+  const container = document.getElementById('container'); 
+  const shortcutInfo = document.getElementById('shortcutInfo'); 
+
+  function hideKeyboardShortcutsIfOverlapping(){
+
+    console.log('resize');
+    const rect1 = container.getBoundingClientRect(); 
+    const rect2 = shortcutInfo.getBoundingClientRect(); 
+ 
+    if (!(rect1.right < rect2.left ||  
+          rect1.left > rect2.right ||  
+          rect1.bottom < rect2.top ||  
+          rect1.top > rect2.bottom)) { 
+      shortcutInfo.classList.add('transparent');
+      // console.log('!!Elements are touching or overlapping!!'); 
+    } else { 
+
+      shortcutInfo.classList.remove('transparent');
+      hideElementByID('shortcutInfo',false);
+      // console.log('Elements are not touching or overlapping'); 
+    }
+}
+
+hideKeyboardShortcutsIfOverlapping();
+window.addEventListener("resize", hideKeyboardShortcutsIfOverlapping);
 
   </script>
 
