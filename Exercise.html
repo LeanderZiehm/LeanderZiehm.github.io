@@ -70,12 +70,12 @@ color: var(--solution);
   top: 0px;
 }
 
-#commentsButton{
+/*#commentsButton{
   position: absolute;
   right: 0px;
   top: 0px;
 }
-
+*/
 #backwardButton, #forwardButton{
    border-radius: 100%;
    aspect-ratio: 1;
@@ -122,12 +122,12 @@ color: var(--solution);
   box-shadow: 10px 10px 5px 12px rgba(0, 0, 0, 0.5);
 
 }
-#commentSection{
+/*#commentSection{
   margin-top: 5%;
-}
-#commentSection{
+}*/
+/*#commentSection{
   margin-top: 50px;
-}
+}*/
 
 #textContainer{
   margin-top: 10px;
@@ -146,7 +146,7 @@ color: var(--solution);
 <body>
 
   <button id="menuButton">Menu</button>
-  <button id="commentsButton">Comments</button>
+  <!-- <button id="commentsButton">Comments</button> -->
 
 
 <div id="container">
@@ -170,11 +170,11 @@ color: var(--solution);
   <button id="forwardButton"><img src="icons/forward.png"/></button>
 </div>
 
-<div id='commentSection'>
-  <button id='commentSectionButton'>
-    <div class="text" id="exerciseNumber">Comments [DOWN ARROW]</div>
-  </button>
-</div>
+<!-- <div id='commentSection'> -->
+  <!-- <button id='commentSectionButton'> -->
+    <!-- <div class="text" id="exerciseNumber">Comments [DOWN ARROW]</div> -->
+  <!-- </button> -->
+<!-- </div> -->
 
 <span id="shortcutInfo"> Keyboard shortcuts: Tip [T or Space] Solution [S or Enter] Next Exercise [Arrow Right or D] Previous Exercise [Arrow Left or A] </span>
 
@@ -187,7 +187,7 @@ color: var(--solution);
     hideElementByID('solution');
     hideElementByID('output');
     //
-    hideElementByID('commentSection');  // TODO IMPLEMENT COMMENT SECTION
+    // hideElementByID('commentSection');  // TODO IMPLEMENT COMMENT SECTION
 
     const urlParams = new URLSearchParams(window.location.search);
     const exerciseParameter = urlParams.get('exercise') || 1;
@@ -205,14 +205,14 @@ color: var(--solution);
     document.getElementById('tipButton').addEventListener('click',showTip);
     document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
     document.getElementById('menuButton').addEventListener('click',function(){  window.location.href = 'ExerciseSelection.html'});
-    document.getElementById('commentsButton').addEventListener('click',function(){  window.open('Comments.html', '_blank').focus(); });
-    document.getElementById('commentSectionButton').addEventListener('click',clickCommentSectionButton);
+    // document.getElementById('commentsButton').addEventListener('click',function(){  window.open('Comments.html', '_blank').focus(); });
+    // document.getElementById('commentSectionButton').addEventListener('click',clickCommentSectionButton);
 
 
-    function clickCommentSectionButton(){
-      console.log("clickCommentSectionButton");
-       document.getElementById('commentSectionButton').style.paddingBottom = "100px";
-    }
+    // function clickCommentSectionButton(){
+    //   console.log("clickCommentSectionButton");
+    //    document.getElementById('commentSectionButton').style.paddingBottom = "100px";
+    // }
 
 
     function showTip(){
@@ -320,7 +320,7 @@ color: var(--solution);
 
   function hideKeyboardShortcutsIfOverlapping(){
 
-    console.log('resize');
+    // console.log('resize');
     const rect1 = container.getBoundingClientRect(); 
     const rect2 = shortcutInfo.getBoundingClientRect(); 
  

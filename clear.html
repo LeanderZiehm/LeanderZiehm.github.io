@@ -3,46 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <!-- <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script> -->
+ <link rel="stylesheet" href="colors.css">
+ <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
 <title>Clear</title>
+
+<style>
+
+</style> 
+
 </head>
 <body>
+
+<span id="displayText"> </span>  
+
 
 <button id="clearCashe">clearCashe</button>
 <!-- <button id="clearGithub">clear</button> -->
 <button id="clear">clear</button>
+<button id="toggleSync">toggleSync</button>
 
 <script>
-   
-// localStorage.clear();
-
-const shift = 3;
-
-function de(x) {
-  let y = "";
-  for (let i = 0; i < x.length; i++) {
-    let charCode = x.charCodeAt(i) - shift - (i % 2);
-    y += String.fromCharCode(charCode);
-  }
-  return y;
-}
-
-const owner = "Circulai";
-const repo = "Requests";
-const branch = "main"; // or the branch you want to commit to
-const fileName = "requests.json"; // path to your JSON file
-const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
-let x = "jlscRggPXjZPyk;QDVDV9jHHLfK7[4Gj:j7OPjz:";
-x = de(x);
-
-async function getGithubFileInfo() {
-  const response = await fetch(apiUrl);
-  const data = await response.json();
-  return data
-}
-
-
-
 
 function appendText(text,size="50",color="black") {
     var errorMessage = document.createElement("span");
@@ -52,22 +32,65 @@ function appendText(text,size="50",color="black") {
     document.body.appendChild(errorMessage);
 }
 
+function toggleSync(){
+  let shouldSyncToGithub = localStorage.getItem('shouldSyncToGithub') || "true";
+
+   if(shouldSyncToGithub === "true"){
+      // displayText("SYNC ON");
+      console.log("sync is set to false");
+      localStorage.setItem('shouldSyncToGithub','false');
+   }else{
+      // displayText("SYNC OFF");
+       console.log("sync is set to true");
+      localStorage.setItem('shouldSyncToGithub','true');
+   }
+   displaySync();
+}
+
+function displayText(textToDisplay){
+  document.getElementById("displayText").innerHTML = textToDisplay;
+}
+
+function displaySync(){
+   let shouldSyncToGithub = localStorage.getItem('shouldSyncToGithub') || "true";
+
+   if(shouldSyncToGithub === "true"){
+      displayText("SYNC ON");
+   }else{
+      displayText("SYNC OFF");
+   }
+}
+
+function clearCashe(){
+    appendText("clearedCashe",25)
+    console.log("CLEAR");
+    localStorage.clear();
+    localStorage.setItem('shouldSyncToGithub','false');
+    displaySync();
+   
+}
+
+displaySync();
 
 async function clear() {
 
-    console.log("CLEAR");
-     localStorage.clear();
+    clearCashe();
+
 
     const info = await getGithubFileInfo();
     const sha = info.sha;
 
 
-    const jsonToSave = {"users":[]}
+    const jsonToSave = {}
+    if(isAnonymous == false){
+      jsonToSave['users'] = []
+    }
+
   // console.log("SAVE");
   const commitMessage = `-`;
   const contentBits = btoa(JSON.stringify(jsonToSave, null, 2));
   const requestBody = JSON.stringify({ message: commitMessage, content: contentBits, sha: sha, branch: branch});
-  const finalResponse = await fetch(apiUrl, {
+  const finalResponse = await fetch(url, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${x}`,
@@ -92,7 +115,8 @@ async function clear() {
 }
 
 // document.getElementById("clearSyncTimer").addEventListener("click", function() {localStorage.clear(); appendText("clearedSyncTimer",25)});
-document.getElementById("clearCashe").addEventListener("click", function() {localStorage.clear(); appendText("cahseCleared",25)});
+document.getElementById("clearCashe").addEventListener("click",clearCashe);
+document.getElementById("toggleSync").addEventListener("click",toggleSync);
 
 
 

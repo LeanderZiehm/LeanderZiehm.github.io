@@ -1,6 +1,11 @@
 // set('shouldSyncToGithub','false');
+let syncMode = get('syncMode','anonymous');
+let isAnonymous = (syncMode === 'anonymous')
 let shouldSyncToGithub = get('shouldSyncToGithub',"true");
+
+console.log("syncMode:" +syncMode +" isAnonymous:"+ isAnonymous+ " shouldSyncToGithub:" + shouldSyncToGithub)
 const syncIntervalMillisec = 10000 // 60000 milliseconds = 1 minute
+
 
 ///////////////////// Database syncing local storage to github
 async function main(){
@@ -12,30 +17,95 @@ async function main(){
   }
   views[url].unshift("+"+getDateTimeString())
   set('views',views,true);
-  let userID = localStorage.getItem('userID');
+
+
+  if(isAnonymous == false){ // TODO FIX THIS BROKEN CODE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    let userID = localStorage.getItem('userID');
     if (userID === null) {
         const jsonData = await getJsonDatabase()
         userID = createIncrementalUserID(jsonData);
         localStorage.setItem('userID',userID);
     }
 
+  }
     window.addEventListener("beforeunload", storeViewEnd);
 
   if(shouldSyncToGithub === "true"){
       checkIfItsTimeToSyncUserData();
   }else{
-    console.log("shouldSyncToGithub: "+shouldSyncToGithub);
+    // console.log("shouldSyncToGithub: "+shouldSyncToGithub);
   }
 }
 
-function storeViewEnd(){
+function dateStringToDate(dateString){
+  console.log(dateString);
 
+const dateComponents = dateString.split(/[\/\s,:]+/); // Splitting by "/", ":", " ", ","
+const day = parseInt(dateComponents[0], 10);
+const month = parseInt(dateComponents[1], 10) - 1; // Months are zero-indexed
+const year = parseInt(dateComponents[2], 10);
+const hours = parseInt(dateComponents[3], 10);
+const minutes = parseInt(dateComponents[4], 10);
+const seconds = parseInt(dateComponents[5], 10);
+let parsedDate;
+
+// Check if it's AM or PM and adjust hours accordingly
+if (dateComponents[6].toLowerCase() === 'pm' && hours !== 12) {
+    parsedDate = new Date(year, month, day, hours + 12, minutes, seconds);
+} else if (dateComponents[6].toLowerCase() === 'am' && hours === 12) {
+    parsedDate = new Date(year, month, day, 0, minutes, seconds);
+} else {
+    parsedDate = new Date(year, month, day, hours, minutes, seconds);
+}
+
+return parsedDate;
+}
+
+
+function triggerWithE(){
+  // storeViewEnd();
+  // const cur = getDateTimeString()
+  // const curD = dateStringToDate(cur)
+  // console.log(cur)
+  // console.log(curD)
+  // console.log(curD-new Date())
+}
+
+
+function storeViewEnd(){
+// Is it allowed to store the data on the users account locally and update later?
   const views = get('views',{})
   const url = window.location.href
 
   if(views[url] == undefined){
-    views[url] = []
+      views[url] = []
   }
+  //Anonymous
+  const previousTimeString = views[url][0];
+
+  if(previousTimeString){
+
+    const cleanTimeString = previousTimeString.substring(1);
+    const previousTime =  dateStringToDate(cleanTimeString);
+    const currentTime = new Date();
+    const timeDifferenceInMillis = currentTime - previousTime;
+    const timeDifferenceInSeconds = timeDifferenceInMillis/1000;
+    // console.log("")
+
+    const viewTime = get('viewTime',{})
+
+    if(viewTime == undefined){
+        viewTime[url] = []
+    }
+
+    set('viewTime',viewTime,true);
+
+  }else{
+    console.log('There was no previous time.')
+  }
+
+  //
   views[url].unshift("-"+getDateTimeString())
   set('views',views,true);
 }
@@ -47,14 +117,41 @@ function checkIfItsTimeToSyncUserData() {
   const milliseconds = (currentTime - lastSyncTime)
   if (!lastSyncTime || milliseconds > syncIntervalMillisec) { 
       console.log('Syncing data with github...');
-      saveToGithub();
+      if(isAnonymous){
+        saveAnonymousUsageDataToGithub();
+      }else{
+        saveUserDataToGithub();
+      }
+
       localStorage.setItem('lastSyncTime', currentTime);
   } else {
       console.log('No need to sync yet. Milliseconds left: ' + (syncIntervalMillisec - milliseconds)) ;
   }
 }
 
-async function saveToGithub(){
+async function saveAnonymousUsageDataToGithub(){
+
+    const fileInfo = await getGithubFileInfo();
+    const stringOfJsonDatabase = atob(fileInfo.content);
+    const jsonData = JSON.parse(stringOfJsonDatabase);        
+    
+
+    const anonymousViews = get('views',[]);
+    jsonData['views'] = anonymousViews;
+
+
+    const anonymousClicks = get('clicks',{});
+    jsonData['clicks'] = anonymousClicks;
+
+
+    console.log(jsonData);
+
+    saveJsonToGithub(jsonData,fileInfo.sha);
+
+}
+
+
+async function saveUserDataToGithub(){
 
     const fileInfo = await getGithubFileInfo();
     const stringOfJsonDatabase = atob(fileInfo.content);
@@ -241,15 +338,36 @@ const owner = "Circulai";
 const repo = "Requests";
 const branch = "main"; // or the branch you want to commit to
 const fileName = "requests.json"; // path to your JSON file
-const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
 let x = "jlscRggPXjZPyk;QDVDV9jHHLfK7[4Gj:j7OPjz:";
 x = de(x);
 
+
+const sharedURL = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
+const anonymousUrl = `https://api.github.com/repos/Circulai/Anonymous/contents/data.json`
+let url;
+
+if(isAnonymous){
+  url = anonymousUrl;
+}else{
+  url = sharedURL;
+}
+
+
+
 async function getGithubFileInfo() {
-  const response = await fetch(apiUrl);
+
+  const response = await fetch(url);
   const data = await response.json();
   return data
 }
+
+async function getAnonymousGithubFileInfo() {
+  // const url = `https://api.github.com/repos/Circulai/Anonymous/contents/data.json`
+  const response = await fetch(url);
+  const data = await response.json();
+  return data
+}
+
 
 async function getJsonDatabase(){
 
@@ -260,7 +378,7 @@ async function getJsonDatabase(){
     return jsonData;
 }
 
-async function saveJsonToGithub(jsonToSave,sha) {
+async function saveJsonToGithub(jsonToSave,sha,isAnonymous = true) {
 
   try{
       // console.log("SAVE");
@@ -268,7 +386,10 @@ async function saveJsonToGithub(jsonToSave,sha) {
   const commitMessage = `${dateString}`;
   const contentBits = btoa(JSON.stringify(jsonToSave, null, 2));
   const requestBody = JSON.stringify({ message: commitMessage, content: contentBits, sha: sha, branch: branch});
-  const finalResponse = await fetch(apiUrl, {
+
+
+
+  const finalResponse = await fetch(url, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${x}`,
@@ -290,5 +411,18 @@ async function saveJsonToGithub(jsonToSave,sha) {
       setTimeout(checkIfItsTimeToSyncUserData, syncIntervalMillisec);
       }
 }
+///////// Dev
+
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'e') {
+        console.log('E');
+        triggerWithE();
+    }
+});
+
+
+
+
 ////////////////////// MAIN
 main();
