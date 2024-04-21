@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="stylesheet" href="colors.css">
+ <script>
+   localStorage.setItem('shouldSyncToGithub','false');
+ </script>
  <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
 <title>Clear</title>
 
@@ -17,10 +20,11 @@
 <span id="displayText"> </span>  
 
 
+<button id="toggleSync">toggleSync</button>
 <button id="clearCashe">clearCashe</button>
 <!-- <button id="clearGithub">clear</button> -->
 <button id="clear">clear</button>
-<button id="toggleSync">toggleSync</button>
+
 
 <script>
 
@@ -37,11 +41,11 @@ function toggleSync(){
 
    if(shouldSyncToGithub === "true"){
       // displayText("SYNC ON");
-      console.log("sync is set to false");
+      // console.log("sync is set to false");
       localStorage.setItem('shouldSyncToGithub','false');
    }else{
       // displayText("SYNC OFF");
-       console.log("sync is set to true");
+       // console.log("sync is set to true");
       localStorage.setItem('shouldSyncToGithub','true');
    }
    displaySync();
