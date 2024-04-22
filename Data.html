@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="colors.css">
+ <script>
+   localStorage.setItem('shouldSyncToGithub','false');
+ </script>
+ <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
+<title>Data</title>
+<style>
+</style> 
+</head>
+<body>
+<span id="displayText"> </span>  
+<button id="toggleSync">toggleSync</button>
+<button id="clearCashe">clearCashe</button>
+<!-- <button id="clearGithub">clear</button> -->
+<button id="clear">clear</button>
+<script>
+function appendText(text,size="50",color="black") {
+    var errorMessage = document.createElement("span");
+    errorMessage.textContent = text;
+    errorMessage.style.color = color;
+    errorMessage.style.fontSize = size+"px";
+    document.body.appendChild(errorMessage);
+}
+function toggleSync(){
+  let shouldSyncToGithub = localStorage.getItem('shouldSyncToGithub') || "true";
+   if(shouldSyncToGithub === "true"){
+      // displayText("SYNC ON");
+      // console.log("sync is set to false");
+      localStorage.setItem('shouldSyncToGithub','false');
+   }else{
+      // displayText("SYNC OFF");
+       // console.log("sync is set to true");
+      localStorage.setItem('shouldSyncToGithub','true');
+   }
+   displaySync();
+}
+function displayText(textToDisplay){
+  document.getElementById("displayText").innerHTML = textToDisplay;
+}
+function displaySync(){
+   let shouldSyncToGithub = localStorage.getItem('shouldSyncToGithub') || "true";
+   if(shouldSyncToGithub === "true"){
+      displayText("SYNC ON");
+   }else{
+      displayText("SYNC OFF");
+   }
+}
+function clearCashe(){
+    appendText("clearedCashe",25)
+    console.log("CLEAR");
+    localStorage.clear();
+    localStorage.setItem('shouldSyncToGithub','false');
+    displaySync();
+}
+displaySync();
+async function clear() {
+    clearCashe();
+    const info = await getGithubFileInfo();
+    const sha = info.sha;
+    const jsonToSave = {}
+    if(isAnonymous == false){
+      jsonToSave['users'] = []
+    }
+  // console.log("SAVE");
+  const commitMessage = `-`;
+  const contentBits = btoa(JSON.stringify(jsonToSave, null, 2));
+  const requestBody = JSON.stringify({ message: commitMessage, content: contentBits, sha: sha, branch: branch});
+  const finalResponse = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${x}`,
+        "Content-Type": "application/json",
+      },
+      body: requestBody
+    });
+  console.log(finalResponse);
+  if(finalResponse.status === 200) {
+    console.log("Saved successfully");
+    document.body.style.backgroundColor = "green";
+    appendText("success");
+  }else{
+    const errorMessage = "ERROR:"+finalResponse.status
+    console.log(errorMessage);
+      document.body.style.backgroundColor = "red";
+      appendText(errorMessage);
+  }
+}
+// document.getElementById("clearSyncTimer").addEventListener("click", function() {localStorage.clear(); appendText("clearedSyncTimer",25)});
+document.getElementById("clearCashe").addEventListener("click",clearCashe);
+document.getElementById("toggleSync").addEventListener("click",toggleSync);
+document.getElementById("clear").addEventListener("click", function() {
+    var result = window.confirm("Are you sure you want to clear?");
+    if (result) {
+        clear();
+    } else {
+        console.log("Clear operation cancelled.");
+    }
+});
+</script>
+</body>
+</html>
