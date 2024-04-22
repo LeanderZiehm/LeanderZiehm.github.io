@@ -2,22 +2,16 @@
 <html>
   <head>
     <title>Clingo Exercises</title>
-
     <script src="exercises.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="colors.css">
-    <!-- <link href="FredokaOne-Regular.ttf" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="css.css"> -->
     <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
-
      <style>
       body {
         display: grid;
         grid-template-columns: repeat(8, 1fr);
         gap: 0px; /* Adjust the gap between buttons */
         justify-items: center; /* Centers the buttons horizontally */
-
       }
-
       button {
         width: 150px; 
         height:150px; 
@@ -25,18 +19,13 @@
     </style>
   <script>
     let exerciseIndex = 0;
-
     function main() {
     console.log("MAIN");
-   
-
     for (let index = 0; index < exercises.length; index++) {
         const exerciseButton = document.createElement('button');
         const indexParameter = index + 1;
-
         exerciseButton.textContent = `Exercise ${index + 1}`;
         exerciseButton.addEventListener('click',function(){  window.location.href = 'Exercise.html?exercise=' + indexParameter;});
-        // exerciseButton.addEventListener('click',function(){  window.location.href = '/Exercise?exercise=' + index;});
         document.body.appendChild(exerciseButton);
     }
 }

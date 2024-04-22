@@ -1,34 +1,68 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="FredokaOne-Regular.ttf" rel="stylesheet"> -->
-    <link rel="stylesheet" href="index.css">
     <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
     <title>Leander Ziehm</title>
+    <style>
+        @font-face {
+            src: url(FredokaOne-Regular.ttf);
+            font-family: 'myImportedFont';
+        }
+        body {
+            user-select: none;
+            background-color: #232323;
+            text-align: center;
+            color: #fff;
+            font-family: 'myImportedFont', sans-serif;
+            font-size: 200%;
+        }
+        .my-name{
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 0;
+            font-size: 300%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .rainbow-text {
+            background-image: linear-gradient(to right, rgb(34, 0, 255), rgb(136, 0, 255), rgb(255, 0, 234));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        p{
+            color: #ffffff2b;
+        }
+        a{
+            font-size: 200%;
+            text-decoration: none;
+            color: #fff;
+        }
+        .newLine{
+            display: block;
+        }
+        a:hover {
+            font-size: 300%;
+        }
+        div{
+            font-size: 300%;
+        }
+        .green-hover:hover{
+            color: #00ffa6;
+        }
+        .blue-hover:hover{
+            color: #00a6ff;
+        }
+        .pink-hover:hover{
+            color: #c800ff;
+        }
+    </style>
 <body>
 <h1 class="my-name rainbow-text">Leander Ziehm</h1>
 <p>I am a Unity Developer for Prototypes, Apps and VR </p>
-
 <a class="pink-hover newLine" href="Projects.html" target="_blank">My Projects</a>
 <a class="blue-hover newLine" href="https://www.linkedin.com/in/leander-ziehm-578876279" target="_blank">LinkedIn</a>
 <a class="green-hover newLine"href="https://www.fiverr.com/leander_ziehm" target="_blank">Fiverr</a>
-
-
-
-
-
-<!-- 
-<footer>
-
-    <a href="https://youtu.be/223BcvgwY94" target="_blank"><img src="youtube.png" alt="facebook" width="50" height="50"></a>
-    <a href="https://play.google.com/store/apps/developer?id=Pandarijus" target="_blank"><img src="playstore.png" alt="Playstore" width="50" height="50"></a>
-   
-    <a href="https://pandev.itch.io/" target="_blank"><img src="itchio.png" alt="itch.io" width="50" height="50"></a>
-
-<footer>     -->
-
 </body>
 </html>

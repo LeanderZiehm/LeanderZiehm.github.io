@@ -17,12 +17,10 @@
              background-color: rgba(0, 0, 0, 0);
             /*font-family: 'Courier New', Courier, monospace;*/
         }
-
         #code-wrapper {
             display: flex;
             flex-direction: row;
         }
-
         #line-numbers {
             display: flex;
             flex-direction: column;
@@ -30,12 +28,10 @@
             width: 40px;
             text-align: center;
         }
-
         .line-number {
             color: #888;
             line-height: 20px;
         }
-
         textarea {
             width: calc(100% - 30px);
             height: 100vh;
@@ -49,11 +45,9 @@
             resize: none;
             white-space: pre;
             overflow: hidden;
-
             color: rgba(100, 100, 100, 1);
             caret-color: white; /*#F8F8F2;*/
         }
-
           #highlighter{
           position: absolute;
           top: 3px;
@@ -64,7 +58,6 @@
           /*color: red;*/
           user-select: none;
           pointer-events: none;
-         
           }
         .highlight{
             color: orange;
@@ -77,24 +70,16 @@
         <textarea id="textarea" oninput="auto_grow(this)" spellcheck="false"></textarea>
     </div>
     <div id="highlighter"></div>
-
-
     <script>
         const textarea = document.getElementById('textarea');
         const lineNumbers = document.getElementById('line-numbers');
         const highlighter = document.getElementById("highlighter");
-
                // console.log(textarea);
          var computedStyle = window.getComputedStyle(textarea);
          // console.log(computedStyle);
           var fontFamily = computedStyle.fontFamily;
          // console.log(fontFamily);
-
          highlighter.style.fontFamily = fontFamily;
-
-
-
-
           function colorizeTextArea() {
             var text = textarea.value;
             var highlightedText = '';
@@ -111,73 +96,56 @@
           }
           colorizeTextArea();
           document.getElementById("textarea").addEventListener("input", colorizeTextArea);
-
         function updateLineNumbers() {
             const linesNeeded = textarea.value.split('\n').length;
             console.log(linesNeeded);
-
             const difference = linesNeeded - lineNumbers.children.length;
             if (difference > 0){
-
             for (let i = lineNumbers.children.length+1; i <= linesNeeded; i++) {
                 lineNumbers.innerHTML += `<div class="line-number">${i}</div>`;
             }
-        
-
             }else if (difference < 0){
                   for (let i = 0; i < Math.abs(difference); i++) {
             lineNumbers.removeChild(lineNumbers.lastChild);
         }
             }
         }
-
         function auto_grow(element) {
           element.style.height = "5px";
           element.style.height = (element.scrollHeight) + "px";
         }
-
         function getLineIndexOfCaret(caretPosition) {
     var textBeforeCaret = textarea.value.substring(0, caretPosition);
     var lineIndex = textBeforeCaret.split('\n').length;
     return lineIndex-1;
 }
-
 function getSelectionIndexAtLine(lineIndex, isStartOfLine) { 
     var lines = textarea.value.split('\n');
     if (lineIndex < 0 || lineIndex >= lines.length) {
         console.error('Invalid line index');
         return -1;
     }
-
     var characterCount = 0;
     for (var i = 0; i < lineIndex; i++) {
         characterCount += lines[i].length+1; // Add 1 for the newline character
     }
-
     if (isStartOfLine == false) {
         characterCount += lines[lineIndex].length; 
     }
-
     return characterCount;
 }
     document.addEventListener('keydown', function(event) {
-
         if (event.ctrlKey || event.metaKey) {
                 event.preventDefault();
             }
-
             if (event.key === "Tab") {
-
                 console.log("tabbed");
                 event.preventDefault();
                 let start = textarea.selectionStart;
                 let end = textarea.selectionEnd;
-
                 textarea.value = textarea.value.substring(0, start) + "\t" + textarea.value.substring(end);
                 textarea.selectionStart = textarea.selectionEnd = start + 1;
             }
-
-
     if (event.ctrlKey) {
         var selectionStart = textarea.selectionStart;
         var selectionEnd = textarea.selectionEnd;
@@ -207,8 +175,6 @@ function getSelectionIndexAtLine(lineIndex, isStartOfLine) {
                         textarea.setRangeText(clipText, selectionStart, selectionEnd, 'end');
                     });
                 break;
-
-
             case 'd':
                 if (event.altKey) {
                     deleteLine(selectionStart, textarea);
@@ -221,7 +187,6 @@ function getSelectionIndexAtLine(lineIndex, isStartOfLine) {
         }
     }
 });
-
 function duplicateLine(cursorPos, textarea) { // TODO FIX RELOADING VISUALS;  Calculated new cursor at the end of new line.
     var textLines = textarea.value.split('\n');
     var currentLineIndex = textarea.value.substr(0, cursorPos).split('\n').length - 1;
@@ -231,9 +196,7 @@ function duplicateLine(cursorPos, textarea) { // TODO FIX RELOADING VISUALS;  Ca
     const newCursorPos = cursorPos;
     textarea.setSelectionRange(newCursorPos, newCursorPos);
     textarea.dispatchEvent(new Event('input'));
-
 }
-
 function deleteLine(cursorPos, textarea) {
     var textLines = textarea.value.split('\n');
     var currentLineIndex = textarea.value.substr(0, cursorPos).split('\n').length - 1;
@@ -243,11 +206,8 @@ function deleteLine(cursorPos, textarea) {
     textarea.setSelectionRange(newCursorPos, newCursorPos);
     textarea.dispatchEvent(new Event('input'));
 }
-
-
 function saveTextFile() {
     var textToSave = textarea.value;
-    
     var blob = new Blob([textToSave], {type: 'text/plain'});
     var a = document.createElement('a');
     a.download = 'text.txt';
@@ -258,16 +218,12 @@ function saveTextFile() {
     window.URL.revokeObjectURL(a.href);
     document.body.removeChild(a);
 }
-
-
-    
         let pos = -1;
         function checkcaret() { // fix line focus after last line was deleted 
             const newPos = textarea.selectionStart;
             const oldLineIndex = getLineIndexOfCaret(pos);
             const lineIndex = getLineIndexOfCaret(newPos);
             console.log(newPos)
-        
         if (lineIndex !== oldLineIndex) {
             const lineStart = getSelectionIndexAtLine(lineIndex,true);
             const lineEnd = getSelectionIndexAtLine(lineIndex,false);
@@ -279,17 +235,11 @@ function saveTextFile() {
             pos = newPos;
           }
         }
-
-
         function delayedCheck() {
-            
             setTimeout(function() {
                 checkcaret()
     },1); 
         }
-
-
-
         textarea.focus();
         textarea.addEventListener('keydown', delayedCheck); 
         textarea.addEventListener('click', checkcaret); // Every character written
@@ -304,7 +254,6 @@ function saveTextFile() {
         // textarea.addEventListener('mousemove', checkcaret); // Selection, dragging text
         // textarea.addEventListener('select', checkcaret); // Some browsers support this event
         // textarea.addEventListener('selectstart', checkcaret); // Some browsers support this event
-
         textarea.addEventListener("input", function() {auto_grow(this);});
         textarea.addEventListener('input', updateLineNumbers);
         window.addEventListener('DOMContentLoaded', updateLineNumbers);

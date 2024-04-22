@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0"/> -->
     <title>Clingo Exercises</title>
+    <!-- <link rel="shortcut icon" type="image/png" href="icons/me.png" />   "icons/me.png" -->
     <script src="exercises.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="colors.css">
     <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
+    <script src="popup.js" type="text/javascript" charset="utf-8"></script>
   <style>
-  body {
-  /*background: rgba(200, 100,100, 1.0);*/
-  /*background-color: var(--bodyBackground);*/
-  background-color: var(--bodyBackground);
-}
 div{
    border-radius: 20px;
    background: var(--div);
@@ -21,28 +19,9 @@ div{
 .hidden{
     display: none;
 }
-.transparent{
-    opacity: 0.0;
-}
-#container{
-  margin: 0;
-  margin-top: 53px; /*2%*/
-  width: 70vw;
-  padding: 7px;
-  box-shadow: 10px 10px 5px 12px rgba(0, 0, 0, 0.5);
-}
-#exerciseContainer{
-    height: 65vh;
-    padding: 15px;
-}
-#textContainer{
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: 0px;
-}
 #shortcutInfo{
 position: absolute;
-bottom:20px;
+bottom:10px;
 color: var(--offWhite);
 }
 #task{
@@ -60,7 +39,6 @@ color: var(--example);
 #exerciseNumber{
   color: var(--exerciseNumber);
   display: inline;
-  /*margin: auto; */
   margin-left: 35%; 
 }
 #tipButton{
@@ -72,31 +50,30 @@ color: var(--solution);
 #solution{
 padding-top: 20px;
 }
-/*#output{
+#output{
 color: var(--solution);
-}*/
-.topRight { /*#exercisesButton*/
-  position: absolute;
-  right: 0px;
-  top: 0px;
 }
-#exercisesSelection,.topLeft { /*#exercisesButton*/
+#menuButton {
   position: absolute;
   left: 0px;
   top: 0px;
 }
+/*#commentsButton{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+*/
 #backwardButton, #forwardButton{
    border-radius: 100%;
    aspect-ratio: 1;
-   /*height: 30px;*/
-   /*width: 30px;*/
-   /*margin-top: 10px;*/
-   margin-top: 10px;
+   margin: 0px;
 }
 #backwardButton img,#forwardButton img{
-  height: 18px;
+  height: 20px;
   padding-top: 5px;  
   opacity: 0.5;
+  /*background-color: rgba(255, 0, 0, 0.5); */
 }
 #backwardButton img{
   padding-right: 3px;
@@ -107,19 +84,48 @@ color: var(--solution);
 #forwardButton{
    float: right;
 }
+#tipButton img{
+  height: 20px;
+  opacity: 0.5;
+  /*filter : hue-rotate(180deg);*/
+}
+#exerciseContainer{
+    height: 60vh;
+    padding: 15px;
+    /*drop-shadow(#e23 0.5rem 0.5rem 1rem);*/
+    /*padding-top: 20px;*/
+}
+#container{
+  margin: 0;
+  margin-top: 2%;
+  width: 60vw;
+  padding: 7px;
+  box-shadow: 10px 10px 5px 12px rgba(0, 0, 0, 0.5);
+}
+/*#commentSection{
+  margin-top: 5%;
+}*/
+/*#commentSection{
+  margin-top: 50px;
+}*/
+#textContainer{
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 0px;
+}
+.transparent{
+    opacity: 0.0; /*!important;*/
+    /*color: rgba(0, 0, 0, 0.0)!important;*/
+    /*display: none !important;*/
+}
   </style>
   </head>
 <body>
-  <select id="exercisesSelection" name="Exercises">
-    <option value="exercise0">Exercise 0</option>
-  </select>
-  <div class="color-picker topRight">
-    <input type="color" id="colorPicker">
-</div>
-  <!-- <button id="exercisesButton">Exercises <img style="height: 20px; opacity: 0.5; position: relative; top: 4px; left: 4px;" src="icons/down.png"></button> -->
+  <button id="menuButton">Menu</button>
+  <!-- <button id="commentsButton">Comments</button> -->
 <div id="container">
   <div id="exerciseContainer">
-    <button id="tipButton"><img style="height: 20px; opacity: 0.5;" size src="icons/tip.png"></button>
+    <button id="tipButton"><img src="icons/tip.png"></button>
     <button id="solutionButton" class="">Solution</button>
     <button id="nextExerciseButton" class="hidden">Next Exercise</button>
   <div id="textContainer">
@@ -128,88 +134,51 @@ color: var(--solution);
     <div class="text" id="tip"></div>
     <div class="text" id="example"></div>
     <div class="text" id="solution"></div>
-    <!-- <div class="text" id="output"></div> -->
+    <div class="text" id="output"></div>
   </div>
 </div>
-  <button id="backwardButton"><img id="backwardButtonIcon"  src="icons/backward.png"/></button>
+  <button id="backwardButton"><img src="icons/backward.png"/></button>
   <div class="text" id="exerciseNumber">Exercise: 1</div>
-  <button id="forwardButton"><img  id="forwardButtonIcon" src="icons/forward.png"/></button>
+  <button id="forwardButton"><img src="icons/forward.png"/></button>
 </div>
+<!-- <div id='commentSection'> -->
+  <!-- <button id='commentSectionButton'> -->
+    <!-- <div class="text" id="exerciseNumber">Comments [DOWN ARROW]</div> -->
+  <!-- </button> -->
+<!-- </div> -->
 <span id="shortcutInfo"> Keyboard shortcuts: Tip [T or Space] Solution [S or Enter] Next Exercise [Arrow Right or D] Previous Exercise [Arrow Left or A] </span>
   <script>
+    function triggerWithE(){
+      createCustomPopup("Hello","Title");
+    }
     hideElementByID('example');
+    // hideElementByID('exerciseNumber');
     hideElementByID('description');
     hideElementByID('tip');
     hideElementByID('solution');
-    // hideElementByID('output');
+    hideElementByID('output');
+    //
+    // hideElementByID('commentSection');  // TODO IMPLEMENT COMMENT SECTION
     const urlParams = new URLSearchParams(window.location.search);
     const exerciseParameter = urlParams.get('exercise') || 1;
     let exerciseIndex = exerciseParameter-1;
     const exercise = exercises[exerciseIndex];
-    const exercisesLength = exercises.length;   // document.getElementById('exercises').innerHTML = insertBreakAfterPeriods(exercise.task);
-    setupDropdown(exercisesLength);
-    setupColorPicker();
     document.getElementById('task').innerHTML = insertBreakAfterPeriods(exercise.task);
     document.getElementById('tip').innerHTML = insertBreakAfterPeriods(exercise.tip);
     document.getElementById('example').innerHTML = "Example: " + insertBreakAfterPeriods(exercise.example);
     document.getElementById('solution').innerHTML = insertBreakAfterPeriods(exercise.solution);
     document.getElementById('description').innerHTML = insertBreakAfterPeriods(exercise.description);
-    // document.getElementById('output').innerHTML = insertBreakAfterPeriods(exercise.output);
+    document.getElementById('output').innerHTML = insertBreakAfterPeriods(exercise.output);
     document.getElementById('exerciseNumber').innerHTML =  "Exercise "+(exerciseIndex+1);
     document.getElementById('tipButton').addEventListener('click',showTip);
     document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
-    function setupColorPicker() {
-      const colorPicker = document.getElementById('colorPicker');
-      const savedBackgroundColor = localStorage.getItem('savedBackgroundColor');
-      if(savedBackgroundColor){
-         document.body.style.backgroundColor = savedBackgroundColor;
-             console.log('YEP BackgroundColor:'+ savedBackgroundColor);
-      }
-
-
-      const currentBackgroundColorRGB = window.getComputedStyle(document.body ,null).getPropertyValue('background-color');
-      const currentBackgroundColorHEX = rgbToHex(currentBackgroundColorRGB);
-      // colorPicker.value = currentBackgroundColorRGB;
-      // console.log(currentBackgroundColorRGB);
-      // console.log(currentBackgroundColorHEX);
-      // console.log(colorPicker.value );
-      colorPicker.value = currentBackgroundColorHEX;
-
-      // console.log('saved BackgroundColor:'+ savedBackgroundColor);
-      console.log(colorPicker.value);
-      // console.log(document.body.style.backgroundColor)
-       // colorPicker.value =  document.body.style.backgroundColor;
-       // console.log(colorPicker.value )
-       colorPicker.addEventListener('input', function(){
-              // console.log('my color is: ',colorPicker.value);
-              document.body.style.backgroundColor = colorPicker.value;
-              localStorage.setItem('savedBackgroundColor', colorPicker.value);
-         });
-    }
-    function rgbToHex(col){
-        if(col.charAt(0)=='r')
-        {
-            col=col.replace('rgb(','').replace(')','').split(',');
-            var r=parseInt(col[0], 10).toString(16);
-            var g=parseInt(col[1], 10).toString(16);
-            var b=parseInt(col[2], 10).toString(16);
-            r=r.length==1?'0'+r:r; g=g.length==1?'0'+g:g; b=b.length==1?'0'+b:b;
-            var colHex='#'+r+g+b;
-            return colHex;
-        }
-    }
-    function setupDropdown(exerciseLength) {
-        const exercisesSelection = document.getElementById('exercisesSelection');
-        exercisesSelection.innerHTML = '';
-        for (var i = 1; i <= exerciseLength; i++) {
-            var option = document.createElement("option");
-            option.text = "Exercise " + i;
-            option.value = "exercise" + (i-1);
-            exercisesSelection.appendChild(option);
-        }
-        exercisesSelection.selectedIndex = exerciseIndex;
-        exercisesSelection.addEventListener("change", function(){ loadExercise(exercisesSelection.selectedIndex); });
-    }
+    document.getElementById('menuButton').addEventListener('click',function(){  window.location.href = 'ExerciseSelection.html'});
+    // document.getElementById('commentsButton').addEventListener('click',function(){  window.open('Comments.html', '_blank').focus(); });
+    // document.getElementById('commentSectionButton').addEventListener('click',clickCommentSectionButton);
+    // function clickCommentSectionButton(){
+    //   console.log("clickCommentSectionButton");
+    //    document.getElementById('commentSectionButton').style.paddingBottom = "100px";
+    // }
     function showTip(){
       hideElementByID('tip',false);
       hideElementByID('example',false);
@@ -217,22 +186,29 @@ color: var(--solution);
     function removeLastBr(inputString) {
     const lastIndex = inputString.lastIndexOf('<br>');
     if (lastIndex !== -1) {
+      // console.log(inputString.substring(0, lastIndex) +"|||"+ inputString.substring(lastIndex + 4));
         return inputString.substring(0, lastIndex) + inputString.substring(lastIndex + 4);
     } else {
-        return inputString;
+        return inputString; // No <br> tag found, return the original string
     }
 }
     function insertBreakAfterPeriods(inputString) {
+    // Replace '.' with '.<br>' using regular expression
+    // return inputString.replace(/\./g, '.<br>');
     let newLineToBr = inputString.trim().split("\n").join('<br>');
     let periodWithBr = newLineToBr.replace(/\./g, '.<br>');
     let final = removeLastBr(periodWithBr);
      return final;
     }
+    // function insertBreakAfterPeriods(textWithNewLineCharacters){
+    //   textWithNewLineCharacters = textWithNewLineCharacters.
+    //  return textWithNewLineCharacters.trim().split("\n").join('<br>');
+    // }
     function hideElementByID(id,hide = true){
       if(hide == true){
-        document.getElementById(id).classList.add('hidden');
+        document.getElementById(id).classList.add('hidden'); //hidden
       }else{
-        document.getElementById(id).classList.remove('hidden');
+        document.getElementById(id).classList.remove('hidden');//hidden
       }
     }
     function loadExercise(index){
@@ -245,9 +221,11 @@ color: var(--solution);
     document.getElementById('backwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex-1); });
     document.getElementById('forwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex+1); });
     if (exerciseIndex == 0) {
+      // hideElementByID('backwardButton');
        document.getElementById('backwardButton').classList.add('transparent'); 
         }
     if (exerciseIndex == exercises.length - 1) {
+      // hideElementByID('forwardButton');
       document.getElementById('forwardButton').classList.add('transparent'); 
         }
   const isMobile = (navigator.maxTouches > 0 && /Android|iPhone/i.test(navigator.userAgent));
@@ -255,22 +233,14 @@ color: var(--solution);
     hideElementByID('shortcutInfo');
   }
   document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowLeft'||event.key === 'a' || event.key === 'A') {
-         loadExercise(exerciseIndex-1);
-    }
-    if (event.key === 'ArrowRight'||event.key === 'd' || event.key === 'D') {
-      loadExercise(exerciseIndex+1);
-    }
-    if (event.key === 't' || event.key === 'T'|| event.key === ' ') {
-        showTip();
-    }
-    if (event.key === 's' || event.key === 'S'|| event.key === 'Enter' ) {
-          hideElementByID('solution',false);
+    if (event.key === 'e' || event.key === ' ') {
+        triggerWithE();
     }
 });
   const container = document.getElementById('container'); 
   const shortcutInfo = document.getElementById('shortcutInfo'); 
   function hideKeyboardShortcutsIfOverlapping(){
+    // console.log('resize');
     const rect1 = container.getBoundingClientRect(); 
     const rect2 = shortcutInfo.getBoundingClientRect(); 
     if (!(rect1.right < rect2.left ||  
@@ -278,9 +248,11 @@ color: var(--solution);
           rect1.bottom < rect2.top ||  
           rect1.top > rect2.bottom)) { 
       shortcutInfo.classList.add('transparent');
+      // console.log('!!Elements are touching or overlapping!!'); 
     } else { 
       shortcutInfo.classList.remove('transparent');
       hideElementByID('shortcutInfo',false);
+      // console.log('Elements are not touching or overlapping'); 
     }
 }
 hideKeyboardShortcutsIfOverlapping();
