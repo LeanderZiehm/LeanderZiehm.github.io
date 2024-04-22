@@ -1,8 +1,15 @@
+
+
+
+
 // set('shouldSyncToGithub','false');
 let syncMode = get('syncMode','anonymous');
-let isAnonymous = (syncMode === 'anonymous')
-let shouldSyncToGithub = get('shouldSyncToGithub',"true");
-console.log("syncMode:" +syncMode +" isAnonymous:"+ isAnonymous+ " shouldSyncToGithub:" + shouldSyncToGithub)
+// let isAnonymous = (syncMode === 'anonymous');
+let isAnonymous = true;
+const shouldSyncToGithubText = get('shouldSyncToGithub',"true");
+// let shouldSyncToGithub = (shouldSyncToGithubText === "true");
+let shouldSyncToGithub = false; // HARDCODED TILL GDPR IS IMPLEMENTED.
+// console.log("syncMode:" +syncMode +" isAnonymous:"+ isAnonymous+ " shouldSyncToGithub:" + shouldSyncToGithub)
 const syncIntervalMillisec = 10000 // 60000 milliseconds = 1 minute
 ///////////////////// Database syncing local storage to github
 async function main(){
@@ -22,7 +29,7 @@ async function main(){
     }
   }
     window.addEventListener("beforeunload", storeViewEnd);
-  if(shouldSyncToGithub === "true"){
+  if(shouldSyncToGithub){
       checkIfItsTimeToSyncUserData();
   }else{
     // console.log("shouldSyncToGithub: "+shouldSyncToGithub);
