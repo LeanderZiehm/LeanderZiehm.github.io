@@ -5,7 +5,7 @@
     --div: rgba(0,0,0,.15);
     --task:  rgba(153, 217, 250, 0.8);
     /*--tip: rgb(0,0, 0,0.2);*/
-    --tip: rgb(208, 142, 39,0.6);
+    --tip: rgb(208, 142, 39,1);
     /*--tip: rgb(208, 142, 39,0.8);*/
     /*--solution: rgb(94, 214, 90, 0.8);*/
     --solution: rgb(94, 214, 90, 0.8);
@@ -39,7 +39,7 @@ button,select {
   }
 
 option {
-  background:  var(--bodyBackground);
+  background-color:  var(--bodyBackground);
 }
 
 input{

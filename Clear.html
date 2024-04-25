@@ -7,7 +7,7 @@
  <script>
    localStorage.setItem('shouldSyncToGithub','false');
  </script>
- <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
+ <script src="test.js" type="text/javascript" charset="utf-8"></script>
 <title>Clear</title>
 <style>
 </style> 
@@ -63,14 +63,11 @@ async function clear() {
     const info = await getGithubFileInfo();
     const sha = info.sha;
     const jsonToSave = {}
-    if(isAnonymous == false){
-      jsonToSave['users'] = []
-    }
   // console.log("SAVE");
   const commitMessage = `-`;
   const contentBits = btoa(JSON.stringify(jsonToSave, null, 2));
   const requestBody = JSON.stringify({ message: commitMessage, content: contentBits, sha: sha, branch: branch});
-  const finalResponse = await fetch(url, {
+  const finalResponse = await fetch(urlRepo, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${x}`,

@@ -4,7 +4,7 @@
     <title>Clingo Exercises</title>
     <script src="exercises.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="colors.css">
-    <script src="githubDatabase.js" type="text/javascript" charset="utf-8"></script>
+    <script src="test.js" type="text/javascript" charset="utf-8"></script>
   <style>
   body {
   /*background: rgba(200, 100,100, 1.0);*/
@@ -15,6 +15,9 @@ div{
    border-radius: 20px;
    background: var(--div);
 }
+.disabled{
+    opacity: 0.1 !important;
+}
 .text{
   padding: 10px;
 }
@@ -23,6 +26,10 @@ div{
 }
 .transparent{
     opacity: 0.0;
+}
+.no{
+  background-color: transparent; 
+ /* box-shadow: none;*/
 }
 #container{
   margin: 0;
@@ -46,13 +53,13 @@ bottom:20px;
 color: var(--offWhite);
 }
 #task{
-color: var(--task);
+color: var(--textS);
 }
 #tip{
 color: var(--tip);
 }
 #example{
-color: var(--example);
+color: var(--tip);
 }
 #description{
   color: var(--description);
@@ -60,13 +67,18 @@ color: var(--example);
 #exerciseNumber{
   color: var(--exerciseNumber);
   display: inline;
+  /*min-width: 200px !important;*/
   /*margin: auto; */
-  margin-left: 35%; 
+  /*margin-left: 35%; */
 }
 #tipButton{
 background-color: var(--tip);
 }
-#solution,#solutionButton{
+#solutionButton{
+background-color: var(--solution);
+}
+
+#solution{
 color: var(--solution);
 }
 #solution{
@@ -107,6 +119,55 @@ color: var(--solution);
 #forwardButton{
    float: right;
 }
+
+#emailButton{
+position: absolute;
+top: 0px;
+right: 80px;
+}
+#emailButton img{
+  height: 18px;
+  padding-top: 5px;  
+  opacity: 0.5;
+}
+
+
+
+#upvoteButton, #downvoteButton {
+  border-radius: 100%;
+   aspect-ratio: 1;
+}
+
+#upvoteButton{ 
+  margin-left: 33%;
+ }
+
+/*#downvoteButton{ 
+   margin-right: 30%;
+ }*/
+
+.iconButton{
+
+}
+
+#upvoteButton img,#downvoteButton img{
+  height: 18px;
+  opacity: 0.5;
+  /*color: red;*/
+  /*background-color: red;*/
+   /*filter: drop-shadow(0px 1000px 0 red);*/
+   /*filter: invert(100%);*/
+}
+
+.invert{
+  filter: invert(100%);
+}
+
+#downvoteButton img{
+  transform: translateY(3px);
+  color: red;
+}
+
   </style>
   </head>
 <body>
@@ -116,7 +177,7 @@ color: var(--solution);
   <div class="color-picker topRight">
     <input type="color" id="colorPicker">
 </div>
-  <!-- <button id="exercisesButton">Exercises <img style="height: 20px; opacity: 0.5; position: relative; top: 4px; left: 4px;" src="icons/down.png"></button> -->
+  <!-- <button id="emailButton"><img src="icons/email.png"></button> -->
 <div id="container">
   <div id="exerciseContainer">
     <button id="tipButton"><img style="height: 20px; opacity: 0.5;" size src="icons/tip.png"></button>
@@ -131,73 +192,251 @@ color: var(--solution);
     <!-- <div class="text" id="output"></div> -->
   </div>
 </div>
-  <button id="backwardButton"><img id="backwardButtonIcon"  src="icons/backward.png"/></button>
-  <div class="text" id="exerciseNumber">Exercise: 1</div>
-  <button id="forwardButton"><img  id="forwardButtonIcon" src="icons/forward.png"/></button>
+  <div class="no">
+    <button id="backwardButton"><img id="backwardButtonIcon"  src="icons/backward.png"/></button>
+    <button id="upvoteButton"><img src="icons/like.png"/></button>      
+    <div class="text" id="exerciseNumber">Exercise: 1</div>
+    <button id="downvoteButton"><img  src="icons/dislike.png"/></button>
+    <button id="forwardButton"><img  id="forwardButtonIcon" src="icons/forward.png"/></button>
+  </div>
+  
+
 </div>
 <span id="shortcutInfo"> Keyboard shortcuts: Tip [T or Space] Solution [S or Enter] Next Exercise [Arrow Right or D] Previous Exercise [Arrow Left or A] </span>
   <script>
-    hideElementByID('example');
-    hideElementByID('description');
-    hideElementByID('tip');
-    hideElementByID('solution');
-    // hideElementByID('output');
     const urlParams = new URLSearchParams(window.location.search);
     const exerciseParameter = urlParams.get('exercise') || 1;
     let exerciseIndex = exerciseParameter-1;
     const exercise = exercises[exerciseIndex];
-    const exercisesLength = exercises.length;   // document.getElementById('exercises').innerHTML = insertBreakAfterPeriods(exercise.task);
-    setupDropdown(exercisesLength);
-    setupColorPicker();
-    document.getElementById('task').innerHTML = insertBreakAfterPeriods(exercise.task);
-    document.getElementById('tip').innerHTML = insertBreakAfterPeriods(exercise.tip);
-    document.getElementById('example').innerHTML = "Example: " + insertBreakAfterPeriods(exercise.example);
-    document.getElementById('solution').innerHTML = insertBreakAfterPeriods(exercise.solution);
-    document.getElementById('description').innerHTML = insertBreakAfterPeriods(exercise.description);
-    // document.getElementById('output').innerHTML = insertBreakAfterPeriods(exercise.output);
-    document.getElementById('exerciseNumber').innerHTML =  "Exercise "+(exerciseIndex+1);
-    document.getElementById('tipButton').addEventListener('click',showTip);
-    document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
-    function setupColorPicker() {
-      const colorPicker = document.getElementById('colorPicker');
-      const savedBackgroundColor = localStorage.getItem('savedBackgroundColor');
-      if(savedBackgroundColor){
-         document.body.style.backgroundColor = savedBackgroundColor;
-             console.log('YEP BackgroundColor:'+ savedBackgroundColor);
+    const exercisesLength = exercises.length;
+
+    // let votes; 
+
+
+
+
+    function main(){
+      loadVariablesFromStorage();
+      hideElements();
+
+      setupBackgroundColor();
+      setupColorPicker();
+      setupDropdown(exercisesLength);
+      displayExercise();
+      setupButtons();
+
+      const isMobile = (navigator.maxTouches > 0 && /Android|iPhone/i.test(navigator.userAgent));
+      if(isMobile){
+        hideElementByID('shortcutInfo');
       }
+      hideKeyboardShortcutsIfOverlapping();
+      window.addEventListener("resize", hideKeyboardShortcutsIfOverlapping);
 
 
-      const currentBackgroundColorRGB = window.getComputedStyle(document.body ,null).getPropertyValue('background-color');
-      const currentBackgroundColorHEX = rgbToHex(currentBackgroundColorRGB);
-      // colorPicker.value = currentBackgroundColorRGB;
-      // console.log(currentBackgroundColorRGB);
-      // console.log(currentBackgroundColorHEX);
-      // console.log(colorPicker.value );
-      colorPicker.value = currentBackgroundColorHEX;
-
-      // console.log('saved BackgroundColor:'+ savedBackgroundColor);
-      console.log(colorPicker.value);
-      // console.log(document.body.style.backgroundColor)
-       // colorPicker.value =  document.body.style.backgroundColor;
-       // console.log(colorPicker.value )
-       colorPicker.addEventListener('input', function(){
-              // console.log('my color is: ',colorPicker.value);
-              document.body.style.backgroundColor = colorPicker.value;
-              localStorage.setItem('savedBackgroundColor', colorPicker.value);
-         });
     }
-    function rgbToHex(col){
-        if(col.charAt(0)=='r')
-        {
-            col=col.replace('rgb(','').replace(')','').split(',');
-            var r=parseInt(col[0], 10).toString(16);
-            var g=parseInt(col[1], 10).toString(16);
-            var b=parseInt(col[2], 10).toString(16);
-            r=r.length==1?'0'+r:r; g=g.length==1?'0'+g:g; b=b.length==1?'0'+b:b;
-            var colHex='#'+r+g+b;
-            return colHex;
+
+    function loadVariablesFromStorage(){
+          votes = get('votes',{});
+          // console.log(votes)
+
+          const previousVote = votes[exerciseIndex]
+          if(previousVote == '+'){
+
+            showVote(true);
+          }else if(previousVote == '-'){
+            showVote(false);
+          }
+
+          window.onbeforeunload = function() {
+          set('votes',votes);
+          // console.log(votes)
+      }
+    }
+    function hideElements(){
+      hideElementByID('example');
+      hideElementByID('description');
+      hideElementByID('tip');
+      hideElementByID('solution');
+    }
+    function displayExercise(){
+      document.getElementById('task').innerHTML = insertBreakAfterPeriods(exercise.task);
+      document.getElementById('tip').innerHTML = insertBreakAfterPeriods(exercise.tip);
+      document.getElementById('example').innerHTML = "Example: " + insertBreakAfterPeriods(exercise.example);
+      document.getElementById('solution').innerHTML = insertBreakAfterPeriods(exercise.solution);
+      document.getElementById('description').innerHTML = insertBreakAfterPeriods(exercise.description);
+      // document.getElementById('output').innerHTML = insertBreakAfterPeriods(exercise.output);
+      document.getElementById('exerciseNumber').innerHTML =  "Exercise "+(exerciseIndex+1);
+      document.getElementById('tipButton').addEventListener('click',showTip);
+      document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
+    }
+
+
+    function vote(isUpvote){
+
+      // votes.unshift(is)
+      const currentVote = isUpvote ? '+' : '-';
+      // console.log(currentVote);
+      votes[exerciseIndex] = currentVote;
+
+      showVote(isUpvote);
+    
+      // document.querySelector('#upvoteButton img').style.c
+    }
+
+    function showVote(isUpvote){
+
+      if(isUpvote){
+        document.querySelector('#upvoteButton img').classList.add('invert'); 
+        document.querySelector('#downvoteButton img').classList.remove('invert'); 
+      }else{
+        document.querySelector('#upvoteButton img').classList.remove('invert'); 
+        document.querySelector('#downvoteButton img').classList.add('invert'); 
+      }
+    }
+
+
+
+    function setupButtons(){
+      document.getElementById('upvoteButton').addEventListener('click',function(){vote(true);});
+      document.getElementById('downvoteButton').addEventListener('click',function(){vote(false);});
+
+
+      document.getElementById('backwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex-1); });
+      document.getElementById('forwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex+1); });
+  if (exerciseIndex == 0) {
+         // document.getElementById('backwardButton').classList.add('transparent'); 
+         document.querySelector('#backwardButton img').classList.add('disabled'); 
+          }
+      if (exerciseIndex == exercises.length - 1) {
+        // document.getElementById('forwardButton').classList.add('transparent'); 
+          document.querySelector('#forwardButton img').classList.add('disabled'); 
+
+          }
+    }
+
+
+function hexToComplimentary(hex,shiftAngle = 180){
+        var rgb = 'rgb(' + (hex = hex.replace('#', '')).match(new RegExp('(.{' + hex.length/3 + '})', 'g')).map(function(l) { return parseInt(hex.length%2 ? l+l : l, 16); }).join(',') + ')';
+        rgb = rgb.replace(/[^\d,]/g, '').split(',');
+        var r = rgb[0], g = rgb[1], b = rgb[2];
+        r /= 255.0;
+        g /= 255.0;
+        b /= 255.0;
+        var max = Math.max(r, g, b);
+        var min = Math.min(r, g, b);
+        var h, s, l = (max + min) / 2.0;
+        if(max == min) {
+            h = s = 0;  //achromatic
+        } else {
+            var d = max - min;
+            s = (l > 0.5 ? d / (2.0 - max - min) : d / (max + min));
+            if(max == r && g >= b) {
+                h = 1.0472 * (g - b) / d ;
+            } else if(max == r && g < b) {
+                h = 1.0472 * (g - b) / d + 6.2832;
+            } else if(max == g) {
+                h = 1.0472 * (b - r) / d + 2.0944;
+            } else if(max == b) {
+                h = 1.0472 * (r - g) / d + 4.1888;
+            }
         }
+        h = h / 6.2832 * 360.0 + 0;
+        h+= shiftAngle;
+        if (h > 360) { h -= 360; }
+        h /= 360;
+        if(s === 0){
+            r = g = b = l; // achromatic
+        } else {
+            var hue2rgb = function hue2rgb(p, q, t){
+                if(t < 0) t += 1;
+                if(t > 1) t -= 1;
+                if(t < 1/6) return p + (q - p) * 6 * t;
+                if(t < 1/2) return q;
+                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            };
+            var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+            var p = 2 * l - q;
+            r = hue2rgb(p, q, h + 1/3);
+            g = hue2rgb(p, q, h);
+            b = hue2rgb(p, q, h - 1/3);
+        }
+        r = Math.round(r * 255);
+        g = Math.round(g * 255); 
+        b = Math.round(b * 255);
+        rgb = b | (g << 8) | (r << 16); 
+        return "#" + (0x1000000 | rgb).toString(16).substring(1);
+    }  
+
+
+    function rgbToHex(col){
+              if(col.charAt(0)=='r')
+              {
+                  col=col.replace('rgb(','').replace(')','').split(',');
+                  var r=parseInt(col[0], 10).toString(16);
+                  var g=parseInt(col[1], 10).toString(16);
+                  var b=parseInt(col[2], 10).toString(16);
+                  r=r.length==1?'0'+r:r; g=g.length==1?'0'+g:g; b=b.length==1?'0'+b:b;
+                  var colHex='#'+r+g+b;
+                  return colHex;
+              }
+          }
+
+    function setupBackgroundColor(){
+     
+        const savedBackgroundColor = localStorage.getItem('savedBackgroundColor');
+        if(savedBackgroundColor){
+            setBackgroundColor(savedBackgroundColor);
+            // document.body.style.backgroundColor = savedBackgroundColor;
+          }
     }
+    function getBackgroundColor(automaticallyConvertRGBToHex = true){
+        let currentBackgroundColor = window.getComputedStyle(document.body ,null).getPropertyValue('background-color');
+
+        console.log(currentBackgroundColor);
+        if(automaticallyConvertRGBToHex){
+          if(currentBackgroundColor.startsWith('rgb')){
+            currentBackgroundColor = rgbToHex(currentBackgroundColor);
+            console.log("Converted to HEX: " +currentBackgroundColor);
+          }else if (currentBackgroundColor.startsWith('#')) {
+                console.log("IS ALREADY HEX: " +currentBackgroundColor)
+            } else {
+                console.log("!IS NEITHER HEX NOT RGB!: " +currentBackgroundColor);
+            }
+        }     
+        
+        return currentBackgroundColor;
+        
+
+    }
+    function setBackgroundColor(backgroundColorToSet){
+      
+      document.documentElement.style.setProperty('--bodyBackground', backgroundColorToSet);
+
+
+      const complement1 = hexToComplimentary(backgroundColorToSet,40);
+
+      const complement2 = hexToComplimentary(backgroundColorToSet,20);
+
+      document.documentElement.style.setProperty('--solution', complement1);
+      document.documentElement.style.setProperty('--tip', complement2);
+
+
+      
+     
+    }
+
+    function setupColorPicker() {
+        const colorPicker = document.getElementById('colorPicker');
+        colorPicker.value = getBackgroundColor();
+        colorPicker.addEventListener('input', function(){
+                setBackgroundColor(colorPicker.value);
+                localStorage.setItem('savedBackgroundColor', colorPicker.value);
+           });
+
+    }
+
+
     function setupDropdown(exerciseLength) {
         const exercisesSelection = document.getElementById('exercisesSelection');
         exercisesSelection.innerHTML = '';
@@ -208,25 +447,32 @@ color: var(--solution);
             exercisesSelection.appendChild(option);
         }
         exercisesSelection.selectedIndex = exerciseIndex;
+
+        // exercisesSelection.style.backgroundColor = hexColor;
+
         exercisesSelection.addEventListener("change", function(){ loadExercise(exercisesSelection.selectedIndex); });
     }
+
     function showTip(){
       hideElementByID('tip',false);
       hideElementByID('example',false);
     }
-    function removeLastBr(inputString) {
-    const lastIndex = inputString.lastIndexOf('<br>');
-    if (lastIndex !== -1) {
-        return inputString.substring(0, lastIndex) + inputString.substring(lastIndex + 4);
-    } else {
-        return inputString;
-    }
-}
+   
     function insertBreakAfterPeriods(inputString) {
-    let newLineToBr = inputString.trim().split("\n").join('<br>');
-    let periodWithBr = newLineToBr.replace(/\./g, '.<br>');
-    let final = removeLastBr(periodWithBr);
-     return final;
+
+      function removeLastBr(inputString) {
+          const lastIndex = inputString.lastIndexOf('<br>');
+          if (lastIndex !== -1) {
+              return inputString.substring(0, lastIndex) + inputString.substring(lastIndex + 4);
+          } else {
+              return inputString;
+          }
+      }
+
+      let newLineToBr = inputString.trim().split("\n").join('<br>');
+      let periodWithBr = newLineToBr.replace(/\./g, '.<br>');
+      let final = removeLastBr(periodWithBr);
+      return final;
     }
     function hideElementByID(id,hide = true){
       if(hide == true){
@@ -236,24 +482,16 @@ color: var(--solution);
       }
     }
     function loadExercise(index){
-      if(index < 0 || index == exercises.length){
-        return;
-      }
-      const indexParameter = index + 1; 
-      window.location.href = 'Exercise.html?exercise=' + indexParameter;
+        if(index < 0 || index == exercises.length){
+          return;
+        }
+        const indexParameter = index + 1; 
+        window.location.href = 'Exercise.html?exercise=' + indexParameter;
     }
-    document.getElementById('backwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex-1); });
-    document.getElementById('forwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex+1); });
-    if (exerciseIndex == 0) {
-       document.getElementById('backwardButton').classList.add('transparent'); 
-        }
-    if (exerciseIndex == exercises.length - 1) {
-      document.getElementById('forwardButton').classList.add('transparent'); 
-        }
-  const isMobile = (navigator.maxTouches > 0 && /Android|iPhone/i.test(navigator.userAgent));
-  if(isMobile){
-    hideElementByID('shortcutInfo');
-  }
+
+    function setupKeyboardShortcuts(){
+
+    }
   document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowLeft'||event.key === 'a' || event.key === 'A') {
          loadExercise(exerciseIndex-1);
@@ -283,8 +521,7 @@ color: var(--solution);
       hideElementByID('shortcutInfo',false);
     }
 }
-hideKeyboardShortcutsIfOverlapping();
-window.addEventListener("resize", hideKeyboardShortcutsIfOverlapping);
+main();
   </script>
 </body>
 </html>
