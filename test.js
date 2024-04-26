@@ -5,18 +5,18 @@
 
 
 const usePrivateRepo = true;
-const shouldSyncToGithubText = get('shouldSyncToGithub',"false");
+const shouldSyncToGithubText = get('shouldSyncToGithub',"trueec");
 let shouldSyncToGithub = (shouldSyncToGithubText === "true");
 const syncIntervalMillisec = 10000 // 60000 milliseconds = 1 minute
 ///////////////////// Database syncing local storage to github
-function triggerWithE(){
-  // const cur = getDateTimeString()
-  getBackgroundColor()
-}
 
+
+let toPush;
 async function main(){
-  setupLocalSaves();
 
+  toPush = get('toPush',{});
+      checkIfIsNewUser();
+      setupLocalSaves();
   if(shouldSyncToGithub){
       checkIfItsTimeToSyncUserData();
   }
@@ -24,114 +24,171 @@ async function main(){
 
 ///////////////////// LOCAL: Views and Buttons
 
+
+
+const startedViewTime = new Date();
+console.log(startedViewTime);
+
 function setupLocalSaves(){
-
-  savePageViewLocal();
-  window.addEventListener("beforeunload", storeViewEndLocal);
   document.addEventListener("DOMContentLoaded", addClickListeners);
+  window.addEventListener("beforeunload", storeViewEndLocal);
+ 
 }
 
-function savePageViewLocal(){
-  const views = get('views',{})
-  const url = window.location.href
-  if(views[url] == undefined){
-    views[url] = []
-  }
-  views[url].unshift("+"+getDateTimeString())
-  set('views',views,true);
+function checkIfIsNewUser(){
+    if(get('needToIncrementNewUserCount','true') === 'true'){
+      set('needToIncrementNewUserCount','false');
+      toPush['uniqueUser'] = true;
+      toPush['browser'] = true;
+    }
 }
+
 
 function storeViewEndLocal(){
-
-  const views = get('views',{})
+  if(toPush['views'] == null){
+    toPush['views'] = {}
+  }
   const url = window.location.href
-  if(views[url] == undefined){
-      views[url] = []
+    if(toPush['views'][url] == null){
+      toPush['views'][url] = []
   }
-  //Anonymous
-  const previousTimeString = views[url][0];
-  if(previousTimeString){
-    const cleanTimeString = previousTimeString.substring(1);
-    const previousTime =  parseDateString(cleanTimeString);
-    const currentTime = new Date();
-    const timeDifferenceInMillis = currentTime - previousTime;
-    const timeDifferenceInSeconds = timeDifferenceInMillis/1000;
-    console.log(timeDifferenceInSeconds);
-    const viewTime = get('viewTime',{})
-    if(viewTime == undefined){
-        viewTime[url] = []
-    }
-    set('viewTime',viewTime,true);
-  }else{
-    console.log('There was no previous time.')
-  }
-  //
-  views[url].unshift("-"+getDateTimeString())
-  set('views',views,true);
+  const diffMillisec =  new Date() - startedViewTime;
+  const diffSec = diffMillisec/1000;
+  console.log(diffSec);
+  const view = getDateTimeString()+", "+diffSec+"s";
+  console.log(view);// "15/04/2024, 11:59:07 pm, 25s"
+  toPush['views'][url].unshift(view)
+
 }
 
 
 function saveClickLocal(element,type) {
-    const clicks = get('clicks',{});
-    const url = window.location.href;
-    if(clicks[url] == undefined){
-      clicks[url] = {}
+
+  console.log(element,type);
+
+   if(toPush['clicks'] == null){
+      toPush['clicks'] = {}
     }
-    let buttonID; 
+      const url = window.location.href
+    if(toPush['clicks'][url] == null){
+      toPush['clicks'][url] = {}
+  }
+    
+    let id; 
     if (element.id) {
-       buttonID = element.id;
+       id = element.id;
     }else{
-        buttonID = element.textContent.trim().replace(/[^\x00-\x7F]/g, '*');
+        id = element.textContent.trim().replace(/[^\x00-\x7F]/g, '*');
     }
-    const pageClicks = clicks[url]
-    if(pageClicks[buttonID] == undefined){
-      pageClicks[buttonID] = []
+    
+    if(toPush['clicks'][url][id] == undefined){
+      toPush['clicks'][url][id] = []
     }
-    pageClicks[buttonID].unshift(getDateTimeString());
-    set('clicks',clicks,true);
+    toPush['clicks'][url][id].unshift(getDateTimeString());
+
 }
 function addClickListeners() {
-  var buttons = document.querySelectorAll('button');
-    buttons.forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            saveClickLocal(button); //.nodeName  .tagName .localName 
+    var listenTo = ['button', 'a','input', 'select'];
+    listenTo.forEach(function(tagName) {
+        var elements = document.querySelectorAll(tagName);
+        elements.forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                saveClickLocal(element);
+            });
         });
     });
-  var links = document.querySelectorAll('a');
-  links.forEach(function(link) {
-      link.addEventListener('click', function(event) {
-         saveClickLocal(link);
-      });
-  });
 }
 
 ///////////////////// GLOBAL Data
 
+gg = {}
+function triggerWithE(){
+
+
+  // let pushedVotes = { 0: "+", 1: "-", 2: "+", 4: "-", 5: "-", 6: "+", 7: "+", 8: "+", 11: "+"};
+  // let votes = { 0: "-", 1: "-", 2: "+", 4: "-", 5: "-", 6: "+", 7: "+", 8: "+", 11: "+", 13: "-"};
+
+  // let databaseJson2 = {}
+
+
+  //   for (let key in votes) {
+
+  //   if (pushedVotes.hasOwnProperty(key)){
+
+  //     if(votes[key] !== pushedVotes[key]){
+  //       console.log(key,"changed");
+  //     }
+  //   }else{
+  //     console.log(key,"NEW");
+  //   }
+}
 
 function addDataToDatabaseJson(databaseJson){
-    // const anonymousViews = get('views',[]);
-    // jsonData['views'] = anonymousViews;
-    // const anonymousClicks = get('clicks',{});
-    // jsonData['clicks'] = anonymousClicks;
-    // console.log(jsonData);
-    ///
-    //     const userID = get('userID');
-    //     let userData = jsonData.users.find(user => user.userID == userID)
-    //     const isNewUser = (userData == undefined)
-    //     if(isNewUser){
-    //         userData = {"userID":userID,"name":"","work":"", "device":window.navigator.userAgent, "joined":getDateTimeString(), "comments":[], "views" :{}, "clicks":{}}
-    //         jsonData.users.unshift(userData);
+    
+
+
+    if(toPush['uniqueUser']){
+       databaseJson['uniqueUsers'] = (databaseJson['userCount'] || 0) + 1;
+    }
+
+    if(toPush['browser']){
+
+      if(databaseJson['browsers'] == null){
+        databaseJson['browsers'] = []
+      }
+
+       databaseJson['browsers'].unshift(window.navigator.userAgent);
+    }
+
+
+   if(databaseJson['clicks'] == null){
+          databaseJson['clicks'] = {}
+        }
+
+       if(databaseJson['views'] == null){
+          databaseJson['views'] = {}
+        }
+
+        /// BRUH  !!!!!!!!!!!!!!!!! TODO MERGE JSON WITH FOR LOOPS
+
+    //     if(databaseJson['views'] == null){
+    //       databaseJson['views'] = []
     //     }
-    //     const comments = get('comments',[],true);
-    //     userData.comments = comments;
-    //     const views = get('views',{});
-    //     userData['views'] = views;
-    //     const workName = get('workName',{});
-    //     if(workName){
-    //     userData['name'] = workName['name'];
-    //     userData['work'] = workName['work'];
-    //     }
-  return jsonData
+
+    // databaseJson['clicks']
+
+
+  pushedVotes = get('pushedVotes',{}); 
+  votes = get('votes',{});
+
+
+   if(databaseJson['votes'] == null){
+        databaseJson['votes'] = {}
+      }
+
+    
+    for (let exercieseNumber in votes) {
+      let vote = votes[exercieseNumber]
+
+      if(databaseJson['votes'].hasOwnProperty(exercieseNumber) == false){
+        databaseJson['votes'][exercieseNumber] = {}
+        databaseJson['votes'][exercieseNumber][vote] = 1
+      }else if (pushedVotes.hasOwnProperty(exercieseNumber)){
+
+      let prevVote = pushedVotes[exercieseNumber];
+      if(vote !== prevVote){
+        // console.log(exercieseNumber,"changed");
+        databaseJson['votes'][exercieseNumber][prevVote] -= 1; 
+        databaseJson['votes'][exercieseNumber][vote] += 1; 
+      }
+    }else{
+      // console.log(exercieseNumber,"NEW");
+      databaseJson['votes'][exercieseNumber][vote] += 1; 
+    }
+    }
+    
+  console.log(databaseJson)
+  return databaseJson
 }
 
 
@@ -216,6 +273,9 @@ async function saveJsonToGithub(jsonToSave,sha) {
     });
   if(finalResponse.status === 200) {
     console.log("Saved successfully");
+
+    set('toPush',{});
+    set('pushedVotes',get('votes',{}));
   }else{
     console.log("ERROR:"+finalResponse.status);
   }
