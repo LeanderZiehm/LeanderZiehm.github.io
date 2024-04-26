@@ -6,6 +6,7 @@
  <link rel="stylesheet" href="colors.css">
  <script>
    localStorage.setItem('shouldSyncToGithub','false');
+
  </script>
  <script src="test.js" type="text/javascript" charset="utf-8"></script>
 <title>Clear</title>
@@ -19,6 +20,8 @@
 <!-- <button id="clearGithub">clear</button> -->
 <button id="clear">clear</button>
 <script>
+
+window.removeEventListener("beforeunload", storeViewEndLocal);
 function appendText(text,size="50",color="black") {
     var errorMessage = document.createElement("span");
     errorMessage.textContent = text;

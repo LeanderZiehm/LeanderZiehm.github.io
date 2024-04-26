@@ -5,7 +5,7 @@
 
 
 const usePrivateRepo = true;
-const shouldSyncToGithubText = get('shouldSyncToGithub',"trueec");
+const shouldSyncToGithubText = get('shouldSyncToGithub',"true");
 let shouldSyncToGithub = (shouldSyncToGithubText === "true");
 const syncIntervalMillisec = 10000 // 60000 milliseconds = 1 minute
 ///////////////////// Database syncing local storage to github
