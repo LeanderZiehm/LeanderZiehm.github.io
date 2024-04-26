@@ -36,10 +36,13 @@ function setupLocalSaves(){
 }
 
 function checkIfIsNewUser(){
-    if(get('needToIncrementNewUserCount','true') === 'true'){
+  const needToIncrementNewUserCount =get('needToIncrementNewUserCount','true');
+  console.log(needToIncrementNewUserCount);
+    if(needToIncrementNewUserCount === 'true'){
       set('needToIncrementNewUserCount','false');
       toPush['uniqueUser'] = true;
       toPush['browser'] = true;
+      console.log('IS UNIQUE USER!')
     }
 }
 
@@ -125,10 +128,11 @@ function triggerWithE(){
 
 function addDataToDatabaseJson(databaseJson){
     
-
-
     if(toPush['uniqueUser']){
-       databaseJson['uniqueUsers'] = (databaseJson['userCount'] || 0) + 1;
+        if(databaseJson['uniqueUsers'] == null){
+        databaseJson['uniqueUsers'] = 1
+        }
+        databaseJson['uniqueUsers'] += 1; 
     }
 
     if(toPush['browser']){
@@ -272,7 +276,7 @@ async function saveJsonToGithub(jsonToSave,sha) {
       body: requestBody
     });
   if(finalResponse.status === 200) {
-    console.log("Saved successfully");
+    console.log("Synced successfully.");
 
     set('toPush',{});
     set('pushedVotes',get('votes',{}));

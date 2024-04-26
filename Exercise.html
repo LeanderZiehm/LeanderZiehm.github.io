@@ -205,14 +205,10 @@ right: 80px;
 <span id="shortcutInfo"> Keyboard shortcuts: Tip [T or Space] Solution [S or Enter] Next Exercise [Arrow Right or D] Previous Exercise [Arrow Left or A] </span>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const exerciseParameter = urlParams.get('exercise') || 1;
-    let exerciseIndex = exerciseParameter-1;
+    const exerciseNumber = urlParams.get('exercise') || 1;
+    let exerciseIndex = exerciseNumber-1;
     const exercise = exercises[exerciseIndex];
     const exercisesLength = exercises.length;
-
-    // let votes; 
-
-
 
 
     function main(){
@@ -239,7 +235,7 @@ right: 80px;
           votes = get('votes',{});
           // console.log(votes)
 
-          const previousVote = votes[exerciseIndex]
+          const previousVote = votes[exerciseNumber]
           if(previousVote == '+'){
 
             showVote(true);
@@ -276,7 +272,7 @@ right: 80px;
       // votes.unshift(is)
       const currentVote = isUpvote ? '+' : '-';
       // console.log(currentVote);
-      votes[exerciseIndex] = currentVote;
+      votes[exerciseNumber] = currentVote;
 
       showVote(isUpvote);
     
@@ -393,15 +389,15 @@ function hexToComplimentary(hex,shiftAngle = 180){
     function getBackgroundColor(automaticallyConvertRGBToHex = true){
         let currentBackgroundColor = window.getComputedStyle(document.body ,null).getPropertyValue('background-color');
 
-        console.log(currentBackgroundColor);
+        // console.log(currentBackgroundColor);
         if(automaticallyConvertRGBToHex){
           if(currentBackgroundColor.startsWith('rgb')){
             currentBackgroundColor = rgbToHex(currentBackgroundColor);
-            console.log("Converted to HEX: " +currentBackgroundColor);
+            // console.log("Converted to HEX: " +currentBackgroundColor);
           }else if (currentBackgroundColor.startsWith('#')) {
-                console.log("IS ALREADY HEX: " +currentBackgroundColor)
+                // console.log("IS ALREADY HEX: " +currentBackgroundColor)
             } else {
-                console.log("!IS NEITHER HEX NOT RGB!: " +currentBackgroundColor);
+                // console.log("!IS NEITHER HEX NOT RGB!: " +currentBackgroundColor);
             }
         }     
         
