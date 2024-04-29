@@ -1,8 +1,5 @@
-// I will use Anonymous for now because it's a private repo https://github.com/Circulai/Anonymous/blob/main/data.json
 //TODO FIGURE OUT KEY
-// Encrypt and rename this file
 // Is it allowed to store the data on the users account locally and update later?
-
 
 const usePrivateRepo = true;
 const shouldSyncToGithubText = get('shouldSyncToGithub',"true");
@@ -14,9 +11,15 @@ const syncIntervalMillisec = 10000 // 60000 milliseconds = 1 minute
 let toPush;
 async function main(){
 
+
+  // return;
+
   toPush = get('toPush',{});
       checkIfIsNewUser();
       setupLocalSaves();
+
+
+
   if(shouldSyncToGithub){
       checkIfItsTimeToSyncUserData();
   }
@@ -26,28 +29,41 @@ async function main(){
 
 
 
-const startedViewTime = new Date();
-console.log(startedViewTime);
+let startedViewTime;
 
 function setupLocalSaves(){
+  startedViewTime = new Date();
   document.addEventListener("DOMContentLoaded", addClickListeners);
-  window.addEventListener("beforeunload", storeViewEndLocal);
+  window.addEventListener("beforeunload", beforeUnloadPage);
  
 }
 
 function checkIfIsNewUser(){
-  const needToIncrementNewUserCount =get('needToIncrementNewUserCount','true');
-  console.log(needToIncrementNewUserCount);
+  const needToIncrementNewUserCount = get('needToIncrementNewUserCount','true');
     if(needToIncrementNewUserCount === 'true'){
       set('needToIncrementNewUserCount','false');
       toPush['uniqueUser'] = true;
       toPush['browser'] = true;
-      console.log('IS UNIQUE USER!')
+      console.log('############IS UNIQUE USER!')
     }
 }
 
+function onSuccessfullPush(){
+  console.log("Synced successfully.");
+  set('needToIncrementNewUserCount','false');
+  set('toPush',{});
+  set('pushedVotes',get('votes',{}));
+}
+
+
+function beforeUnloadPage(){
+  storeViewEndLocal();
+  set('toPush',toPush);
+}
 
 function storeViewEndLocal(){
+
+
   if(toPush['views'] == null){
     toPush['views'] = {}
   }
@@ -57,10 +73,10 @@ function storeViewEndLocal(){
   }
   const diffMillisec =  new Date() - startedViewTime;
   const diffSec = diffMillisec/1000;
-  console.log(diffSec);
   const view = getDateTimeString()+", "+diffSec+"s";
-  console.log(view);// "15/04/2024, 11:59:07 pm, 25s"
   toPush['views'][url].unshift(view)
+
+
 
 }
 
@@ -104,33 +120,82 @@ function addClickListeners() {
 
 ///////////////////// GLOBAL Data
 
-gg = {}
 function triggerWithE(){
 
+  databaseJson = {
+  "votes": {
+    "2": {
+      "+": 1,
+      "-": 0
+    },
+    "3": {
+      "+": 0,
+      "-": 1
+    },
+    "4": {
+      "+": 1,
+      "-": 0
+    }
+  }
+}
 
-  // let pushedVotes = { 0: "+", 1: "-", 2: "+", 4: "-", 5: "-", 6: "+", 7: "+", 8: "+", 11: "+"};
-  // let votes = { 0: "-", 1: "-", 2: "+", 4: "-", 5: "-", 6: "+", 7: "+", 8: "+", 11: "+", 13: "-"};
+  // pushedVotes = get('pushedVotes',{}); 
+  pushedVotes = 
+  {
+  "2": "+",
+  "3": "-",
+  "4": "+",
+}
 
-  // let databaseJson2 = {}
 
 
-  //   for (let key in votes) {
+  votes = get('votes',{});
+  votes = {
+  "2": "+",
+  "3": "+",
+  "4": "+",
+}
 
-  //   if (pushedVotes.hasOwnProperty(key)){
+   // console.log('pushedVotes',jsonString(pushedVotes))
+   // console.log('votes',jsonString(votes))
 
-  //     if(votes[key] !== pushedVotes[key]){
-  //       console.log(key,"changed");
-  //     }
-  //   }else{
-  //     console.log(key,"NEW");
-  //   }
+
+    // console.log('databaseJson:',jsonString(databaseJson))
+  
 }
 
 function addDataToDatabaseJson(databaseJson){
+
+  // databaseJson = {}  ////////////////////////////////////////////////////////////////////
+//   console.log('toPushOG:',toPush)
+
+//   toPush = {
+//   "uniqueUser": true,
+//   "browser": true,
+//   "clicks": {
+//     "file:///C:/Users/krott/Documents/[Github]/LeanderZiehm.github.io/Exercise.html": {
+//       "tipButton": [
+//         "29/04/2024, 10:38:52 am"
+//       ],
+//       "solutionButton": [
+//         "29/04/2024, 10:38:52 am"
+//       ]
+//     }
+//   }
+// }
+
+
+
+
+
+
+  console.log('toPush',toPush)
+
+  // console.log('databaseJson1',databaseJson)
     
     if(toPush['uniqueUser']){
         if(databaseJson['uniqueUsers'] == null){
-        databaseJson['uniqueUsers'] = 1
+        databaseJson['uniqueUsers'] = 0;
         }
         databaseJson['uniqueUsers'] += 1; 
     }
@@ -145,22 +210,22 @@ function addDataToDatabaseJson(databaseJson){
     }
 
 
-   if(databaseJson['clicks'] == null){
-          databaseJson['clicks'] = {}
-        }
 
-       if(databaseJson['views'] == null){
+    if(databaseJson['views'] == null){
           databaseJson['views'] = {}
-        }
+      }
 
-        /// BRUH  !!!!!!!!!!!!!!!!! TODO MERGE JSON WITH FOR LOOPS
+         if(databaseJson['clicks'] == null){
+          databaseJson['clicks'] = {}
+    }
 
-    //     if(databaseJson['views'] == null){
-    //       databaseJson['views'] = []
-    //     }
 
-    // databaseJson['clicks']
 
+    merge(databaseJson['views'],toPush['views'])
+    merge(databaseJson['clicks'],toPush['clicks'])
+   
+
+    /////////////////////////////////////////////
 
   pushedVotes = get('pushedVotes',{}); 
   votes = get('votes',{});
@@ -170,30 +235,134 @@ function addDataToDatabaseJson(databaseJson){
         databaseJson['votes'] = {}
       }
 
-    
+      
+
+
+   if(databaseJson['votes'] == null){
+        databaseJson['votes'] = {}
+      }
+
+
     for (let exercieseNumber in votes) {
+
       let vote = votes[exercieseNumber]
 
-      if(databaseJson['votes'].hasOwnProperty(exercieseNumber) == false){
-        databaseJson['votes'][exercieseNumber] = {}
-        databaseJson['votes'][exercieseNumber][vote] = 1
-      }else if (pushedVotes.hasOwnProperty(exercieseNumber)){
+      const isFirstVoterInThisExerciese = (databaseJson['votes'].hasOwnProperty(exercieseNumber) == false)
 
-      let prevVote = pushedVotes[exercieseNumber];
-      if(vote !== prevVote){
-        // console.log(exercieseNumber,"changed");
-        databaseJson['votes'][exercieseNumber][prevVote] -= 1; 
-        databaseJson['votes'][exercieseNumber][vote] += 1; 
+      if(isFirstVoterInThisExerciese){
+        console.log(exercieseNumber,"isNew")
+        databaseJson['votes'][exercieseNumber] = {"+":0,"-":0};
+        databaseJson['votes'][exercieseNumber][vote] += 1;
+      }else{
+        // console.log(exercieseNumber,"exercise has already been voted on before.")
+
+        // console.log(pushedVotes)
+        // console.log(exercieseNumber)
+
+        if (pushedVotes.hasOwnProperty(exercieseNumber)){
+                // console.log(exercieseNumber,"User already pushed their answer of this before")
+
+                let prevVote = pushedVotes[exercieseNumber];
+
+
+                if(vote !== prevVote){
+                  // console.log(exercieseNumber,"User has changed their vote from previous");
+                  databaseJson['votes'][exercieseNumber][prevVote] -= 1; 
+                  databaseJson['votes'][exercieseNumber][vote] += 1; 
+                }
+
+        }else{
+
+          // console.log(exercieseNumber,"It's the first time this user votes for this.");
+          databaseJson['votes'][exercieseNumber][vote] += 1; 
+
+        } 
+
       }
-    }else{
-      // console.log(exercieseNumber,"NEW");
-      databaseJson['votes'][exercieseNumber][vote] += 1; 
     }
-    }
-    
-  console.log(databaseJson)
+
+  set('databaseJsonVotes',databaseJson['votes']); // RENAME THIS TO GLOBAL VOTES!!!!!!
+
+  console.log('databaseJson2:',jsonString(databaseJson))
   return databaseJson
 }
+
+
+
+
+
+
+
+// get2('databaseJsonVotes',[exerciseNumber],{'+':0,'-':0});
+function get2(getName,keys,defaultValue){
+
+
+
+  const isList = (typeof keys.constructor === Array)
+  if(isList == false){
+    keys = [keys]
+  }
+   // console.log("keys:",keys)
+
+  const json = get(getName,{});
+
+  // console.log("get:",json)
+
+  let currentLayer = json;
+
+  for(index in keys){
+
+    key = keys[index];
+
+    // console.log("key:",key);
+
+    if(currentLayer.hasOwnProperty(key)){
+
+      currentLayer = currentLayer[key]
+
+    }else{
+      return defaultValue;
+    }
+  }
+
+  return currentLayer
+
+}
+
+
+
+function merge(jsonMain,jsonToAdd) {
+    for (let key in jsonToAdd) {
+        if (jsonToAdd.hasOwnProperty(key)) {
+            if (!jsonMain.hasOwnProperty(key)) {
+                // If the key doesn't exist in jsonMain, add it with the same type as in jsonToAdd
+                jsonMain[key] = jsonToAdd[key];
+                console.log("add",key, "with value",jsonToAdd[key])
+            } else {
+                // If the key exists in jsonMain, but the types don't match, don't merge
+                if (typeof jsonMain[key] !== typeof jsonToAdd[key]) {
+                    console.error(`Type mismatch for key "${key}". Skipping merge.`);
+                    continue;
+                }
+                // If the types match, merge recursively for nested objects or arrays
+                if (typeof jsonMain[key] === 'object') {
+                    if (Array.isArray(jsonMain[key]) && Array.isArray(jsonToAdd[key])) {
+                        jsonMain[key] = jsonMain[key].concat(jsonToAdd[key]);
+                    } else {
+                        merge(jsonToAdd[key], jsonMain[key]);
+                    }
+                } else {
+                    // For non-object types, overwrite with the value from jsonToAdd
+                    jsonMain[key] = jsonToAdd[key];
+                    console.log("overwriting",key, "with value",jsonToAdd[key])
+                }
+            }
+        }
+    }
+    return jsonMain;
+}
+
+
 
 
 
@@ -214,13 +383,18 @@ function checkIfItsTimeToSyncUserData() {
 }
 
 
+async function getJsonDatabaseAsync(){
+    const fileInfo = await getGithubFileInfo();
+    const stringOfJsonDatabase = atob(fileInfo.content);
+    const jsonData = JSON.parse(stringOfJsonDatabase);
+    return jsonData;
+}
+
 async function saveDataToGithub(){
     const fileInfo = await getGithubFileInfo();
     const stringOfJsonDatabase = atob(fileInfo.content);
     let databaseJson = JSON.parse(stringOfJsonDatabase); 
-
     databaseJson = addDataToDatabaseJson(databaseJson);
-
     saveJsonToGithub(databaseJson,fileInfo.sha);
 }
 
@@ -254,15 +428,17 @@ async function getGithubFileInfo() {
   const data = await response.json();
   return data
 }
-async function getJsonDatabase(){
-    const fileInfo = await getGithubFileInfo();
-    const stringOfJsonDatabase = atob(fileInfo.content);
-    const jsonData = JSON.parse(stringOfJsonDatabase);
-    return jsonData;
-}
+
 async function saveJsonToGithub(jsonToSave,sha) {
   try{
+
+    // jsonToSave = {}
+    // sha = '3'
+    // console.log('sha',sha);
+    // console.log('sha:',sha)
+    console.log(jsonString(jsonToSave),jsonToSave);
       // console.log("SAVE");
+    
   const dateString = getDateTimeString();
   const commitMessage = `${dateString}`;
   const contentBits = btoa(JSON.stringify(jsonToSave, null, 2));
@@ -276,10 +452,9 @@ async function saveJsonToGithub(jsonToSave,sha) {
       body: requestBody
     });
   if(finalResponse.status === 200) {
-    console.log("Synced successfully.");
 
-    set('toPush',{});
-    set('pushedVotes',get('votes',{}));
+    onSuccessfullPush();
+    
   }else{
     console.log("ERROR:"+finalResponse.status);
   }
@@ -335,6 +510,11 @@ function parseDateString(dateString){
       parsedDate = new Date(year, month, day, hours, minutes, seconds);
   }
   return parsedDate;
+}
+
+
+function jsonString(json){
+  return JSON.stringify(json, null, 2);
 }
 
 ///////////////////// local storage helper functions

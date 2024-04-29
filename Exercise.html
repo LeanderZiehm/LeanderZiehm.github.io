@@ -15,7 +15,8 @@ div{
    border-radius: 20px;
    background: var(--div);
 }
-.disabled{
+
+.ghosty{
     opacity: 0.1 !important;
 }
 .text{
@@ -24,11 +25,11 @@ div{
 .hidden{
     display: none;
 }
-.transparent{
+.invisible{
     opacity: 0.0;
 }
 .no{
-  background-color: transparent; 
+  background-color: invisible; 
  /* box-shadow: none;*/
 }
 #container{
@@ -168,15 +169,88 @@ right: 80px;
   color: red;
 }
 
+#colorPickerButton{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      display: flex;
+      justify-content: center; /* Horizontal centering */
+      align-items: center; /* Vertical centering */
+      cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+      height: 60px;
+      width: 60px;
+      border-radius: 20px;
+}
+
+#colorPickerButton img{
+  position: absolute;
+  height: 25px;
+  /*opacity: 0.5;*/
+  /*opacity: 0.5;*/
+  filter: invert(1);
+
+
+
+}
+
+.colorFilter{
+  filter:      
+        brightness(0)
+        invert(1)
+        sepia(100%)
+        saturate(10000000%)
+        hue-rotate(100deg) !important;
+}
+
+
+button,{
+  cursor: pointer;
+}
+
+#colorPicker {
+      display: none; /* Hide the color picker */
+    }
+
+#exerciseMetaButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.centered {
+  display: flex;
+  align-items: center;
+}
+
+#upvoteButton,
+#downvoteButton {
+  margin: 0 10px;
+}
+
+#exerciseNumber {
+  margin: 0 10px; 
+}
+
+/*#upvotes{
+  margin-left: 10px;
+}
+
+#downvotes{
+  margin-right: 10px;
+}*/
+
   </style>
   </head>
 <body>
   <select id="exercisesSelection" name="Exercises">
     <option value="exercise0">Exercise 0</option>
   </select>
-  <div class="color-picker topRight">
-    <input type="color" id="colorPicker">
-</div>
+  <button id="colorPickerButton" >
+    <input  type="color" id="colorPicker">
+    <img id="colorPickerIcon" class="colorFilter"  src="icons/color-palette.png"/>
+    
+</button>
   <!-- <button id="emailButton"><img src="icons/email.png"></button> -->
 <div id="container">
   <div id="exerciseContainer">
@@ -192,11 +266,15 @@ right: 80px;
     <!-- <div class="text" id="output"></div> -->
   </div>
 </div>
-  <div class="no">
+  <div id='exerciseMetaButtons' class="no">
     <button id="backwardButton"><img id="backwardButtonIcon"  src="icons/backward.png"/></button>
-    <button id="upvoteButton"><img src="icons/like.png"/></button>      
-    <div class="text" id="exerciseNumber">Exercise: 1</div>
-    <button id="downvoteButton"><img  src="icons/dislike.png"/></button>
+    <div class="centered">
+      <span id="upvotes">1</span>
+      <button id="upvoteButton"><img src="icons/like.png"/></button>      
+      <div class="text" id="exerciseNumber">Exercise: 1</div>
+      <button id="downvoteButton"><img  src="icons/dislike.png"/></button>
+      <span id="downvotes">1</span>
+    </div>
     <button id="forwardButton"><img  id="forwardButtonIcon" src="icons/forward.png"/></button>
   </div>
   
@@ -233,22 +311,80 @@ right: 80px;
 
     function loadVariablesFromStorage(){
           votes = get('votes',{});
-          // console.log(votes)
-
           const previousVote = votes[exerciseNumber]
-          if(previousVote == '+'){
-
-            showVote(true);
-          }else if(previousVote == '-'){
-            showVote(false);
-          }
-
+          showVote(previousVote);
           window.onbeforeunload = function() {
           set('votes',votes);
-          console.log(votes);
+          console.log("onbeforeunload votes",votes);
+
       }
     }
-    function hideElements(){
+
+
+
+    function vote(currentVote){
+      votes[exerciseNumber] = currentVote;
+      showVote(currentVote);
+    }
+
+    function showVote(currentVote){
+
+
+      // console.log(exerciseNumber)
+      let currentGlobalVotes = get2('databaseJsonVotes',exerciseNumber,{'+':0,'-':0});
+
+      console.log("currentGlobalVotes",currentGlobalVotes)
+
+
+      const globalUp = currentGlobalVotes['+']
+      const globalDown = currentGlobalVotes['-']
+
+
+      let upvotes = globalUp;
+      let downvotes = globalDown;
+
+
+
+      if(currentVote == '+'){
+
+        upvotes += 1;
+        document.querySelector('#upvoteButton img').classList.add('invert'); 
+        document.querySelector('#downvoteButton img').classList.remove('invert');         
+      }else if (currentVote == '-' ){
+        downvotes += 1;
+        document.querySelector('#upvoteButton img').classList.remove('invert'); 
+        document.querySelector('#downvoteButton img').classList.add('invert'); 
+      }
+
+
+      
+      const upvoteTextElement = document.getElementById('upvotes')
+      const downvotesTextElement = document.getElementById('downvotes')
+
+      upvoteTextElement.innerHTML = upvotes;
+      downvotesTextElement.innerHTML = downvotes;
+
+      if(upvotes == 0){
+        setClass(upvoteTextElement,'invisible',true);
+      }else{
+        setClass(upvoteTextElement,'invisible',false);
+      }
+      if(downvotes == 0){
+        setClass(downvotesTextElement,'invisible',true);
+      }else{
+        setClass(downvotesTextElement,'invisible',false);
+      }
+     
+
+
+      
+  
+
+
+    }
+
+
+        function hideElements(){
       hideElementByID('example');
       hideElementByID('description');
       hideElementByID('tip');
@@ -267,51 +403,53 @@ right: 80px;
     }
 
 
-    function vote(isUpvote){
-
-      // votes.unshift(is)
-      const currentVote = isUpvote ? '+' : '-';
-      // console.log(currentVote);
-      votes[exerciseNumber] = currentVote;
-
-      showVote(isUpvote);
-    
-      // document.querySelector('#upvoteButton img').style.c
-    }
-
-    function showVote(isUpvote){
-
-      if(isUpvote){
-        document.querySelector('#upvoteButton img').classList.add('invert'); 
-        document.querySelector('#downvoteButton img').classList.remove('invert'); 
-      }else{
-        document.querySelector('#upvoteButton img').classList.remove('invert'); 
-        document.querySelector('#downvoteButton img').classList.add('invert'); 
-      }
-    }
-
-
 
     function setupButtons(){
-      document.getElementById('upvoteButton').addEventListener('click',function(){vote(true);});
-      document.getElementById('downvoteButton').addEventListener('click',function(){vote(false);});
+
+       document.getElementById('colorPickerButton').addEventListener('click', function() {
+      // Simulate click on the hidden color picker input
+      document.getElementById('colorPicker').click();
+    });
+
+
+      document.getElementById('upvoteButton').addEventListener('click',function(){vote('+');});
+      document.getElementById('downvoteButton').addEventListener('click',function(){vote('-');});
 
 
       document.getElementById('backwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex-1); });
       document.getElementById('forwardButton').addEventListener('click',function(){ loadExercise(exerciseIndex+1); });
   if (exerciseIndex == 0) {
-         // document.getElementById('backwardButton').classList.add('transparent'); 
-         document.querySelector('#backwardButton img').classList.add('disabled'); 
+         // document.getElementById('backwardButton').classList.add('invisible'); 
+         document.querySelector('#backwardButton img').classList.add('ghosty'); 
           }
       if (exerciseIndex == exercises.length - 1) {
-        // document.getElementById('forwardButton').classList.add('transparent'); 
-          document.querySelector('#forwardButton img').classList.add('disabled'); 
+        // document.getElementById('forwardButton').classList.add('invisible'); 
+          document.querySelector('#forwardButton img').classList.add('ghosty'); 
 
           }
     }
 
 
-function hexToComplimentary(hex,shiftAngle = 180){
+
+  function setClass(id,className,shouldAdd = true){
+
+
+     if (typeof id === 'string') {
+        element = document.getElementById(param);
+      }else if(id instanceof HTMLElement){
+        element = id;
+      }
+
+      if(shouldAdd == true){
+        element.classList.add(className);
+      }else{
+        element.classList.remove(className);
+      }
+    }
+
+
+
+function hexToComplimentary(hex,shiftAngle = 180,lightOffset=0){
         var rgb = 'rgb(' + (hex = hex.replace('#', '')).match(new RegExp('(.{' + hex.length/3 + '})', 'g')).map(function(l) { return parseInt(hex.length%2 ? l+l : l, 16); }).join(',') + ')';
         rgb = rgb.replace(/[^\d,]/g, '').split(',');
         var r = rgb[0], g = rgb[1], b = rgb[2];
@@ -321,6 +459,11 @@ function hexToComplimentary(hex,shiftAngle = 180){
         var max = Math.max(r, g, b);
         var min = Math.min(r, g, b);
         var h, s, l = (max + min) / 2.0;
+
+
+
+
+
         if(max == min) {
             h = s = 0;  //achromatic
         } else {
@@ -337,7 +480,21 @@ function hexToComplimentary(hex,shiftAngle = 180){
             }
         }
         h = h / 6.2832 * 360.0 + 0;
+
+        console.log(l,lightOffset)
+        l += lightOffset
+        if(l > 1){
+          l = 1;
+        }
+        if(l < 0){
+          l = 0;
+        }
+
         h+= shiftAngle;
+      
+
+
+
         if (h > 360) { h -= 360; }
         h /= 360;
         if(s === 0){
@@ -410,9 +567,9 @@ function hexToComplimentary(hex,shiftAngle = 180){
       document.documentElement.style.setProperty('--bodyBackground', backgroundColorToSet);
 
 
-      const complement1 = hexToComplimentary(backgroundColorToSet,40);
+      const complement1 = hexToComplimentary(backgroundColorToSet,40,-0.05);
 
-      const complement2 = hexToComplimentary(backgroundColorToSet,20);
+      const complement2 = hexToComplimentary(backgroundColorToSet,20,0.1);
 
       document.documentElement.style.setProperty('--solution', complement1);
       document.documentElement.style.setProperty('--tip', complement2);
@@ -511,9 +668,9 @@ function hexToComplimentary(hex,shiftAngle = 180){
           rect1.left > rect2.right ||  
           rect1.bottom < rect2.top ||  
           rect1.top > rect2.bottom)) { 
-      shortcutInfo.classList.add('transparent');
+      shortcutInfo.classList.add('invisible');
     } else { 
-      shortcutInfo.classList.remove('transparent');
+      shortcutInfo.classList.remove('invisible');
       hideElementByID('shortcutInfo',false);
     }
 }

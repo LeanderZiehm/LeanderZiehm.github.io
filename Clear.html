@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="stylesheet" href="colors.css">
  <script>
+
+    shouldSyncToGithubBackup = localStorage.getItem('shouldSyncToGithub')
    localStorage.setItem('shouldSyncToGithub','false');
 
  </script>
@@ -19,7 +21,10 @@
 <button id="clearCashe">clearCashe</button>
 <!-- <button id="clearGithub">clear</button> -->
 <button id="clear">clear</button>
+<a id="buttonLink" target="_blank" href="Exercise.html">Exercises</a>
 <script>
+
+    localStorage.setItem('shouldSyncToGithub',shouldSyncToGithubBackup);
 
 window.removeEventListener("beforeunload", storeViewEndLocal);
 function appendText(text,size="50",color="black") {
@@ -56,8 +61,9 @@ function displaySync(){
 function clearCashe(){
     appendText("clearedCashe",25)
     console.log("CLEAR");
+    shouldSyncToGithubBackup = localStorage.getItem('shouldSyncToGithub');
     localStorage.clear();
-    // localStorage.setItem('shouldSyncToGithub','false');
+    localStorage.setItem('shouldSyncToGithub',shouldSyncToGithubBackup);
     displaySync();
 }
 displaySync();
