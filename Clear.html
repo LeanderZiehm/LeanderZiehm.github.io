@@ -6,6 +6,8 @@
  <link rel="stylesheet" href="colors.css">
  <script>
 
+
+
     shouldSyncToGithubBackup = localStorage.getItem('shouldSyncToGithub')
    localStorage.setItem('shouldSyncToGithub','false');
 
@@ -24,6 +26,8 @@
 <a id="buttonLink" target="_blank" href="Exercise.html">Exercises</a>
 <script>
 
+    window.removeEventListener("beforeunload", beforeUnloadPage);
+    
     localStorage.setItem('shouldSyncToGithub',shouldSyncToGithubBackup);
 
 window.removeEventListener("beforeunload", storeViewEndLocal);

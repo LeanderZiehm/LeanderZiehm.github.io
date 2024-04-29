@@ -1,3 +1,6 @@
+// TODO: fix multible pushes!
+
+
 //TODO FIGURE OUT KEY
 // Is it allowed to store the data on the users account locally and update later?
 
@@ -51,6 +54,7 @@ function checkIfIsNewUser(){
 function onSuccessfullPush(){
   console.log("Synced successfully.");
   set('needToIncrementNewUserCount','false');
+  toPush = {}
   set('toPush',{});
   set('pushedVotes',get('votes',{}));
 }
