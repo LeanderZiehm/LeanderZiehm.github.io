@@ -9,7 +9,7 @@
     /*--tip: rgb(208, 142, 39,0.8);*/
     /*--solution: rgb(94, 214, 90, 0.8);*/
     --solution: rgb(94, 214, 90, 0.8);
-    --offWhite: rgb(100, 100, 100, 0.3);
+    --shortcutInfo: rgb(100, 100, 100, 0.5);
     --example: rgb(208, 142, 39,1);
   }
 @font-face {

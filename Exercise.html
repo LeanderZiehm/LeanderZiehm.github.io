@@ -51,7 +51,7 @@ div{
 #shortcutInfo{
 position: absolute;
 bottom:20px;
-color: var(--offWhite);
+color: var(--shortcutInfo);
 }
 #task{
 color: var(--textS);
@@ -246,7 +246,7 @@ button,{
   <select id="exercisesSelection" name="Exercises">
     <option value="exercise0">Exercise 0</option>
   </select>
-  <button id="colorPickerButton" >
+  <button id="colorPickerButton"  title="change colors (keyboard shortcut: C)">
     <input  type="color" id="colorPicker">
     <img id="colorPickerIcon" class="colorFilter"  src="icons/color-palette.png"/>
     
@@ -254,9 +254,9 @@ button,{
   <!-- <button id="emailButton"><img src="icons/email.png"></button> -->
 <div id="container">
   <div id="exerciseContainer">
-    <button id="tipButton"><img style="height: 20px; opacity: 0.5;" size src="icons/tip.png"></button>
-    <button id="solutionButton" class="">Solution</button>
-    <button id="nextExerciseButton" class="hidden">Next Exercise</button>
+    <button id="tipButton" title="tip (keyboard shortcut: T or Space)" ><img style="height: 20px; opacity: 0.5;" size src="icons/tip.png"></button>
+    <button id="solutionButton" class="" title="solution (keyboard shortcut: S or Enter)" >Solution</button>
+    <button id="nextExerciseButton" class="hidden" title="next (keyboard shortcut: S or Enter)">Next Exercise</button>
   <div id="textContainer">
     <div class="text" id="description"></div>
     <div class="text" id="task">Exercise 420: There is an error in the html and therefore I wasn't able to load an exercise.</div>
@@ -267,7 +267,7 @@ button,{
   </div>
 </div>
   <div id='exerciseMetaButtons' class="no">
-    <button id="backwardButton"><img id="backwardButtonIcon"  src="icons/backward.png"/></button>
+    <button id="backwardButton" title="previous (keyboard shortcut: right arrow or D)"><img id="backwardButtonIcon"  src="icons/backward.png"/></button>
     <div class="centered">
       <span id="upvotes">1</span>
       <button id="upvoteButton"><img src="icons/like.png"/></button>      
@@ -275,12 +275,12 @@ button,{
       <button id="downvoteButton"><img  src="icons/dislike.png"/></button>
       <span id="downvotes">1</span>
     </div>
-    <button id="forwardButton"><img  id="forwardButtonIcon" src="icons/forward.png"/></button>
+    <button id="forwardButton" title="next (keyboard shortcut: left arrow or A)"><img  id="forwardButtonIcon" src="icons/forward.png"/></button>
   </div>
   
 
 </div>
-<span id="shortcutInfo"> Keyboard shortcuts: Tip [T or Space] Solution [S or Enter] Next Exercise [Arrow Right or D] Previous Exercise [Arrow Left or A] </span>
+<span id="shortcutInfo"> Keyboard shortcuts: Tip [T or Space] Solution [S or Enter] Next Exercise [Arrow Right or D] Previous Exercise [Arrow Left or A] Colors [C] </span>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const exerciseNumber = urlParams.get('exercise') || 1;
@@ -315,7 +315,7 @@ button,{
           showVote(previousVote);
           window.onbeforeunload = function() {
           set('votes',votes);
-          console.log("onbeforeunload votes",votes);
+          // console.log("onbeforeunload votes",votes);
 
       }
     }
@@ -333,7 +333,7 @@ button,{
       // console.log(exerciseNumber)
       let currentGlobalVotes = get2('databaseJsonVotes',exerciseNumber,{'+':0,'-':0});
 
-      console.log("currentGlobalVotes",currentGlobalVotes)
+      // console.log("currentGlobalVotes",currentGlobalVotes)
 
 
       const globalUp = currentGlobalVotes['+']
@@ -490,7 +490,7 @@ function hexToComplimentary(hex,shiftAngle = 180,lightOffset=0){
         }
         h = h / 6.2832 * 360.0 + 0;
 
-        console.log(l,lightOffset)
+        // console.log(l,lightOffset)
         l += lightOffset
         if(l > 1){
           l = 1;
@@ -651,22 +651,74 @@ function hexToComplimentary(hex,shiftAngle = 180,lightOffset=0){
         window.location.href = 'Exercise.html?exercise=' + indexParameter;
     }
 
-    function setupKeyboardShortcuts(){
+//     const shortcuts = [
+//     {
+//       "actionName": "previous",
+//       "keys": ["arrowleft", "a"]
+//     },
+//     {
+//       "actionName": "next",
+//       "keys": ["arrowright", "d"]
+//     },
+//     {
+//       "actionName": "tip",
+//       "keys": ["t", " "]
+//     },
+//     {
+//       "actionName": "solution",
+//       "keys": ["s", "Enter"]
+//     },
+//     {
+//       "actionName": "specialAction",
+//       "keys": ["ctrl+alt+x"]
+//     }
+// ]
 
+
+    function saveKeyboardShortcut(shortuctName){
+      console.log("keydown: ",shortuctName);
+      saveShortcutToPush(shortuctName);// located in test.js
     }
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'ArrowLeft'||event.key === 'a' || event.key === 'A') {
+
+
+
+
+  document.addEventListener('keydown', function(keydown) {
+      // console.log("keydown: ",keydown) 
+    let key = event.key.toLowerCase();
+    if (key === 'arrowleft'||key === 'a') {
+        saveKeyboardShortcut("prev");
          loadExercise(exerciseIndex-1);
+         
     }
-    if (event.key === 'ArrowRight'||event.key === 'd' || event.key === 'D') {
+    else if (key === 'arrowright'||key === 'd') {
+        saveKeyboardShortcut("next");
       loadExercise(exerciseIndex+1);
+    
     }
-    if (event.key === 't' || event.key === 'T'|| event.key === ' ') {
+    else if (key === 't' || key === ' ') {
+        saveKeyboardShortcut("tip");
         showTip();
+       
+        // console.log("tip");
     }
-    if (event.key === 's' || event.key === 'S'|| event.key === 'Enter' ) {
-          hideElementByID('solution',false);
+    else if (key === 's' || key === 'enter' ) {
+       saveKeyboardShortcut("solution");
+        hideElementByID('solution',false);
+       
+         // console.log("solution");
+    }else if (key === 'c') {
+        // activateColorPicker();
+        saveKeyboardShortcut("color");
+        document.getElementById('colorPickerButton').click();
+    }else{
+      // console.log("else key: "+key) 
     }
+    // else if (key === 'e' || key === 'm' ) {
+
+    //      document.getElementById('exercisesSelection').dispatchEvent(new Event('click'));
+    //     saveKeyboardShortcut("exercises");
+    // }
 });
   const container = document.getElementById('container'); 
   const shortcutInfo = document.getElementById('shortcutInfo'); 

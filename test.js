@@ -47,7 +47,6 @@ function checkIfIsNewUser(){
       set('needToIncrementNewUserCount','false');
       toPush['uniqueUser'] = true;
       toPush['browser'] = true;
-      console.log('############IS UNIQUE USER!')
     }
 }
 
@@ -84,10 +83,31 @@ function storeViewEndLocal(){
 
 }
 
+function saveShortcutToPush(shortcut){
+
+
+   if(toPush['shortcuts'] == null || toPush['shortcuts'] == undefined){
+      toPush['shortcuts'] = {}
+
+    }
+      const url = window.location.href
+    if(toPush['shortcuts'][url] == null){
+      toPush['shortcuts'][url] = {}
+  }
+    
+    if(toPush['shortcuts'][url][shortcut] == undefined){
+      toPush['shortcuts'][url][shortcut] = []
+    }
+    toPush['shortcuts'][url][shortcut].unshift(getDateTimeString());
+    
+
+
+}
+
+
 
 function saveClickLocal(element,type) {
 
-  console.log(element,type);
 
    if(toPush['clicks'] == null){
       toPush['clicks'] = {}
@@ -160,43 +180,13 @@ function triggerWithE(){
   "4": "+",
 }
 
-   // console.log('pushedVotes',jsonString(pushedVotes))
-   // console.log('votes',jsonString(votes))
 
 
-    // console.log('databaseJson:',jsonString(databaseJson))
   
 }
 
 function addDataToDatabaseJson(databaseJson){
 
-  // databaseJson = {}  ////////////////////////////////////////////////////////////////////
-//   console.log('toPushOG:',toPush)
-
-//   toPush = {
-//   "uniqueUser": true,
-//   "browser": true,
-//   "clicks": {
-//     "file:///C:/Users/krott/Documents/[Github]/LeanderZiehm.github.io/Exercise.html": {
-//       "tipButton": [
-//         "29/04/2024, 10:38:52 am"
-//       ],
-//       "solutionButton": [
-//         "29/04/2024, 10:38:52 am"
-//       ]
-//     }
-//   }
-// }
-
-
-
-
-
-
-  console.log('toPush',toPush)
-
-  // console.log('databaseJson1',databaseJson)
-    
     if(toPush['uniqueUser']){
         if(databaseJson['uniqueUsers'] == null){
         databaseJson['uniqueUsers'] = 0;
@@ -219,15 +209,18 @@ function addDataToDatabaseJson(databaseJson){
           databaseJson['views'] = {}
       }
 
-         if(databaseJson['clicks'] == null){
+    if(databaseJson['clicks'] == null){
           databaseJson['clicks'] = {}
     }
 
+    if(databaseJson['shortcuts'] == null){
+          databaseJson['shortcuts'] = {}
+    }
 
 
     merge(databaseJson['views'],toPush['views'])
     merge(databaseJson['clicks'],toPush['clicks'])
-   
+    merge(databaseJson['shortcuts'],toPush['shortcuts'])
 
     /////////////////////////////////////////////
 
@@ -254,30 +247,23 @@ function addDataToDatabaseJson(databaseJson){
       const isFirstVoterInThisExerciese = (databaseJson['votes'].hasOwnProperty(exercieseNumber) == false)
 
       if(isFirstVoterInThisExerciese){
-        console.log(exercieseNumber,"isNew")
         databaseJson['votes'][exercieseNumber] = {"+":0,"-":0};
         databaseJson['votes'][exercieseNumber][vote] += 1;
       }else{
-        // console.log(exercieseNumber,"exercise has already been voted on before.")
 
-        // console.log(pushedVotes)
-        // console.log(exercieseNumber)
 
         if (pushedVotes.hasOwnProperty(exercieseNumber)){
-                // console.log(exercieseNumber,"User already pushed their answer of this before")
 
                 let prevVote = pushedVotes[exercieseNumber];
 
 
                 if(vote !== prevVote){
-                  // console.log(exercieseNumber,"User has changed their vote from previous");
                   databaseJson['votes'][exercieseNumber][prevVote] -= 1; 
                   databaseJson['votes'][exercieseNumber][vote] += 1; 
                 }
 
         }else{
 
-          // console.log(exercieseNumber,"It's the first time this user votes for this.");
           databaseJson['votes'][exercieseNumber][vote] += 1; 
 
         } 
@@ -287,7 +273,6 @@ function addDataToDatabaseJson(databaseJson){
 
   set('databaseJsonVotes',databaseJson['votes']); // RENAME THIS TO GLOBAL VOTES!!!!!!
 
-  console.log('databaseJson2:',jsonString(databaseJson))
   return databaseJson
 }
 
@@ -306,11 +291,9 @@ function get2(getName,keys,defaultValue){
   if(isList == false){
     keys = [keys]
   }
-   // console.log("keys:",keys)
 
   const json = get(getName,{});
 
-  // console.log("get:",json)
 
   let currentLayer = json;
 
@@ -318,7 +301,6 @@ function get2(getName,keys,defaultValue){
 
     key = keys[index];
 
-    // console.log("key:",key);
 
     if(currentLayer.hasOwnProperty(key)){
 
@@ -341,11 +323,10 @@ function merge(jsonMain,jsonToAdd) {
             if (!jsonMain.hasOwnProperty(key)) {
                 // If the key doesn't exist in jsonMain, add it with the same type as in jsonToAdd
                 jsonMain[key] = jsonToAdd[key];
-                console.log("add",key, "with value",jsonToAdd[key])
             } else {
                 // If the key exists in jsonMain, but the types don't match, don't merge
                 if (typeof jsonMain[key] !== typeof jsonToAdd[key]) {
-                    console.error(`Type mismatch for key "${key}". Skipping merge.`);
+                    // console.error(`Type mismatch for key "${key}". Skipping merge.`);
                     continue;
                 }
                 // If the types match, merge recursively for nested objects or arrays
@@ -358,7 +339,6 @@ function merge(jsonMain,jsonToAdd) {
                 } else {
                     // For non-object types, overwrite with the value from jsonToAdd
                     jsonMain[key] = jsonToAdd[key];
-                    console.log("overwriting",key, "with value",jsonToAdd[key])
                 }
             }
         }
@@ -377,22 +357,13 @@ function checkIfItsTimeToSyncUserData() {
   var lastSyncTime = localStorage.getItem('lastSyncTime');
   const milliseconds = (currentTime - lastSyncTime)
   if (!lastSyncTime || milliseconds > syncIntervalMillisec) { 
-      console.log('Syncing data with github...');
       saveDataToGithub();
   
       localStorage.setItem('lastSyncTime', currentTime);
   } else {
-      console.log('No need to sync yet. Milliseconds left: ' + (syncIntervalMillisec - milliseconds)) ;
   }
 }
 
-
-async function getJsonDatabaseAsync(){
-    const fileInfo = await getGithubFileInfo();
-    const stringOfJsonDatabase = atob(fileInfo.content);
-    const jsonData = JSON.parse(stringOfJsonDatabase);
-    return jsonData;
-}
 
 async function saveDataToGithub(){
     const fileInfo = await getGithubFileInfo();
@@ -438,10 +409,6 @@ async function saveJsonToGithub(jsonToSave,sha) {
 
     // jsonToSave = {}
     // sha = '3'
-    // console.log('sha',sha);
-    // console.log('sha:',sha)
-    console.log(jsonString(jsonToSave),jsonToSave);
-      // console.log("SAVE");
     
   const dateString = getDateTimeString();
   const commitMessage = `${dateString}`;
@@ -460,21 +427,23 @@ async function saveJsonToGithub(jsonToSave,sha) {
     onSuccessfullPush();
     
   }else{
-    console.log("ERROR:"+finalResponse.status);
   }
 }catch(e){
-      console.log("ERROR:"+e);
       console.log("couldn't push to github. trying again in "+syncIntervalMillisec)
       setTimeout(checkIfItsTimeToSyncUserData, syncIntervalMillisec);
       }
 }
-///////// Dev
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'e') {
-        console.log('E');
-        triggerWithE();
-    }
-});
+
+
+
+
+//////////////////////////////////// Dev
+
+//   document.addEventListener('keydown', function(event) {
+//     if (event.key === 'e') {
+//         triggerWithE();
+//     }
+// });
 
 
 
@@ -496,7 +465,6 @@ function getDateTimeString() {
 }
 
 function parseDateString(dateString){
-  // console.log(dateString);
   const dateComponents = dateString.split(/[\/\s,:]+/); // Splitting by "/", ":", " ", ","
   const day = parseInt(dateComponents[0], 10);
   const month = parseInt(dateComponents[1], 10) - 1; // Months are zero-indexed
@@ -542,7 +510,6 @@ function get(key,defaultValue=1){
       }else if(defaultValueIsNumber){
           return parseInt(value);
       }else if(json || defaultValueIsArray || defaultValueIsObject ){
-              // console.log(value)
               return JSON.parse(value);
       }else{
               return value;

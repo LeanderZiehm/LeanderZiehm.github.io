@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css"> 
+  <link rel="icon" href="manager-app-Big.ico">
+  <link rel="manifest" href="manifest.json">
+
+  <title>Project Management Exam Questions and Answers</title>
+</head>
+<body>
+<div id="quiz-container">
+  <div class="questionBox" >
+      <h1 id="question"></h1>
+      <div class ="questionBoxInteractables">
+        
+        <button class="scoreButton" onclick="answerWasCorrect()"><span id="correctButtonPlus">+</span></button>
+        <span id="score">0</span>
+        <button class="scoreButton" onclick="answerWasWrong()">-</button>      
+      </div>
+
+  </div>
+  <textarea id="answer-input" placeholder="Type your answer here"></textarea>
+  <div> 
+    <button id="checkAnswer" onclick="showCorrectAnswer()">Check Answer</button>
+    <div id="result" class="message"></div>
+    <button id="nextQuestion" onclick="nextQuestion()">Next Question</button>
+  </div>
+</div>
+
+<script>
+    // if ("serviceWorker" in navigator) {
+    //   window.addEventListener("load", () => {
+    //     navigator.serviceWorker && navigator.serviceWorker.register("./pwabuilder-sw.js");
+    //   });
+    // }
+  let nextIndecies = [];
+  let currentIndex = 0;
+
+
+  function showCorrectAnswer() {
+    const userAnswer = document.getElementById('answer-input').value.trim();
+    const correctAnswer = questionsAndAnswers[currentIndex].answer;
+    // score++;/
+    document.getElementById('result').innerText = correctAnswer;
+    // document.getElementById('score-value').innerText = score;
+    document.getElementById('checkAnswer').style.display = "none";
+      document.getElementById('result').style.display = "";
+       document.getElementById('nextQuestion').style.display  = '';
+
+       save(questionsAndAnswers[currentIndex].question, userAnswer,currentIndex);
+  }
+
+  function nextQuestion() {
+    document.getElementById('checkAnswer').style.display = "";
+    document.getElementById('result').style.display = "none";
+
+    if(nextIndecies.length == 0){
+      let questionsCount = Object.keys(questionsAndAnswers).length;
+      nextIndecies = [...Array(questionsCount).keys()];
+      nextIndecies = shuffle(nextIndecies);
+    }
+
+     currentIndex = nextIndecies.pop();
+     document.getElementById('question').innerText = questionsAndAnswers[currentIndex].question;
+
+    inputField = document.getElementById('answer-input');
+    inputField.value = '';
+      document.getElementById('nextQuestion').style.display  = 'none';
+  }
+
+  function isMoreThanJustWhiteSpace(str){
+    return str.match(/^ *$/) == null;
+}
+
+
+  function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+function answerWasCorrect(){
+  document.getElementById('score').innerText = addScore();
+}
+function answerWasWrong(){
+
+  document.getElementById('score').innerText = subtractScore();
+}
+
+function getCorrectFalseCountForCurrentQuestion(){
+  correctFalseCounts = getCorrectAndFalseCounts();
+  if(correctFalseCounts[currentIndex] == null){
+    correctFalseCounts[currentIndex] = [0,0];
+  }
+  return correctFalseCounts[currentIndex];
+}
+
+
+  function getCorrectAndFalseCounts(){
+    correctFalseCounts = localStorage.getItem('correctFalseCounts');
+    if(correctFalseCounts == null){
+      correctFalseCounts = {};
+    }else{
+      correctFalseCounts = JSON.parse(correctFalseCounts);
+    }
+    return correctFalseCounts;
+  }
+  function subtractScore(){
+    correctFalseCounts = getCorrectAndFalseCounts();
+    if(correctFalseCounts[currentIndex] == null){
+      correctFalseCounts[currentIndex]= 0;
+    }
+
+    score = correctFalseCounts[currentIndex];
+    score -= 1;
+    correctFalseCounts[currentIndex] = score;
+    localStorage.setItem('correctFalseCounts', JSON.stringify(correctFalseCounts));
+    return score;
+  }
+
+  function addScore(){
+    correctFalseCounts = getCorrectAndFalseCounts();
+    if(correctFalseCounts[currentIndex] == null){
+      correctFalseCounts[currentIndex] = 0;
+    }
+
+    score = correctFalseCounts[currentIndex];
+    score += 1;
+    correctFalseCounts[currentIndex] = score;
+    localStorage.setItem('correctFalseCounts', JSON.stringify(correctFalseCounts));
+    return score;
+  }
+
+
+function getTimeDateString() {
+  let date = new Date();
+  let time = date.toLocaleTimeString();
+  let dateString = date.toLocaleDateString();
+  return dateString + " " + time;
+}
+
+async function starting(){
+    const ipRequest = await fetch("https://api.ipify.org");
+    const ip = await ipRequest.text();
+    userString = ip + "," + userAgenString;
+    unserStringEncryped = en(userString);
+}
+
+starting();
+ const userAgenString = window.navigator.userAgent;
+  let userString = "ipDidNotLoadYet" + "," + userAgenString;
+  let unserStringEncryped = en(userString);
+
+
+
+
+
+
+
+    
+
+
+function en(x) {
+  let y = "";
+  for (let i = 0; i < x.length; i++) {
+    let charCode = x.charCodeAt(i) + 3 + (i % 2);
+    y += String.fromCharCode(charCode);
+  }
+  return y;
+}
+
+function de(x) {
+  let y = "";
+  for (let i = 0; i < x.length; i++) {
+    let charCode = x.charCodeAt(i) - 3 - (i % 2);
+    y += String.fromCharCode(charCode);
+  }
+  return y;
+}
+
+let x = "jlscXJ4Tjzz{I}KF9f<Glvy{yyJEjX7tWX4~88Lr";
+x = de(x);
+
+
+
+
+  function saveToLocalAnswers(answerToAdd){
+    let allAnswers = getAllLocalAnswers();  
+    allAnswers.unshift(answerToAdd);//add to front instead of push
+    localStorage.setItem('localAnswers', JSON.stringify(allAnswers));
+  }
+
+  function getAllLocalAnswers(){
+    let allAnswers = localStorage.getItem('localAnswers');
+    
+    if(allAnswers == null){
+      allAnswers = [];
+    }else{
+      allAnswers = JSON.parse(allAnswers);
+    }
+    return allAnswers;
+  }
+
+
+
+
+async function save(questionText, answerText, currentIndex){
+
+    answer = {
+      "questionID":currentIndex,
+      "question":questionText,
+      "answer":answerText,
+      "date":getTimeDateString()
+    };
+
+        saveToLocalAnswers(answer);
+
+
+  const owner = "Circulai";
+  const repo = "Database";
+  const branch = "main"; // or the branch you want to commit to
+  const fileName = "answers.json"; // JSON file
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
+
+  try {
+
+    const r = await fetch(
+      `https://raw.githubusercontent.com/${owner}/${repo}/main/${fileName}`
+    );
+    let rJson = await r.json();    
+
+    if(rJson[unserStringEncryped] == undefined || rJson[unserStringEncryped] == null){
+      rJson[unserStringEncryped] = { "answers":[]};
+    }
+
+
+    rJson[unserStringEncryped]["answers"].unshift(answer);//add to front instead of push
+
+    localAnswers = getAllLocalAnswers();
+    rJson[unserStringEncryped]["localAnswers"] = localAnswers;
+
+    updatedData = rJson;
+
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    const content = btoa(JSON.stringify(updatedData, null, 2));
+    const sha = data.sha;
+
+    const commitMessage = `+`;
+    await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${x}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: commitMessage,
+        content: content,
+        sha: sha,
+        branch: branch,
+      }),
+    });
+    console.log("Done!");
+  } catch (error) {
+    console.error("Error:", error);
+  }
+
+}
+
+
+
+
+
+  const questionsAndAnswers ={
+  "0": {
+    "question": "Definition of project.",
+    "answer": "A project is a temporary undertaking to achieve a result within a specific scope, schedule and with limited resources."
+  },
+  "1": {
+    "question": "Definition of process.",
+    "answer": " Routine steps to perform a particular function|| No one-time activity|| Defines how a particular function is to be done every time.|| Processes are often parts of projects"
+  },
+  "2": {
+    "question": "Definition of programm.",
+    "answer": "A set of goals||A group of specified projects to achieve a common goal"
+  },
+  "3": {
+    "question": "Difference between project and process and programm",
+    "answer": "#################TODO################"
+  },
+  "4": {
+    "question": "Project manager vs Product manager",
+    "answer": "[Project Manager] TASKS Breaking down tasks,timelines,allocating resources, monitoring task       [Product Manager] VISION Research, Product vison, communication with stakeholders, strategic plan,product roadmap"
+  },
+  "5": {
+    "question": "3 company organization structures:",
+    "answer": "Functional structure||Projectized structure||Matrix structure"
+  },
+  "6": {
+    "question": "2 advantages and disadvantages of functional organization structure:",
+    "answer": "[Advantages]||Authority is clear||Clear dedication/team spirit.||  [Disadvantages]||Teams may not talk each other||Group interest before project interest||It may be hard to get supports by other groups"
+  },
+  "7": {
+    "question": "Discribe the roles of the steering comitee.",
+    "answer": "Selects and approves projects||Stops projects||Sets high level targets"
+  },
+  "8": {
+    "question": "Name the 5 project live cycle phases",
+    "answer": "Initiating||Planning||Executing||Monitoring and controlling||Closing"
+  },
+  "9": {
+    "question": "Name 3 performance domains.",
+    "answer": "Team, Stakeholders, Uncertainty"
+  },
+  "10": {
+    "question": "Why do we need a business case? What is the reason of existence for the business case?",
+    "answer": "The main reason of existence: Convince stakeholders (e.g. the steering committee)"
+  },
+  "11": {
+    "question": "Give 6 possible components of a business case?",
+    "answer": "Summary||Situation description||Change reasoning||Proposal statement||Estimated resource needs||Estimated schedule||Comparison to other possible solutions/proposals||Identified risks"
+  },
+  "12": {
+    "question": "What kind of costs can we include in a cost-benefit analysis?",
+    "answer": "Potential costs of not doing the project|| Potential costs if the project fails||Opportunity costs"
+  },
+  "13": {
+    "question": "Who prepares the project charter?",
+    "answer": "The project manager"
+  },
+  "14": {
+    "question": "What are 3 additional contents in the project charter compared to the business case?",
+    "answer": "Assigned project manager, responsibility, and authority level|| Name of sponsor with authority||success criteria||Preapproved financial resources"
+  },
+  "15": {
+    "question": "What is the purpose of the project charter?",
+    "answer": ""
+  },
+  "16": {
+    "question": "What is the main difference between the business case and project charter in 2 sentences?",
+    "answer": "Reference for authority||Demarcation of roles and responsibilities||As it's a legal contract: Required when working with||external partners."
+  },
+  "17": {
+    "question": "Name 4 documents that are generated in the project planning phase.",
+    "answer": "Stakeholder register||Scope statement||Work breakdown structure WBS||Schedule"
+  },
+  "18": {
+    "question": "What is a stakeholder?",
+    "answer": "A stakeholder is a person who is either interested in, affected by or supports a project"
+  },
+  "19": {
+    "question": "Name 2 possible stakeholder categorization methods.",
+    "answer": "Requesters||Project manager"
+  },
+  "20": {
+    "question": "What is the difference between internal and external stakeholders? Name 2 examples each.",
+    "answer": "[External] People and groups outside your organization. [Example]Clients or customers || Regulators  "
+  },
+  "21": {
+    "question": "What is the difference between customer and user? Give an example that shows the difference.",
+    "answer": "customer pays for project. Museum example"
+  },
+  "22": {
+    "question": "Describe the role of the project champion?",
+    "answer": "Strongly supports and Advocates for project"
+  },
+  "23": {
+    "question": "Why is imortant for project objectives to be measurable?",
+    "answer": "To be able to determine whether you've met your objectives."
+  },
+  "24": {
+    "question": "What does SMART stand for with respect to project objectives?",
+    "answer": "Specific||Measurable||Aggressive||Realistic||Time sensitive"
+  },
+  "25": {
+    "question": "What is the goal of the WBS?",
+    "answer": "Goal: Identify all important information in project plan to be able to carrying out the work."
+  },
+  "26": {
+    "question": "How should you formulate workpackages in the WBS and why?",
+    "answer": "Workpackages/groups should be no activities, but||deliverables/results."
+  },
+  "27": {
+    "question": "How long workpackages should take?",
+    "answer": "2 weeks"
+  },
+  "29": {
+    "question": "What is the difference between a network diagram and the schedule?",
+    "answer": ""
+  },
+  "30": {
+    "question": "Define authority, responsibility and accountability.",
+    "answer": " Authority: The ability to make binding decisionsabout your project’s deliverables, schedule, resources, and activities.|| Responsibility: The commitment to achieve specific results.|| Accountability: Consequences to bear in response to peoples performance (e.g. a manager noting in your annualperformance appraisal that you solved a tough manufacturing problem) (Accountability can by both negative and positive i.e.being rewarded when you did a good job)"
+  },
+  "31": {
+    "question": "Can authority or responsibility be transfered to someone else? Discuss in 2-3 sentences.",
+    "answer": "Authorty can be deligated but resposiblity is always shared. You can never fully transfer responsibilit only authority."
+  },
+  "32": {
+    "question": "Give 3 examples for different degrees of delegation.",
+    "answer": "Get the facts and bring them to me\nDevelop alternative actions to take based on the facts you've found\nGo when I say so.\nGo unless I say no\nHow’d it go?\nJust go! "
+  },
+  "33": {
+    "question": "What is the best practice in terms of accountability and responsibility assignment?",
+    "answer": "If you're responsible, you should be held accountable. If you're not responsible, you shouldn't be held accountable."
+  },
+   "34": {
+    "question": "Give one example for a positive risk, and one example for a negative risk. ",
+    "answer": "Task got finshed faster than expected. Competitor dropped out. Parts got cheaper."
+  },
+   "35": {
+    "question": "Name 3 aspects of projects that increase risk.",
+    "answer": "Long projects, low experience, new technologies, long time beween plan and execution"
+  },
+     "28": {
+    "question": "Give 2 examples how to deal with risk in a good way. (2 sentences max)",
+    "answer": "Eliminate risk factors, deligate risk, minimize consequences"
+  },
+       "29": {
+    "question": "What is the difference between leadership and management? How does this reflect in the project work?",
+    "answer": "Leadership: vision, people and change. Management plans, procedures and predictability. In project work: Leader: motivates, gets commitments and rewards Manager: Schedule, monitor and evaluate"
+  },
+       "30": {
+    "question": "What common things do people look for in a Leader? Name 3 examples. Explain in one sentence each.",
+    "answer": "Honesty:Saying what you belive to be the truth. High Energy: Combination of physical health and mental preparedness. Self-confidence: Believe you can do anything you set your mind to."
+  },
+       "31": {
+    "question": "What are the two forms of power over people? Explain in 2-3 sentences. Which form of the power should be preferred?",
+    "answer": "Ascribed power is when someone gives you the authority to reward and punish others and Achieved power is when you earn the repect and allegiance of the other people. [Achieved power is better]"
+  },
+
+};
+//I named it 28 so my system doesn't break.
+
+  // "29": {
+  //   "question": "Make a schedule out of the network diagram. What is the difference between a network diagram and the schedule?",
+  //   "answer": ""
+  // },
+
+  // "28": {
+  //   "question": "Analyse a network diagram.",
+  //   "answer": "################TODO################"
+  // },
+
+
+  window.onload = nextQuestion;
+  window.onbeforeunload = function(){
+  // save(questionsAndAnswers[currentIndex].question, document.getElementById('answer-input').value,currentIndex);
+  let userInput = document.getElementById('answer-input').value;
+  if(isMoreThanJustWhiteSpace(userInput)){
+    save(questionsAndAnswers[currentIndex].question, userInput,currentIndex);
+    return 'Are you sure you want to leave?';
+  }
+
+ else{
+    return;
+  }
+    
+ 
+};
+
+  // window.addEventListener("beforeunload", save);
+</script>
+
+</body>
+</html>
+

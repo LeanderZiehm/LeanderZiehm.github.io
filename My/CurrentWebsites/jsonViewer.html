@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Viewer</title>
+<style>
+  .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    margin: 2px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+
+  .collapsible:hover {
+    background-color: #555;
+  }
+
+  .content {
+    display: none;
+    padding-left: 20px;
+  }
+
+  #copyButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div id="jsonContent"></div>
+<button id="copyButton">Copy JSON Text to Clipboard</button>
+
+<script>
+  var jsonData = {
+    "name": "John",
+    "age": 30,
+    "city": "New York",
+    "children": [
+      { "name": "Alice", "age": 5 },
+      { "name": "Bob", "age": 8 }
+    ]
+  };
+
+let jsonToSave;
+function main(){
+
+  const savedJson = localStorage.getItem("savedJson");
+
+  if(savedJson){
+    jsonData = JSON.parse(savedJson);
+  }
+  renderJson(jsonData);
+
+  window.addEventListener("beforeunload",function(){localStorage.setItem("savedJson",JSON.stringify(jsonToSave))});
+  // window.addEventListener("beforeunload",function(){localStorage.setItem("savedJson",JSON.stringify({"hello":"world"}))});
+}
+
+
+  function renderData(data, container) {
+    var keys = Object.keys(data);
+    keys.forEach(function(key) {
+      var value = data[key];
+      var keyElement = document.createElement('div');
+      keyElement.innerHTML = '<button class="collapsible">' + key + '</button>';
+      var valueElement = document.createElement('div');
+      valueElement.className = 'content';
+
+      if (typeof value === 'object' && value !== null) {
+        renderData(value, valueElement);
+      } else {
+        valueElement.innerHTML = JSON.stringify(value);
+      }
+
+      keyElement.appendChild(valueElement);
+      container.appendChild(keyElement);
+    });
+  }
+
+
+
+    function renderJson(json){
+      jsonToSave = json;
+      var container = document.getElementById('jsonContent');
+      container.innerHTML = ''
+      renderData(json, container);
+
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            // console.log(this)
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      
+
+      coll[i].classList.toggle("active");
+      coll[i].nextElementSibling.style.display = "block";
+
+      }
+  }
+
+
+
+
+
+  document.getElementById('copyButton').addEventListener('click', function() {
+     navigator.clipboard.readText()
+        .then(text => {
+            try {
+                let clipboardJsonData = JSON.parse(text);
+                renderJson(clipboardJsonData);
+
+            } catch (error) {
+                console.error('Error parsing clipboard text:', error);
+            }
+        })
+        .catch(err => {
+            console.error('Failed to read clipboard contents:', err);
+        });
+  });
+
+
+main();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* Apply some basic styling to the whole page */
+body {
+  user-select: none;
+  font-family: Arial, sans-serif;
+  font-size:2vw;
+  color: #ffffff;
+  background-color: #3f62f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+  text-align: center;
+}
+/* #quiz-container {
+  background-color: rgba(0, 0, 0, 0.099);
+} */
+
+.questionBox {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.099);
+  border-radius: 20px;
+  padding: 20px 60px;
+  /* margin: 10px;
+  width: 50%; */
+  height: 60%;
+}
+
+.questionBoxInteractables {
+  position: absolute;
+  /* right: 50%; */
+  right: 0;
+  bottom: 0;
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  /* background-color: rgba(0, 0, 0, 0.099); */
+  /* grid-template-rows: 1fr 1fr; */
+  /* grid-gap: 50%; */
+}
+
+.scoreButton {
+  /* position: relative; */
+  border-radius: 50px;
+  padding: 0;
+  margin: 0;
+  width: 30px;
+  height: 30px;
+  /* text-align: center; */
+}
+/* //move that little bitch up */
+#correctButtonPlus {
+  /* transform: translateY(100px); */
+  /* transform: translateX(100px); */
+  /* background-color: red; */
+}
+
+button {
+  /*font-size: 10vw;*/
+  padding: 5px;
+  font-size: 2vw;
+  background-color: #349beb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#answer-input {
+  width: 100%;
+  /* padding: 5px; */
+  /* margin-bottom: 10px; */
+
+  /* padding: 10px; */
+  font-size: 18px;
+  color: black;
+  background-color: white;
+
+  /* border: none; */
+  /* cursor: pointer; */
+  border-radius: 5px;
+}
+
+.top-bar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  /* margin: 5px; */
+}
