@@ -25,6 +25,8 @@ async function main(){
 
   if(shouldSyncToGithub){
       checkIfItsTimeToSyncUserData();
+  }else{
+    console.log('.');
   }
 }
 
@@ -361,6 +363,7 @@ function checkIfItsTimeToSyncUserData() {
   
       localStorage.setItem('lastSyncTime', currentTime);
   } else {
+    console.log('syncLeft:',milliseconds);
   }
 }
 

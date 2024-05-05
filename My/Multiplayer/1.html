@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea Ranking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sort-options {
+            margin-top: 10px;
+        }
+
+        .idea-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .idea-card h2 {
+            margin-top: 0;
+        }
+
+        .idea-card p {
+            margin: 0;
+        }
+
+        .upvote-btn {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .comment-btn {
+            background-color: #008CBA; /* Blue */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comment-section {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .comment-section textarea {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .comment-section button {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Idea Ranking</h1>
+        <div class="sort-options">
+            <label for="sort">Sort by:</label>
+            <select id="sort">
+                <option value="last7days">Top of Last 7 Days</option>
+                <option value="last30days">Top of Last 30 Days</option>
+            </select>
+        </div>
+    </header>
+    <main id="idea-list">
+        <!-- Idea cards will be dynamically generated here -->
+    </main>
+
+    <script>
+        // Sample data for demonstration
+        const ideas = [
+            { id: 1, title: "Idea 1", votes: 10, comments: ["Great idea!", "Interesting."]},
+            { id: 2, title: "Idea 2", votes: 15, comments: ["I like it!"]},
+            { id: 3, title: "Idea 3", votes: 5, comments: []},
+        ];
+
+        // Function to render idea cards
+        function renderIdeas(ideas) {
+            const ideaList = document.getElementById("idea-list");
+            ideaList.innerHTML = "";
+            ideas.forEach(idea => {
+                const ideaCard = document.createElement("div");
+                ideaCard.classList.add("idea-card");
+                ideaCard.innerHTML = `
+                    <h2>${idea.title}</h2>
+                    <p>Votes: ${idea.votes}</p>
+                    <button class="upvote-btn" data-id="${idea.id}">Upvote</button>
+                    <button class="comment-btn" data-id="${idea.id}">Comment</button>
+                    <div class="comment-section">
+                        <textarea placeholder="Add your comment"></textarea>
+                        <button>Add Comment</button>
+                    </div>
+                `;
+                ideaList.appendChild(ideaCard);
+
+                // Event listener for upvote button
+                ideaCard.querySelector(".upvote-btn").addEventListener("click", () => {
+                    // Increment votes
+                    idea.votes++;
+                    // Re-render ideas
+                    renderIdeas(ideas);
+                });
+
+                // Event listener for comment button
+                ideaCard.querySelector(".comment-btn").addEventListener("click", () => {
+                    // Toggle comment section visibility
+                    const commentSection = ideaCard.querySelector(".comment-section");
+                    commentSection.style.display = commentSection.style.display === "none" ? "block" : "none";
+                });
+            });
+        }
+
+        // Initial render
+        renderIdeas(ideas);
+
+        // Event listener for sort options
+        document.getElementById("sort").addEventListener("change", () => {
+            const sortBy = document.getElementById("sort").value;
+            if (sortBy === "last7days") {
+                // Sort by last 7 days
+                // You can implement sorting logic here
+                // For demonstration, let's just sort by votes in descending order
+                ideas.sort((a, b) => b.votes - a.votes);
+            } else if (sortBy === "last30days") {
+                // Sort by last 30 days
+                // You can implement sorting logic here
+                // For demonstration, let's just sort by votes in descending order
+                ideas.sort((a, b) => b.votes - a.votes);
+            }
+            // Re-render ideas after sorting
+            renderIdeas(ideas);
+        });
+    </script>
+</body>
+</html>
