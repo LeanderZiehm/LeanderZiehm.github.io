@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event List</title>
+<script src="eventsJson.js"></script>
+<script src="../test.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    .filters {
+        width: 200px;
+        /* background-color: rgba(0, 0, 0, 0.05); */
+        padding: 20px;
+        height: 95vh;
+    }
+
+   
+
+    .filters h2 {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        /* This adds a solid black line as the separator */
+    }
+
+    .filters label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+
+    .filters input[type="checkbox"],
+    .filters select {
+        margin-bottom: 10px;
+    }
+
+    button {
+        border: none;
+        border-radius: 50px;
+        background-color: rgba(100, 100, 100, 0.5);
+        /*color: rgba(255,255,255,1);*/
+        color: rgba(0, 0, 0, 1);
+        padding: 3px 10px;
+    }
+</style>
+
+    <div class="container">
+        <div class="filters">
+            <h2>Filters</h2>
+            <label><input type="checkbox" name="free">Free</label>
+            <label><input type="checkbox" name="paid">Paid</label>
+
+
+            
+            <label>Date:<input type="date" name="date"></label>
+            <label>
+                Category:
+                <select name="category">
+                    <option value="">Select</option>
+                    <option value="education">Education</option>
+                    <option value="job">Job</option>
+                    <option value="sports">Sports</option>
+                    <option value="music">Music</option>
+                    <option value="international">International</option>
+                </select>
+
+            </label>
+            <label>Languages</label>            
+            <label><input type="checkbox" name="en">English</label>
+            <label><input type="checkbox" name="de">German</label>
+
+            <label>Type</label>            
+            <label><input type="checkbox" name="en">In person</label>
+            <label><input type="checkbox" name="de">Online</label>
+
+        </div>
+
+        <style>
+
+    #header{
+        text-align: center;
+        /* margin: 20px; */
+    }
+
+     #eventsContainer {
+        background-color: rgb(0, 0, 0, 0.05);
+        border: none;
+        flex-grow: 1;
+        /* padding: 20px; */
+        margin: 0px;
+        padding: 0px;
+    }
+    #events{
+        /* margin: 20px; */
+        /* padding: 15px; */
+         /* background-color: rgba(255, 255, 255, 1); */
+    }
+
+    .event {
+        background-color: rgba(255, 255, 255, 1);
+        /* margin-bottom: 20px; */
+        padding: 10px;
+        margin: 15px;
+        border-radius: 20px;
+
+        position: relative;
+       
+    }
+
+    .details-container{
+        margin-left: 20px;
+         /* put items in middle of div vertically */
+        /* display: flex;
+        flex-direction: column;
+        justify-content: center;         1*/ 
+    }
+
+    .details-container *{
+        padding: 2px;       
+    }
+
+    .event-title{
+        margin: 20px 0px 10px 0px;
+        /* padding-bottom: 10px;   1*/
+        font-size: 24px;
+        font-weight: bold;
+    }
+   
+    .event-header {
+        display: flex;
+    }
+    
+    #thumbnail {
+        border-radius: 20px;
+        width: 200px; 
+        height: 200px;
+    }
+
+
+
+    .event-title {
+        font-size: 18px;
+        font-weight: bold;
+        /* background-color: yellow; */
+    }
+
+    .event-descriptionShort {
+        font-size: 14px;
+        /* background-color: lightblue; */
+    }
+   
+
+
+
+    .event-date {
+        /* transform: translate(0px, 15px); */
+    
+    }
+
+    
+    .event-actions {
+        /* background-color: red; */
+        position: absolute;
+        right: 40px;
+        top: 40%;
+        /*margin-top: 20px;*/
+        /* transform: translateY(15px); */
+    }
+    .event-actions * img { 
+         width: 30px;
+        height: 30px;
+   }
+
+     /* .like img,
+    .share img {
+        width: 30px;
+        height: 30px;
+    } */
+
+    .share,
+    .like {
+        background-color: transparent;
+        padding: 10px;
+
+    }
+    .like{
+        margin-right: 20px;
+    }
+
+    #likes {
+        font-size: 30px;
+    }
+
+
+
+    .clickable {
+        cursor: pointer;
+    }
+    .clickable:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+
+    #addEventBtn {
+        background-color: rgb(138, 43, 226, 1);
+        color: rgba(255, 255, 255, 1);
+        padding: 10px;
+        margin-left: 550px;
+        font-size: 20px;
+        /* font-weight: bold; */
+    }
+
+   
+    
+
+
+
+
+
+        </style>
+
+
+        <div id="eventsContainer">
+            <h2 id="header" >Events Deggendorf</h2>
+            <div id="events"></div>
+            <button id="addEventBtn">+Add event </button>
+        </div>
+    </div>
+
+    <script>
+function createEventHTML(event,index) {
+    console.log(index);
+    return `
+        <div class="event" id="${index}">
+            <div class="event-header">
+                 <img class="clickable"  id="thumbnail" src="images/${event.imagePath}/${event.images[0]}" alt="img">
+                
+                <div class="details-container" >
+                    <div class="event-title">${event.name}</div>
+                    <div class="event-date">${event.date}</div>
+                    <div class="event-time">${event.time}</div>
+                    <div class="event-descriptionShort">${event.descriptionShort} </div>
+                    <div class="event-location">${event.location.name}</div>
+
+                </div>
+               
+                
+                <div class="event-actions">
+                    <span id="likes">1</span>
+                    <button class="like"><img src="images/icons/love.png" alt="Like"></button>
+                    <button class="share"><img src="images/icons/share.png" alt="Share"></button>
+                </div>
+         
+          
+              
+            </div>
+        </div>
+    `;
+}
+
+
+
+
+
+function main() {
+        
+        const events = document.getElementById("events");
+
+        for (let i = 0; i < 3; i++) { //example data repeat
+            var eventsHTML =  eventsJson.map((event, index) => createEventHTML(event, index)).join('');
+            events.innerHTML += eventsHTML;
+        }
+
+        //get all events as elements
+        const eventElements = document.querySelectorAll(".event");
+        //add click event to each event element for like and share
+        eventElements.forEach((element) => {
+            element.querySelector(".like").onclick = function () {
+                element.querySelector("#likes").innerHTML = parseInt(element.querySelector("#likes").innerHTML) + 1;
+            };
+            element.querySelector(".share").onclick = function () {
+                alert("Share");
+            };
+        });
+
+
+       
+        document.getElementById("addEventBtn").onclick = function () {
+            window.location.href = "Event.html?event=new";
+        };
+
+    //     document.getElementById("thumbnail").onclick = function () {
+    //     window.location.href = "Event.html?event=0";
+    // };
+    // for every clickable class elemenet get the id and add on click function to redirect to Event.html?event=id
+    document.querySelectorAll(".clickable").forEach((element) => {
+        element.onclick = function () {
+            window.location.href = "Event.html?event=" + element.parentElement.parentElement.id;
+        };
+    });
+
+
+     
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", main);
+
+    
+    </script>
+</body>
+</h

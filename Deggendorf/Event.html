@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Details</title>
+<script src="eventsJson.js"></script>
+<script src="../test.js" type="text/javascript" charset="utf-8"></script>
+<style>
+    body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+
+        button {
+            border: none;
+            border-radius: 50px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+           filter: brightness(96%); 
+        }
+
+        a{
+            color: #007bff;
+            text-decoration: none;
+        }
+
+    #container {
+        background-color: white;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+    }
+    #container *{
+        padding: 8px;
+    }
+
+        /* button:hover {
+            background-color: #0056b3;
+        } */
+
+        #backBtn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(222, 122, 0, 1);
+            border-radius: 10px;
+        }
+
+
+
+    #follow-button,#share-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+    
+
+    /* #follow-button:hover{
+        background-color: #0056b3;
+    } */
+
+    #event-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* margin-bottom: 20px; */
+    }
+
+    #event-name {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    #descriptionLong {
+        margin-bottom: 20px;
+        color: rgba(0, 0, 0, 1);
+    }
+
+
+    #event-images img {
+        max-width: 200px;
+        max-height: 200px;
+        margin-right: 10px;
+    }
+
+
+
+
+     #organizer-container {
+        border-radius: 20px;
+        background-color: rgba(0, 0, 0, 0.05);
+        /* width: fit-content; */
+        /* make conetnet centered  */
+        /* align-content: center; */
+        /* margin: 0 auto; */
+
+        padding: 20px;
+        display: flex;
+    }
+
+    #organizer-profile {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    #organizer-image {
+        /* width: 50px; */
+        height: 70px;
+        border-radius: 50%;
+        margin-right: 10px;
+
+        transform: translateY(12px);
+
+        filter: brightness(0);
+    }
+
+    #organizer-details {
+        font-size: 16px;
+    }
+
+    #images {
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+
+        /* position: absolute; */
+        /* top: 20%; */
+    }
+    #images * {
+        /* max-width: 200px; */
+        max-height: 200px;
+        border-radius: 20px;
+        user-select: none;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+    <button id="backBtn">Back</button>
+
+
+
+
+
+    <div id="container">
+        <div id="event-header">
+            <div id="event-name">Event Name</div>
+            <div>
+                <button id="follow-button">Follow</button>
+                <button id="share-button">Share</button>
+            </div>
+        </div>
+        <div id="images">
+                <img src="images/icons/upload.png" alt="img">
+        </div>
+        <!-- <div id="descriptionLong">Description of the event goes here. You can provide detailed information about the event.</div>
+        <div id="date">Date: 16.05.2024</div>
+        <div id="time">Time: 6PM/18Uhr</div>
+        <div id="type">Type: Hybrid</div>
+        <div id="location">Location: J007</div> -->
+        <div id="descriptionLong">Description:<textarea  id="descriptionLong-input"></textarea>
+        <div id="date">Date: <input type="date" id="date-input" ></div>
+        <div id="time">Time: <input type="time" id="time-input" ></div>
+        <div id="type">Type:
+            <select id="event-type" >
+                <option value="in-person">In-person</option>
+                <option value="virtual">Virtual</option>
+                <option value="hybrid" selected>Hybrid</option>
+            </select>
+        </div>
+        <div id="location">Location: <input type="text" id="location-input" s></div>
+
+        <div id="online-link">Online Link: <a href="https://www.youtube.com/watch?v=DlDgj5LRujE" target="_blank">https://www.youtube.com/watch?v=DlDgj5LRujE</a></div>
+
+    
+        <div id="organizer-container">
+            <img id="organizer-image" alt="img">
+                <div id="organizer-details">
+                    <div id="organizer-name">Von: Sign In</div>
+                    <div id="organizer-website">Website: Sign In</div>
+                    <div id="organizer-ratings" >Ratings: Sign In</div>
+                </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("backBtn").onclick = function() {
+    window.location.href = "Events.html";
+};
+
+            const queryParams = new URLSearchParams(window.location.search);
+            const eventParameter = queryParams.get('event');
+
+            if(eventParameter == 'new') {
+                document.getElementById('event-name').innerHTML = "New Event";
+            }else{
+                const eventIdParameter = queryParams.get('eventId');
+                const eventId = eventIdParameter ? parseInt(eventIdParameter) : 0;
+                var event = eventsJson[eventId];
+
+                const eventLanguage = event.language;
+
+                document.getElementById('event-name').innerHTML = event.name;
+                document.getElementById('organizer-image').src = "images" + '/' + event.imagePath + '/' + event.organizer.image;
+                document.getElementById('organizer-name').innerHTML = event.organizer.name;
+                document.getElementById('organizer-ratings').innerHTML = "Ratings: " + event.organizer.ratings;
+                document.getElementById('descriptionLong').innerHTML = event.descriptionLong[eventLanguage];
+                document.getElementById('date').innerHTML = "Date: " + event.date;
+                document.getElementById('time').innerHTML = "Time: " + event.time;
+                document.getElementById('type').innerHTML = "Type: " + event.type;
+                document.getElementById('location').innerHTML = "Location: " + event.location.name;
+                document.getElementById('online-link').innerHTML = "Online Link: " + "<a href='" + event.onlineLink + "' target='_blank'>" + event.onlineLink + "</a>";
+                document.getElementById('images').innerHTML = event.images.map(image => "<img src='images/" + event.imagePath + "/" + image + "' alt='img'>").join('');
+
+            }
+
+            document.getElementById('follow-button').onclick = function() {
+                alert("Follow");
+            };
+            document.getElementById('share-button').onclick = function() {
+                alert("Share");
+            };
+
+            
+
+
+            
+
+    </script>
+</body>
+
+</html>

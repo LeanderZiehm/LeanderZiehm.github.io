@@ -48,7 +48,8 @@ function checkIfIsNewUser(){
     if(needToIncrementNewUserCount === 'true'){
       set('needToIncrementNewUserCount','false');
       toPush['uniqueUser'] = true;
-      toPush['browser'] = true;
+      toPush['browser'] = window.navigator.userAgent;
+      toPush['newUserView'] = window.location.href+'  '+getDateTimeString()+'  '+window.navigator.userAgent;
     }
 }
 
@@ -202,8 +203,25 @@ function addDataToDatabaseJson(databaseJson){
         databaseJson['browsers'] = []
       }
 
-       databaseJson['browsers'].unshift(window.navigator.userAgent);
+       databaseJson['browsers'].unshift(toPush['browser']);
     }
+
+
+
+
+    if(toPush['newUserView']){
+
+      if(databaseJson['newUserView'] == null){
+        databaseJson['newUserView'] = []
+      }
+
+       databaseJson['newUserView'].unshift(toPush['newUserView']);
+    }
+
+
+
+
+ 
 
 
 
