@@ -4,8 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Event Details</title>
+
 <script src="eventsJson.js"></script>
 <script src="../test.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="icons/font-awesome5.15.4.all.min.css"/>
+
 <style>
     body {
             font-family: Arial, sans-serif;
@@ -148,10 +151,17 @@
         user-select: none;
         pointer-events: none;
     }
+    
+    i {
+
+        /* font-size: inherit; */
+        /* font-size: 50px; */
+        /* color: red; */
+    }
 </style>
 </head>
 <body>
-    <button id="backBtn">Back</button>
+    <button id="backBtn"><i class="fas fa-arrow-left"></i>Back</button>
 
 
 
@@ -161,8 +171,8 @@
         <div id="event-header">
             <div id="event-name">Event Name</div>
             <div>
-                <button id="follow-button">Follow</button>
-                <button id="share-button">Share</button>
+                <button id="follow-button"><i class="fab fa-twitter"></i>Follow</button>
+                <button id="share-button"><i class="fas fa-share"></i>Share</button>
             </div>
         </div>
         <div id="images">
@@ -173,9 +183,13 @@
         <div id="time">Time: 6PM/18Uhr</div>
         <div id="type">Type: Hybrid</div>
         <div id="location">Location: J007</div> -->
-        <div id="descriptionLong">Description:<textarea  id="descriptionLong-input"></textarea>
+        <div id="descriptionLong">Description:<textarea  id="descriptionLong-input"></textarea></div>
         <div id="date">Date: <input type="date" id="date-input" ></div>
         <div id="time">Time: <input type="time" id="time-input" ></div>
+        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Your%20Event%20Title&dates=20240501T080000Z/20240501T100000Z&details=Event%20Description%20Here&location=Event%20Location%20Here" target="_blank">
+            Add to Google Calendar
+        </a>
+
         <div id="type">Type:
             <select id="event-type" >
                 <option value="in-person">In-person</option>
@@ -196,7 +210,7 @@
                     <div id="organizer-ratings" >Ratings: Sign In</div>
                 </div>
         </div>
-    </div>
+ 
     <script>
         document.getElementById("backBtn").onclick = function() {
     window.location.href = "Events.html";

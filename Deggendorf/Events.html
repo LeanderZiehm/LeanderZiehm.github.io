@@ -22,7 +22,8 @@
         display: flex;
     }
 
-    .filters {
+    #filters {
+        /* position: fixed; */
         width: 200px;
         /* background-color: rgba(0, 0, 0, 0.05); */
         padding: 20px;
@@ -31,19 +32,20 @@
 
    
 
-    .filters h2 {
+    #filters h2 {
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-top: 20px;
         /* This adds a solid black line as the separator */
     }
 
-    .filters label {
+    #filters label {
         display: block;
         margin-bottom: 10px;
     }
 
 
-    .filters input[type="checkbox"],
-    .filters select {
+    #filters input[type="checkbox"],
+    #filters select {
         margin-bottom: 10px;
     }
 
@@ -55,10 +57,23 @@
         color: rgba(0, 0, 0, 1);
         padding: 3px 10px;
     }
+
+    #toggleCollapseFilters {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: rgb(115, 115, 200);
+        color: white;
+        font-weight: bold;
+        width: 30px;
+        height: 30px;
+        z-index: 1000;
+    }
 </style>
 
     <div class="container">
-        <div class="filters">
+        <button id="toggleCollapseFilters">X</button>
+        <div id="filters">
             <h2>Filters</h2>
             <label><input type="checkbox" name="free">Free</label>
             <label><input type="checkbox" name="paid">Paid</label>
@@ -102,11 +117,17 @@
         /* padding: 20px; */
         margin: 0px;
         padding: 0px;
+        /* position: relative; */
+           /* min-height: 100; */
+
+        /* background-color: red; */
+     
     }
     #events{
         /* margin: 20px; */
         /* padding: 15px; */
          /* background-color: rgba(255, 255, 255, 1); */
+         
     }
 
     .event {
@@ -218,9 +239,13 @@
         background-color: rgb(138, 43, 226, 1);
         color: rgba(255, 255, 255, 1);
         padding: 10px;
-        margin-left: 550px;
+        /* margin-left: 550px; */
         font-size: 20px;
-        /* font-weight: bold; */
+        /* position: absolute; */
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
    
@@ -276,10 +301,37 @@ function createEventHTML(event,index) {
 
 
 function main() {
+
+        document.getElementById("toggleCollapseFilters").onclick = function () {
+
+            const filters = document.getElementById("filters");
+            const filterToggleBtn = document.getElementById("toggleCollapseFilters");
+
+            const filtersCollapsed = filters.style.display === "none";
+
+            if (filtersCollapsed) {
+                filters.style.display = "block";
+                filterToggleBtn.innerHTML = "X";
+                
+            } else {
+                filters.style.display = "none";
+                filterToggleBtn.innerHTML = "+";
+            }
+
+            //set innerHTML of button to "+" or "X" depending on the state of the filters
+
+            // document.getElementById("filters").classList.toggle("collapsed");
+            // document.getElementById("filters").style.display = "none";
+
+        };
+
+    
+
+
         
         const events = document.getElementById("events");
 
-        for (let i = 0; i < 3; i++) { //example data repeat
+        for (let i = 0; i < 10; i++) { //example data repeat
             var eventsHTML =  eventsJson.map((event, index) => createEventHTML(event, index)).join('');
             events.innerHTML += eventsHTML;
         }
