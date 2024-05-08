@@ -38,6 +38,10 @@
         /* This adds a solid black line as the separator */
     }
 
+    select{
+        border-radius: 20px;
+    }
+
     #filters label {
         display: block;
         margin-bottom: 10px;
@@ -45,7 +49,7 @@
 
 
     #filters input[type="checkbox"],
-    #filters select {
+    #category {
         margin-bottom: 10px;
     }
 
@@ -75,16 +79,16 @@
         <button id="toggleCollapseFilters">X</button>
         <div id="filters">
             <h2>Filters</h2>
-            <label><input type="checkbox" name="free">Free</label>
-            <label><input type="checkbox" name="paid">Paid</label>
+            <label><input type="checkbox" id="free">Free</label>
+            <label><input type="checkbox" id="paid">Paid</label>
 
 
             
-            <label>Date:<input type="date" name="date"></label>
+            <label>Date:<input type="date" id="date"></label>
             <label>
                 Category:
-                <select name="category">
-                    <option value="">Select</option>
+                <select id="category">
+                    <option value="">Any Category</option>
                     <option value="education">Education</option>
                     <option value="job">Job</option>
                     <option value="sports">Sports</option>
@@ -94,12 +98,12 @@
 
             </label>
             <label>Languages</label>            
-            <label><input type="checkbox" name="en">English</label>
-            <label><input type="checkbox" name="de">German</label>
+            <label><input type="checkbox" id="en">English</label>
+            <label><input type="checkbox" id="de">German</label>
 
             <label>Type</label>            
-            <label><input type="checkbox" name="en">In person</label>
-            <label><input type="checkbox" name="de">Online</label>
+            <label><input type="checkbox" id="inPerson">In person</label>
+            <label><input type="checkbox" id="online">Online</label>
 
         </div>
 
