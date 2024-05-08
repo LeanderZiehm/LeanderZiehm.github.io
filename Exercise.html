@@ -407,10 +407,26 @@ button,{
       document.getElementById('description').innerHTML = insertBreakAfterPeriods(exercise.description);
       // document.getElementById('output').innerHTML = insertBreakAfterPeriods(exercise.output);
       document.getElementById('exerciseNumber').innerHTML =  "Exercise "+(exerciseIndex+1);
-      document.getElementById('tipButton').addEventListener('click',showTip);
-      document.getElementById('solutionButton').addEventListener('click',function(){ hideElementByID('solution',false);});
+      document.getElementById('tipButton').addEventListener('click',toggleTip);
+      document.getElementById('solutionButton').addEventListener('click',toggleSolution);
     }
 
+    function toggleHidden(id){
+      document.getElementById(id).classList.toggle('hidden');
+      // document.getElementById(id).classList.add('hidden');
+      // document.getElementById(id).classList.remove('hidden');
+    }
+
+    function toggleSolution(){
+
+      toggleHidden('solution');
+
+    }
+
+    function toggleTip(){
+       toggleHidden('tip');
+       toggleHidden('example');
+    }
 
 
     function setupButtons(){
@@ -615,11 +631,7 @@ function hexToComplimentary(hex,shiftAngle = 180,lightOffset=0){
         exercisesSelection.addEventListener("change", function(){ loadExercise(exercisesSelection.selectedIndex); });
     }
 
-    function showTip(){
-      hideElementByID('tip',false);
-      hideElementByID('example',false);
-    }
-   
+
     function insertBreakAfterPeriods(inputString) {
 
       function removeLastBr(inputString) {
@@ -698,7 +710,7 @@ function hexToComplimentary(hex,shiftAngle = 180,lightOffset=0){
     }
     else if (key === 't' || key === ' ') {
         saveKeyboardShortcut("tip");
-        showTip();
+        toggleTip();
        
         // console.log("tip");
     }
