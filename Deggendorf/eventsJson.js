@@ -108,7 +108,46 @@ var eventsJson = [
         "type": "in person",
         "location": {
             "name": "Dreifach- Turnhalle Comenius Gymnasium, Jahnstraße 8, 94469 Deggendorf(Zugang Jahnstraße über FOS / BOS) ",
-            "maps": "https://maps.app.goo.gl/UfmUWQsr5Mu8Ar7N8",
+            "maps": "https://maps.app.goo.gl/mYPKEkcVBHG7raa78",
+            "description": "Coming from Rewe on the opposite site of Shell go up the stairs to enter."
+        },
+        "sharesGenerated": 5,
+        "sharesClicked": 5
+    },
+
+
+    {
+        "name": "United Ai goes to Cern",
+        "date": "30.05.2024",
+        "timeEntry": "5:44PM",
+        "timeStart": "8:00PM",
+        "descriptionShort": "CERN, Switzerland visit - United AI 2024",
+        "price": "150$",
+        "registration": "required",
+        "language": "en",
+        "images": ["1.jpeg", "2.jpg", "3.webp"],
+
+        "descriptionLong": {
+            "en": `🌟 Exciting News! 🌟 Registration for our journey to CERN is NOW OPEN! 🚀 Secure your spot on this unforgettable adventure into the heart of particle physics! 🌌 Don't miss your chance to explore the mysteries of the universe with United AI. 🎇 Hurry, spots are limited and filling up fast! Reserve your seat today and prepare for an immersive experience like no other! 🔭
+
+🔗 The link to the registration form is in:
+
+https://forms.gle/YyXBvFQ8wSPSsqy2A
+
+Don't wait, sign up before May 9th, 2024, 23:59 (UTC) to join us on this incredible journey! 🌟` },
+        "duration": "3+ days",
+        "likes": 5,
+        "organizer":
+        {
+            "name": "Tushar Tom",
+            "email": "thushar.tom.germany@gmail.com",
+            "website": "https://united-ai.net/en/",
+            "ratings": 4.9
+        },
+        "type": "in person",
+        "location": {
+            "name": "Geneva, hotel.",
+            "maps": "https://maps.app.goo.gl/B8JUwQB5pnigjUgN7",
             "description": "Base floor on the entrince straigt under the stairs through the glass door third room on the left."
         },
         "sharesGenerated": 5,
