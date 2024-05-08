@@ -33,11 +33,13 @@
         a{
             color: #007bff;
             text-decoration: none;
+            padding: 0px;
+            margin: 0px;    
         }
 
     #container {
         background-color: white;
-        max-width: 800px;
+        max-width: 900px;
         margin: 20px auto;
         padding: 20px;
         border: 1px solid #ccc;
@@ -88,7 +90,9 @@
     }
 
     #descriptionLong {
-        margin-bottom: 20px;
+        /* margin-top: 10px; */
+        /* margin-bottom: 10px; */
+
         color: rgba(0, 0, 0, 1);
     }
 
@@ -123,12 +127,14 @@
     #organizer-image {
         /* width: 50px; */
         height: 70px;
+        aspect-ratio: 1;
         border-radius: 50%;
+        /* border: black 1px solid; */
         margin-right: 10px;
 
-        transform: translateY(12px);
+        /* transform: translateY(12px); */
 
-        filter: brightness(0);
+        /* filter: brightness(0); */
     }
 
     #organizer-details {
@@ -158,6 +164,7 @@
         /* font-size: 50px; */
         /* color: red; */
     }
+    
 </style>
 </head>
 <body>
@@ -185,21 +192,31 @@
         <div id="location">Location: J007</div> -->
         <div id="descriptionLong">Description:<textarea  id="descriptionLong-input"></textarea></div>
         <div id="date">Date: <input type="date" id="date-input" ></div>
-        <div id="time">Time: <input type="time" id="time-input" ></div>
+        <div id="timeEntry">Time: <input type="time" id="timeEntry-input" ></div>
+        <div id="timeStart">Time: <input type="time" id="timeStart-input" ></div>
+        <div id="duration">Duration: <input type="number" id="duration-input" min="1" max="48" /></div>
         <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Your%20Event%20Title&dates=20240501T080000Z/20240501T100000Z&details=Event%20Description%20Here&location=Event%20Location%20Here" target="_blank">
-            Add to Google Calendar
+            📆Add to Google Calendar
         </a>
 
         <div id="type">Type:
-            <select id="event-type" >
+            <select id="type-input" >
                 <option value="in-person">In-person</option>
                 <option value="virtual">Virtual</option>
                 <option value="hybrid" selected>Hybrid</option>
             </select>
         </div>
         <div id="location">Location: <input type="text" id="location-input" s></div>
+        <div id="location-maps">Location: <input type="text" id="location-maps-input" s></div>
 
         <div id="online-link">Online Link: <a href="https://www.youtube.com/watch?v=DlDgj5LRujE" target="_blank">https://www.youtube.com/watch?v=DlDgj5LRujE</a></div>
+
+        <div id="language">Languages: <select id="language-input" >
+                <option value="en">English</option>
+                <option value="de">Deutsch</option>
+                <option value="both">both</option>
+            </select>
+        </div>
 
     
         <div id="organizer-container">
@@ -207,6 +224,7 @@
                 <div id="organizer-details">
                     <div id="organizer-name">Von: Sign In</div>
                     <div id="organizer-website">Website: Sign In</div>
+                    <div id="organizer-email">Email: Sign In</div>
                     <div id="organizer-ratings" >Ratings: Sign In</div>
                 </div>
         </div>
@@ -216,29 +234,95 @@
     window.location.href = "Events.html";
 };
 
+    function getLinkElement(link) {
+        return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+    }
+
+
             const queryParams = new URLSearchParams(window.location.search);
             const eventParameter = queryParams.get('event');
 
             if(eventParameter == 'new') {
                 document.getElementById('event-name').innerHTML = "New Event";
             }else{
-                const eventIdParameter = queryParams.get('eventId');
+                const eventIdParameter = queryParams.get('event');
+
+                console.log(eventIdParameter);
                 const eventId = eventIdParameter ? parseInt(eventIdParameter) : 0;
                 var event = eventsJson[eventId];
+                 console.log(eventId);
+
+
+
 
                 const eventLanguage = event.language;
+                const languageEmoji = eventLanguage == 'en' ? '🇺🇸' : '🇩🇪';
+
 
                 document.getElementById('event-name').innerHTML = event.name;
-                document.getElementById('organizer-image').src = "images" + '/' + event.imagePath + '/' + event.organizer.image;
+                document.getElementById('organizer-image').src =  getOrganizerProfileImagePath(eventId) ;
                 document.getElementById('organizer-name').innerHTML = event.organizer.name;
+                document.getElementById('organizer-website').innerHTML = getLinkElement(event.organizer.website);
+                if (event.organizer.email) {
+                    document.getElementById('organizer-email').innerHTML = event.organizer.email;
+                } else {
+                    document.getElementById('organizer-email').style.display = 'none';
+                }
+                // document.getElementById('organizer-email').innerHTML = event.organizer.email;
                 document.getElementById('organizer-ratings').innerHTML = "Ratings: " + event.organizer.ratings;
                 document.getElementById('descriptionLong').innerHTML = event.descriptionLong[eventLanguage];
-                document.getElementById('date').innerHTML = "Date: " + event.date;
-                document.getElementById('time').innerHTML = "Time: " + event.time;
-                document.getElementById('type').innerHTML = "Type: " + event.type;
-                document.getElementById('location').innerHTML = "Location: " + event.location.name;
-                document.getElementById('online-link').innerHTML = "Online Link: " + "<a href='" + event.onlineLink + "' target='_blank'>" + event.onlineLink + "</a>";
-                document.getElementById('images').innerHTML = event.images.map(image => "<img src='images/" + event.imagePath + "/" + image + "' alt='img'>").join('');
+                document.getElementById('date').innerHTML = "📅 " + event.date;
+                document.getElementById('timeEntry').innerHTML = "🚪 " + event.timeEntry;
+                document.getElementById('timeStart').innerHTML = "⏱️ " + event.timeStart;
+                document.getElementById('duration').innerHTML = "⏳ " + event.duration;
+                document.getElementById('language').innerHTML = "🗣️ " + languageEmoji;
+                
+                // language
+
+
+
+
+                const eventType = event.type;
+                let hasLocation = false;
+                let hasOnlineLink = false;
+                 let typeString = "";
+
+                if (eventType == 'in person') {
+                    hasLocation = true;
+                    typeString = "👥"
+                }else if (eventType == 'online') {
+                    hasOnlineLink = true;
+                    typeString = "🌐"
+                } else if(eventType == 'hybrid') {
+                    hasLocation = true;
+                    hasOnlineLink = true;
+                    typeString = "👥➕🌐"
+                }
+                
+
+
+                // 👥
+                // 🌐
+
+               
+
+
+                document.getElementById('type').innerHTML = typeString;
+                if(hasLocation){
+                    document.getElementById('location').innerHTML = "📍 " + event.location.name;//📌
+                    document.getElementById('location-maps').innerHTML = "🗺️ " + getLinkElement(event.location.maps);
+                    
+                    
+                }else{
+                    document.getElementById('location').style.display = 'none';
+                    document.getElementById('location-maps').style.display = 'none';
+                }
+                if(hasOnlineLink){
+                    document.getElementById('online-link').innerHTML = "🔗 " + getLinkElement(event.onlineLink);
+                }else{
+                    document.getElementById('online-link').style.display = 'none';
+                }
+                document.getElementById('images').innerHTML = event.images.map(image => "<img src='images/" + eventId + "/" + image  + "' alt='img'>").join('');
 
             }
 

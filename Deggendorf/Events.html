@@ -73,7 +73,20 @@
         height: 30px;
         z-index: 1000;
     }
+
+    #langueSelect{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    
+    }
 </style>
+
+    <div id="langueSelect">
+        <button id="deBtn" onclick="setLanguage('de')">🇩🇪 DE</button>
+        <button id="enBtn" onclick="setLanguage('en')">🇺🇸 EN</button>
+    </div>
+ 
 
     <div class="container">
         <button id="toggleCollapseFilters">X</button>
@@ -275,20 +288,23 @@ function createEventHTML(event,index) {
     return `
         <div class="event" id="${index}">
             <div class="event-header">
-                 <img class="clickable"  id="thumbnail" src="images/${event.imagePath}/${event.images[0]}" alt="img">
+                 <img class="clickable"  id="thumbnail" src="images/${index}/${event.images[0]}" alt="img">
                 
                 <div class="details-container" >
                     <div class="event-title">${event.name}</div>
                     <div class="event-date">${event.date}</div>
-                    <div class="event-time">${event.time}</div>
+                    <div class="event-time">Einlass: ${event.timeEntry}</div>
+                    <div class="event-time">Start: ${event.timeStart}</div>
                     <div class="event-descriptionShort">${event.descriptionShort} </div>
                     <div class="event-location">${event.location.name}</div>
+                    <div class="event-price">${event.price}</div>
+                    <div class="event-language">${event.language}</div>
 
                 </div>
                
                 
                 <div class="event-actions">
-                    <span id="likes">1</span>
+                    <span id="likes"></span>
                     <button class="like"><img src="images/icons/love.png" alt="Like"></button>
                     <button class="share"><img src="images/icons/share.png" alt="Share"></button>
                 </div>
@@ -335,7 +351,7 @@ function main() {
         
         const events = document.getElementById("events");
 
-        for (let i = 0; i < 10; i++) { //example data repeat
+        for (let i = 0; i < 3; i++) { //example data repeat
             var eventsHTML =  eventsJson.map((event, index) => createEventHTML(event, index)).join('');
             events.innerHTML += eventsHTML;
         }
@@ -345,11 +361,28 @@ function main() {
         //add click event to each event element for like and share
         eventElements.forEach((element) => {
             element.querySelector(".like").onclick = function () {
-                element.querySelector("#likes").innerHTML = parseInt(element.querySelector("#likes").innerHTML) + 1;
+
+                const likeSpan = element.querySelector("#likes");
+                const currentLikeText= likeSpan.innerHTML;
+                //like text is empty at the start
+                let currentLikes = 0;
+                if(currentLikeText !== ""){
+                    currentLikes = parseInt(currentLikeText);
+                }
+                likeSpan.innerHTML = currentLikes + 1;
             };
             element.querySelector(".share").onclick = function () {
                 alert("Share");
             };
+
+            //convert event language to emoji
+            const eventLanguage = element.querySelector(".event-language").innerHTML;
+            if(eventLanguage === "de"){
+                element.querySelector(".event-language").innerHTML = "🇩🇪";
+            }else if(eventLanguage === "en"){
+                element.querySelector(".event-language").innerHTML = "🇺🇸";
+            }
+
         });
 
 
