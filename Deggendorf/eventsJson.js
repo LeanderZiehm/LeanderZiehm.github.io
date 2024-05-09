@@ -6,6 +6,7 @@ var eventsJson = [
         "date": "16.05.2024",
         "timeEntry": "17:00",
         "timeStart": "18:00",
+        "timeEnd": "20:00",
         "descriptionShort": "Sendung über E-Sport und Gaming",
         "price": "Free",
         "language": "de",
@@ -80,9 +81,9 @@ var eventsJson = [
 
     {
         "name": "Badminton",
-        "date": "15.05.2024",
-        "timeEntry": "5:15PM",
+        "date": "calculate:3",
         "timeStart": "5:30PM",
+        "timeEnd": "7:00PM",
         "descriptionShort": "Playing Badminton as university sports with students and friends",
         "price": "Free",
         "registration": "required",
@@ -90,14 +91,14 @@ var eventsJson = [
         "language": "en",
         "images": ["1.jpg", "2.webp", "3.jpg"],
 
-        "descriptionLong": { "en": "Join the official Badminton Whatsapp group: https://chat.whatsapp.com/LyGhAonrgY1CiWjjEsHVX2" },
+        "descriptionLong": { "en": "registration required. 24 people max." },
         "duration": "1:30 hours",
         "organizer":
         {
             "name": "Hendran Manimaran",
             "email": "hendran.manimaran@stud.th-deg.de",
             "website": "https://ilearn.th-deg.de/course/view.php?id=13241",
-            "ratings": 4.9
+            "whatsapp": "https://chat.whatsapp.com/LyGhAonrgY1CiWjjEsHVX2"
         },
         "type": "in person",
         "location": {
@@ -311,9 +312,476 @@ Pixar ist ein Jahr nach RATATOUILLE mit WALL-E erneut ein Meilenstein im Genre d
         }
     },
 
-// Sports
+// Sports JUMP
+
+    {
+        "name": "Calisthenics und Full-Body Workout",
+        "date": "calculate:2",
+        "timeStart": "18:00",
+        "timeEnd": "20:00",
+        "descriptionShort": "Body weight sport like pushups, pullups, dips, squats, etc.",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "de",
+        "images": ["1.jpg", "2.jpg", "3.png"],
+
+        "descriptionLong": { "de": `
+        Aufbau des Kurses: Warm Up, Geführtes und Freies Training, Workshops, Mobility und Stetching
+Für eine bessere Verständigung haben wir eine WhatsApp-Gruppe eröffnet. Gerne kannst du über den Einladungslink beitreten: (https://chat.whatsapp.com/ClzBlqIiXfwHmjzQgbFAdk).
+Wenn du eigenes Equipment hast (z.B. Therabänder, Ringe, etc.) nehmt es gerne mit!
+Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
+|
+In diesem Kurs wirst du alles wichtige zum Thema Calisthenics erlernen. Dieser Kurs bietet die Grundlagen in Basiskraft von Beine bis Oberkörper. In Calisthenics wird hauptsächlich mit dem eigenen Körpergewicht trainiert, dabei spielt das Zusammenspiel aller Muskeln eine wichtige Rolle und trainiert so auch die Koordinationsfähigkeit, Kraftausdauer und vieles mehr.
+        ` },
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image":"thd.jpg",
+            "name": "Simon Grüneberg und Clemens Hofman",
+            "email": "simon.grueneberg@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=11805",
+            "whatsapp": "https://chat.whatsapp.com/KFUyfd8n5H67hVgKVoksHm"
+        },
+        "type": "in person",
+        "location": {
+            "name": "Turnhalle des Förderzentrums Deggendorf ",
+            "maps": "https://goo.gl/maps/dUfDA2Raru912M9E6",
+            "description": ""
+        }
+    },
 
 
+
+    {
+        "name": "Salsa",
+        "date": "calculate:2",
+        "timeStart": "19:15",
+        "timeEnd": "20:45",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": { "en": `
+        
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "XXX"
+        },
+        "type": "in person",
+        "location": {
+            "name": "XXX",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+
+
+    {
+        "name": "Fußball",
+        "date": "calculate:1",
+        "timeStart": "21:00",
+        "timeEnd": "23:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "Noel und Noah Müller",
+            "email": "XXX",
+            "website": "XXX",
+            "whatsapp": "https://chat.whatsapp.com/GVmI7IqehgyGKUgIoCnvJ4"
+        },
+        "type": "in person",
+        "location": {
+            "name": "Dreifach-Turnhalle Comenius Gymnasium Deggendorf, Jahnstraße, 94469 Deggendorf (Zugang über Fachoberschule)",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+
+    {
+        "name": "Handball",
+        "date": "calculate:3",
+        "timeStart": "20:30",
+        "timeEnd": "22:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "XXX"
+        },
+        "type": "in person",
+        "location": {
+            "name": "Dreifach-Turnhalle Comenius Gymnasium Deggendorf Jahnstraße, 94469 Deggendorf(Zugang über Fachoberschule)",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+
+    {
+        "name": "Schach",
+        "date": "calculate:5",
+        "timeStart": "19:30",
+        "timeEnd": "20:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "no",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.png", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "https://schachverein-deggendorf.de/"
+        },
+        "type": "in person",
+        "location": {
+            "name": "Stadthotel Deggendorf (1. Stock)Östlicher Stadtgraben 13, 94469 Deggendorf",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+    {
+    "name": "Schwimmen Elypso",
+    "date": "calculate:2",
+    "timeStart": "14:00",
+    "timeEnd": "16:30",
+    "descriptionShort": "Schwimmen im Swimmbad Elypso",
+    "price": "Free",
+    "registration": "no",
+    "repeat": "weekly",
+    "language": "en",
+    "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+    "descriptionLong": {
+        "en": `
+        Jeweils dienstags von 14:00 bis 16:30 Uhr
+und mittwochs von 19:15 bis 22:00 Uhr
+Ganzjahresbad „Elypso“
+Sandnerhofweg 4-6, 94469 Deggendorf
+
+Kosten: keine - bitte an der Kasse den Studentenausweis oder Mitarbeiterausweis vorlegen
+Anmeldung: nicht erforderlich
+Freier Übungsbetrieb
+
+Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in der Badewelt (Nähere Infos dazu unter: https://www.elypso.de/saunawelt/events-aktionen-saunawelt)
+        `},
+    "duration": "2:00 hours",
+    "organizer":
+    {
+        "image": "elipso.jpg",
+        "name": "XXX",
+        "email": "XXX",
+        "website": "https://ilearn.th-deg.de/course/view.php?id=13345"
+    },
+    "type": "in person",
+    "location": {
+        "name": "XXX",
+        "maps": "XXX",
+        "description": ""
+    }
+    },
+
+    {
+        "name": "Spikeball",
+        "date": "calculate:2",
+        "timeStart": "15:00",
+        "timeEnd": "17:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "no",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        Anmeldung: nicht erforderlich
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "XXX",
+            "whatsapp": "https://chat.whatsapp.com/LSCZgB8WK7t3eySavBUG1A"
+        },
+        "type": "in person",
+        "location": {
+            "name": "Outdoor, beim Beachvolleyballfeld an der Donau",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+
+    {
+        "name": "Ultimate Frisbee",
+        "date": "calculate:4",
+        "timeStart": "18:00",
+        "timeEnd": "20:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "Florian Kaspar",
+            "email": " florian.kaspar@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=16584"
+        },
+        "type": "in person",
+        "location": {
+            "name": "XXX",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+
+    {
+        "name": "Volleyball",
+        "date": "calculate:3",
+        "timeStart": "17:00",
+        "timeEnd": "19:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "XXX"
+        },
+        "type": "in person",
+        "location": {
+            "name": "XXX",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+    {
+        "name": "Yoga",
+        "date": "calculate:3",
+        "timeStart": "17:30",
+        "timeEnd": "18:45",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "XXX"
+        },
+        "type": "in person",
+        "location": {
+            "name": "XXX",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+    {
+        "name": "Functional Training",
+        "date": "calculate:3",
+        "timeStart": "19:00",
+        "timeEnd": "20:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "XXX"
+        },
+        "type": "in person",
+        "location": {
+            "name": "XXX",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+
+    {
+        "name": "Tischtennis",
+        "date": "calculate:4",
+        "timeStart": "19:00",
+        "timeEnd": "20:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "XXX"
+        },
+        "type": "in person",
+        "location": {
+            "name": "XXX",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+
+    {
+        "name": "Basketball",
+        "date": "calculate:4",
+        "timeStart": "19:00",
+        "timeEnd": "21:00",
+        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "price": "Free",
+        "registration": "required",
+        "repeat": "weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+        
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "XXX"
+        },
+        "type": "in person",
+        "location": {
+            "name": "XXX",
+            "maps": "XXX",
+            "description": ""
+        }
+    },
+
+    {
+        "name": "Tennis",
+        "date": "calculate:1",
+        "timeStart": "15:00",
+        "timeEnd": "16:00",
+        "descriptionShort": "Tennis im freien Übungsbetrieb",
+        "price": "3$",
+        "registration": "no",
+        "repeat": "2 weekly",
+        "language": "en",
+        "images": ["1.jpg", "2.jpg", "3.jpg"],
+
+        "descriptionLong": {
+            "en": `
+            Montag und Mittwoch: 15:00-16:00 Uhr
+                           Donnerstag: 14:30 - 16:00 Uhr
+            Kosten:               3 Euro pro Stunde und Person (Schläger und Bälle können kostenfrei geliehen werden)
+            Betreuer:            Trainer vor Ort
+        Kontakt:             Peschl Josef  unter tel. +49 170 / 7748092 (Abteilungsleiter Tennis / ESV Deggendorf)
+
+                          Nassl Tim unter tel. +49 177 / 7961858 (Betreuer Hochschultennis)
+
+Weitere Infos: Weitere Stunden oder Trainingsangebote können privat angefragt werden
+        `},
+        "duration": "2:00 hours",
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "XXX",
+            "email": "XXX",
+            "website": "https://esv-deggendorf.de/"
+        },
+        "type": "in person",
+        "location": {
+            "name": "ESV Deggendorf; Neusiedlerstraße 17; (ca. 100m donauaufwärts; direkt am Kreisverkehr Richtung Metten)",
+            "maps": "https://maps.app.goo.gl/YyNj5ao1C48c9xYm6",
+            "description": ""
+        }
+    },
 
 
 
@@ -326,10 +794,18 @@ Pixar ist ein Jahr nach RATATOUILLE mit WALL-E erneut ein Meilenstein im Genre d
 
 function getOrganizerProfileImagePath(index){
     //the path is the name but no spaces and no special characters
-    const organizerName = eventsJson[index].organizer.name;
-    const organizerPath = organizerName.replace(/[^a-zA-Z0-9]/g, '');
-    const organizerProfileImagePath = `Organizers/${organizerPath}/profile.png`;
-    return organizerProfileImagePath;
+   
+    const onganizerImage = eventsJson[index].organizer.image;
+    if(onganizerImage){
+        return `images/profiles/${onganizerImage}`;
+    }else{
+        const organizerName = eventsJson[index].organizer.name;
+        const organizerPath = organizerName.replace(/[^a-zA-Z0-9]/g, '');
+        const organizerProfileImagePath = `Organizers/${organizerPath}/profile.png`;
+        return organizerProfileImagePath;
+    }
+
+  
 }
 
 function calculateDayNameFromDateString(dateString){
@@ -337,3 +813,50 @@ function calculateDayNameFromDateString(dateString){
     const dayName = date.toLocaleString('de-DE', { weekday: 'long' });
     return dayName;
 }
+
+
+function calculateNextDate(dayNumber,n = 1, englishDay=false) {
+    var nextThreeTuesdays = [];
+    var today = new Date();
+    var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+    var daysUntilTuesday = dayNumber - dayOfWeek; // Tuesday is 2 days after Monday
+
+    if (daysUntilTuesday <= 0) {
+        daysUntilTuesday += 7; // If today is Tuesday or later in the week, add 7 days to get to the next Tuesday
+    }
+
+    for (var i = 0; i < n; i++) {
+
+        var nextTuesday = new Date(today);
+        nextTuesday.setDate(today.getDate() + daysUntilTuesday + (7 * i));
+        let nextTuesdayString = formatDate(nextTuesday);
+        nextThreeTuesdays.push(nextTuesdayString);
+    }
+
+    return nextThreeTuesdays;
+}
+
+
+
+
+function formatDate(date, englishDay = false) {
+    const options = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDateDe = date.toLocaleDateString('de-DE',options);
+    const formattedDateEn = date.toLocaleDateString('en-EN',options);
+
+    let day;
+    if(englishDay){
+        day = formattedDateEn.split(',')[0];
+    }else{
+    day = formattedDateDe.split(',')[0];
+    }
+    const formattedDate = formattedDateDe.split(',')[1];
+
+    return day + ', ' + formattedDate;
+}
+
+// // Example usage
+// const nextTuesdays = getNextTuesdays();
+// console.log(nextTuesdays);
+// console.log(formatDate(nextTuesdays[0]));
+// console.log(formatDate(nextTuesdays[0],false));

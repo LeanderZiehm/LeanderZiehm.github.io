@@ -39,7 +39,9 @@
 
     #container {
         background-color: white;
-        max-width: 55vw;
+        width: 55vw;
+        min-width: 500px;
+        /* max-width: 55vw; */
         margin: 20px auto;
         padding: 20px;
         border: 1px solid #ccc;
@@ -121,7 +123,9 @@
 
     #organizer-image {
         /* width: 50px; */
-        height: 70px;
+        /* width: 10vw; */
+        max-width: 10vw;
+        max-height: 10vw;
         aspect-ratio: 1;
         border-radius: 50%;
         /* border: black 1px solid; */
@@ -154,6 +158,9 @@
         pointer-events: none;
     }
     #addToCalendar{
+        display: none;
+    }
+    #organizer-ratings{
         display: none;
     }
 
@@ -224,7 +231,8 @@
                 <div id="organizer-details">
                     <div id="organizer-name">Von: Sign In</div>
                     <div id="organizer-website">Website: Sign In</div>
-                    <div id="organizer-email">Email: Sign In</div>
+                    <div id="organizer-email">✉️: Sign In</div>
+                    <div id="organizer-whatsapp">💬: Sign In</div>
                     <div id="organizer-ratings" >Ratings: Sign In</div>
                 </div>
         </div>
@@ -262,17 +270,31 @@
                 document.getElementById('event-name').innerHTML = event.name;
                 document.getElementById('organizer-image').src =  getOrganizerProfileImagePath(eventId) ;
                 document.getElementById('organizer-name').innerHTML = event.organizer.name;
-                document.getElementById('organizer-website').innerHTML = getLinkElement(event.organizer.website);
+                document.getElementById('organizer-website').innerHTML ="🌐"+ getLinkElement(event.organizer.website);
                 if (event.organizer.email) {
-                    document.getElementById('organizer-email').innerHTML = event.organizer.email;
+                    document.getElementById('organizer-email').innerHTML ="✉️ "+ event.organizer.email;
                 } else {
                     document.getElementById('organizer-email').style.display = 'none';
                 }
+                
+                if (event.organizer.whatsapp) {
+                    document.getElementById('organizer-whatsapp').innerHTML = "💬"+ getLinkElement(event.organizer.whatsapp);
+                } else {
+                    document.getElementById('organizer-whatsapp').style.display = 'none';
+                }
+                
+
+
                 // document.getElementById('organizer-email').innerHTML = event.organizer.email;
                 document.getElementById('organizer-ratings').innerHTML = "Ratings: " + event.organizer.ratings;
                 document.getElementById('descriptionLong').innerHTML = event.descriptionLong[eventLanguage];
                 document.getElementById('date').innerHTML = "📅 " + event.date;
-                document.getElementById('timeEntry').innerHTML = "🚪 " + event.timeEntry;
+                if(event.timeEntry){
+                    document.getElementById('timeEntry').innerHTML = "🚪 " + event.timeEntry;
+                }else{
+                    document.getElementById('timeEntry').style.display = 'none';
+                }
+               
                 document.getElementById('timeStart').innerHTML = "⏱️ " + event.timeStart;
                 document.getElementById('duration').innerHTML = "⏳ " + event.duration;
                 document.getElementById('language').innerHTML = "" + languageEmoji;

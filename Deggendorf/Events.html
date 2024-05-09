@@ -312,40 +312,6 @@
     </div>
 
     <script>
-function createEventHTML(event,index) {
-    console.log(index);
-    return `
-        <div class="event" id="${index}">
-            <div class="event-header">
-                 <img class="clickable"  id="thumbnail" src="images/${index}/${event.images[0]}" alt="img">
-                
-                <div class="details-container" >
-                    <div class="event-title">${event.name}</div>
-                    <div class="event-descriptionShort">${event.descriptionShort} </div>
-                    <div class="event-date">${event.date}</div>
-                    <div class="event-time">🚪 ${event.timeEntry}</div>
-                    <div class="event-time">⏱️ ${event.timeStart}</div>
-                   
-                    <div class="event-location">${event.location.name}</div>
-                    <div class="event-price">${event.price}</div>
-                    <div class="event-language">${event.language}</div>
-
-                </div>
-               
-                
-                <div class="event-actions">
-                    <span id="likes"></span>
-                    <button class="like"><img src="images/icons/love.png" alt="Like"></button>
-                    <button class="share"><img src="images/icons/share.png" alt="Share"></button>
-                </div>
-         
-          
-              
-            </div>
-        </div>
-    `;
-}
-
 
 
 
@@ -374,17 +340,89 @@ function main() {
             // document.getElementById("filters").style.display = "none";
 
         };
+        const events = document.getElementById("events");
+
+        // var eventsHTML = '';
+    for (var index = 0; index < eventsJson.length; index++) {
+        let event = eventsJson[index];
+        let eventHTML = createEventHTML(event, index);
+
+        let  eventElement = document.createElement('div');
+        eventElement.id = index;
+        eventElement.className = "event";
+        eventElement.innerHTML = eventHTML;
+
+
+        // //hide timeEntry if it does not exist in json
+        if(event.timeEntry === undefined){
+           eventElement.querySelector(".event-timeEntry").style.display = "none";
+        }
+
+        if(event.timeEnd === undefined){
+            eventElement.querySelector("#timeEnd").style.display = "none";
+        }
+        if(event.date.startsWith("calculate:")){
+             var numberStr = event.date.split(":")[1]; // Splitting the string and getting the part after the colon
+            var number = parseInt(numberStr);
+            const nextDateString = calculateNextDate(number);
+            // const nextDateString = calculateNextDate(number);
+            eventElement.querySelector(".event-date").innerHTML = nextDateString+" 🔁 weekly";
+        }
+
+        events.appendChild(eventElement);
+    }
+
+
+
+
+
+
+    function createEventHTML(event, index) {
+        // console.log(index);
+        let eventHTML = `
+       
+            <div class="event-header">
+                 <img class="clickable"  id="thumbnail" src="images/${index}/${event.images[0]}" alt="img">
+                
+                <div class="details-container" >
+                    <div class="event-title">${event.name}</div>
+                    <div class="event-descriptionShort">${event.descriptionShort} </div>
+                    <div class="event-date">${event.date}</div>
+                    <div class="event-timeEntry">🚪 ${event.timeEntry}</div>
+                    <div class="event-timeStart">⏱️ ${event.timeStart}<span id="timeEnd"> - ${event.timeEnd}</span></div>
+                   
+                    <div class="event-location">${event.location.name}</div>
+                    <div class="event-price">${event.price}</div>
+                    <div class="event-language">${event.language}</div>
+
+                </div>
+               
+                
+                <div class="event-actions">
+                    <span id="likes"></span>
+                    <button class="like"><img src="images/icons/love.png" alt="Like"></button>
+                    <button class="share"><img src="images/icons/share.png" alt="Share"></button>
+                </div>
+         
+          
+              
+            </div>
+  
+    `;
+
+        return eventHTML;
+
+    }
+    
 
     
 
 
-        
-        const events = document.getElementById("events");
+            // var eventsHTML =  eventsJson.map((event, index) => createEventHTML(event, index)).join('');
+            // events.innerHTML += eventsHTML;
 
-        for (let i = 0; i < 1; i++) { //example data repeat
-            var eventsHTML =  eventsJson.map((event, index) => createEventHTML(event, index)).join('');
-            events.innerHTML += eventsHTML;
-        }
+          
+      
 
         //get all events as elements
         const eventElements = document.querySelectorAll(".event");
@@ -412,6 +450,9 @@ function main() {
             }else if(eventLanguage === "en"){
                 element.querySelector(".event-language").innerHTML = "🇺🇸";
             }
+
+       
+      
 
         });
 
