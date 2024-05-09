@@ -39,7 +39,7 @@
 
     #container {
         background-color: white;
-        max-width: 900px;
+        max-width: 55vw;
         margin: 20px auto;
         padding: 20px;
         border: 1px solid #ccc;
@@ -64,6 +64,7 @@
 
 
     #follow-button,#share-button {
+        display: none;
         padding: 10px 20px;
         background-color: #007bff;
         color: #fff;
@@ -152,6 +153,9 @@
         user-select: none;
         pointer-events: none;
     }
+    #addToCalendar{
+        display: none;
+    }
 
     
     i {
@@ -191,22 +195,22 @@
         <div id="timeEntry">Time: <input type="time" id="timeEntry-input" ></div>
         <div id="timeStart">Time: <input type="time" id="timeStart-input" ></div>
         <div id="duration">Duration: <input type="number" id="duration-input" min="1" max="48" /></div>
-        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Your%20Event%20Title&dates=20240501T080000Z/20240501T100000Z&details=Event%20Description%20Here&location=Event%20Location%20Here" target="_blank">
+        <a id="addToCalendar" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Your%20Event%20Title&dates=20240501T080000Z/20240501T100000Z&details=Event%20Description%20Here&location=Event%20Location%20Here" target="_blank">
             📆Add to Google Calendar
         </a>
 
-        <div id="type">Type:
-            <select id="type-input" >
-                <option value="in-person">In-person</option>
-                <option value="virtual">Virtual</option>
-                <option value="hybrid" selected>Hybrid</option>
-            </select>
-        </div>
+   
         <div id="location">Location: <input type="text" id="location-input" s></div>
         <div id="location-maps">Location: <input type="text" id="location-maps-input" s></div>
 
         <div id="online-link">Online Link: <a href="https://www.youtube.com/watch?v=DlDgj5LRujE" target="_blank">https://www.youtube.com/watch?v=DlDgj5LRujE</a></div>
-
+    <div id="type">Type:
+        <select id="type-input">
+            <option value="in-person">In-person</option>
+            <option value="virtual">Virtual</option>
+            <option value="hybrid" selected>Hybrid</option>
+        </select>
+    </div>
         <div id="language">Languages: <select id="language-input" >
                 <option value="en">English</option>
                 <option value="de">Deutsch</option>
@@ -271,7 +275,7 @@
                 document.getElementById('timeEntry').innerHTML = "🚪 " + event.timeEntry;
                 document.getElementById('timeStart').innerHTML = "⏱️ " + event.timeStart;
                 document.getElementById('duration').innerHTML = "⏳ " + event.duration;
-                document.getElementById('language').innerHTML = "🗣️ " + languageEmoji;
+                document.getElementById('language').innerHTML = "" + languageEmoji;
                 
                 // language
 
