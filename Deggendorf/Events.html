@@ -14,7 +14,9 @@
 <meta property="og:image" content="https://leanderziehm.github.io/Deggendorf/images/OG1.png" />
 <!-- <meta property="og:image:type" content="image/png" /> -->
 <!-- <meta property="og:image:width" content="1200" /> -->
+<meta property="og:image:width" content="300" />
 <!-- <meta property="og:image:height" content="630" /> -->
+<meta property="og:image:height" content="300" />
 
 </head>
 <body>
@@ -343,6 +345,7 @@ function main() {
         const events = document.getElementById("events");
 
         // var eventsHTML = '';
+        const eventArray = [];
     for (var index = 0; index < eventsJson.length; index++) {
         let event = eventsJson[index];
         let eventHTML = createEventHTML(event, index);
@@ -361,16 +364,35 @@ function main() {
         if(event.timeEnd === undefined){
             eventElement.querySelector("#timeEnd").style.display = "none";
         }
+
+
+        
+        
         if(event.date.startsWith("calculate:")){
              var numberStr = event.date.split(":")[1]; // Splitting the string and getting the part after the colon
             var number = parseInt(numberStr);
             const nextDateString = calculateNextDate(number);
             // const nextDateString = calculateNextDate(number);
+            // console.log(nextDateString);//"Dienstag,  14.05.2024"       
             eventElement.querySelector(".event-date").innerHTML = nextDateString+" 🔁 weekly";
         }
 
-        events.appendChild(eventElement);
+        
+        const dateString = eventElement.querySelector(".event-date").innerHTML;
+        const date = getDateFromString(eventElement.querySelector(".event-date").innerHTML);
+        eventArray.push({date: date, element: eventElement});
+        // events.appendChild(eventElement);
     }
+    //sort events by date
+    eventArray.sort((a, b) => a.date - b.date);
+    eventArray.forEach((event) => {
+        events.appendChild(event.element);
+    });
+
+    // events.appendChild(eventElement);
+
+
+
 
 
 

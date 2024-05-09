@@ -860,3 +860,19 @@ function formatDate(date, englishDay = false) {
 // console.log(nextTuesdays);
 // console.log(formatDate(nextTuesdays[0]));
 // console.log(formatDate(nextTuesdays[0],false));
+
+
+
+
+function getDateFromString(str) {
+    const dateRegex = /\b(\d{2}\.\d{2}\.\d{4})\b/;
+    const foundDateString = dateRegex.exec(str)[1]; //15.05.2024
+
+    var parts = foundDateString.split(".");
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10) - 1; // Months are zero-indexed in JavaScript Date objects
+    var year = parseInt(parts[2], 10);
+    var date = new Date(year, month, day);
+
+    return date    
+}
