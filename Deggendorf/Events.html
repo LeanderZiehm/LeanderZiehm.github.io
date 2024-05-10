@@ -251,6 +251,8 @@
         aspect-ratio: 1;
         max-width: 30vw;
         max-height: 40vw;
+        /* disble dragging the image */
+        /* user-drag: none; */
         /* center image vertically  */
         /* vertical-align: middle; */
            /* position: relative; */
@@ -544,6 +546,36 @@ function main() {
         });
 
 
+
+         const queryParams = new URLSearchParams(window.location.search);
+        const eventParameter = queryParams.get('event');
+
+        if (eventParameter == 'new') {
+            // document.getElementById('event-name').innerHTML = "New Event";
+
+        } else {
+            // console
+            const eventIDScrollTo = eventParameter;
+            const element = document.getElementById(eventIDScrollTo);
+
+            
+            if (element) { 
+                const elementPosition = element.getBoundingClientRect().top;
+                const possitionToScroll = elementPosition - 200;
+                window.scrollTo({
+                    top: possitionToScroll
+                    // behavior: 'smooth' // Optionally, you can use 'smooth' for smooth scrolling
+                });
+            }
+
+
+        }
+
+
+        
+
+
+
        
         document.getElementById("addEventBtn").onclick = function () {
             window.location.href = "Event.html?event=new";
@@ -557,7 +589,10 @@ function main() {
         element.onclick = function () {
             window.location.href = "Event.html?event=" + element.parentElement.parentElement.id;
         };
+
+        element.setAttribute('draggable', false);
     });
+
 
 
      

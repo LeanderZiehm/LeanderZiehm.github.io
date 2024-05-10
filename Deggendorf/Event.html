@@ -48,7 +48,7 @@
 
     #container {
         background-color: white;
-        width: 55vw;
+        width: 60vw;
         min-width: 500px;
         /* max-width: 55vw; */
         margin: 20px auto;
@@ -264,7 +264,7 @@
 
                 
 
-                const eventIdParameter = queryParams.get('event');
+                const eventIdParameter = eventParameter;
                 console.log(eventIdParameter);
                 const eventID = eventIdParameter ? parseInt(eventIdParameter) : 0;
                 var event = eventsJson[eventID];
@@ -342,7 +342,7 @@
                 
                 document.getElementById('type').innerHTML = typeString;
                 if(hasLocation){
-                    document.getElementById('location').innerHTML = "📍 " + event.location.name +""+ event.location.description+"";//📌
+                    document.getElementById('location').innerHTML = "📍 " + event.location.name +" "+ event.location.description+"";//📌
                     document.getElementById('location-maps').innerHTML = "🗺️ " + getLinkElement(event.location.maps);
                     
                     
@@ -372,6 +372,10 @@
                     document.getElementById('organizer-whatsapp').style.display = 'none';
                 }
 
+                if (event.organizer.website2){
+                    document.getElementById('organizer-website').innerHTML += "<div>" +  getLinkElement(event.organizer.website2)+ "</div>";
+                }
+
 
 
                 // document.getElementById('organizer-email').innerHTML = event.organizer.email;
@@ -387,7 +391,7 @@
             };
 
             document.getElementById("backBtn").onclick = function () {
-                    window.location.href = "Events.html";
+                    window.location.href = "Events.html?event="+ eventParameter;
             };
 
 

@@ -313,7 +313,8 @@ Pixar ist ein Jahr nach RATATOUILLE mit WALL-E erneut ein Meilenstein im Genre d
         "descriptionShort": "Body weight sport like pushups, pullups, dips, squats, etc.",
         "price": "Free",
         "registration": "false",
-        "repeat": "weekly",
+        "type": "in person",
+        "type": "in person",
         "language": "de+en",
         "images": ["1.jpg", "3.webp", "3.png"],
 
@@ -331,8 +332,14 @@ Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
     If you have your own equipment (e.g. therabands, rings, etc.) feel free to bring it!
     provided: Music, fun, motivation & an awesome workout!!!
         `
-    
+        
     },
+    
+        "location": {
+            "name": "Turnhalle des Förderzentrums Deggendorf ",
+            "maps": "https://goo.gl/maps/dUfDA2Raru912M9E6",
+            "description": ""
+        },
         "organizer":
         {
             "image":"thd.jpg",
@@ -340,12 +347,6 @@ Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
             "email": "simon.grueneberg@stud.th-deg.de",
             "website": "https://ilearn.th-deg.de/course/view.php?id=11805",
             "whatsapp": "https://chat.whatsapp.com/KFUyfd8n5H67hVgKVoksHm"
-        },
-        "type": "in person",
-        "location": {
-            "name": "Turnhalle des Förderzentrums Deggendorf ",
-            "maps": "https://goo.gl/maps/dUfDA2Raru912M9E6",
-            "description": ""
         }
     },
 
@@ -358,26 +359,47 @@ Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
         "timeEnd": "20:45",
         "descriptionShort": "",
         "price": "Free",
-        "registration": "required",
-        "repeat": "weekly",
+        "registration": "no",
+        "type": "in person",
         "language": "de+en",
-        "images": ["1.jpg", "2.jpg", "3.jpg"],
+        "images": ["1.jpg", "zumba.webp", "3.jpg"],
 
-        "descriptionLong": { "en": `
-        
-        `},
+        "descriptionLong": {"de":`
+        ✨ Salsa, Salsa und noch mehr Salsa
+✨ Entdecke Tänze, die Teil unserer "Tanzfamilie" sind, einschließlich einer Prise Bachata
+✨ Lerne, zu führen, zu folgen oder vielleicht beides
+✨ Spaß, Gelächter und ein bisschen geordnetes Chaos
+
+Komm vorbei und lass uns aus dem "tapsigen Pinguin" einen "Tanzkönig" oder eine "Tanzkönigin" machen. Melde dich jetzt an.
+Neben dem Kurs werden wir auch zu verschiedenen Partys gehen, um das Gelernte auf der Tanzfläche umzusetzen. Die Teilnahme an den Partys ist selbstverständlich freiwillig.
+
+Hinweis: in der Turnhalle ist das Tanzen nur mit Hallenschuhen oder ohne Schuhe möglich - Tanzschuhe können nicht genutzt werden.
+        `, "en": `
+        ✨ Salsa, Salsa, and more Salsa
+✨ Discover dances that are part of our "dance family," including a bit of Bachata
+✨ Learn to lead, follow, or maybe even both
+✨ Fun, laughter, and a bit of controlled chaos
+
+Come on over and let's turn that "awkward penguin" into a "dance king" or "dance queen."
+
+In addition to the course, we'll also be attending various parties to put what we've learned into practice on the dance floor. Of course, the parties are entirely optional.
+
+Note: in the gym, dancing is possible only with gym shoes or without shoes - dancing shoes cannot be used.
+        `
+        },
+
+        "location": {
+            "name": "Turnhalle der Realschule Maria-Ward-Schulstiftung Passau, Maria-Ward-Platz 18, 94469 Deggendorf",
+            "maps": "https://maps.app.goo.gl/fvJ7jw3zjrZuRxeP9",
+            "description": ""
+        },
         "organizer":
         {
             "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "XXX"
-        },
-        "type": "in person",
-        "location": {
-            "name": "XXX",
-            "maps": "XXX",
-            "description": ""
+            "name": "Anja Heller",
+            "email": "anja.heller@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=18336",
+            "whatsapp": "https://chat.whatsapp.com/KFUyfd8n5H67hVgKVoksHm"
         }
     },
 
@@ -390,32 +412,32 @@ Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
         "descriptionShort": "",
         "price": "Free",
         "registration": "required",
-        "repeat": "weekly",
+        "maxPeople": 60,
+        "type": "in person",
         "language": "de+en",
-        "images": ["1.jpg", "2.jpg", "3.jpg"],
+        "images": ["1.jpg", "2.webp", "3.webp"],
 
         "descriptionLong": {
             "de": `
-            
-        
+            Anmeldung: je Kurseinheit erforderlich (siehe unten) - die Anmeldung für einen Termin wird immer nach dem vorhergegangenen Termin freigeschalten. Die Teilnehmendenanzahl ist auf maximal 60 begrenzt.
         `,
             "en": `
-
+Registration: required per course unit (see below) - registration for an appointment is always released after the previous appointment. The number of participants is limited to a maximum of 60.
         `},
+        "location": {
+            "name": "Dreifach-Turnhalle Comenius Gymnasium Deggendorf, Jahnstraße, 94469 Deggendorf (Zugang über Fachoberschule)",
+            "maps": "https://maps.app.goo.gl/mYPKEkcVBHG7raa78",
+            "description": ""
+        },
         "organizer":
         {
             "image": "thd.jpg",
             "name": "Noel und Noah Müller",
-            "email": "XXX",
-            "website": "XXX",
+            "email": "noah.mueller@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=13238",
             "whatsapp": "https://chat.whatsapp.com/GVmI7IqehgyGKUgIoCnvJ4"
-        },
-        "type": "in person",
-        "location": {
-            "name": "Dreifach-Turnhalle Comenius Gymnasium Deggendorf, Jahnstraße, 94469 Deggendorf (Zugang über Fachoberschule)",
-            "maps": "XXX",
-            "description": ""
         }
+       
     },
 
     {
@@ -426,26 +448,34 @@ Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
         "descriptionShort": "",
         "price": "Free",
         "registration": "required",
-        "repeat": "weekly",
+        "type": "in person",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
-            "en": `
+            "de": `
+            Nutzt diese Möglichkeit, egal ob als Neueinsteiger, Anfänger oder "Profi" jeder ist Herzlich Willkommen.
+            
+            Im Vordergrund steht der Spaß sowie die Bewegung.
         
+        `,
+            "en": `
+The handball course is revived, use this opportunity, whether as a newcomer, beginner or "pro" everyone is welcome.
+
+In the foreground is the fun as well as the movement.
         `},
+        "location": {
+            "name": "Dreifach-Turnhalle Comenius Gymnasium Deggendorf, Jahnstraße, 94469 Deggendorf (Zugang über Fachoberschule)",
+            "maps": "https://maps.app.goo.gl/mYPKEkcVBHG7raa78",
+            "description": ""
+        },
         "organizer":
         {
             "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "XXX"
-        },
-        "type": "in person",
-        "location": {
-            "name": "Dreifach-Turnhalle Comenius Gymnasium Deggendorf Jahnstraße, 94469 Deggendorf(Zugang über Fachoberschule)",
-            "maps": "XXX",
-            "description": ""
+            "name": "Noel Philippe Müller",
+            "email": "noel-philippe.mueller@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=13341",
+            "whatsapp": "https://chat.whatsapp.com/Lr7YHoZ1ijiJiVSGXI8bkm"
         }
     },
 
@@ -457,27 +487,27 @@ Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
         "descriptionShort": "",
         "price": "Free",
         "registration": "no",
-        "repeat": "weekly",
+        "type": "in person",
         "language": "de+en",
-        "images": ["1.png", "2.jpg", "3.jpg"],
+        "images": ["1.png", "2.webp", "3.jpg"],
 
         "descriptionLong": {
-            "en": `
-        
-        `},
-        "organizer":
-        {
-            "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "https://schachverein-deggendorf.de/"
-        },
-        "type": "in person",
+            "de":`Freier Spielbetrieb`,
+            "en": `Free play`},
         "location": {
             "name": "Stadthotel Deggendorf (1. Stock)Östlicher Stadtgraben 13, 94469 Deggendorf",
-            "maps": "XXX",
+            "maps": "https://maps.app.goo.gl/DEYwrxTaoRA8pw297",
             "description": ""
+        },
+        "organizer":
+        {
+            "image": "schachverein.png",
+            "name": "Schachverein Deggendorf",
+            "email": "johannes@grabmeier.net",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=13421",
+            "website2": "https://schachverein-deggendorf.de/"
         }
+      
     },
     {
     "name": "Schwimmen Elypso",
@@ -487,12 +517,12 @@ Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
     "descriptionShort": "Schwimmen im Swimmbad Elypso",
     "price": "Free",
     "registration": "no",
-    "repeat": "weekly",
+    "type": "in person",
     "language": "de+en",
     "images": ["1.jpg", "2.jpg", "3.jpg"],
 
     "descriptionLong": {
-        "en": `
+        "de": `
         Jeweils dienstags von 14:00 bis 16:30 Uhr
 und mittwochs von 19:15 bis 22:00 Uhr
 Ganzjahresbad „Elypso“
@@ -503,19 +533,27 @@ Anmeldung: nicht erforderlich
 Freier Übungsbetrieb
 
 Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in der Badewelt (Nähere Infos dazu unter: https://www.elypso.de/saunawelt/events-aktionen-saunawelt)
-        `},
+        `,
+        "en":`
+        All-season swimming pool 
+
+        Please note: 1x a month on Wednesdays from 8.30 pm there is textile-free swimming in the Badewelt (for more information, see: https://www.elypso.de/saunawelt/events-aktionen-saunawelt)
+        
+        Don't forget to bring you student ID to show it at the reception.`
+    
+    },
     "organizer":
     {
-        "image": "elipso.jpg",
-        "name": "XXX",
-        "email": "XXX",
-        "website": "https://ilearn.th-deg.de/course/view.php?id=13345"
+        "image": "elypso.jpg",
+        "name": "Elypso",
+        "email": "info@elypso.de",
+        "website": "https://ilearn.th-deg.de/course/view.php?id=13345",
+        "website2": "https://www.elypso.de/"
     },
-    "type": "in person",
     "location": {
-        "name": "XXX",
-        "maps": "XXX",
-        "description": ""
+        "name": "Elypso Sandnerhofweg 4-6, 94469 Deggendorf, Germany",
+        "maps": "https://maps.app.goo.gl/AqKWkSVaeHhogAvaA",
+        "description": "(20 min with the bike from deggendorf, There is also a bus connection)"
     }
     },
 
@@ -527,26 +565,28 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "descriptionShort": "",
         "price": "Free",
         "registration": "no",
-        "repeat": "weekly",
+        "type": "in person",
         "language": "de+en",
-        "images": ["1.jpg", "2.jpg", "3.jpg"],
+        "images": ["1.jpg", "2.webp", "3.jpg"],
 
         "descriptionLong": {
+            "de":`
+            Mehr Infos zu Roundnet/ Spikeball findet ihr z.B. hier: https://roundnetgermany.de/das-ist-roundnet/
+            `,
             "en": `
-        Anmeldung: nicht erforderlich
-        `},
+       You can find more information about Roundnet/ Spikeball e.g. here: https://roundnetgermany.de/das-ist-roundnet/
+       `},
         "organizer":
         {
             "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "XXX",
+            "name": "Kayley Kopp",
+            "email": "kayley.kopp@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=14562",
             "whatsapp": "https://chat.whatsapp.com/LSCZgB8WK7t3eySavBUG1A"
         },
-        "type": "in person",
         "location": {
             "name": "Outdoor, beim Beachvolleyballfeld an der Donau",
-            "maps": "XXX",
+            "maps": "https://maps.app.goo.gl/Gemmn3Y36QvFWu6H8",
             "description": ""
         }
     },
@@ -558,15 +598,27 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "timeEnd": "20:00",
         "descriptionShort": "",
         "price": "Free",
-        "registration": "required",
-        "repeat": "weekly",
+        "registration": "no",
+        "type": "in person",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
-            "en": `
-        
-        `},
+            "de": `
+        So gut wie jeder hatte schon mal eine Frisbeescheibe in der Hand und beinahe jeder kann so eine Scheibe auch werfen – wenigstens ein paar Meter weit.
+
+Ultimate ist ein Laufsport, bei dem sich zwei Teams mit jeweils 7 Spielern gegenüberstehen. Gespielt wird  auf einem Feld von ca. der Länge und der halben Breite eines Fußballfeldes. An den langen Enden des Spielfeldes befinden sich wie beim American Football zwei 15-20 Meter tiefe Endzonen.
+
+Ein Punkt wird erzielt, indem ein Spieler die Scheibe innerhalb der gegnerischen Endzone fängt. Ein Spieler in Scheibenbesitz darf ausser eines Sternschritts (wie beim Basketball) keine weiteren Schritte gehen.
+Die erste und wichtigste Regel, auf der viele der folgenden Regeln basieren, ist der so genannte Spirit of the game. Er besagt, dass jeder Ultimate-Spieler fair spielen soll.
+        `, "en": `Almost everyone has had a Frisbee disc in their hand and almost everyone can throw one - at least a few meters.
+
+Ultimate is a running sport in which two teams of 7 players face each other. It is played on a field about the length and half the width of a soccer field. At the long ends of the field, as in American football, there are two end zones 15-20 meters deep.
+
+A point is scored by a player catching the disc inside the opponent's end zone. A player in possession of the disc may not take any steps other than a star step (as in basketball).
+
+The first and most important rule, on which many of the following rules are based, is the so-called spirit of the game. It states that every Ultimate player should play fairly.
+`},
         "organizer":
         {
             "image": "thd.jpg",
@@ -576,8 +628,8 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         },
         "type": "in person",
         "location": {
-            "name": "XXX",
-            "maps": "XXX",
+            "name": "Football field on the Danube, at the Weidenversteck playground (riverside promenade)",
+            "maps": "https://maps.app.goo.gl/iQMisUmZnxSHsPGWA",
             "description": ""
         }
     },
@@ -590,27 +642,30 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "descriptionShort": "",
         "price": "Free",
         "registration": "required",
-        "repeat": "weekly",
+        "type": "in person",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
-            "en": `
-        
+            "de": `
+        Jeder ist willkommen, egal ob Anfänger oder Fortgeschritten – aber bitte zuvor die Links zur Volleyball Technik unten anschauen (nur 1-2 Minuten pro Video)
+        `,"en": `
+        Everybody ist welcome, it doesn´t matter if you are a beginner or an advanced player – please just watch the links below for basic volleyball techniques (only 1-2 minutes per video)
         `},
+        "location": {
+            "name": "Dreifachturnhalle des Deggendorfer Schulzentrums (Robert-Koch-Gymnasium) Egger Straße 30 in Deggendorf",
+            "maps": "https://maps.app.goo.gl/Zz9HesSGk6aoX3GA7",
+            "description": ""
+        },
         "organizer":
         {
             "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "XXX"
-        },
-        "type": "in person",
-        "location": {
-            "name": "XXX",
-            "maps": "XXX",
-            "description": ""
+            "name": "Phil Lüftner, Tim Seifert",
+            "email": "tim.seifert@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=13239",
+            "whatsapp": "https://chat.whatsapp.com/KQJM54C20gE1iQrrjbczDl"
         }
+    
     },
     {
         "name": "Yoga",
@@ -619,28 +674,30 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "timeEnd": "18:45",
         "descriptionShort": "",
         "price": "Free",
-        "registration": "required",
-        "repeat": "weekly",
+        "registration": "no",
+        "type": "in person",
         "language": "de+en",
-        "images": ["1.jpg", "2.jpg", "3.jpg"],
+        "images": ["1.jpg", "2.webp", "3.webp"],
 
         "descriptionLong": {
-            "en": `
-        
+            "de": `
+        Eigene Isomatte mitbringen!
+        `,"en":`
+        Please bring your own mat!
         `},
+        "location": {
+            "name": "Aula der Realschule Maria Ward, Maria-Ward-Platz 18, 94469 Deggendorf",
+            "maps": "https://maps.app.goo.gl/HJQtfZmNv4XYoezH6",
+            "description": ""
+        },
         "organizer":
         {
             "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "XXX"
-        },
-        "type": "in person",
-        "location": {
-            "name": "XXX",
-            "maps": "XXX",
-            "description": ""
+            "name": "Lisa Zehetmeier",
+            "email": "lisa.zehetmeier@th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=13343"
         }
+      
     },
     {
         "name": "Functional Training",
@@ -649,28 +706,30 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "timeEnd": "20:00",
         "descriptionShort": "",
         "price": "Free",
-        "registration": "required",
-        "repeat": "weekly",
+        "registration": "no",
+        "type": "in person",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
-            "en": `
-        
+            "de": `
+        Falls du eine eigene Matte hast, kannst du diese gerne mitnehmen!
+        `,"en":`
+        If you have your own mat, feel free to bring it along!
         `},
+        "location": {
+            "name": "Turnhalle der Mittelschule St. Martin Berger Straße 29, 94469 Deggendorf",
+            "maps": "https://maps.app.goo.gl/zrHbqnaLfgkC54Lr7",
+            "description": "(Zugang über die St.- Martin - Straße)"
+        },
         "organizer":
         {
             "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "XXX"
-        },
-        "type": "in person",
-        "location": {
-            "name": "XXX",
-            "maps": "XXX",
-            "description": ""
+            "name": "Lena und Theo Lackenbauer",
+            "email": "lena.lackenbauer@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=13369"
         }
+  
     },
 
     {
@@ -681,7 +740,7 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "descriptionShort": "",
         "price": "Free",
         "registration": "required",
-        "repeat": "weekly",
+        "type": "in person",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -692,14 +751,13 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "organizer":
         {
             "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "XXX"
+            "name": "Felix Jung",
+            "email": "felix.jung@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=18335"
         },
-        "type": "in person",
         "location": {
-            "name": "XXX",
-            "maps": "XXX",
+            "name": "Dreifachturnhalle des Deggendorfer Schulzentrums (Robert-Koch-Gymnasium) Egger Straße 30 in Deggendorf",
+            "maps": "https://maps.app.goo.gl/Zz9HesSGk6aoX3GA7",
             "description": ""
         }
     },
@@ -711,27 +769,30 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "timeEnd": "21:00",
         "descriptionShort": "",
         "price": "Free",
-        "registration": "required",
+        "registration": "no",
+        "type": "in person",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
-            "en": `
-        
-        `},
+            "de": `
+        Anfänger Gruppe: 19:00-20:00 Uhr
+Fortgeschrittene Gruppe: 20:00-21:00 Uhr
+        `, "en": `Beginners group: 19:00-20:00
+Advanced group: 20:00-21:00 pm`},
+        "location": {
+            "name": "Tunrhalle der Realschule Maria-Ward-Schulstiftung Passau, Maria-Ward-Platz 18, 94469 Deggendorf",
+            "maps": "https://maps.app.goo.gl/pteAvN7Crt9VWYa27",
+            "description": ""
+        },
         "organizer":
         {
             "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
-            "website": "XXX"
-        },
-        "type": "in person",
-        "location": {
-            "name": "XXX",
-            "maps": "XXX",
-            "description": ""
+            "name": "Jakob Michlbauer",
+            "email": "jakob.michlbauer@stud.th-deg.de",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=13240"
         }
+       
     },
 
     {
@@ -747,9 +808,8 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
-            "en": `
-            Montag und Mittwoch: 15:00-16:00 Uhr
-                           Donnerstag: 14:30 - 16:00 Uhr
+            "de": `
+            
             Kosten:               3 Euro pro Stunde und Person (Schläger und Bälle können kostenfrei geliehen werden)
             Betreuer:            Trainer vor Ort
         Kontakt:             Peschl Josef  unter tel. +49 170 / 7748092 (Abteilungsleiter Tennis / ESV Deggendorf)
@@ -757,29 +817,94 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
                           Nassl Tim unter tel. +49 177 / 7961858 (Betreuer Hochschultennis)
 
 Weitere Infos: Weitere Stunden oder Trainingsangebote können privat angefragt werden
+        `,"en": `
+        Cost: 3 euros per hour and person (rackets and balls can be borrowed free of charge)
+Supervisor: Trainer on site
+Contact:             Peschl Josef on tel. +49 170 / 7748092 (Head of Tennis Department / ESV Deggendorf)
+
+                          Nassl Tim on tel. +49 177 / 7961858 (Supervisor of university tennis)
+
+Further information: Further lessons or training offers can be requested privately
         `},
+        "location": {
+            "name": "ESV Deggendorf; Neusiedlerstraße 17",
+            "maps": "https://maps.app.goo.gl/YyNj5ao1C48c9xYm6",
+            "description": "(ca. 100m donauaufwärts; direkt am Kreisverkehr Richtung Metten)"
+        },
         "organizer":
         {
-            "image": "thd.jpg",
-            "name": "XXX",
-            "email": "XXX",
+            "image": "esv.png",
+            "name": "ESV Deggendorf",
+            "email": "info@esv-deggendorf.de",
             "website": "https://esv-deggendorf.de/"
-        },
-        "type": "in person",
-        "location": {
-            "name": "ESV Deggendorf; Neusiedlerstraße 17; (ca. 100m donauaufwärts; direkt am Kreisverkehr Richtung Metten)",
-            "maps": "https://maps.app.goo.gl/YyNj5ao1C48c9xYm6",
-            "description": ""
         }
+ 
     },
 
 
+
+    {
+        "name": "Beachvolleyball",
+        "date": "calculate:4",
+        "timeStart": "18:00",
+        "timeEnd": "22:00",
+        "descriptionShort": "",
+        "price": "Free",
+        "registration": "no",
+        "type": "in person",
+        "language": "de+en",
+        "images": ["1.jpg", "2.jpeg", "4.jpeg"],
+
+        "descriptionLong": {
+            "de": `
+        
+            `, "en": `
+        
+        `},
+        "location": {
+            "name": "Beachvolleyball-Anlage des TSV Deggendorf, Stadtpark",
+            "maps": "https://maps.app.goo.gl/ZZYm5BGW6woZfXCN7",
+            "description": ""
+        },
+        "organizer":
+        {
+            "image": "thd.jpg",
+            "name": "Phil Lüftner",
+            "email": "phil.lueftner@stud.th-deg.de ",
+            "website": "https://ilearn.th-deg.de/course/view.php?id=14539"
+        }
+
+    },
 
 
 
 
     
 ];
+
+// "descriptionLong": {
+//     "de": `
+            
+        
+//         `,
+//         "en": `
+
+//         `},
+// "location": {
+//     "name": "XXX",
+//         "maps": "XXX",
+//             "description": ""
+// },
+// "organizer":
+// {
+//     "image": "thd.jpg",
+//         "name": "XXX",
+//             "email": "XXX",
+//                 "website": "XXX",
+//                     "whatsapp": "XXX"
+// }
+
+
 
 
 function getLinkElement(link) {
