@@ -276,7 +276,16 @@
 
 
                 const eventLanguage = event.language;
-                const languageEmoji = eventLanguage == 'en' ? '🇺🇸' : '🇩🇪';
+                let languageEmoji = "";
+
+    
+                if (eventLanguage === "de") {
+                    languageEmoji = "🇩🇪";
+                } else if (eventLanguage === "en") {
+                    languageEmoji = "🇺🇸";
+                } else if (eventLanguage === "de+en") {
+                    languageEmoji =  "🇩🇪 🇺🇸";
+                }
 
 
                 document.getElementById('event-name').innerHTML = event.name;
