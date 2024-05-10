@@ -136,7 +136,7 @@
     }
 
     #langueSelect{
-        display: none;
+        /* display: none; */
         position: absolute;
         top: 20px;
         right: 20px;
@@ -145,8 +145,8 @@
 </style>
 
     <div id="langueSelect">
-        <button id="deBtn" onclick="setLanguage('de')">🇩🇪 DE</button>
-        <button id="enBtn" onclick="setLanguage('en')">🇺🇸 EN</button>
+        <button id="deBtn">🇩🇪 DE</button>
+        <button id="enBtn">🇺🇸 EN</button>
     </div>
  
 
@@ -571,8 +571,58 @@ function main() {
 
         }
 
+    
 
+       
+    setLanguage(getLanguage());
+
+    document.getElementById("deBtn").onclick = function () {
+         
+        setLanguage('de')
+    };
+    document.getElementById("enBtn").onclick = function () {
+        document.getElementById("enBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
+        document.getElementById("deBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
+        setLanguage('en')
+    };
+
+
+    function setLanguage(lang) {
+
+        console.log(lang);
+
+        if(lang === "de"){
+            document.getElementById("deBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
+            document.getElementById("enBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
+        }else if(lang === "en"){
+            document.getElementById("enBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
+            document.getElementById("deBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
+        }
         
+        saveLanguage(lang);
+        
+
+
+        // const eventElements = document.querySelectorAll(".event");
+        // eventElements.forEach((element) => {
+        //     const eventLanguageElement = element.querySelector(".event-language");
+        //     const eventLanguage = eventLanguageElement.innerHTML;
+        //     if (lang === "de") {
+        //         if (eventLanguage === "🇺🇸") {
+        //             element.style.display = "none";
+        //         } else {
+        //             element.style.display = "block";
+        //         }
+        //     } else if (lang === "en") {
+        //         if (eventLanguage === "🇩🇪") {
+        //             element.style.display = "none";
+        //         } else {
+        //             element.style.display = "block";
+        //         }
+        //     }
+        // });
+    }
+
 
 
 

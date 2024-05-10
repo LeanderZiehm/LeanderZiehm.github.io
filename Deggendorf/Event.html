@@ -289,8 +289,11 @@
 
 
                 document.getElementById('event-name').innerHTML = event.name;
+
+                const userLanguage = getLanguage();
+                console.log(userLanguage);
                
-                let descriptionLong = event.descriptionLong[eventLanguage];
+                let descriptionLong = event.descriptionLong[userLanguage];
                 if(descriptionLong === undefined){
                     const firstDescriptionLong = Object.values(event.descriptionLong)[0];
                     descriptionLong = firstDescriptionLong;

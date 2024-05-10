@@ -1065,6 +1065,33 @@ function getMyTimeString(index) {
 
 }
 
+// localStorage.clear();
+
+function saveLanguage(language){
+    localStorage.setItem('language', language);
+}
+function getLanguage(){
+
+    const language = localStorage.getItem('language');
+    console.log(language);
+    if (language === null || language === undefined) {
+        console.log('language is null');
+        return getNaviagatorLanguage();
+    }else{
+        return language;
+    }
+}
+
+function getNaviagatorLanguage(){
+    const nav = navigator.language || navigator.userLanguage;
+    console.log(nav);
+
+    if(nav.includes('de')){
+        return 'de';
+    }else{
+        return 'en';
+    }
+}
 
 
 
