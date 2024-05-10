@@ -1,5 +1,5 @@
 //
-
+console.log("eventsJson.js loaded");
 var eventsJson = [
     {
         "name": "Schwitzen im Sitzen",
@@ -1070,6 +1070,8 @@ function getMyTimeString(index) {
 function saveLanguage(language){
     localStorage.setItem('language', language);
 }
+
+console.log("getLanguage() loaded");
 function getLanguage(){
 
     const language = localStorage.getItem('language');

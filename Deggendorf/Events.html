@@ -573,8 +573,11 @@ function main() {
 
     
 
+    //on loaded document set language with event listener
+    document.addEventListener("DOMContentLoaded", setLanguage(getLanguage()));
+
        
-    setLanguage(getLanguage());
+    // setLanguage(getLanguage());
 
     document.getElementById("deBtn").onclick = function () {
          
