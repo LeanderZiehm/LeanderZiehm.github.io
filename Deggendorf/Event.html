@@ -391,7 +391,14 @@
             };
 
             document.getElementById("backBtn").onclick = function () {
-                    window.location.href = "Events.html?event="+ eventParameter;
+
+                if(eventParameter == 'new'|| eventParameter == '' || eventParameter == null){
+                    window.location.href = "Events.html"
+                }else{
+                    window.location.href = "Events.html?event=" + eventParameter;
+                }
+
+                   
             };
 
 
