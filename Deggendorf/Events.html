@@ -11,7 +11,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://leanderziehm.github.io/Deggendorf/Events.html" />
 <meta property="og:description" content="Events for Students at the THD. Sports, cinema and more.">
-<meta property="og:image" content="https://leanderziehm.github.io/Deggendorf/images/X.jpg" />
+<meta property="og:image" content="https://leanderziehm.github.io/Deggendorf/images/OG1.jpg" />
 <!-- <meta property="og:image" content="https://picsum.photos/200/300" /> -->
 <!-- <meta property="og:image:type" content="image/png" /> -->
 <!-- <meta property="og:image:width" content="1200" /> -->
@@ -49,7 +49,7 @@
 
 <style>
 
-     @font-face {
+     /* @font-face {
              src: url("../FredokaOne-Regular.ttf");
              font-family: 'FredokaOne';
     }
@@ -61,7 +61,7 @@
      @font-face {
              src: url("RobotoThin.ttf");
              font-family: 'RobotoThin';
-    }
+    } */
 
 
 
@@ -275,6 +275,11 @@
     }
    
 
+    .event-location{
+        display: none;
+
+    }
+
 
 
     .event-date {
@@ -392,12 +397,12 @@ function main() {
 
         // var eventsHTML = '';
         const eventArray = [];
-    for (var index = 0; index < eventsJson.length; index++) {
-        let event = eventsJson[index];
-        let eventHTML = createEventHTML(event, index);
+    for (var eventID = 0; eventID < eventsJson.length; eventID++) {
+        let event = eventsJson[eventID];
+        let eventHTML = createEventHTML(event, eventID);
 
         let  eventElement = document.createElement('div');
-        eventElement.id = index;
+        eventElement.id = eventID;
         eventElement.className = "event";
         eventElement.innerHTML = eventHTML;
 
@@ -407,39 +412,49 @@ function main() {
            eventElement.querySelector(".event-timeEntry").style.display = "none";
         }
 
-        if(event.timeEnd === undefined){
-            eventElement.querySelector("#timeEnd").style.display = "none";
-        }
+
+
 
 
         
-        
-        if(event.date.startsWith("calculate:")){
-             var numberStr = event.date.split(":")[1]; // Splitting the string and getting the part after the colon
-            var number = parseInt(numberStr);
-            const nextDateString = calculateNextDate(number);
-            // const nextDateString = calculateNextDate(number);
-            // console.log(nextDateString);//"Dienstag,  14.05.2024"       
-            eventElement.querySelector(".event-date").innerHTML = nextDateString+" 🔁 weekly";
-        }
+        eventElement.querySelector("#time").innerHTML = getMyTimeString(eventID);
+
+        // ⏱️ ${ event.timeStart } <span id="timeEnd"></span>
+
 
         
+
+
+        eventElement.querySelector(".event-date").innerHTML = anyDateStringToDateString(event.date);
+
         const dateString = eventElement.querySelector(".event-date").innerHTML;
         const date = getDateFromString(eventElement.querySelector(".event-date").innerHTML);
         eventArray.push({date: date, element: eventElement});
-        // events.appendChild(eventElement);
+
+        if(event.descriptionShort == "" || event.descriptionShort == undefined){
+            // 
+             eventElement.querySelector(".event-descriptionShort").style.display = "none";
+        }
     }
+
+
+
+    const DISABLE_SORTING_BY_DATE_FOR_DEBUGGING = true;
     //sort events by date
-    eventArray.sort((a, b) => a.date - b.date);
+    if(!DISABLE_SORTING_BY_DATE_FOR_DEBUGGING){
+          eventArray.sort((a, b) => a.date - b.date);
+    }
+  
+
+
     eventArray.forEach((event) => {
         events.appendChild(event.element);
     });
 
-    // events.appendChild(eventElement);
 
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -457,7 +472,7 @@ function main() {
                     <div class="event-descriptionShort">${event.descriptionShort} </div>
                     <div class="event-date">${event.date}</div>
                     <div class="event-timeEntry">🚪 ${event.timeEntry}</div>
-                    <div class="event-timeStart">⏱️ ${event.timeStart}<span id="timeEnd"> - ${event.timeEnd}</span></div>
+                    <div id="time"></div>
                    
                     <div class="event-location">${event.location.name}</div>
                     <div class="event-price">${event.price}</div>
@@ -512,11 +527,15 @@ function main() {
             };
 
             //convert event language to emoji
-            const eventLanguage = element.querySelector(".event-language").innerHTML;
+
+            const eventLanguageElement = element.querySelector(".event-language");
+            const eventLanguage = eventLanguageElement.innerHTML;
             if(eventLanguage === "de"){
-                element.querySelector(".event-language").innerHTML = "🇩🇪";
+                eventLanguageElement.innerHTML = "🇩🇪";
             }else if(eventLanguage === "en"){
-                element.querySelector(".event-language").innerHTML = "🇺🇸";
+                eventLanguageElement.innerHTML = "🇺🇸";
+            }else if(eventLanguage === "de+en"){
+                eventLanguageElement.innerHTML = "🇩🇪 🇺🇸";
             }
 
        

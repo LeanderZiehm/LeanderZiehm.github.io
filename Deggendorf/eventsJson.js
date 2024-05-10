@@ -13,13 +13,11 @@ var eventsJson = [
         "images": ["1.jpg", "2.png", "3.png"],
 
         "descriptionLong": { "de": "Wir werfen einen Blick hinter die Kulissen des E-Sport. Wir haben auch wieder Gäste im Studio, die beiden Brüder Simon Schlegl (E-Sportler), Florian Schlegl (Vereinsgründer) und Simon Bauer (Kommentator). Sie wollen uns einen spannenden Einblick in ihren Alltag geben. Du bist ein leidenschaftlicher E-Sportler, E-Sports Fan oder willst einfach mehr über das Thema erfahren? Dann schalte gerne ein, oder komm zu uns an die THD und tauch mit uns in die spannende Welt des E-Sport ein." },
-        "duration": "~2 Stunden",
         "organizer":
         {
             "name": "Doschauher",
             "email":"info@doschauher.de",
-            "website": "https://doschauher.tv/",
-            "ratings": 4.9
+            "website": "https://doschauher.tv/"
         },
         "type": "hybrid",
         "onlineLink": "https://www.youtube.com/watch?v=DlDgj5LRujE",
@@ -60,7 +58,6 @@ var eventsJson = [
     Nominierungen: 2 Oscars
 ` },
         "duration": "133 Min.",
-        "language": "de",
         "organizer":
         {
             "name": "Burning Cinema",
@@ -87,12 +84,10 @@ var eventsJson = [
         "descriptionShort": "Playing Badminton as university sports with students and friends",
         "price": "Free",
         "registration": "required",
-        "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.webp", "3.jpg"],
 
         "descriptionLong": { "en": "registration required. 24 people max." },
-        "duration": "1:30 hours",
         "organizer":
         {
             "name": "Hendran Manimaran",
@@ -117,7 +112,7 @@ var eventsJson = [
         "descriptionShort": "CERN, Switzerland visit - United AI 2024",
         "price": "150€",
         "registration": "required",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpeg", "2.jpg", "3.webp"],
 
         "descriptionLong": {
@@ -128,13 +123,13 @@ var eventsJson = [
 https://forms.gle/YyXBvFQ8wSPSsqy2A
 
 Don't wait, sign up before May 9th, 2024, 23:59 (UTC) to join us on this incredible journey! 🌟` },
-        "duration": "3+ days",
+        "duration": "",
         "organizer":
         {
             "name": "Tushar Tom",
             "email": "thushar.tom.germany@gmail.com",
-            "website": "https://united-ai.net/en/",
-            "ratings": 4.9
+            // "website": "https://forms.gle/YyXBvFQ8wSPSsqy2A"
+            "website": "https://united-ai.net/en/"
         },
         "type": "in person",
         "location": {
@@ -174,7 +169,6 @@ Phantasie- und humorvolles Märchenabenteuer über ein kleines Mädchen, das von
 
                   ` },
         "duration": "119 Min.",
-        "language": "de",
         "organizer":
         {
             "name": "Burning Cinema",
@@ -215,7 +209,6 @@ Die vielfältige, fantastische Welt und der spielerische Geist des legendären R
 
                   ` },
         "duration": "133 Min.",
-        "language": "de",
         "organizer":
         {
             "name": "Burning Cinema",
@@ -255,7 +248,6 @@ Basierend auf der Bestseller-Reihe von Suzanne Collins begeisterten die "Die Tri
 
                   ` },
         "duration": "157 Min.",
-        "language": "de",
         "organizer":
         {
             "name": "Burning Cinema",
@@ -295,7 +287,6 @@ Pixar ist ein Jahr nach RATATOUILLE mit WALL-E erneut ein Meilenstein im Genre d
     Nominierungen: 6 Oscars
                   ` },
         "duration": "98 Min.",
-        "language": "de",
         "organizer":
         {
             "name": "Burning Cinema",
@@ -321,20 +312,27 @@ Pixar ist ein Jahr nach RATATOUILLE mit WALL-E erneut ein Meilenstein im Genre d
         "timeEnd": "20:00",
         "descriptionShort": "Body weight sport like pushups, pullups, dips, squats, etc.",
         "price": "Free",
-        "registration": "required",
+        "registration": "false",
         "repeat": "weekly",
-        "language": "de",
-        "images": ["1.jpg", "2.jpg", "3.png"],
+        "language": "de+en",
+        "images": ["1.jpg", "3.webp", "3.png"],
 
         "descriptionLong": { "de": `
-        Aufbau des Kurses: Warm Up, Geführtes und Freies Training, Workshops, Mobility und Stetching
-Für eine bessere Verständigung haben wir eine WhatsApp-Gruppe eröffnet. Gerne kannst du über den Einladungslink beitreten: (https://chat.whatsapp.com/ClzBlqIiXfwHmjzQgbFAdk).
+In diesem Kurs wirst du alles wichtige zum Thema Calisthenics erlernen. Dieser Kurs bietet die Grundlagen in Basiskraft von Beine bis Oberkörper. In Calisthenics wird hauptsächlich mit dem eigenen Körpergewicht trainiert, dabei spielt das Zusammenspiel aller Muskeln eine wichtige Rolle und trainiert so auch die Koordinationsfähigkeit, Kraftausdauer und vieles mehr.
+
+Aufbau des Kurses: Warm Up, Geführtes und Freies Training, Workshops, Mobility und Stetching
 Wenn du eigenes Equipment hast (z.B. Therabänder, Ringe, etc.) nehmt es gerne mit!
 Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
-|
-In diesem Kurs wirst du alles wichtige zum Thema Calisthenics erlernen. Dieser Kurs bietet die Grundlagen in Basiskraft von Beine bis Oberkörper. In Calisthenics wird hauptsächlich mit dem eigenen Körpergewicht trainiert, dabei spielt das Zusammenspiel aller Muskeln eine wichtige Rolle und trainiert so auch die Koordinationsfähigkeit, Kraftausdauer und vieles mehr.
-        ` },
-        "duration": "2:00 hours",
+        `,
+        "en" : `
+        In this course you will learn everything important about Calisthenics. This course offers the basics in basic strength from legs to upper body. In Calisthenics you train mainly with your own body weight. The interaction of all muscles plays an important role and trains coordination skills, strength endurance and much more.
+
+    Course structure: Warm Up, Guided & Free Training, Workshops, Mobility & Stetching
+    If you have your own equipment (e.g. therabands, rings, etc.) feel free to bring it!
+    provided: Music, fun, motivation & an awesome workout!!!
+        `
+    
+    },
         "organizer":
         {
             "image":"thd.jpg",
@@ -358,17 +356,16 @@ In diesem Kurs wirst du alles wichtige zum Thema Calisthenics erlernen. Dieser K
         "date": "calculate:2",
         "timeStart": "19:15",
         "timeEnd": "20:45",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": { "en": `
         
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -390,16 +387,20 @@ In diesem Kurs wirst du alles wichtige zum Thema Calisthenics erlernen. Dieser K
         "date": "calculate:1",
         "timeStart": "21:00",
         "timeEnd": "23:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
-            "en": `
+            "de": `
+            
         
+        `,
+            "en": `
+
         `},
         "organizer":
         {
@@ -422,11 +423,11 @@ In diesem Kurs wirst du alles wichtige zum Thema Calisthenics erlernen. Dieser K
         "date": "calculate:3",
         "timeStart": "20:30",
         "timeEnd": "22:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
@@ -453,18 +454,17 @@ In diesem Kurs wirst du alles wichtige zum Thema Calisthenics erlernen. Dieser K
         "date": "calculate:5",
         "timeStart": "19:30",
         "timeEnd": "20:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "no",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.png", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
             "en": `
         
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -481,14 +481,14 @@ In diesem Kurs wirst du alles wichtige zum Thema Calisthenics erlernen. Dieser K
     },
     {
     "name": "Schwimmen Elypso",
-    "date": "calculate:2",
+    "date": "calculate:2,3",
     "timeStart": "14:00",
     "timeEnd": "16:30",
     "descriptionShort": "Schwimmen im Swimmbad Elypso",
     "price": "Free",
     "registration": "no",
     "repeat": "weekly",
-    "language": "en",
+    "language": "de+en",
     "images": ["1.jpg", "2.jpg", "3.jpg"],
 
     "descriptionLong": {
@@ -504,7 +504,6 @@ Freier Übungsbetrieb
 
 Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in der Badewelt (Nähere Infos dazu unter: https://www.elypso.de/saunawelt/events-aktionen-saunawelt)
         `},
-    "duration": "2:00 hours",
     "organizer":
     {
         "image": "elipso.jpg",
@@ -525,18 +524,17 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:2",
         "timeStart": "15:00",
         "timeEnd": "17:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "no",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
             "en": `
         Anmeldung: nicht erforderlich
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -558,18 +556,17 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:4",
         "timeStart": "18:00",
         "timeEnd": "20:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
             "en": `
         
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -590,18 +587,17 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:3",
         "timeStart": "17:00",
         "timeEnd": "19:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
             "en": `
         
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -621,18 +617,17 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:3",
         "timeStart": "17:30",
         "timeEnd": "18:45",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
             "en": `
         
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -652,18 +647,17 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:3",
         "timeStart": "19:00",
         "timeEnd": "20:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
             "en": `
         
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -684,18 +678,17 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:4",
         "timeStart": "19:00",
         "timeEnd": "20:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
         "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
             "en": `
         
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -716,18 +709,16 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:4",
         "timeStart": "19:00",
         "timeEnd": "21:00",
-        "descriptionShort": "Playing XXX as university sports with students and friends",
+        "descriptionShort": "",
         "price": "Free",
         "registration": "required",
-        "repeat": "weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
             "en": `
         
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -745,14 +736,14 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
 
     {
         "name": "Tennis",
-        "date": "calculate:1",
+        "date": "calculate:1,4",
         "timeStart": "15:00",
         "timeEnd": "16:00",
         "descriptionShort": "Tennis im freien Übungsbetrieb",
         "price": "3$",
         "registration": "no",
         "repeat": "2 weekly",
-        "language": "en",
+        "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
         "descriptionLong": {
@@ -767,7 +758,6 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
 
 Weitere Infos: Weitere Stunden oder Trainingsangebote können privat angefragt werden
         `},
-        "duration": "2:00 hours",
         "organizer":
         {
             "image": "thd.jpg",
@@ -790,6 +780,13 @@ Weitere Infos: Weitere Stunden oder Trainingsangebote können privat angefragt w
 
     
 ];
+
+
+function getLinkElement(link) {
+    return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+}
+
+
 
 
 function getOrganizerProfileImagePath(index){
@@ -815,7 +812,7 @@ function calculateDayNameFromDateString(dateString){
 }
 
 
-function calculateNextDate(dayNumber,n = 1, englishDay=false) {
+function calculateNextDate(dayNumber,useComma = false,n = 1, englishDay=false) {
     var nextThreeTuesdays = [];
     var today = new Date();
     var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
@@ -839,7 +836,7 @@ function calculateNextDate(dayNumber,n = 1, englishDay=false) {
 
 
 
-function formatDate(date, englishDay = false) {
+function formatDate(date, englishDay = false, useComma = false) {
     const options = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
     const formattedDateDe = date.toLocaleDateString('de-DE',options);
     const formattedDateEn = date.toLocaleDateString('en-EN',options);
@@ -852,7 +849,12 @@ function formatDate(date, englishDay = false) {
     }
     const formattedDate = formattedDateDe.split(',')[1];
 
-    return day + ', ' + formattedDate;
+    if (useComma) {
+        return day + ', ' + formattedDate;
+    } else {
+        return day + ' ' + formattedDate;
+    }
+
 }
 
 // // Example usage
@@ -876,3 +878,73 @@ function getDateFromString(str) {
 
     return date    
 }
+
+function calculateNextDatesFromDateString(calculateString){
+    let nextDateString = ''
+
+    // console.log(calculateString);
+        var numberStr = calculateString.split(":")[1]; // Splitting the string and getting the part after the colon
+        if (numberStr.includes(',')) {
+
+            const nextDateStrings = numberStr.split(',').map(function (numberText) {
+                var number = parseInt(numberText);
+                return calculateNextDate(number);
+            });
+            nextDateString = nextDateStrings.join(", ");
+
+        } else {
+            var number = parseInt(numberStr);
+            nextDateString = calculateNextDate(number);
+        }
+
+        return nextDateString;
+
+    
+}
+
+function anyDateStringToDateString(dateString){
+    if(dateString.startsWith("calculate:")){
+        return calculateNextDatesFromDateString(dateString) + " 🔁 weekly";
+    }else{
+        return dateString;
+    }
+}
+
+///
+
+function calculateTimeEnd(startTime, duration) {
+
+    const minutesNumberString = duration.match(/\d+/)[0];  //"133 Min." => 133
+    const minutesToAdd = parseInt(minutesNumberString);
+
+    const [hours, minutes] = startTime.split(':').map(Number); //"19:30" => [19,30]
+    const totalMinutes = hours * 60 + minutes + minutesToAdd;
+    const newHours = Math.floor(totalMinutes / 60);
+    const newMinutes = totalMinutes % 60;
+    const formattedTime = `${String(newHours).padStart(2, '0')}:${String(newMinutes).padStart(2, '0')}`;
+    return formattedTime; // "21:43"
+}
+
+
+function getMyTimeString(index) {
+    let event = eventsJson[index];
+
+    let timeEnd = "";
+    if (event.timeEnd) {
+        timeEnd = " - " + event.timeEnd;
+    } else if (event.timeStart && event.duration) {
+        timeEnd = " - " + calculateTimeEnd(event.timeStart, event.duration);
+    }
+    const myTimeString = "⏱️ " + event.timeStart + timeEnd
+    return myTimeString;
+
+}
+
+
+
+
+// Example usage:
+// const addedTime = "133 Min.";
+// const baseTime = "19:30";
+// const newTime = calculateTimeEnd(baseTime,addedTime);
+// console.log(newTime); // Output: 21:43
