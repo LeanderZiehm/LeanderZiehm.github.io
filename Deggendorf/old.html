@@ -3,74 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Events Deggendorf</title>
+<title>Event List</title>
 <script src="eventsJson.js"></script>
 <script src="../test.js" type="text/javascript" charset="utf-8"></script>
-
-<meta property="og:title" content="Events Deggendorf" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://leanderziehm.github.io/Deggendorf/Events.html" />
-<meta property="og:description" content="Events for Students at the THD. Sports, cinema and more.">
-<meta property="og:image" content="https://leanderziehm.github.io/Deggendorf/images/OG1.jpg" />
-<!-- <meta property="og:image" content="https://picsum.photos/200/300" /> -->
-<!-- <meta property="og:image:type" content="image/png" /> -->
-<!-- <meta property="og:image:width" content="1200" /> -->
-<!-- <meta property="og:image:width" content="300" /> -->
-<!-- <meta property="og:image:height" content="630" /> -->
-<!-- <meta property="og:image:height" content="300" /> -->
 
 </head>
 <body>
 
 
-<script type="text/javascript">
-    
-//     // Array of font names
-// const fonts = ["Arial", "Times New Roman", "Verdana", "Courier New", "Georgia"];
-
-// // Index to keep track of the current font
-// let currentFontIndex = 0;
-
-// // Function to change the font
-// function changeFont() {
-//     document.body.style.fontFamily = fonts[currentFontIndex];
-//     currentFontIndex = (currentFontIndex + 1) % fonts.length;
-// }
-
-// // Event listener for the 'e' key press
-// document.addEventListener('keydown', function(event) {
-//     if (event.key === 'e') {
-//         changeFont();
-//     }
-// });
-
-</script>
-
-
 <style>
-
-     /* @font-face {
-             src: url("../FredokaOne-Regular.ttf");
-             font-family: 'FredokaOne';
-    }
-    @font-face {
-             src: url("Reef.otf");
-             font-family: 'Reef';
-    }
-
-     @font-face {
-             src: url("RobotoThin.ttf");
-             font-family: 'RobotoThin';
-    } */
-
-
-
     body {
-        /*font-family: RobotoThin, sans-serif;*/
-        /*font-family: Reef, sans-serif;*/
-        /*font-family: FredokaOne, sans-serif;*/
-        /*font-family: Arial, sans-serif;*/
-        font-family: Verdana, sans-serif;
+        font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
     }
@@ -80,7 +23,6 @@
     }
 
     #filters {
-        display: none;
         /* position: fixed; */
         width: 200px;
         /* background-color: rgba(0, 0, 0, 0.05); */
@@ -121,7 +63,6 @@
     }
 
     #toggleCollapseFilters {
-        display: none;
         position: fixed;
         top: 20px;
         left: 20px;
@@ -131,12 +72,9 @@
         width: 30px;
         height: 30px;
         z-index: 1000;
-        padding: 0px;
-        margin: 0px;
     }
 
     #langueSelect{
-        display: none;
         position: absolute;
         top: 20px;
         right: 20px;
@@ -151,7 +89,7 @@
  
 
     <div class="container">
-        <button id="toggleCollapseFilters">◀</button>
+        <button id="toggleCollapseFilters">X</button>
         <div id="filters">
             <h2>Filters</h2>
             <label><input type="checkbox" id="free">Free</label>
@@ -159,7 +97,7 @@
 
 
             
-            <label>📅:<input type="date" id="date"></label>
+            <label>Date:<input type="date" id="date"></label>
             <label>
                 Category:
                 <select id="category">
@@ -233,8 +171,7 @@
     }
 
     .event-title{
-        margin-top: 10px;
-        /* margin: 20px 0px 00px 0px; */
+        margin: 20px 0px 10px 0px;
         /* padding-bottom: 10px;   1*/
         font-size: 24px;
         font-weight: bold;
@@ -250,17 +187,7 @@
         /* height: 200px; */
         aspect-ratio: 1;
         max-width: 30vw;
-        max-height: 40vw;
-        /* disble dragging the image */
-        /* user-drag: none; */
-        /* center image vertically  */
-        /* vertical-align: middle; */
-           /* position: relative; */
-    /* top: 0; */
-    /* bottom: 0; */
-    /* margin: auto; */
-
-
+        /* max-width: ; */
     }
 
 
@@ -277,11 +204,6 @@
     }
    
 
-    .event-location{
-        display: none;
-
-    }
-
 
 
     .event-date {
@@ -291,8 +213,6 @@
 
     
     .event-actions {
-         display: none;
-   
         /* background-color: red; */
         position: absolute;
         right: 40px;
@@ -336,7 +256,6 @@
 
 
     #addEventBtn {
-        display: none;
         background-color: rgb(138, 43, 226, 1);
         color: rgba(255, 255, 255, 1);
         padding: 10px;
@@ -367,115 +286,19 @@
     </div>
 
     <script>
-
-
-
-
-function main() {
-
-        document.getElementById("toggleCollapseFilters").onclick = function () {
-
-            const filters = document.getElementById("filters");
-            const filterToggleBtn = document.getElementById("toggleCollapseFilters");
-
-            const filtersCollapsed = filters.style.display === "none";
-
-            if (filtersCollapsed) {
-                filters.style.display = "block";
-                filterToggleBtn.innerHTML = "◀";
-                
-            } else {
-                filters.style.display = "none";
-                filterToggleBtn.innerHTML = "🔍";
-            }
-
-            //set innerHTML of button to "+" or "X" depending on the state of the filters
-
-            // document.getElementById("filters").classList.toggle("collapsed");
-            // document.getElementById("filters").style.display = "none";
-
-        };
-        const events = document.getElementById("events");
-
-        // var eventsHTML = '';
-        const eventArray = [];
-    for (var eventID = 0; eventID < eventsJson.length; eventID++) {
-        let event = eventsJson[eventID];
-        let eventHTML = createEventHTML(event, eventID);
-
-        let  eventElement = document.createElement('div');
-        eventElement.id = eventID;
-        eventElement.className = "event";
-        eventElement.innerHTML = eventHTML;
-
-
-        // //hide timeEntry if it does not exist in json
-        if(event.timeEntry === undefined){
-           eventElement.querySelector(".event-timeEntry").style.display = "none";
-        }
-
-
-
-
-
-        
-        eventElement.querySelector("#time").innerHTML = getMyTimeString(eventID);
-
-        // ⏱️ ${ event.timeStart } <span id="timeEnd"></span>
-
-
-        
-
-
-        eventElement.querySelector(".event-date").innerHTML = anyDateStringToDateString(event.date);
-
-        const dateString = eventElement.querySelector(".event-date").innerHTML;
-        const date = getDateFromString(eventElement.querySelector(".event-date").innerHTML);
-        eventArray.push({date: date, element: eventElement});
-
-        if(event.descriptionShort == "" || event.descriptionShort == undefined){
-            // 
-             eventElement.querySelector(".event-descriptionShort").style.display = "none";
-        }
-    }
-
-
-
-    const DISABLE_SORTING_BY_DATE_FOR_DEBUGGING = true;
-    //sort events by date
-    if(!DISABLE_SORTING_BY_DATE_FOR_DEBUGGING){
-          eventArray.sort((a, b) => a.date - b.date);
-    }
-  
-
-
-    eventArray.forEach((event) => {
-        events.appendChild(event.element);
-    });
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-    function createEventHTML(event, index) {
-        // console.log(index);
-        let eventHTML = `
-       
+function createEventHTML(event,index) {
+    console.log(index);
+    return `
+        <div class="event" id="${index}">
             <div class="event-header">
                  <img class="clickable"  id="thumbnail" src="images/${index}/${event.images[0]}" alt="img">
                 
                 <div class="details-container" >
                     <div class="event-title">${event.name}</div>
-                    <div class="event-descriptionShort">${event.descriptionShort} </div>
                     <div class="event-date">${event.date}</div>
-                    <div class="event-timeEntry">🚪 ${event.timeEntry}</div>
-                    <div id="time"></div>
-                   
+                    <div class="event-time">Einlass: ${event.timeEntry}</div>
+                    <div class="event-time">Start: ${event.timeStart}</div>
+                    <div class="event-descriptionShort">${event.descriptionShort} </div>
                     <div class="event-location">${event.location.name}</div>
                     <div class="event-price">${event.price}</div>
                     <div class="event-language">${event.language}</div>
@@ -492,22 +315,49 @@ function main() {
           
               
             </div>
-  
+        </div>
     `;
+}
 
-        return eventHTML;
 
-    }
+
+
+
+function main() {
+
+        document.getElementById("toggleCollapseFilters").onclick = function () {
+
+            const filters = document.getElementById("filters");
+            const filterToggleBtn = document.getElementById("toggleCollapseFilters");
+
+            const filtersCollapsed = filters.style.display === "none";
+
+            if (filtersCollapsed) {
+                filters.style.display = "block";
+                filterToggleBtn.innerHTML = "X";
+                
+            } else {
+                filters.style.display = "none";
+                filterToggleBtn.innerHTML = "+";
+            }
+
+            //set innerHTML of button to "+" or "X" depending on the state of the filters
+
+            // document.getElementById("filters").classList.toggle("collapsed");
+            // document.getElementById("filters").style.display = "none";
+
+        };
+
     
 
-    
 
+        
+        const events = document.getElementById("events");
 
-            // var eventsHTML =  eventsJson.map((event, index) => createEventHTML(event, index)).join('');
-            // events.innerHTML += eventsHTML;
-
-          
-      
+        for (let i = 0; i < 3; i++) { //example data repeat
+            var eventsHTML =  eventsJson.map((event, index) => createEventHTML(event, index)).join('');
+            events.innerHTML += eventsHTML;
+        }
 
         //get all events as elements
         const eventElements = document.querySelectorAll(".event");
@@ -529,51 +379,14 @@ function main() {
             };
 
             //convert event language to emoji
-
-            const eventLanguageElement = element.querySelector(".event-language");
-            const eventLanguage = eventLanguageElement.innerHTML;
+            const eventLanguage = element.querySelector(".event-language").innerHTML;
             if(eventLanguage === "de"){
-                eventLanguageElement.innerHTML = "🇩🇪";
+                element.querySelector(".event-language").innerHTML = "🇩🇪";
             }else if(eventLanguage === "en"){
-                eventLanguageElement.innerHTML = "🇺🇸";
-            }else if(eventLanguage === "de+en"){
-                eventLanguageElement.innerHTML = "🇩🇪 🇺🇸";
+                element.querySelector(".event-language").innerHTML = "🇺🇸";
             }
-
-       
-      
 
         });
-
-
-
-         const queryParams = new URLSearchParams(window.location.search);
-        const eventParameter = queryParams.get('event');
-
-        if (eventParameter == 'new') {
-            // document.getElementById('event-name').innerHTML = "New Event";
-
-        } else {
-            // console
-            const eventIDScrollTo = eventParameter;
-            const element = document.getElementById(eventIDScrollTo);
-
-            
-            if (element) { 
-                const elementPosition = element.getBoundingClientRect().top;
-                const possitionToScroll = elementPosition - 200;
-                window.scrollTo({
-                    top: possitionToScroll
-                    // behavior: 'smooth' // Optionally, you can use 'smooth' for smooth scrolling
-                });
-            }
-
-
-        }
-
-
-        
-
 
 
        
@@ -589,10 +402,7 @@ function main() {
         element.onclick = function () {
             window.location.href = "Event.html?event=" + element.parentElement.parentElement.id;
         };
-
-        element.setAttribute('draggable', false);
     });
-
 
 
      
