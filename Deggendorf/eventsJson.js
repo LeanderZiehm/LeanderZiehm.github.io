@@ -1028,7 +1028,7 @@ function calculateNextDatesFromDateString(calculateString){
 
 function anyDateStringToDateString(dateString){
     if(dateString.startsWith("calculate:")){
-        return calculateNextDatesFromDateString(dateString) + "<div>🔁 weekly</div>";
+        return calculateNextDatesFromDateString(dateString) + "<br/>🔁 weekly";
     }else{
         return dateString;
     }
