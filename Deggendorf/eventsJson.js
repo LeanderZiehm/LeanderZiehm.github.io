@@ -79,8 +79,8 @@ var eventsJson = [
     {
         "name": "Badminton",
         "date": "calculate:3",
-        "timeStart": "5:30PM",
-        "timeEnd": "7:00PM",
+        "timeStart": "17:30",
+        "timeEnd": "19:00",
         "descriptionShort": "Playing Badminton as university sports with students and friends",
         "price": "Free",
         "registration": "required",
@@ -803,7 +803,6 @@ Advanced group: 20:00-21:00 pm`},
         "descriptionShort": "Tennis im freien Übungsbetrieb",
         "price": "3$",
         "registration": "no",
-        "repeat": "2 weekly",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -1029,7 +1028,7 @@ function calculateNextDatesFromDateString(calculateString){
 
 function anyDateStringToDateString(dateString){
     if(dateString.startsWith("calculate:")){
-        return calculateNextDatesFromDateString(dateString) + " 🔁 weekly";
+        return calculateNextDatesFromDateString(dateString) + "<div>🔁 weekly</div>";
     }else{
         return dateString;
     }
