@@ -7,12 +7,11 @@
 <script src="eventsJson.js"></script>
 <script src="../test.js" type="text/javascript" charset="utf-8"></script>
 
-<meta property="og:title" content="Events Deggendorf" />
+<meta property="og:title" content="Student Events Deggendorf" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://leanderziehm.github.io/Deggendorf/Events.html" />
 <meta property="og:description" content="Events for Students at the THD. Sports, cinema and more.">
 <meta property="og:image" content="https://leanderziehm.github.io/Deggendorf/images/OG2.jpg" />
-<!-- <meta property="og:image" content="https://picsum.photos/200/300" /> -->
 <!-- <meta property="og:image:type" content="image/png" /> -->
 <!-- <meta property="og:image:width" content="1200" /> -->
 <!-- <meta property="og:image:width" content="300" /> -->
@@ -250,7 +249,18 @@
         /* height: 200px; */
         aspect-ratio: 1;
         max-width: 30vw;
-        max-height: 40vw;
+        max-height: 30vw;
+        /* max-height: 40vw; */
+
+        /* width: 30%; */
+        object-fit: cover;
+
+        /* centered and square */
+        /* display: block;
+        margin: auto; */
+
+
+
         /* disble dragging the image */
         /* user-drag: none; */
         /* center image vertically  */
@@ -349,6 +359,12 @@
         transform: translateX(-50%);
     }
 
+
+    .event-language{
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+    }
    
     
 
@@ -571,39 +587,47 @@ function main() {
 
         }
 
-    
 
-    //on loaded document set language with event listener
-    document.addEventListener("DOMContentLoaded", setLanguage(getLanguage()));
+    const DISABLE_LANGUAGE_FOR_NOW = true;
+    if(DISABLE_LANGUAGE_FOR_NOW){
+        document.getElementById("langueSelect").style.display = "none";
+    }else{
 
-       
-    // setLanguage(getLanguage());
-
-    document.getElementById("deBtn").onclick = function () {
-         
-        setLanguage('de')
-    };
-    document.getElementById("enBtn").onclick = function () {
-        document.getElementById("enBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
-        document.getElementById("deBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
-        setLanguage('en')
-    };
+        //on loaded document set language with event listener
+        document.addEventListener("DOMContentLoaded", setLanguage(getLanguage()));
 
 
-    function setLanguage(lang) {
+        // setLanguage(getLanguage());
 
-        console.log(lang);
+        document.getElementById("deBtn").onclick = function () {
 
-        if(lang === "de"){
-            document.getElementById("deBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
-            document.getElementById("enBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
-        }else if(lang === "en"){
+            setLanguage('de')
+        };
+        document.getElementById("enBtn").onclick = function () {
             document.getElementById("enBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
             document.getElementById("deBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
-        }
-        
-        saveLanguage(lang);
-        
+            setLanguage('en')
+        };
+
+
+        function setLanguage(lang) {
+
+            console.log(lang);
+
+            if (lang === "de") {
+                document.getElementById("deBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
+                document.getElementById("enBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
+            } else if (lang === "en") {
+                document.getElementById("enBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
+                document.getElementById("deBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
+            }
+
+            saveLanguage(lang);
+
+
+    }
+
+    
 
 
         // const eventElements = document.querySelectorAll(".event");
