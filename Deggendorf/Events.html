@@ -454,7 +454,13 @@ function main() {
 
         const dateString = eventElement.querySelector(".event-date").innerHTML;
         const date = getDateFromString(eventElement.querySelector(".event-date").innerHTML);
-        eventArray.push({date: date, element: eventElement});
+
+        //only add events that are in the future
+        const eventIsInFuture = date > new Date();
+        if(eventIsInFuture){
+             eventArray.push({ date: date, element: eventElement });
+        }
+       
 
         if(event.descriptionShort == "" || event.descriptionShort == undefined){
             // 
