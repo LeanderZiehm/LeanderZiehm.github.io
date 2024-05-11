@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collapsible Tree View</title>
+<style>
+  .tree ul {
+    list-style: none;
+    padding-left: 20px;
+  }
+  .tree li {
+    position: relative;
+  }
+  .tree li:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -10px;
+    border-left: 1px solid #000;
+    height: 100%;
+  }
+  .tree li:last-child:before {
+    height: 20px;
+  }
+  .tree li:last-child:before, .tree li:last-child:after {
+    display: none;
+  }
+  .tree li:after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    border-top: 1px solid #000;
+    width: 10px;
+  }
+  .tree li.collapsed > ul {
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div class="tree" id="tree"></div>
+
+<script>
+  // Sample JSON data
+  var jsonData = [
+    {
+      "name": "Parent 1",
+      "children": [
+        {
+          "name": "Child 1.1"
+        },
+        {
+          "name": "Child 1.2"
+        }
+      ]
+    },
+    {
+      "name": "Parent 2",
+      "children": [
+        {
+          "name": "Child 2.1"
+        },
+        {
+          "name": "Child 2.2"
+        }
+      ]
+    }
+  ];
+
+  function createTree(container, data) {
+    data.forEach(function(item) {
+      var li = document.createElement("li");
+      li.textContent = item.name;
+
+      if (item.children) {
+        li.classList.add("parent");
+        var ul = document.createElement("ul");
+        createTree(ul, item.children);
+        li.appendChild(ul);
+      }
+
+      container.appendChild(li);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var treeContainer = document.getElementById("tree");
+    createTree(treeContainer, jsonData);
+
+    treeContainer.addEventListener("click", function(event) {
+      var target = event.target;
+      if (target.classList.contains("parent")) {
+        target.classList.toggle("collapsed");
+      }
+    });
+  });
+</script>
+</body>
+</html>

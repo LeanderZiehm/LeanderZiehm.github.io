@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="treeview.css" />
+	<script src="treeview.js"></script>
+</head>
+<body>
+	<div id="tree"></div>
+
+
+	<script>
+		
+		var tree = [{
+  name: 'Vegetables',
+  children: []
+  }, {
+  name: 'Fruits',
+  children: [{
+    name: 'Apple',
+    children: []
+  }, {
+    name: 'Orange',
+    children: []
+  }, {
+    name: 'Lemon',
+    children: []
+  }]
+  }, {
+  name: 'Candy',
+  children: [{
+    name: 'Gummies',
+    children: []
+  }, {
+    name: 'Chocolate',
+    children: [{
+    name: 'M & M\'s',
+    children: []
+    }, {
+    name: 'Hershey Bar',
+    children: []
+    }]
+  }, ]
+  }, {
+  name: 'Bread',
+  children: []
+}];
+
+// Create the tree view.
+
+var t = new TreeView(tree, 'tree');
+// 
+// Events available.
+
+t.on('select', function (target,data) { 
+  // alert('select'); 
+});
+t.on('expand', function (target,leaves) { 
+  // alert('expand'); 
+});
+t.on('expandAll', function () { 
+  // alert('expand'); 
+});
+t.on('collapse', function (target,leaves) { 
+  // alert('collapse'); 
+});
+t.on('collapseAll', function () { 
+  // alert('collapse'); 
+});
+	</script>
+	
+</body>
+</html>
