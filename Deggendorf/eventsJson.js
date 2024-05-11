@@ -129,7 +129,7 @@ Don't wait, sign up before May 9th, 2024, 23:59 (UTC) to join us on this incredi
             "name": "Tushar Tom",
             "email": "thushar.tom.germany@gmail.com",
             // "website": "https://forms.gle/YyXBvFQ8wSPSsqy2A"
-            "website": "https://united-ai.net/en/"
+            "website": "https://forms.gle/YyXBvFQ8wSPSsqy2A"
         },
         "type": "in person",
         "location": {
