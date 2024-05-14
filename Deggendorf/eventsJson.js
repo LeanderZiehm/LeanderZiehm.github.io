@@ -38,7 +38,7 @@ var eventsJson = [
         "timeEntry": "19:00",
         "timeStart": "19:30",
         "descriptionShort": "Studentenkino: Die Phantastischen Tierwesen führen uns zurück in die magische Welt von Harry Potter",
-        "price": "5€",
+        "price": "2€",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "3.webp"],
 
@@ -147,7 +147,7 @@ Don't wait, sign up before May 9th, 2024, 23:59 (UTC) to join us on this incredi
         "timeEntry": "19:00",
         "timeStart": "19:30",
         "descriptionShort": "Studentenkino: Schoner Anime Film von Studio Ghibli.",
-        "price": "5€",
+        "price": "2€",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "5.jpg"],
 
@@ -191,7 +191,7 @@ Phantasie- und humorvolles Märchenabenteuer über ein kleines Mädchen, das von
         "timeEntry": "19:00",
         "timeStart": "19:30",
         "descriptionShort": "Studentenkino: D&D Rollenspeil Film.",
-        "price": "5€",
+        "price": "2€",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "3.webp"],
 
@@ -230,7 +230,7 @@ Die vielfältige, fantastische Welt und der spielerische Geist des legendären R
         "timeEntry": "19:00",
         "timeStart": "19:30",
         "descriptionShort": "Studentenkino: Die Prequel zu der Hunger Games Fimreihe.",
-        "price": "5€",
+        "price": "2€",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -269,7 +269,7 @@ Basierend auf der Bestseller-Reihe von Suzanne Collins begeisterten die "Die Tri
         "timeEntry": "19:00",
         "timeStart": "19:30",
         "descriptionShort": "Studentenkino: Der Letzte räumt die Erde auf",
-        "price": "5€",
+        "price": "2€",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -801,7 +801,7 @@ Advanced group: 20:00-21:00 pm`},
         "timeStart": "15:00",
         "timeEnd": "16:00",
         "descriptionShort": "Tennis im freien Übungsbetrieb",
-        "price": "3$",
+        "price": "3€",
         "registration": "no",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],

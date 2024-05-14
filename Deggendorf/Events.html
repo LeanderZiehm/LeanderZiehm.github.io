@@ -217,6 +217,7 @@
         border-radius: 20px;
 
         position: relative;
+
        
     }
 
@@ -229,7 +230,9 @@
     }
 
     .details-container *{
-        padding: 2px;       
+        padding: 2px;
+        /* make non selectable  */
+        user-select: none;
     }
 
     .event-title{
@@ -243,39 +246,6 @@
     .event-header {
         display: flex;
     }
-    
-    #thumbnail {
-        border-radius: 20px;
-        width: 200px; 
-        /* height: 200px; */
-        aspect-ratio: 1;
-        max-width: 30vw;
-        max-height: 30vw;
-        /* max-height: 40vw; */
-
-        /* width: 30%; */
-        object-fit: cover;
-
-        /* centered and square */
-        /* display: block;
-        margin: auto; */
-
-
-
-        /* disble dragging the image */
-        /* user-drag: none; */
-        /* center image vertically  */
-        /* vertical-align: middle; */
-           /* position: relative; */
-    /* top: 0; */
-    /* bottom: 0; */
-    /* margin: auto; */
-
-
-    }
-
-
-
     .event-title {
         font-size: 18px;
         font-weight: bold;
@@ -287,19 +257,60 @@
         font-size: 14px;
         /* background-color: lightblue; */
     }
-   
 
     .event-location{
         display: none;
-
     }
-
-
-
     .event-date {
         /* transform: translate(0px, 15px); */
-    
     }
+    
+
+    #thumbnail {
+        border-radius: 20px;
+        width: 200px; 
+        aspect-ratio: 1;
+        max-width: 30vw;
+        max-height: 30vw;
+
+        
+
+
+        /* object-fit: cover; #no stretching but cuts of borders */
+        /* object-fit: contain; # shows fill but adds transparent boderes at the side */
+        /* object-fit: fill; # seems the same as default */
+        /* object-fit: scale-down; shows all but borders */
+        /* object-fit: none; #trash  */
+        /* object-fit: inherit; */
+        /* object-fit: initial; */
+        /* object-fit: unset; */
+
+
+
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        /* centered and square */
+        /* display: block;
+        margin: auto; */
+
+
+        /* make image keep it's aspect ratio
+        max-width: 30vw; 
+        max-height: 30vw; 
+        width: auto;
+        height: 150px;
+        max-width: 100%; 
+        max-height: 100%; 
+        object-fit: contain;  */
+    }
+    .clickable {
+        cursor: pointer;
+    }
+    .clickable:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+    }
+
+
+
 
     
     .event-actions {
@@ -339,12 +350,6 @@
 
 
 
-    .clickable {
-        cursor: pointer;
-    }
-    .clickable:hover {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
 
 
     #addEventBtn {
@@ -502,7 +507,7 @@ function main() {
             <div class="event-header">
                  <img class="clickable"  id="thumbnail" src="images/${index}/${event.images[0]}" alt="img">
                 
-                <div class="details-container" >
+                <div class="details-container clickable" >
                     <div class="event-title">${event.name}</div>
                     <div class="event-descriptionShort">${event.descriptionShort} </div>
                     <div class="event-date">${event.date}</div>
