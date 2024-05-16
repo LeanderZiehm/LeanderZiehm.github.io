@@ -899,12 +899,172 @@ Further information: Further lessons or training offers can be requested private
 
     },
 
+        {
+        "name": "Evening of Politics",
+        "date": "17.05.2024",
+        "timeStart": "19:00",
+        "timeEnd": "",
+        "price": "free",
+        "category":"international",
+        "registration": "no",
+        "type": "inPerson",
+        "language": "en",
+        "images": ["eu.webp"],
+
+        "descriptionLong": {
+        "en": `
+        Are you ready to make your voice heard in the upcoming European election?
+
+Join us for an electrifying event designed to inform, engage, and celebrate democracy!
+
+ℹ️ *Information Season:* Get clued in on the issues that matter most in the 2024 European election. Our knowledgeable speakers will provide insights, answer questions, and help you understand the importance of your vote.
+
+🎮 *Minigames:* Who said politics can't be fun? Test your knowledge and compete in engaging minigames designed to entertain and educate. Prizes await the most politically savvy participants!
+
+🎉 *Aftershow Party:* After all the excitement, it's time to unwind and celebrate! Enjoy delicious finger food, refreshing drinks, and mingle with fellow attendees. Let's toast to democracy!
+
+📸 *Event Photographer:* Capture the memorable moments of the evening with our professional photographer. Strike a pose, smile, and immortalize your commitment to civic engagement.
+
+Don't miss out on this unique opportunity to become informed, empowered, and entertained. Mark your calendars, invite your friends, and let's make a difference together! See you there! 🌟 #ElectionAwareness #EuropeanElection2024 #DemocracyInAction
+        `},
+        "location": {
+            "name": "Finkenhof",
+            "maps": "https://maps.app.goo.gl/PURLofEN2hsnaPzC7",
+            "description": ""
+        },
+        "organizer":
+        {
+            "name": "ESN Deggendorf",
+            "image": "esn.jpg",
+            "email": "",
+            "website": "https://www.instagram.com/esn_deggendorf/"
+        }
+
+    },
+
+      {
+        "name": "Hiking Extravaganza: Przewalski Horses to Großer Falkenstein",
+        "date": "18.05.2024",
+        "timeStart": "11:00",
+        "timeEnd": "",
+        "price": "free",
+        "category":"international",
+        "registration": "no",
+        "type": "inPerson",
+        "language": "en",
+        "images": ["hike1.jpg", "hike2.jpg"],
+
+        "descriptionLong": {
+        "en": `
+        Hey, fellow outdoor enthusiasts!
+
+Get ready to lace up your boots and embrace the great outdoors with an epic hike organised by ISN Regensburg, ESN Ingolstadt and ESN Deggendorf!
+We're embarking on a journey from the mesmerising realm of Przewalski horses through the historic trails of the Auerochsen up to the majestic peak of Großer Falkenstein in Lower Bavaria.
+
+🐴 Starting Point: Przewalski Horses Sanctuary
+Our adventure kicks off amidst the serene landscapes of the Przewalski horses' sanctuary. Surrounded by nature's wonders, we'll soak in the beauty of these magnificent creatures before we hit the trails.
+
+🌿 Scenic Route: Auerochsen Trails
+As we trek along the Auerochsen trails, expect breathtaking views and encounters with Bavaria's rich wildlife. From lush forests to rolling hills, every step promises a discovery and a photo-worthy moment.
+
+🏔 Summit Destination: Großer Falkenstein
+Our ultimate goal awaits atop the towering Großer Falkenstein. With its panoramic vistas and sweeping landscapes, reaching the summit will be a triumph worth celebrating. Don't forget your camera to capture the awe-inspiring views!
+
+👟 Details:
+Meeting Point: Deggendorf Central Station
+Difficulty Moderate
+What to Bring: Water, snacks, sturdy hiking boots, sunscreen, camera, and a sense of adventure!
+Join us for a day of camaraderie, exploration, and unforgettable memories. Whether you're a seasoned hiker or just starting, this is an opportunity to connect with nature and fellow students while experiencing the best of Bavaria's outdoors.
+
+See you on the trails!
+        `},
+        "location": {
+            "name": "Deggendorf Central Station",
+            "maps": "https://maps.app.goo.gl/CRb6bsdRCKB4s51s6",
+            "description": ""
+        },
+        "organizer":
+        {
+            "name": "ESN Deggendorf",
+            "image": "esn.jpg",
+            "email": "",
+            "website": "https://www.instagram.com/esn_deggendorf/"
+        }
+
+    },
+
+      {
+        "name": "BBQ day with friends",
+        "date": "21.05.2024",
+        "timeStart": "19:30",
+        "timeEnd": "",
+        "price": "free",
+        "category":"international",
+        "registration": "no",
+        "type": "inPerson",
+        "language": "en",
+        "images": ["bbq.jpg"],
+
+        "descriptionLong": {
+        "en": `
+        Join us for great company, and delicious food off the grill. Couldn't have asked for a better way to spend the day. Cheers to summer vibes and good times! 🥳
+
+P.S Dont forget to bring your own food😉😋
+        `},
+        "location": {
+            "name": "Studierendenviertel",
+            "maps": "https://maps.app.goo.gl/mGwNN3vor2DweJKF8",
+            "description": ""
+        },
+        "organizer":
+        {
+            "name": "ESN Deggendorf",
+            "image": "esn.jpg",
+            "email": "",
+            "website": "https://www.instagram.com/esn_deggendorf/"
+        }
+
+    },
+
+
 
 
 
     
 ];
 
+
+
+    //   {
+    //     "name": "XXX",
+    //     "date": "XXX",
+    //     "timeStart": "19:00",
+    //     "timeEnd": "21:00",
+    //     "price": "free",
+    //     "category":"international",
+    //     "registration": "no",
+    //     "type": "inPerson",
+    //     "language": "en",
+    //     "images": ["1.jpg", "2.jpg"],
+
+    //     "descriptionLong": {
+    //     "en": `
+        
+    //     `},
+    //     "location": {
+    //         "name": "XXX",
+    //         "maps": "https://maps.app.goo.gl/ZZYm5BGW6woZfXCN7",
+    //         "description": ""
+    //     },
+    //     "organizer":
+    //     {
+    //         "name": "ESN Deggendorf",
+    //         "image": "esn.jpg",
+    //         "email": "",
+    //         "website": "https://www.instagram.com/esn_deggendorf/"
+    //     }
+
+    // },
 
 
 function getLinkElement(link) {
