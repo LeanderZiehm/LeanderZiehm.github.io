@@ -379,6 +379,17 @@
 
 
             <div id="events"></div>
+
+
+            <div style="display: flex; justify-content: center;">
+                <div id="whatsappFeedback" >
+                    <img id="thumbnail" src="images/icons/whatsapp.png">
+                    <!-- <div style="color: white; font-weight: bold; font-size: 20px; " >Feedback</div> -->
+                </div>
+            </div>
+ 
+
+
             <button id="addEventBtn">+Add event </button>
         </div>
     </div>
@@ -388,7 +399,14 @@
 
 
 
+
+
 function main() {
+
+    document.getElementById("whatsappFeedback").onclick = function () {
+        window.open("https://chat.whatsapp.com/Bw7nlNAwJcBBZQuLFvtRWF");
+    };
+    
 
         // document.getElementById("toggleCollapseFilters").onclick = function () {
 
