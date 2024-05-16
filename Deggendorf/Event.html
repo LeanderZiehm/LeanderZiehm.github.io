@@ -331,7 +331,10 @@
                 
 
 
-                document.getElementById('date').innerHTML = "📅 " + anyDateStringToDateString(event.date);
+                
+                const dateInfo = calculateDateInfo(event.date);
+
+                document.getElementById('date').innerHTML = "📅 " + dateInfo["dateText"];
                 if(event.timeEntry){
                     document.getElementById('timeEntry').innerHTML = "🚪 " + event.timeEntry;
                 }else{
@@ -348,7 +351,7 @@
                 let hasOnlineLink = false;
                  let typeString = "";
 
-                if (eventType == 'in person') {
+                if (eventType == 'inPerson') {
                     hasLocation = true;
                     typeString = "👥"
                 }else if (eventType == 'online') {

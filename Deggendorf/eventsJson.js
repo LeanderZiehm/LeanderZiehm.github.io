@@ -1,4 +1,4 @@
-//
+    //go 2
 console.log("eventsJson.js loaded");
 var eventsJson = [
     {
@@ -7,9 +7,11 @@ var eventsJson = [
         "timeEntry": "17:00",
         "timeStart": "18:00",
         "timeEnd": "20:00",
-        "descriptionShort": "Sendung über E-Sport und Gaming",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"special",
         "language": "de",
+
         "images": ["1.jpg", "2.png", "3.png"],
 
         "descriptionLong": { "de": "Wir werfen einen Blick hinter die Kulissen des E-Sport. Wir haben auch wieder Gäste im Studio, die beiden Brüder Simon Schlegl (E-Sportler), Florian Schlegl (Vereinsgründer) und Simon Bauer (Kommentator). Sie wollen uns einen spannenden Einblick in ihren Alltag geben. Du bist ein leidenschaftlicher E-Sportler, E-Sports Fan oder willst einfach mehr über das Thema erfahren? Dann schalte gerne ein, oder komm zu uns an die THD und tauch mit uns in die spannende Welt des E-Sport ein." },
@@ -34,11 +36,12 @@ var eventsJson = [
 
         {
         "name": "Burning Cinema: Phantastische Tierwesen und wo sie zu finden sind",
-        "date": "Donnerstag 18.04.2024",
+        "date": "18.04.2024",
         "timeEntry": "19:00",
         "timeStart": "19:30",
-        "descriptionShort": "Studentenkino: Die Phantastischen Tierwesen führen uns zurück in die magische Welt von Harry Potter",
+        
         "price": "2€",
+        "category":"cinema",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "3.webp"],
 
@@ -66,7 +69,7 @@ var eventsJson = [
             "email": "deggendorf@unifilm.de",
             "ratings": 4.9
         },
-        "type": "in person",
+        "type": "inPerson",
         "location": {
             "name": "THD, Campus Deggendorf, J007",
             "maps": "https://maps.app.goo.gl/UfmUWQsr5Mu8Ar7N8",
@@ -81,8 +84,9 @@ var eventsJson = [
         "date": "calculate:3",
         "timeStart": "17:30",
         "timeEnd": "19:00",
-        "descriptionShort": "Playing Badminton as university sports with students and friends",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "required",
         "language": "de+en",
         "images": ["1.jpg", "2.webp", "3.jpg"],
@@ -95,7 +99,7 @@ var eventsJson = [
             "website": "https://ilearn.th-deg.de/course/view.php?id=13241",
             "whatsapp": "https://chat.whatsapp.com/LyGhAonrgY1CiWjjEsHVX2"
         },
-        "type": "in person",
+        "type": "inPerson",
         "location": {
             "name": "Dreifach- Turnhalle Comenius Gymnasium, Jahnstraße 8, 94469 Deggendorf(Zugang Jahnstraße über FOS / BOS) ",
             "maps": "https://maps.app.goo.gl/mYPKEkcVBHG7raa78",
@@ -109,8 +113,9 @@ var eventsJson = [
         "date": "30.05.2024",
         "timeEntry": "5:44PM",
         "timeStart": "8:00PM",
-        "descriptionShort": "CERN, Switzerland visit - United AI 2024",
+        
         "price": "150€",
+        "category":"special",
         "registration": "required",
         "language": "de+en",
         "images": ["1.jpeg", "2.jpg", "3.webp"],
@@ -131,7 +136,7 @@ Don't wait, sign up before May 9th, 2024, 23:59 (UTC) to join us on this incredi
             // "website": "https://forms.gle/YyXBvFQ8wSPSsqy2A"
             "website": "https://forms.gle/YyXBvFQ8wSPSsqy2A"
         },
-        "type": "in person",
+        "type": "inPerson",
         "location": {
             "name": "Geneva, hotel.",
             "maps": "https://maps.app.goo.gl/B8JUwQB5pnigjUgN7",
@@ -143,11 +148,12 @@ Don't wait, sign up before May 9th, 2024, 23:59 (UTC) to join us on this incredi
 
     {
         "name": "Burning Cinema: Das wandelnde Schloss",
-        "date": "Dienstag 07.05.2024",
+        "date": "07.05.2024",
         "timeEntry": "19:00",
         "timeStart": "19:30",
-        "descriptionShort": "Studentenkino: Schoner Anime Film von Studio Ghibli.",
+        
         "price": "2€",
+        "category":"cinema",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "5.jpg"],
 
@@ -177,7 +183,7 @@ Phantasie- und humorvolles Märchenabenteuer über ein kleines Mädchen, das von
             "email": "deggendorf@unifilm.de",
             "ratings": 4.9
         },
-        "type": "in person",
+        "type": "inPerson",
         "location": {
             "name": "THD, Campus Deggendorf, Hörsaal B004",
             "maps": "https://maps.app.goo.gl/wrKFLAM7fqAck77b8",
@@ -187,11 +193,12 @@ Phantasie- und humorvolles Märchenabenteuer über ein kleines Mädchen, das von
 
     {
         "name": "Burning Cinema: Dungeons & Dragons: Ehre unter Dieben",
-        "date": "Donnerstag 16.05.2024",
+        "date": "16.05.2024",
         "timeEntry": "19:00",
         "timeStart": "19:30",
-        "descriptionShort": "Studentenkino: D&D Rollenspeil Film.",
+        
         "price": "2€",
+        "category":"cinema",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "3.webp"],
 
@@ -217,7 +224,7 @@ Die vielfältige, fantastische Welt und der spielerische Geist des legendären R
             "email": "deggendorf@unifilm.de",
             "ratings": 4.9
         },
-        "type": "in person",
+        "type": "inPerson",
         "location": {
             "name": "THD, Campus Deggendorf, J007",
             "maps": "https://maps.app.goo.gl/UfmUWQsr5Mu8Ar7N8",
@@ -226,11 +233,12 @@ Die vielfältige, fantastische Welt und der spielerische Geist des legendären R
     },
     {
         "name": "Burning Cinema: The Hunger Games: The Ballad of Songbirds & Snakes  [OV]",
-        "date": "Donnerstag 23.05.2024",
+        "date": "23.05.2024",
         "timeEntry": "19:00",
         "timeStart": "19:30",
-        "descriptionShort": "Studentenkino: Die Prequel zu der Hunger Games Fimreihe.",
+        
         "price": "2€",
+        "category":"cinema",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -256,7 +264,7 @@ Basierend auf der Bestseller-Reihe von Suzanne Collins begeisterten die "Die Tri
             "email": "deggendorf@unifilm.de",
             "ratings": 4.9
         },
-        "type": "in person",
+        "type": "inPerson",
         "location": {
             "name": "THD, Campus Deggendorf, J007",
             "maps": "https://maps.app.goo.gl/UfmUWQsr5Mu8Ar7N8",
@@ -265,11 +273,12 @@ Basierend auf der Bestseller-Reihe von Suzanne Collins begeisterten die "Die Tri
     },
     {
         "name": "Burning Cinema: Wall-E",
-        "date": "Donnerstag 20.06.2024",
+        "date": "20.06.2024",
         "timeEntry": "19:00",
         "timeStart": "19:30",
-        "descriptionShort": "Studentenkino: Der Letzte räumt die Erde auf",
+        
         "price": "2€",
+        "category":"cinema",
         "language": "de",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -295,7 +304,7 @@ Pixar ist ein Jahr nach RATATOUILLE mit WALL-E erneut ein Meilenstein im Genre d
             "email": "deggendorf@unifilm.de",
             "ratings": 4.9
         },
-        "type": "in person",
+        "type": "inPerson",
         "location": {
             "name": "THD, Campus Deggendorf, J007",
             "maps": "https://maps.app.goo.gl/UfmUWQsr5Mu8Ar7N8",
@@ -310,11 +319,12 @@ Pixar ist ein Jahr nach RATATOUILLE mit WALL-E erneut ein Meilenstein im Genre d
         "date": "calculate:2",
         "timeStart": "18:00",
         "timeEnd": "20:00",
-        "descriptionShort": "Body weight sport like pushups, pullups, dips, squats, etc.",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "false",
-        "type": "in person",
-        "type": "in person",
+        "type": "inPerson",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "3.webp", "3.png"],
 
@@ -357,10 +367,11 @@ Wir sorge für: Musik, Spaß, Motivation & ein geiles Training!!!
         "date": "calculate:2",
         "timeStart": "19:15",
         "timeEnd": "20:45",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "no",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "zumba.webp", "3.jpg"],
 
@@ -409,11 +420,12 @@ Note: in the gym, dancing is possible only with gym shoes or without shoes - dan
         "date": "calculate:1",
         "timeStart": "21:00",
         "timeEnd": "23:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "required",
         "maxPeople": 60,
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.webp", "3.webp"],
 
@@ -445,10 +457,11 @@ Registration: required per course unit (see below) - registration for an appoint
         "date": "calculate:3",
         "timeStart": "20:30",
         "timeEnd": "22:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "required",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -484,10 +497,11 @@ In the foreground is the fun as well as the movement.
         "date": "calculate:5",
         "timeStart": "19:30",
         "timeEnd": "20:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "no",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.png", "2.webp", "3.jpg"],
 
@@ -514,10 +528,11 @@ In the foreground is the fun as well as the movement.
     "date": "calculate:2,3",
     "timeStart": "14:00",
     "timeEnd": "16:30",
-    "descriptionShort": "Schwimmen im Swimmbad Elypso",
-    "price": "Free",
+    
+    "price": "free",
+        "category":"sport",
     "registration": "no",
-    "type": "in person",
+    "type": "inPerson",
     "language": "de+en",
     "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -562,10 +577,11 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:2",
         "timeStart": "15:00",
         "timeEnd": "17:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "no",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.webp", "3.jpg"],
 
@@ -596,10 +612,11 @@ Bitte beachtet: 1x im Monat ist mittwochs ab 20.30 Uhr textilfreies Schwimmen in
         "date": "calculate:4",
         "timeStart": "18:00",
         "timeEnd": "20:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "no",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -626,7 +643,7 @@ The first and most important rule, on which many of the following rules are base
             "email": " florian.kaspar@stud.th-deg.de",
             "website": "https://ilearn.th-deg.de/course/view.php?id=16584"
         },
-        "type": "in person",
+        "type": "inPerson",
         "location": {
             "name": "Football field on the Danube, at the Weidenversteck playground (riverside promenade)",
             "maps": "https://maps.app.goo.gl/iQMisUmZnxSHsPGWA",
@@ -639,10 +656,11 @@ The first and most important rule, on which many of the following rules are base
         "date": "calculate:3",
         "timeStart": "17:00",
         "timeEnd": "19:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "required",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -672,10 +690,11 @@ The first and most important rule, on which many of the following rules are base
         "date": "calculate:3",
         "timeStart": "17:30",
         "timeEnd": "18:45",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "no",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.webp", "3.webp"],
 
@@ -704,10 +723,11 @@ The first and most important rule, on which many of the following rules are base
         "date": "calculate:3",
         "timeStart": "19:00",
         "timeEnd": "20:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "no",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -737,10 +757,11 @@ The first and most important rule, on which many of the following rules are base
         "date": "calculate:4",
         "timeStart": "19:00",
         "timeEnd": "20:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "required",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -767,10 +788,11 @@ The first and most important rule, on which many of the following rules are base
         "date": "calculate:4",
         "timeStart": "19:00",
         "timeEnd": "21:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "no",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
 
@@ -800,8 +822,9 @@ Advanced group: 20:00-21:00 pm`},
         "date": "calculate:1,4",
         "timeStart": "15:00",
         "timeEnd": "16:00",
-        "descriptionShort": "Tennis im freien Übungsbetrieb",
+        
         "price": "3€",
+        "category":"sport",
         "registration": "no",
         "language": "de+en",
         "images": ["1.jpg", "2.jpg", "3.jpg"],
@@ -847,10 +870,11 @@ Further information: Further lessons or training offers can be requested private
         "date": "calculate:4",
         "timeStart": "18:00",
         "timeEnd": "22:00",
-        "descriptionShort": "",
-        "price": "Free",
+        
+        "price": "free",
+        "category":"sport",
         "registration": "no",
-        "type": "in person",
+        "type": "inPerson",
         "language": "de+en",
         "images": ["1.jpg", "2.jpeg", "4.jpeg"],
 
@@ -880,29 +904,6 @@ Further information: Further lessons or training offers can be requested private
 
     
 ];
-
-// "descriptionLong": {
-//     "de": `
-            
-        
-//         `,
-//         "en": `
-
-//         `},
-// "location": {
-//     "name": "XXX",
-//         "maps": "XXX",
-//             "description": ""
-// },
-// "organizer":
-// {
-//     "image": "thd.jpg",
-//         "name": "XXX",
-//             "email": "XXX",
-//                 "website": "XXX",
-//                     "whatsapp": "XXX"
-// }
-
 
 
 
@@ -935,107 +936,6 @@ function calculateDayNameFromDateString(dateString){
     return dayName;
 }
 
-
-function calculateNextDate(dayNumber,useComma = false,n = 1, englishDay=false) {
-    var nextThreeTuesdays = [];
-    var today = new Date();
-    var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
-    var daysUntilTuesday = dayNumber - dayOfWeek; // Tuesday is 2 days after Monday
-
-    if (daysUntilTuesday <= 0) {
-        daysUntilTuesday += 7; // If today is Tuesday or later in the week, add 7 days to get to the next Tuesday
-    }
-
-    for (var i = 0; i < n; i++) {
-
-        var nextTuesday = new Date(today);
-        nextTuesday.setDate(today.getDate() + daysUntilTuesday + (7 * i));
-        let nextTuesdayString = formatDate(nextTuesday);
-        nextThreeTuesdays.push(nextTuesdayString);
-    }
-
-    return nextThreeTuesdays;
-}
-
-
-
-
-function formatDate(date, englishDay = false, useComma = false) {
-    const options = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
-    const formattedDateDe = date.toLocaleDateString('de-DE',options);
-    const formattedDateEn = date.toLocaleDateString('en-EN',options);
-
-    let day;
-    if(englishDay){
-        day = formattedDateEn.split(',')[0];
-    }else{
-    day = formattedDateDe.split(',')[0];
-    }
-    const formattedDate = formattedDateDe.split(',')[1];
-
-    if (useComma) {
-        return day + ', ' + formattedDate;
-    } else {
-        return day + ' ' + formattedDate;
-    }
-
-}
-
-// // Example usage
-// const nextTuesdays = getNextTuesdays();
-// console.log(nextTuesdays);
-// console.log(formatDate(nextTuesdays[0]));
-// console.log(formatDate(nextTuesdays[0],false));
-
-
-
-
-function getDateFromString(str) {
-    const dateRegex = /\b(\d{2}\.\d{2}\.\d{4})\b/;
-    const foundDateString = dateRegex.exec(str)[1]; //15.05.2024
-
-    var parts = foundDateString.split(".");
-    var day = parseInt(parts[0], 10);
-    var month = parseInt(parts[1], 10) - 1; // Months are zero-indexed in JavaScript Date objects
-    var year = parseInt(parts[2], 10);
-    var date = new Date(year, month, day);
-
-    return date    
-}
-
-function calculateNextDatesFromDateString(calculateString){
-    let nextDateString = ''
-
-    // console.log(calculateString);
-        var numberStr = calculateString.split(":")[1]; // Splitting the string and getting the part after the colon
-        if (numberStr.includes(',')) {
-
-            const nextDateStrings = numberStr.split(',').map(function (numberText) {
-                var number = parseInt(numberText);
-                return calculateNextDate(number);
-            });
-            nextDateString = nextDateStrings.join(", ");
-
-        } else {
-            var number = parseInt(numberStr);
-            nextDateString = calculateNextDate(number);
-        }
-
-        return nextDateString;
-
-    
-}
-
-function anyDateStringToDateString(dateString){
-    if(dateString.startsWith("calculate:")){
-        return calculateNextDatesFromDateString(dateString) + "<br/>🔁 weekly";
-    }else{
-        return dateString;
-    }
-}
-
-///
-
 function calculateTimeEnd(startTime, duration) {
 
     const minutesNumberString = duration.match(/\d+/)[0];  //"133 Min." => 133
@@ -1066,26 +966,34 @@ function getMyTimeString(index) {
 
 // localStorage.clear();
 
-function saveLanguage(language){
-    localStorage.setItem('language', language);
-}
-
-console.log("getLanguage() loaded");
-function getLanguage(){
-
+function loadLanguage(){
     const language = localStorage.getItem('language');
-    console.log(language);
+    // console.log(language);
     if (language === null || language === undefined) {
-        console.log('language is null');
+        // console.log('language is null');
         return getNaviagatorLanguage();
-    }else{
+    } else {
         return language;
     }
 }
 
+
+let CURRENT_LANGUAGE = loadLanguage();
+console.log("getLanguage() loaded:", CURRENT_LANGUAGE);
+
+function setLanguage(language){
+    CURRENT_LANGUAGE = language;
+    localStorage.setItem('language', language);
+}
+
+
+function getLanguage(){
+    return CURRENT_LANGUAGE;
+}
+
 function getNaviagatorLanguage(){
     const nav = navigator.language || navigator.userLanguage;
-    console.log(nav);
+    // console.log(nav);
 
     if(nav.includes('de')){
         return 'de';
@@ -1096,8 +1004,125 @@ function getNaviagatorLanguage(){
 
 
 
-// Example usage:
-// const addedTime = "133 Min.";
-// const baseTime = "19:30";
-// const newTime = calculateTimeEnd(baseTime,addedTime);
-// console.log(newTime); // Output: 21:43
+
+
+
+function getDayName(dateString, language) {
+
+    const dateParts = dateString.split(".");
+    const day = parseInt(dateParts[0]);
+    const month = parseInt(dateParts[1]) - 1; // Months are zero-based in JavaScript
+    const year = parseInt(dateParts[2]);
+
+    const date = new Date(year, month, day);
+    const dayIndex = date.getDay();
+
+    switch (language) {
+        case "en":
+            return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][dayIndex];
+        case "de":
+            return ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"][dayIndex];
+        case "es":
+            return ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"][dayIndex];
+        default:
+            return "Invalid language";
+    }
+}
+
+
+function dateToString(date) {
+    const day = String(date.getDate()).padStart(2, '0'); // Add leading zero if needed
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+}
+
+function calculateNextDate(dayNumber) {
+    var today = new Date();
+    var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+    var daysUntilTuesday = dayNumber - dayOfWeek; // Tuesday is 2 days after Monday
+
+    if (daysUntilTuesday <= 0) {
+        daysUntilTuesday += 7; // If today is Tuesday or later in the week, add 7 days to get to the next Tuesday
+    }
+
+    var nextDate = new Date(today);
+    nextDate.setDate(today.getDate() + daysUntilTuesday + 7);
+    // let nextDateString = dateToString(nextDate);
+    return nextDate;
+}
+
+
+function calculateDates(calculateString){
+
+    let dateStringList = [];
+    let nextDateString = ''
+        var numberStr = calculateString.split(":")[1]; // Splitting the string and getting the part after the colon
+        const calculateMultipleDates = numberStr.includes(',')
+        if (calculateMultipleDates) {
+            const nextDateStrings = numberStr.split(',').map(function (numberText) {
+                var number = parseInt(numberText);
+                return calculateNextDate(number);
+            });
+
+            dateStringList = nextDateStrings;
+           
+        } else {
+            var number = parseInt(numberStr);
+            nextDateString = calculateNextDate(number);
+            dateStringList = [nextDateString];
+        }
+
+        return dateStringList;   
+}
+
+function stringToDate(str) {
+    const dateRegex = /\b(\d{2}\.\d{2}\.\d{4})\b/;
+    const foundDateString = dateRegex.exec(str)[1]; //15.05.2024
+    var parts = foundDateString.split(".");
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10) - 1; // Months are zero-indexed in JavaScript Date objects
+    var year = parseInt(parts[2], 10);
+    var date = new Date(year, month, day);
+
+    return date    
+}
+
+function calculateDateInfo(dateString){
+    const toReturn = {};    
+    let dates = [];
+    if(dateString.startsWith("calculate:")){
+        dates = calculateDates(dateString);  
+        toReturn["weekly"] = true;
+    }else{
+        const date = stringToDate(dateString);
+        dates = [date];
+    }
+
+
+    let dateText = "";
+
+    for (let i = 0; i < dates.length; i++) {
+        const date = dates[i];
+        let dateString = dateToString(date);
+
+       if (i > 0) {
+            dateText += ", ";
+        }
+
+        dateText += getDayName(dateString, CURRENT_LANGUAGE);
+        dateText += " ";
+        dateText += dateString;
+
+
+    }
+
+    toReturn["date"] = dates[0];
+    toReturn["dateString"] = dateToString(dates[0]);
+    toReturn["dateText"] = dateText;
+    // toReturn['name'] = getDayName(dateString, "en")
+
+
+
+    return toReturn;
+}

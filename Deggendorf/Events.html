@@ -53,71 +53,14 @@
 
 </script>
 
-
-<style>
-
-     /* @font-face {
-             src: url("../FredokaOne-Regular.ttf");
-             font-family: 'FredokaOne';
-    }
-    @font-face {
-             src: url("Reef.otf");
-             font-family: 'Reef';
-    }
-
-     @font-face {
-             src: url("RobotoThin.ttf");
-             font-family: 'RobotoThin';
-    } */
-
-
+    <style>
 
     body {
-        /* position: absolute; */
-        /* right: 0px; */
-        /*font-family: RobotoThin, sans-serif;*/
-        /*font-family: Reef, sans-serif;*/
-        /*font-family: FredokaOne, sans-serif;*/
-        /*font-family: Arial, sans-serif;*/
         font-family: Verdana, sans-serif;
+        background-color: rgb(0, 0, 0, 0.05);
         margin: 0;
         padding: 0;
-    }
 
-    .container {
-        display: flex;
-    }
-
-    #filters {
-        display: none;
-        /* position: fixed; */
-        width: 200px;
-        /* background-color: rgba(0, 0, 0, 0.05); */
-        padding: 20px;
-        height: 95vh;
-    }
-
-   
-
-    #filters h2 {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        padding-top: 20px;
-        /* This adds a solid black line as the separator */
-    }
-
-    select{
-        border-radius: 20px;
-    }
-
-    #filters label {
-        display: block;
-        margin-bottom: 10px;
-    }
-
-
-    #filters input[type="checkbox"],
-    #category {
-        margin-bottom: 10px;
     }
 
     button {
@@ -129,82 +72,20 @@
         padding: 3px 10px;
     }
 
-    #toggleCollapseFilters {
-        display: none;
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        background-color: rgb(115, 115, 200);
-        color: white;
-        font-weight: bold;
-        width: 30px;
-        height: 30px;
-        z-index: 1000;
-        padding: 0px;
-        margin: 0px;
-    }
-
-    #langueSelect{
-        display: none;
-        position: absolute;
-        top: 20px;
-        right: 20px;
-    
-    }
-
-</style>
-
-    <div id="langueSelect">
-        <button id="deBtn">🇩🇪 DE</button>
-        <button id="enBtn">🇺🇸 EN</button>
-    </div>
 
 
-
- 
-
-    <div class="container">
-        <button id="toggleCollapseFilters">◀</button>
-        <div id="filters">
-            <h2>Filters</h2>
-            <label><input type="checkbox" id="free">Free</label>
-            <label><input type="checkbox" id="paid">Paid</label>
-
-
-            
-            <label>📅:<input type="date" id="date"></label>
-            <label>
-                Category:
-                <select id="category">
-                    <option value="">Any Category</option>
-                    <option value="education">Education</option>
-                    <option value="job">Job</option>
-                    <option value="sports">Sports</option>
-                    <option value="music">Music</option>
-                    <option value="international">International</option>
-                </select>
-
-            </label>
-            <label>Languages</label>            
-            <label><input type="checkbox" id="en">English</label>
-            <label><input type="checkbox" id="de">German</label>
-
-            <label>Type</label>            
-            <label><input type="checkbox" id="inPerson">In person</label>
-            <label><input type="checkbox" id="online">Online</label>
-
-        </div>
-
-        <style>
 
     #header{
         text-align: center;
-        /* margin: 20px; */
+         padding: 20px;
+         margin: 0px;
+         /*background-color: rgb(0, 0, 0, 0.05);*/
+
     }
 
      #eventsContainer {
         position: relative;
-        background-color: rgb(0, 0, 0, 0.05);
+       
         border: none;
         flex-grow: 1;
         margin: 0px;
@@ -222,15 +103,13 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr); 
         gap: 0px; 
-    }
+        }
 
     .event {
         width: auto; 
+        }
     }
-}
 
-
-    
 
     .event {
         background-color: rgba(255, 255, 255, 1);
@@ -371,10 +250,6 @@
         font-size: 30px;
     }
 
-
-
-
-
     #addEventBtn {
         display: none;
         background-color: rgb(138, 43, 226, 1);
@@ -402,32 +277,65 @@
         bottom: 40px;
     }
    
+
+
+   .filtes{
+    /*display: inline-block;*/
+    padding: 10px;
+   }
     
 
 
-
-    #dateFilter{
-        display: block;
+    select{
+        /*display: block;*/
         /* margin-left: auto; */
         /* margin-left: auto; */
         /* margin-right: 100px; Add space on the right side */
         margin-left: 20px;
-
-
         border-radius: 20px;
         padding: 15px 30px;
         border: none;
         font-weight: bold;
         font-size: 15px;
+        background-color: white;
+    }
+
+    #dateFilter{
+    }
+
+    
+    #langueSelect{
+        /*display: none;*/
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        z-index: 1000;
+    
+    }
+
+    #deBtn img, #enBtn img {
+    width: 40px;
+    padding: 1px;
+    border-radius: 10px;
+    /* height: 30px; */
+
+    
     }
 
 
         </style>
 
 
+        <div id="langueSelect">
+            <button id="deBtn"><img src="images/icons/de.png" ></button>
+            <button id="enBtn"><img src="images/icons/us.png"></button>
+        </div>
+
         <div id="eventsContainer">
             <h2 id="header" >Events Deggendorf</h2>
 
+            <div class="filtes">
+            
             <select id="dateFilter">
                 <option value="any">Any Day</option>
                 <option value="today">Today</option>
@@ -437,6 +345,37 @@
                 <option value="thisMonth">This Month</option>
                 <option value="nextMonth">Next Month</option>
             </select>
+
+            <select id="categoryFilter">
+                <option value="any">Any Category</option>
+                <option value="sport">Sports</option>
+                <option value="cinema">Cinema</option>
+                <option value="special">Special</option>
+            </select>
+
+
+            <select id="typeFilter">
+                <option value="any">Any Type</option>
+                <option value="inPerson">In Person</option>
+                <option value="online">Online</option>
+            </select>
+
+            <select id="priceFilter">
+                <option value="any">Any Price</option>
+                <option value="notFree">Not Free</option>
+                <option value="free">Free</option>
+            </select>
+
+            <select id="languageFilter">
+                <option value="any">Any Language</option>
+                <option value="de">Deutsch</option>
+                <option value="en">English</option>
+            </select>
+
+
+            </div>
+
+           
 
 
             <div id="events"></div>
@@ -451,32 +390,31 @@
 
 function main() {
 
-        document.getElementById("toggleCollapseFilters").onclick = function () {
+        // document.getElementById("toggleCollapseFilters").onclick = function () {
 
-            const filters = document.getElementById("filters");
-            const filterToggleBtn = document.getElementById("toggleCollapseFilters");
+        //     const filters = document.getElementById("filters");
+        //     const filterToggleBtn = document.getElementById("toggleCollapseFilters");
 
-            const filtersCollapsed = filters.style.display === "none";
+        //     const filtersCollapsed = filters.style.display === "none";
 
-            if (filtersCollapsed) {
-                filters.style.display = "block";
-                filterToggleBtn.innerHTML = "◀";
+        //     if (filtersCollapsed) {
+        //         filters.style.display = "block";
+        //         filterToggleBtn.innerHTML = "◀";
                 
-            } else {
-                filters.style.display = "none";
-                filterToggleBtn.innerHTML = "🔍";
-            }
+        //     } else {
+        //         filters.style.display = "none";
+        //         filterToggleBtn.innerHTML = "🔍";
+        //     }
 
-            //set innerHTML of button to "+" or "X" depending on the state of the filters
+        //     //set innerHTML of button to "+" or "X" depending on the state of the filters
 
-            // document.getElementById("filters").classList.toggle("collapsed");
-            // document.getElementById("filters").style.display = "none";
+        //     // document.getElementById("filters").classList.toggle("collapsed");
+        //     // document.getElementById("filters").style.display = "none";
 
-        };
+        // };
         const events = document.getElementById("events");
 
-        // var eventsHTML = '';
-        const eventArray = [];
+        const eventElementAndDateArray = [];
     for (var eventID = 0; eventID < eventsJson.length; eventID++) {
         let event = eventsJson[eventID];
         let eventHTML = createEventHTML(event, eventID);
@@ -486,8 +424,6 @@ function main() {
         eventElement.className = "event";
         eventElement.innerHTML = eventHTML;
 
-
-        // //hide timeEntry if it does not exist in json
         if(event.timeEntry === undefined){
            eventElement.querySelector(".event-timeEntry").style.display = "none";
         }
@@ -499,13 +435,102 @@ function main() {
         
         eventElement.querySelector("#time").innerHTML = getMyTimeString(eventID);
 
-        // ⏱️ ${ event.timeStart } <span id="timeEnd"></span>
+
+
+//////////////////
+        
+
+        const dateString = event.date;
+        const dateInfo = calculateDateInfo(dateString);
+        // console.log("dateInfo:", dateInfo);
+
+        const isWeekly = dateInfo["weekly"] !== undefined;
+
+        let eventDateHtml = `<span class="dateText">${dateInfo["dateText"]}</span>`;
+        if(isWeekly){
+            eventDateHtml += `<br/><span class="weekly">🔁 weekly</span>`;
+        }
+
+        eventElement.querySelector(".event-date").innerHTML = eventDateHtml;
+
+
+        const date = dateInfo["date"];
+        const eventIsInFuture = date >= new Date();
+
+        if(eventIsInFuture){
+             eventElementAndDateArray.push({ date: date, element: eventElement, "dateString": dateInfo["dateString"] });
+        }
+       
+
+        if(event.descriptionShort == "" || event.descriptionShort == undefined){
+             eventElement.querySelector(".event-descriptionShort").style.display = "none";
+        }
+    }
 
 
 
-        function checkIfPassesFilter(eventDate, filterText ) {
+    const DISABLE_SORTING_BY_DATE_FOR_DEBUGGING = false;
+    //sort events by date
+    if(!DISABLE_SORTING_BY_DATE_FOR_DEBUGGING){
+          eventElementAndDateArray.sort((a, b) => a.date - b.date);
+    }
+  
+
+
+    eventElementAndDateArray.forEach((eventElementAndDate) => {
+        events.appendChild(eventElementAndDate.element);
+    });
+
+
+
+
+    function getEventDateHtml(date){
+        const dateInfo = calculateDateInfo(date);
+        const isWeekly = dateInfo["weekly"] !== undefined;
+        let eventDateHtml = `<span class="dateText">${dateInfo["dateText"]}</span>`;
+        if (isWeekly) {
+            eventDateHtml += `<br/><span class="weekly">🔁 weekly</span>`;
+        }
+        return eventDateHtml;
+    }
+
+
+    
+    function onLanguageChange(language) {
+        console.log("Language changed to: ", language);
+            eventElementAndDateArray.forEach((eventElementAndDate) => {
+                eventElementAndDate.element.querySelector(".event-date").innerHTML = getEventDateHtml(eventElementAndDate["dateString"]);                
+            });
+
+
+    }
+
+
+
+
+
+    function addFilterOnChange(checkIfPassesFilterCallback,id,eventKeyName){
+
+        const filterElement = document.getElementById(id);
+
+        filterElement.onchange = function () {
+        eventElementAndDateArray.forEach((eventElementAndDate) => {
+            const passesFilter = checkIfPassesFilterCallback(eventElementAndDate,eventKeyName, filterElement.value);
+            if (passesFilter) {
+                eventElementAndDate.element.style.display = "block";
+            } else {
+                eventElementAndDate.element.style.display = "none";
+            }
+        });
+    };
+
+    }
+
+
+        function checkIfPassesDateFilter(eventElementAndDate,eventKeyName, filterText) {
 
             currentDate = new Date();
+            eventDate = eventElementAndDate.date;
 
             switch (filterText) {
                 case "today":
@@ -541,54 +566,44 @@ function main() {
         }
 
 
-        
+        function checkIfPassesFilter(eventElementAndDate,eventKeyName ,filterText) {
+            let eventID = eventElementAndDate.element.id;
+            eventID = parseInt(eventID);
+            const event = eventsJson[eventID];
+            const eventValue = event[eventKeyName];
 
-
-        eventElement.querySelector(".event-date").innerHTML = anyDateStringToDateString(event.date);
-
-        const dateString = eventElement.querySelector(".event-date").innerHTML;
-        const date = getDateFromString(eventElement.querySelector(".event-date").innerHTML);
-        const eventIsInFuture = date > new Date();
-
-        if(eventIsInFuture){
-             eventArray.push({ date: date, element: eventElement });
-        }
-       
-
-        if(event.descriptionShort == "" || event.descriptionShort == undefined){
-             eventElement.querySelector(".event-descriptionShort").style.display = "none";
-        }
-    }
-
-
-
-    const DISABLE_SORTING_BY_DATE_FOR_DEBUGGING = false;
-    //sort events by date
-    if(!DISABLE_SORTING_BY_DATE_FOR_DEBUGGING){
-          eventArray.sort((a, b) => a.date - b.date);
-    }
-  
-
-
-    eventArray.forEach((event) => {
-        events.appendChild(event.element);
-    });
-
-
-
-
-
-    document.getElementById("dateFilter").onchange = function () {
-        const filterText = document.getElementById("dateFilter").value;
-        eventArray.forEach((event) => {
-            const passesFilter = checkIfPassesFilter(event.date, filterText);
-            if (passesFilter) {
-                event.element.style.display = "block";
-            } else {
-                event.element.style.display = "none";
+            if(filterText == 'any'){
+                return true;
             }
-        });
-    };
+            else if (filterText == eventValue){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+    
+
+        
+    // addFilterOnChange(checkIfPassesDateFilter,'dateFilter');
+    addFilterOnChange(checkIfPassesFilter,'categoryFilter','category');
+    // addFilterOnChange(checkIfPassesFilter,'typeFilter','type','NEEDS CUSOM FOR HYBRID!!!!');
+    // addFilterOnChange(checkIfPassesFilter,'priceFilter','price');
+    // addFilterOnChange(checkIfPassesFilter,'languageFilter','language','NEEDS CUSOM!!!!'); 
+
+    // hide every commented filter 
+
+    document.getElementById("dateFilter").style.display = "none";
+    document.getElementById("typeFilter").style.display = "none";
+    document.getElementById("priceFilter").style.display = "none";
+    document.getElementById("languageFilter").style.display = "none";
+
+
+    
+
+    // console.log("HI")
+   clickedLanguage(getLanguage());
+
 
 
    
@@ -602,56 +617,9 @@ function main() {
 
 
 
-    function createEventHTML(event, index) {
-        // console.log(index);
-        let eventHTML = `
-       
-            <div class="event-header">
-                 <img class="clickable"  id="thumbnail" src="images/${index}/${event.images[0]}" alt="img">
-                
-                <div class="details-container clickable" >
-                    <div class="event-title">${event.name}</div>
-                    <div class="event-descriptionShort">${event.descriptionShort} </div>
-                    <div class="event-date">${event.date}</div>
-                    <div class="event-timeEntry">🚪 ${event.timeEntry}</div>
-                    <div id="time"></div>
-                   
-                    <div class="event-location">${event.location.name}</div>
-                    <div class="event-price">${event.price}</div>
-                    <div class="event-language">${event.language}</div>
-
-                </div>
-               
-                
-                <div class="event-actions">
-                    <span id="likes"></span>
-                    <button class="like"><img src="images/icons/love.png" alt="Like"></button>
-                    <button class="share"><img src="images/icons/share.png" alt="Share"></button>
-                </div>
-         
-          
-              
-            </div>
-  
-    `;
-
-        return eventHTML;
-
-    }
-    
 
     
-
-
-            // var eventsHTML =  eventsJson.map((event, index) => createEventHTML(event, index)).join('');
-            // events.innerHTML += eventsHTML;
-
-          
-      
-
-        //get all events as elements
         const eventElements = document.querySelectorAll(".event");
-        //add click event to each event element for like and share
         eventElements.forEach((element) => {
             element.querySelector(".like").onclick = function () {
 
@@ -668,8 +636,6 @@ function main() {
                 alert("Share");
             };
 
-            //convert event language to emoji
-
             const eventLanguageElement = element.querySelector(".event-language");
             const eventLanguage = eventLanguageElement.innerHTML;
             if(eventLanguage === "de"){
@@ -680,103 +646,34 @@ function main() {
                 eventLanguageElement.innerHTML = "🇩🇪 🇺🇸";
             }
 
-       
-      
 
         });
 
+    document.getElementById("deBtn").addEventListener("click", function () {
+        clickedLanguage('de');
+    });
 
+    document.getElementById("enBtn").addEventListener("click", function () {
+        clickedLanguage('en');
+    });
 
-         const queryParams = new URLSearchParams(window.location.search);
-        const eventParameter = queryParams.get('event');
+        function clickedLanguage(languageToSet) {
 
-        if (eventParameter == 'new') {
-            // document.getElementById('event-name').innerHTML = "New Event";
+            console.log("clicked:", languageToSet);
 
-        } else {
-            // console
-            const eventIDScrollTo = eventParameter;
-            const element = document.getElementById(eventIDScrollTo);
-
-            
-            if (element) { 
-                const elementPosition = element.getBoundingClientRect().top;
-                const possitionToScroll = elementPosition - 200;
-                window.scrollTo({
-                    top: possitionToScroll
-                    // behavior: 'smooth' // Optionally, you can use 'smooth' for smooth scrolling
-                });
-            }
-
-
-        }
-
-
-
-
-
-    const DISABLE_LANGUAGE_FOR_NOW = true;
-    if(DISABLE_LANGUAGE_FOR_NOW){
-        document.getElementById("langueSelect").style.display = "none";
-    }else{
-
-        //on loaded document set language with event listener
-        document.addEventListener("DOMContentLoaded", setLanguage(getLanguage()));
-
-
-        // setLanguage(getLanguage());
-
-        document.getElementById("deBtn").onclick = function () {
-
-            setLanguage('de')
-        };
-        document.getElementById("enBtn").onclick = function () {
-            document.getElementById("enBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
-            document.getElementById("deBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
-            setLanguage('en')
-        };
-
-
-        function setLanguage(lang) {
-
-            console.log(lang);
-
-            if (lang === "de") {
+            if (languageToSet === "de") {
                 document.getElementById("deBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
                 document.getElementById("enBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
-            } else if (lang === "en") {
+            } else if (languageToSet === "en") {
                 document.getElementById("enBtn").style.backgroundColor = "rgb(138, 43, 226, 1)";
                 document.getElementById("deBtn").style.backgroundColor = "rgba(255, 255, 255, 1)";
             }
 
-            saveLanguage(lang);
-
-
+            if(languageToSet !== getLanguage()){
+                setLanguage(languageToSet);
+                onLanguageChange(languageToSet);
+            }
     }
-
-    
-
-
-        // const eventElements = document.querySelectorAll(".event");
-        // eventElements.forEach((element) => {
-        //     const eventLanguageElement = element.querySelector(".event-language");
-        //     const eventLanguage = eventLanguageElement.innerHTML;
-        //     if (lang === "de") {
-        //         if (eventLanguage === "🇺🇸") {
-        //             element.style.display = "none";
-        //         } else {
-        //             element.style.display = "block";
-        //         }
-        //     } else if (lang === "en") {
-        //         if (eventLanguage === "🇩🇪") {
-        //             element.style.display = "none";
-        //         } else {
-        //             element.style.display = "block";
-        //         }
-        //     }
-        // });
-    }
-
 
 
 
@@ -785,10 +682,6 @@ function main() {
             window.location.href = "Event.html?event=new";
         };
 
-    //     document.getElementById("thumbnail").onclick = function () {
-    //     window.location.href = "Event.html?event=0";
-    // };
-    // for every clickable class elemenet get the id and add on click function to redirect to Event.html?event=id
     document.querySelectorAll(".clickable").forEach((element) => {
         element.onclick = function () {
             window.location.href = "Event.html?event=" + element.parentElement.parentElement.id;
@@ -798,6 +691,32 @@ function main() {
     });
 
 
+
+
+
+    const queryParams = new URLSearchParams(window.location.search);
+    const eventParameter = queryParams.get('event');
+
+    if (eventParameter == 'new') {
+        // document.getElementById('event-name').innerHTML = "New Event";
+
+    } else {
+        // console
+        const eventIDScrollTo = eventParameter;
+        const element = document.getElementById(eventIDScrollTo);
+
+
+        if (element) {
+            const elementPosition = element.getBoundingClientRect().top;
+            const possitionToScroll = elementPosition - 200;
+            window.scrollTo({
+                top: possitionToScroll
+                // behavior: 'smooth' // Optionally, you can use 'smooth' for smooth scrolling
+            });
+        }
+
+
+    }
 
      
 }
@@ -817,14 +736,37 @@ function main() {
 
 
 
+    function createEventHTML(event, index) {
+            let eventHTML = `
+            <div class="event-header">
+                 <img class="clickable"  id="thumbnail" src="images/${index}/${event.images[0]}" alt="img">
+                
+                <div class="details-container clickable" >
+                    <div class="event-title">${event.name}</div>
+                    <div class="event-descriptionShort">${event.descriptionShort} </div>
+                    <div class="event-date"></div>
+                    <div class="event-timeEntry">🚪 ${event.timeEntry}</div>
+                    <div id="time"></div>
+                    <div class="event-location">${event.location.name}</div>
+                    <div class="event-price">${event.price}</div>
+                    <div class="event-language">${event.language}</div>
 
+                </div>
+                <div class="event-actions">
+                    <span id="likes"></span>
+                    <button class="like"><img src="images/icons/love.png" alt="Like"></button>
+                    <button class="share"><img src="images/icons/share.png" alt="Share"></button>
+                </div>
+            </div>
+  
+    `;
+            return eventHTML;
+        }
 
 
 
 document.addEventListener("DOMContentLoaded", main);
-
-    
-    </script>
+</script>
 </body>
 
 </html>
