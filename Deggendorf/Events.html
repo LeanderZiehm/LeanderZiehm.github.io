@@ -473,9 +473,13 @@ function main() {
 
 
         const date = dateInfo["date"];
-        const eventIsInFuture = date >= new Date();
+        const eventIsInFuture = date > new Date();
 
-        if(eventIsInFuture){
+        const eventIsOnSameDay = date.toDateString() === new Date().toDateString();
+
+        // console.log("eventIsInFuture:", eventIsInFuture, "date:", date, "new Date():", new Date(),"eventIsOnSameDay:", eventIsOnSameDay)
+
+        if(eventIsInFuture || eventIsOnSameDay){
              eventElementAndDateArray.push({ date: date, element: eventElement, "dateString": dateInfo["dateString"] });
         }
        
