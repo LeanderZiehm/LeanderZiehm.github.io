@@ -197,6 +197,17 @@ function addDataToDatabaseJson(databaseJson){
         databaseJson['uniqueUsers'] += 1; 
     }
 
+    if(toPush['newUserView']){
+
+      if(databaseJson['newUserView'] == null){
+        databaseJson['newUserView'] = []
+      }
+
+       databaseJson['newUserView'].unshift(toPush['newUserView']);
+    }
+
+
+
     if(toPush['browser']){
 
       if(databaseJson['browsers'] == null){
@@ -209,16 +220,7 @@ function addDataToDatabaseJson(databaseJson){
 
 
 
-    if(toPush['newUserView']){
-
-      if(databaseJson['newUserView'] == null){
-        databaseJson['newUserView'] = []
-      }
-
-       databaseJson['newUserView'].unshift(toPush['newUserView']);
-    }
-
-
+  
 
 
  

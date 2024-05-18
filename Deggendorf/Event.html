@@ -193,6 +193,10 @@
         /* font-size: 50px; */
         /* color: red; */
     }
+
+    #downloadEventCalender{
+        display: none;
+    }
     
 </style>
 </head>
@@ -221,13 +225,16 @@
         <div id="location">Location: J007</div> -->
        
 
+        <button id="downloadEventCalender">📆Download event for calender</button>
         <div id="date">Date: <input type="date" id="date-input" ></div>
         <div id="timeEntry">Time: <input type="time" id="timeEntry-input" ></div>
         <div id="timeStart">Time: <input type="time" id="timeStart-input" ></div>
         <div id="duration">Duration: <input type="number" id="duration-input" min="1" max="48" /></div>
-        <a id="addToCalendar" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Your%20Event%20Title&dates=20240501T080000Z/20240501T100000Z&details=Event%20Description%20Here&location=Event%20Location%20Here" target="_blank">
-            📆Add to Google Calendar
-        </a>
+
+        
+        <!-- <a id="addToCalendar" href="">
+           Add to Google Calendar
+        </a> -->
 
    
         <div id="location">Location: <input type="text" id="location-input" s></div>
@@ -422,10 +429,105 @@
                     window.location.href = "Events.html"
                 }else{
                     window.location.href = "Events.html?event=" + eventParameter;
+                }  
+            };
+
+
+            document.getElementById("downloadEventCalender").onclick = function () {
+                const title = document.getElementById('event-name').innerHTML;
+                const description = document.getElementById('descriptionLong').innerHTML;
+                const location = document.getElementById('location').innerHTML;
+                const date = document.getElementById('date').innerHTML;
+                const timeStart = document.getElementById('timeStart').innerHTML;
+                const duration = document.getElementById('duration').innerHTML;
+                // const start = new Date(date + " " + timeStart);
+
+        //         <div id="date">Date: <input type="date" id="date-input" ></div>
+        // <div id="timeStart">Time: <input type="time" id="timeStart-input" ></div>
+
+        const startText = date + " " + timeStart;
+
+                // const end = new Date(start.getTime() + duration * 60 * 60 * 1000);
+                downloadEventCalender(title, description, location, startText   , null);
+            };
+
+
+
+
+
+
+            function downloadEventCalender(title, description, location, start, end=null) {
+
+                  if (end == null) {
+                    const oneHour = 3600000;
+                    // event.end = new Date(start.getTime() + oneHour*2); // Default is 2 hour
+                    end = "usually 2 hours later";
+                }
+                    // Event details
+                    const event = {
+                        title: title,
+                        description: description,
+                        location: location,
+                        start: start, // Change this to your event start time
+                        end: end // Change this to your event end time
+                    };
+
+                  
+
+                    // Format the date for the iCal file
+                    function formatDate(date) {
+                        return date;
+                        // return date.toISOString().replace(/-|:|\.\d+/g, '');
+                    }
+
+                    // Create the iCal content
+                    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+DTSTART:${formatDate(event.start)}
+DTEND:${formatDate(event.end)}
+END:VEVENT
+END:VCALENDAR`;
+
+
+                function sanitizeFilename(input) {
+                    // Define a regex pattern for characters not allowed in filenames
+                    const invalidChars = /[<>:"/\\|?*\x00-\x1F]/g;
+
+                    // Replace invalid characters with an underscore
+                    let sanitized = input.replace(invalidChars, '_');
+
+                    // Trim any leading or trailing whitespace
+                    sanitized = sanitized.trim();
+
+                    // Handle reserved filenames in Windows (CON, PRN, AUX, NUL, etc.)
+                    const reservedNames = /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\.|$)/i;
+                    if (reservedNames.test(sanitized)) {
+                        sanitized = '_' + sanitized;
+                    }
+
+                    // Return the sanitized filename
+                    return sanitized;
                 }
 
-                   
-            };
+                    // Create a Blob containing the iCal content
+                    const blob = new Blob([icsContent], { type: 'text/calendar' });
+
+                    // Create a link element to trigger the download
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+
+
+                    const fileName = sanitizeFilename(event.title   ) + '.ics';
+
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
 
 
             

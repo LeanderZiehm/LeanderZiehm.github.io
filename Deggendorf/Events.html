@@ -120,11 +120,14 @@
 
         position: relative;
 
+
        
     }
 
     .details-container{
         margin-left: 20px;
+
+        /* min-width: 500px; */
          /* put items in middle of div vertically */
         /* display: flex;
         flex-direction: column;
@@ -463,17 +466,42 @@ function main() {
         const dateInfo = calculateDateInfo(dateString);
         // console.log("dateInfo:", dateInfo);
 
-        const isWeekly = dateInfo["weekly"] !== undefined;
+        // const isWeekly = dateInfo["weekly"] !== undefined;
 
-        let eventDateHtml = `<span class="dateText">${dateInfo["dateText"]}</span>`;
-        if(isWeekly){
-            eventDateHtml += `<br/><span class="weekly">🔁 weekly</span>`;
-        }
+        // let eventDateHtml = `<span class="dateText">${dateInfo["dateText"]}</span>`;
+        // if(isWeekly){
+            // eventDateHtml += `<br/><span class="weekly">🔁 weekly</span>`;
+        // }
 
-        eventElement.querySelector(".event-date").innerHTML = eventDateHtml;
+        // getEventDateHtml(dateInfo["date"]);
+
+        //  eventElementAndDate.element.querySelector(".event-date").innerHTML = getEventDateHtml(dateInfo["dateText"]); 
+         eventElement.querySelector(".event-date").innerHTML = getEventDateHtml(event.date); 
+
+        // eventElement.querySelector(".event-date").innerHTML = eventDateHtml;
 
 
         const date = dateInfo["date"];
+
+        //add start time to date
+        const timeStart = event.timeStart;
+        if(timeStart !== undefined){
+            const timeParts = timeStart.split(":");
+            date.setHours(timeParts[0]);
+            date.setMinutes(timeParts[1]);
+        }
+
+        const timeEntry = event.timeEntry;
+        if(timeEntry !== undefined){
+            //set timeEntry to date
+            const timeEntryParts = timeEntry.split(":");
+            date.setHours(timeEntryParts[0]);
+            date.setMinutes(timeEntryParts[1]);
+
+        }
+
+
+
         const eventIsInFuture = date > new Date();
 
         const eventIsOnSameDay = date.toDateString() === new Date().toDateString();
@@ -510,7 +538,14 @@ function main() {
     function getEventDateHtml(date){
         const dateInfo = calculateDateInfo(date);
         const isWeekly = dateInfo["weekly"] !== undefined;
-        let eventDateHtml = `<span class="dateText">${dateInfo["dateText"]}</span>`;
+
+        let dateText = dateInfo["dateText"];
+        //remove year from dateText
+        dateText = dateText.replace(new Date().getFullYear() + "", "").replace(new Date().getFullYear() + "", ""); // removes 2024
+        //how can I remove all occurences of a substring in a string?
+        // Answer = dateText.replace(/2024/g, ""); // removes all occurences of 2024
+        
+        let eventDateHtml = `<span class="dateText">${dateText}</span>`;
         if (isWeekly) {
             eventDateHtml += `<br/><span class="weekly">🔁 weekly</span>`;
         }

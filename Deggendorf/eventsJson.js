@@ -193,7 +193,7 @@ Phantasie- und humorvolles Märchenabenteuer über ein kleines Mädchen, das von
 
     {
         "name": "Burning Cinema: Dungeons & Dragons: Ehre unter Dieben",
-        "date": "16.05.2024",
+        "date": "13.06.2024",
         "timeEntry": "19:00",
         "timeStart": "19:30",
         
@@ -232,7 +232,7 @@ Die vielfältige, fantastische Welt und der spielerische Geist des legendären R
         }
     },
     {
-        "name": "Burning Cinema: The Hunger Games: The Ballad of Songbirds & Snakes  [OV]",
+        "name": "The Hunger Games: The Ballad of Songbirds&Snakes",
         "date": "23.05.2024",
         "timeEntry": "19:00",
         "timeStart": "19:30",
@@ -273,7 +273,7 @@ Basierend auf der Bestseller-Reihe von Suzanne Collins begeisterten die "Die Tri
     },
     {
         "name": "Burning Cinema: Wall-E",
-        "date": "20.06.2024",
+        "date": "27.06.2024",
         "timeEntry": "19:00",
         "timeStart": "19:30",
         
@@ -1027,8 +1027,221 @@ P.S Dont forget to bring your own food😉😋
     },
 
 
+    {
+        "name": "30 Years THD",
+        "date": "06.06.2024",
+        "timeStart": "18:00",
+        "timeEnd": "01:00",
+        "price": "free",
+        "category": "special",
+        "registration": "no",
+        "type": "inPerson",
+        "language": "de+en",
+        "images": ["30THD.png"],
+
+        "descriptionLong": {
+            "de": `
+       Wir feiern 30 Jahre THD! Mit DJ´s, Chillerlounge und hoffentlich schönen Wetter wollen wir den Geburtstag der THD feiern! Keine Reden oder Wiederreden....eine große Campusparty ist geplant. Kommt vorbei! Von Studis für Studis!
+        `},
+        "location": {
+            "name": "THD Campus Deggendorf",
+            "maps": "https://maps.app.goo.gl/T5h4GeJWybNLnydQ8",
+            "description": ""
+        },
+        "organizer":
+        {
+            "name": "THD",
+            "image": "thd.jpg",
+            "email": "konvent-vorsitz@th-deg.de",
+            "website": "https://www.th-deg.de/de/veranstaltung?id=15154211"
+        }
+
+    },
 
 
+    {
+        "name": "Maifest",
+        "date": "24.05.2024",
+        "timeStart": "17:30",
+        "timeEnd": "",
+        "price": "free",
+        "category": "special",
+        "registration": "no",
+        "type": "inPerson",
+        "language": "de+en",
+        "images": ["maifest.png"],
+
+        "descriptionLong": {
+            "de": `
+      Am 24. Mai ab 17:30 Uhr veranstaltet die KjG-Deggendorf wieder das traditionelle Maifest vor dem Pfarrheim (bei schlechtem Wetter im Pfarrsaal). Das diesjährige Maifest steht ganz unter dem Motto 10 Jahre Maifest. Für das leibliche Wohl ist bestens gesorgt, mit Spanferkel und frischem Mallersdorfer Maibock vom Fass. Der Anstich erfolgt um 18:00 Uhr. Musikalisch begleitet wird der Abend von den Himmelreichbläsern, der Familie Brunner und der Familie Kink.
+        `},
+        "location": {
+            "name": "THD Campus Deggendorf",
+            "maps": "https://maps.app.goo.gl/T5h4GeJWybNLnydQ8",
+            "description": ""
+        },
+        "organizer":
+        {
+            "name": "Deggendorf",
+            "image": "deggendorf.png",
+            "website": "https://www.deggendorf.de/veranstaltungen/event/maifest"
+        }
+
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+        "name": "Puss in Boots 2: The last wish [OV]",
+        "date": "04.06.2024",
+        "timeEntry": "19:00",
+        "timeStart": "19:30",
+
+        "price": "2€",
+        "category": "cinema",
+        "language": "de",
+        "images": ["Puss_in_Boots_The_Last_Wish_poster.jpg"],
+
+        "descriptionLong": {
+            "de": `
+IMDb 7,8/10
+Rotten Tomatoes 95 %
+Amazon.de 4,6/5
+Google users liked this film  84%
+
+Puss in Boots discovers that his passion for adventure has taken its toll when he learns that he has burnt through eight of his nine lives. Puss sets out on an epic journey to find the mythical Last Wish and restore his nine lives.
+Release date: December 22, 2022 (Germany)
+Director: Joel Crawford
+Distributed by: Universal Pictures
+Adapted from: Puss in Boots
+Box office: $485.3 million
+Produced by: Mark Swift
+                  ` },
+        "duration": "102 Min.",
+        "organizer":
+        {
+            "name": "Burning Cinema",
+            "website": "https://www.unifilm.de/studentenkinos/Deggendorf",
+            "instagram": "https://www.instagram.com/hochschulkino_deggendorf/",
+            "email": "deggendorf@unifilm.de",
+            "ratings": 4.9
+        },
+        "type": "inPerson",
+        "location": {
+            "name": "THD, Campus Deggendorf, J007",
+            "maps": "https://maps.app.goo.gl/UfmUWQsr5Mu8Ar7N8",
+            "description": "Base floor on the entrince straigt under the stairs through the glass door third room on the left."
+        }
+    },
+
+
+
+        {
+            "name": "Open Air [OV]",
+            "date": "11.06.2024",
+            "timeEntry": "19:00",
+            "timeStart": "19:30",
+
+            "price": "2€",
+            "category": "cinema",
+            "language": "de",
+            "images": ["openair.jfif"],
+
+            "descriptionLong": {
+                "de": `
+         Ausnahmsweise am Dienstag und Open Air
+Ein Open Air zu planen ist gar nicht so einfach. Alleine auf die Lizenzzusage wartet man oft mehrere Wochen. Können wir so lange warten? Klar, aber dann startet das gesamte Kinoprogramm erst kurz vor den Semesterferien. Das klingt gar nicht mal so sinnvoll. Das heißt nämlich, dass wir uns entscheiden müssen: entweder Open Air oder das ganze Semester über Filme. Wenn es dafür nur eine Lösung gäbe! Vielleicht erzählen wir euch zu Beginn des Semesters einfach nur, dass wir ein Open Air planen und arbeiten dann weiter an einer verfügbaren Lizenz...
+
+Heute soll's nicht regnen, stürmen oder schnei'n, denn uns hilft heut' nur ein Tag voll Sonnenschein. Heut' ist Open-Air-Tag darum feiern wir – alle uns're Freunde sind deshalb auch hier, alle uns're Freunde sind deshalb auch hier. Happy Open-Air-Day! Updates zum Film gibt's in der App.
+
+R: Son N. Schein
+D
+k.A.
+Abenteuer
+180 Min.
+
+
+Am Dienstag, den 11. Juni, veranstaltet das Universitätskino ein Open-Air-Event mit einer Karaoke-Party nach dem Film.
+
+Weitere Informationen folgen auf Instagram.
+
+Wir freuen uns auf euch!!
+Euer Brennendes Kino
+
+                      ` },
+            "duration": "180 Min.",
+            "organizer":
+            {
+                "name": "Burning Cinema",
+                "website": "https://www.unifilm.de/studentenkinos/Deggendorf",
+                "instagram": "https://www.instagram.com/hochschulkino_deggendorf/",
+                "email": "deggendorf@unifilm.de",
+                "ratings": 4.9
+            },
+            "type": "inPerson",
+            "location": {
+                "name": "THD, Campus Deggendorf, J007",
+                "maps": "https://maps.app.goo.gl/UfmUWQsr5Mu8Ar7N8",
+                "description": "Base floor on the entrince straigt under the stairs through the glass door third room on the left."
+            }
+        },
+
+
+
+
+    {
+        "name": "Campus Party Burning Cinem",
+        "date": "23.05.2024",
+        "timeEntry": "18:30",
+        "timeStart": "20:00",
+
+        "price": "free",
+        "category": "cinema",
+        "language": "de",
+        "images": ["campusParty.jpg"],
+
+        "descriptionLong": {
+            "de": `
+
+
+18:30 Uhr Minispiele und Verkauf
+19:30 Uhr The Hunger Games (OV)
+20:00 Uhr Party vor dem J-Gebäude
+                  ` },
+        "organizer":
+        {
+            "name": "Burning Cinema",
+            "website": "https://www.unifilm.de/studentenkinos/Deggendorf",
+            "instagram": "https://www.instagram.com/hochschulkino_deggendorf/",
+            "email": "deggendorf@unifilm.de",
+            "ratings": 4.9
+        },
+        "type": "inPerson",
+        "location": {
+            "name": "THD, Campus Deggendorf, J007",
+            "maps": "https://maps.app.goo.gl/UfmUWQsr5Mu8Ar7N8",
+            "description": "Base floor on the entrince straigt under the stairs through the glass door third room on the left."
+        }
+    },
 
     
 ];
@@ -1194,21 +1407,28 @@ function dateToString(date) {
     const day = String(date.getDate()).padStart(2, '0'); // Add leading zero if needed
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
     const year = date.getFullYear();
+    // return `${day}.${month}.${year}`;
     return `${day}.${month}.${year}`;
 }
 
 function calculateNextDate(dayNumber) {
+
+
     var today = new Date();
     var dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
     var daysUntilTuesday = dayNumber - dayOfWeek; // Tuesday is 2 days after Monday
 
-    if (daysUntilTuesday <= 0) {
-        daysUntilTuesday += 7; // If today is Tuesday or later in the week, add 7 days to get to the next Tuesday
-    }
+    
+
+    // if (daysUntilTuesday <= 0) {
+    //     daysUntilTuesday += 7; // If today is Tuesday or later in the week, add 7 days to get to the next Tuesday
+
+    // }
 
     var nextDate = new Date(today);
     nextDate.setDate(today.getDate() + daysUntilTuesday + 7);
-    // let nextDateString = dateToString(nextDate);
+
+    // console.log("dayNumber:",dayNumber,"nextDate:",nextDate)
     return nextDate;
 }
 
@@ -1267,7 +1487,8 @@ function calculateDateInfo(dateString){
         let dateString = dateToString(date);
 
        if (i > 0) {
-            dateText += ", ";
+            dateText += " ";
+            // dateText += ", ";
         }
 
         dateText += getDayName(dateString, CURRENT_LANGUAGE);
