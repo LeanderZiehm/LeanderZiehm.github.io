@@ -5,10 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Event Details</title>
 
-<script src="eventsJson.js"></script>
-<script src="../test.js" type="text/javascript" charset="utf-8"></script>
-<!-- <link rel="stylesheet" href="icons/font-awesome5.15.4.all.min.css"/> -->
-
 <meta property="og:title" content="Events Deggendorf" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://leanderziehm.github.io/Deggendorf/Events.html" />
@@ -16,7 +12,20 @@
 <meta property="og:image" content="https://leanderziehm.github.io/Deggendorf/images/OG1.jpg" />
 
 
+<script src="../test.js" type="text/javascript" charset="utf-8"></script>
+<script src="eventsJson.js"></script>
+<script src="main.js" type="text/javascript" charset="utf-8"></script>
+<!-- <link rel="stylesheet" href="icons/font-awesome5.15.4.all.min.css"/> -->
+
+
 <style>
+
+ :root{
+    /* --orange: rgba(222, 122, 0, 1); */
+    --orange: orange;
+ }    
+
+
     body {
             /*font-family: Arial, sans-serif;*/
             font-family: Verdana, sans-serif;
@@ -68,7 +77,7 @@
             position: absolute;
             top: 30px;
             left: 30px;
-            background-color: rgba(222, 122, 0, 1);
+            background-color: var(--orange);
             border-radius: 10px;
             padding: 15px 30px;
             /* width: 70px; */
@@ -79,8 +88,12 @@
 
 
 
-    #follow-button,#share-button {
+    #follow-button{
         display: none;
+    }
+    
+    #share-button {
+        /* display: none; */
         padding: 10px 20px;
         background-color: #007bff;
         color: #fff;
@@ -173,7 +186,7 @@
     #images * {
         /* max-width: 200px; */
         max-height: 200px;
-        max-width: 30vw;
+        max-width: 50vw;
         border-radius: 20px;
         user-select: none;
         pointer-events: none;
@@ -197,6 +210,37 @@
     #downloadEventCalender{
         display: none;
     }
+
+    #shareContainer {
+        /* display: block; */
+        /* margin: auto; */
+        display: none;
+        /* position: absolute; */
+        /* width: 100vw; */
+        /* height: 100vh; */
+        /* background-color: red; */
+        /* display: flex; */
+        /* justify-content: center; */
+        /* align-items: center; */
+    }
+
+
+    
+    #shareBtn {
+        display: none;
+        background-color: var(--orange);
+    }
+
+    #shareBtn img{
+        width: 20px;
+        height: 20px;
+        margin: 0px;
+        padding: 0px 2px;
+        transform: translateY(2px);
+        /* margin-right: 10px; */
+    
+    }
+
     
 </style>
 </head>
@@ -204,6 +248,12 @@
     <button id="backBtn"><i class="fas fa-arrow-left"></i>Back</button>
 
 
+    <div id="shareContainer">
+        <div id="sharePanel">
+            <button id="copyToClipboard" ></button>
+            <button id="shareWhatsapp" ></button>
+        </div>
+    </div>
 
 
 
@@ -212,7 +262,7 @@
             <div id="event-name">Event Name</div>
             <div>
                 <button id="follow-button"><i class="fab fa-twitter"></i>Follow</button>
-                <button id="share-button"><i class="fas fa-share"></i>Share</button>
+                <button id="shareBtn"><img src="images/icons/share.png"></button>
             </div>
         </div>
         <div id="images">
@@ -416,10 +466,12 @@
            
             }
 
-            document.getElementById('follow-button').onclick = function() {
-                alert("Follow");
-            };
-            document.getElementById('share-button').onclick = function() {
+            // document.getElementById('follow-button').onclick = function() {
+            //     alert("Follow");
+            // };
+
+
+            document.getElementById('shareBtn').onclick = function() {
                 alert("Share");
             };
 
