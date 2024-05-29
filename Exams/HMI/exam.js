@@ -1,55 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .chapter {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            padding: 20px;
-            width: 80%;
-        }
-
-        .question {
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-        }
-
-        .question p {
-            margin: 5px 0;
-        }
-
-        .answerLabel {
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <h1>Interactive Quiz</h1>
-    <div id="content"></div>
-    
-    <script>
-        const quizData = [
+//  console.log('exadm.js loaded');
+ 
+ const exam = [
             {
                 "chapter": "DESIGN OF EVERYDAY THINGS",
                 "points": 29,
@@ -249,36 +200,3 @@
                 ]
             }
         ];
-
-        const contentDiv = document.getElementById('content');
-
-        quizData.forEach(chapter => {
-            const chapterDiv = document.createElement('div');
-            chapterDiv.classList.add('chapter');
-
-            const chapterTitle = document.createElement('h2');
-            chapterTitle.textContent = chapter.chapter;
-            chapterDiv.appendChild(chapterTitle);
-
-            chapter.questions.forEach(question => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question');
-
-                const questionText = document.createElement('p');
-                questionText.innerHTML = `<strong>${question.letter}.</strong> ${question.question} <em>(${question.points} points)</em>`;
-                questionDiv.appendChild(questionText);
-
-                question.answerLabel.forEach(label => {
-                    const labelText = document.createElement('p');
-                    labelText.innerHTML = `<span class="answerLabel">${label}</span>`;
-                    questionDiv.appendChild(labelText);
-                });
-
-                chapterDiv.appendChild(questionDiv);
-            });
-
-            contentDiv.appendChild(chapterDiv);
-        });
-    </script>
-</body>
-</html>
