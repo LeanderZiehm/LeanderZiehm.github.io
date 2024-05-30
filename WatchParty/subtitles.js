@@ -1,0 +1,1597 @@
+const videoFileName = "What Follow Your Dreams Misses  Harvey Mudd Commencement Speech 2024.mp4";
+
+function getVideoFileName() {
+  return videoFileName;
+}
+
+const subtitles = {
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 0,
+    "dDurationMs": 3360,
+    "segs": [ {
+      "utf8": "Last year, Grant gave the math department's Michael E."
+    } ]
+  }, {
+    "tStartMs": 3560,
+    "dDurationMs": 2860,
+    "segs": [ {
+      "utf8": "Moody lecture on where math and physics collide."
+    } ]
+  }, {
+    "tStartMs": 6900,
+    "dDurationMs": 5500,
+    "segs": [ {
+      "utf8": "He explored unexpected connections between kinematics, optics, and quantum computing."
+    } ]
+  }, {
+    "tStartMs": 13160,
+    "dDurationMs": 2916,
+    "segs": [ {
+      "utf8": "Our students loved his talk, and the senior class voted "
+    } ]
+  }, {
+    "tStartMs": 16076,
+    "dDurationMs": 2864,
+    "segs": [ {
+      "utf8": "overwhelmingly to ask him back as commencement speaker."
+    } ]
+  }, {
+    "tStartMs": 20160,
+    "dDurationMs": 3372,
+    "segs": [ {
+      "utf8": "Grant has said that he seeks to educate and inspire "
+    } ]
+  }, {
+    "tStartMs": 23532,
+    "dDurationMs": 3308,
+    "segs": [ {
+      "utf8": "the world with beauty and the power of mathematics."
+    } ]
+  }, {
+    "tStartMs": 27430,
+    "dDurationMs": 3630,
+    "segs": [ {
+      "utf8": "He certainly has inspired many of us here at Harvey Mudd."
+    } ]
+  }, {
+    "tStartMs": 31220,
+    "dDurationMs": 2820,
+    "segs": [ {
+      "utf8": "Please join me in welcoming Grant Sanderson."
+    } ]
+  }, {
+    "tStartMs": 45840,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "Thank you President Nempahrd for that very warm introduction and for inviting me."
+    } ]
+  }, {
+    "tStartMs": 50080,
+    "dDurationMs": 3180,
+    "segs": [ {
+      "utf8": "And thank you to the class of 2024 for including me in such a special day."
+    } ]
+  }, {
+    "tStartMs": 53760,
+    "dDurationMs": 2760,
+    "segs": [ {
+      "utf8": "I had the joy of getting to know many of you last year on this visit."
+    } ]
+  }, {
+    "tStartMs": 56520,
+    "dDurationMs": 2714,
+    "segs": [ {
+      "utf8": "And I distinctly remember coming away with the feeling "
+    } ]
+  }, {
+    "tStartMs": 59234,
+    "dDurationMs": 2666,
+    "segs": [ {
+      "utf8": "that a future in your hands is a bright future indeed."
+    } ]
+  }, {
+    "tStartMs": 62900,
+    "dDurationMs": 2506,
+    "segs": [ {
+      "utf8": "For those in the audience who don't know who I am, "
+    } ]
+  }, {
+    "tStartMs": 65406,
+    "dDurationMs": 3834,
+    "segs": [ {
+      "utf8": "I focus on making videos about mathematics with an emphasis on visualizations."
+    } ]
+  }, {
+    "tStartMs": 69840,
+    "dDurationMs": 920,
+    "segs": [ {
+      "utf8": "It's a weird job."
+    } ]
+  }, {
+    "tStartMs": 71500,
+    "dDurationMs": 3640,
+    "segs": [ {
+      "utf8": "I do love it though, and it's no exaggeration to describe it as a dream job."
+    } ]
+  }, {
+    "tStartMs": 76040,
+    "dDurationMs": 4629,
+    "segs": [ {
+      "utf8": "And a common cliché is for someone who is lucky enough to land in a dream job, "
+    } ]
+  }, {
+    "tStartMs": 80669,
+    "dDurationMs": 3809,
+    "segs": [ {
+      "utf8": "to stand confidently in front of a group of fledgling graduates, "
+    } ]
+  }, {
+    "tStartMs": 84478,
+    "dDurationMs": 2462,
+    "segs": [ {
+      "utf8": "and to compel them to follow their dreams."
+    } ]
+  }, {
+    "tStartMs": 88240,
+    "dDurationMs": 3560,
+    "segs": [ {
+      "utf8": "Frankly, on its own, I don't think this is very good advice."
+    } ]
+  }, {
+    "tStartMs": 93860,
+    "dDurationMs": 2340,
+    "segs": [ {
+      "utf8": "To be clear, there is truth behind the cliché."
+    } ]
+  }, {
+    "tStartMs": 96780,
+    "dDurationMs": 3520,
+    "segs": [ {
+      "utf8": "It is true that those who make the biggest ripples are the ones who are fueled by passion."
+    } ]
+  }, {
+    "tStartMs": 100620,
+    "dDurationMs": 2253,
+    "segs": [ {
+      "utf8": "It is true that the life that you live is much more "
+    } ]
+  }, {
+    "tStartMs": 102873,
+    "dDurationMs": 2427,
+    "segs": [ {
+      "utf8": "enjoyable if you can find something doing what you love."
+    } ]
+  }, {
+    "tStartMs": 105460,
+    "dDurationMs": 3580,
+    "segs": [ {
+      "utf8": "And it's also true that you shouldn't feel shackled by societal constraints."
+    } ]
+  }, {
+    "tStartMs": 110100,
+    "dDurationMs": 2099,
+    "segs": [ {
+      "utf8": "But for one thing, not everyone has a pre-baked "
+    } ]
+  }, {
+    "tStartMs": 112199,
+    "dDurationMs": 1881,
+    "segs": [ {
+      "utf8": "dream sitting there waiting to be followed."
+    } ]
+  }, {
+    "tStartMs": 114500,
+    "dDurationMs": 1080,
+    "segs": [ {
+      "utf8": "That's completely okay."
+    } ]
+  }, {
+    "tStartMs": 116660,
+    "dDurationMs": 3802,
+    "segs": [ {
+      "utf8": "And even if you are one of the lucky ones who has a passion that you want to roll "
+    } ]
+  }, {
+    "tStartMs": 120462,
+    "dDurationMs": 3710,
+    "segs": [ {
+      "utf8": "into a career, I think there are a few pragmatic concerns that don't always fit "
+    } ]
+  }, {
+    "tStartMs": 124172,
+    "dDurationMs": 3988,
+    "segs": [ {
+      "utf8": "very neatly into an inspirational speech that are required to make this actually work."
+    } ]
+  }, {
+    "tStartMs": 129259,
+    "dDurationMs": 2609,
+    "segs": [ {
+      "utf8": "Now, I know I'm talking to a very nerdy audience, "
+    } ]
+  }, {
+    "tStartMs": 131868,
+    "dDurationMs": 4381,
+    "segs": [ {
+      "utf8": "so I'm tempted to describe my aims here a little bit more mathematically precisely, "
+    } ]
+  }, {
+    "tStartMs": 136249,
+    "dDurationMs": 2608,
+    "segs": [ {
+      "utf8": "where in the vector space of all possible advice, "
+    } ]
+  }, {
+    "tStartMs": 138857,
+    "dDurationMs": 4643,
+    "segs": [ {
+      "utf8": "if you consider the follow your dreams vector, I want to explore its orthogonal subspace."
+    } ]
+  }, {
+    "tStartMs": 145900,
+    "dDurationMs": 2040,
+    "segs": [ {
+      "utf8": "Maybe though, it's better if I just start with a story."
+    } ]
+  }, {
+    "tStartMs": 149700,
+    "dDurationMs": 3100,
+    "segs": [ {
+      "utf8": "Before I entered college, I was one of those who knew what I wanted to major in."
+    } ]
+  }, {
+    "tStartMs": 153020,
+    "dDurationMs": 1520,
+    "segs": [ {
+      "utf8": "There's no surprises here, it was math."
+    } ]
+  }, {
+    "tStartMs": 155060,
+    "dDurationMs": 2840,
+    "segs": [ {
+      "utf8": "This was a topic that I had loved for a long time, as long as I can remember."
+    } ]
+  }, {
+    "tStartMs": 158600,
+    "dDurationMs": 3598,
+    "segs": [ {
+      "utf8": "When I was in college, I was plenty seduced by the adjacent field of computer "
+    } ]
+  }, {
+    "tStartMs": 162198,
+    "dDurationMs": 3922,
+    "segs": [ {
+      "utf8": "science and programming, and I would spend my summers interning at software startups."
+    } ]
+  }, {
+    "tStartMs": 166580,
+    "dDurationMs": 3725,
+    "segs": [ {
+      "utf8": "But I distinctly remember coming back at the end of each of those summers and thinking, "
+    } ]
+  }, {
+    "tStartMs": 170305,
+    "dDurationMs": 3515,
+    "segs": [ {
+      "utf8": "man, you know what I really want to do with my life, is spend more time doing math."
+    } ]
+  }, {
+    "tStartMs": 174620,
+    "dDurationMs": 2160,
+    "segs": [ {
+      "utf8": "So I had a passion, I had something I would want to follow."
+    } ]
+  }, {
+    "tStartMs": 177220,
+    "dDurationMs": 3189,
+    "segs": [ {
+      "utf8": "But in hindsight, that passion was a lot more arbitrary and maybe a "
+    } ]
+  }, {
+    "tStartMs": 180409,
+    "dDurationMs": 3331,
+    "segs": [ {
+      "utf8": "little more self-centered than I would have liked to admit at the time."
+    } ]
+  }, {
+    "tStartMs": 184660,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Why did I love math?"
+    } ]
+  }, {
+    "tStartMs": 186680,
+    "dDurationMs": 3361,
+    "segs": [ {
+      "utf8": "You know, if I'm honest, I think it had its roots in the fact that when I was young, "
+    } ]
+  }, {
+    "tStartMs": 190041,
+    "dDurationMs": 2334,
+    "segs": [ {
+      "utf8": "the adults emphasized this is an important topic to learn, "
+    } ]
+  }, {
+    "tStartMs": 192375,
+    "dDurationMs": 1345,
+    "segs": [ {
+      "utf8": "and they told me I was good at it."
+    } ]
+  }, {
+    "tStartMs": 194080,
+    "dDurationMs": 1480,
+    "segs": [ {
+      "utf8": "This makes me spend more time with it."
+    } ]
+  }, {
+    "tStartMs": 195680,
+    "dDurationMs": 2692,
+    "segs": [ {
+      "utf8": "Spending time with something is how you get better at something, "
+    } ]
+  }, {
+    "tStartMs": 198372,
+    "dDurationMs": 3728,
+    "segs": [ {
+      "utf8": "and that kicks off a positive feedback loop, in both senses of the word positive feedback."
+    } ]
+  }, {
+    "tStartMs": 202760,
+    "dDurationMs": 4280,
+    "segs": [ {
+      "utf8": "Now, as time went on, I do believe it became less about perceptions when I was in college."
+    } ]
+  }, {
+    "tStartMs": 207180,
+    "dDurationMs": 2508,
+    "segs": [ {
+      "utf8": "I remember genuinely enjoying the aesthetic delights "
+    } ]
+  }, {
+    "tStartMs": 209688,
+    "dDurationMs": 2272,
+    "segs": [ {
+      "utf8": "that beautiful math problem solving has to have."
+    } ]
+  }, {
+    "tStartMs": 213220,
+    "dDurationMs": 2937,
+    "segs": [ {
+      "utf8": "But thinking of it as a career ambition, not just a hobby, "
+    } ]
+  }, {
+    "tStartMs": 216157,
+    "dDurationMs": 3884,
+    "segs": [ {
+      "utf8": "this had the fatal flaw that I was viewing the world through a lens of what I "
+    } ]
+  }, {
+    "tStartMs": 220041,
+    "dDurationMs": 3983,
+    "segs": [ {
+      "utf8": "personally enjoyed, not giving enough weight to a plan for how exactly it would "
+    } ]
+  }, {
+    "tStartMs": 224024,
+    "dDurationMs": 996,
+    "segs": [ {
+      "utf8": "add value to others."
+    } ]
+  }, {
+    "tStartMs": 226260,
+    "dDurationMs": 2332,
+    "segs": [ {
+      "utf8": "I don't know if you felt it yet, but today marks "
+    } ]
+  }, {
+    "tStartMs": 228592,
+    "dDurationMs": 2428,
+    "segs": [ {
+      "utf8": "a day in your life when a fundamental goal changes."
+    } ]
+  }, {
+    "tStartMs": 231720,
+    "dDurationMs": 4120,
+    "segs": [ {
+      "utf8": "When you're a student, the fundamental goal is to grow, to learn, to become better."
+    } ]
+  }, {
+    "tStartMs": 236680,
+    "dDurationMs": 3166,
+    "segs": [ {
+      "utf8": "So many institutions and structures around you are there to support you "
+    } ]
+  }, {
+    "tStartMs": 239846,
+    "dDurationMs": 3254,
+    "segs": [ {
+      "utf8": "in growing and learning and getting better and to reward you for doing so."
+    } ]
+  }, {
+    "tStartMs": 244100,
+    "dDurationMs": 2601,
+    "segs": [ {
+      "utf8": "In life after college, the goal changes a little, "
+    } ]
+  }, {
+    "tStartMs": 246701,
+    "dDurationMs": 3799,
+    "segs": [ {
+      "utf8": "and success hinges on how effectively you're able to add value to others."
+    } ]
+  }, {
+    "tStartMs": 252040,
+    "dDurationMs": 1260,
+    "segs": [ {
+      "utf8": "Now, these aren't at odds with each other."
+    } ]
+  }, {
+    "tStartMs": 253380,
+    "dDurationMs": 1340,
+    "segs": [ {
+      "utf8": "In fact, they go hand in hand."
+    } ]
+  }, {
+    "tStartMs": 255120,
+    "dDurationMs": 2590,
+    "segs": [ {
+      "utf8": "You're much better positioned to make a difference if you're armed "
+    } ]
+  }, {
+    "tStartMs": 257710,
+    "dDurationMs": 2590,
+    "segs": [ {
+      "utf8": "with an expertise and if you spend your life honing that expertise."
+    } ]
+  }, {
+    "tStartMs": 260300,
+    "dDurationMs": 3506,
+    "segs": [ {
+      "utf8": "But there is a big difference between personal growth being "
+    } ]
+  }, {
+    "tStartMs": 263806,
+    "dDurationMs": 3274,
+    "segs": [ {
+      "utf8": "the end in and of itself versus being a means to an end."
+    } ]
+  }, {
+    "tStartMs": 268120,
+    "dDurationMs": 3660,
+    "segs": [ {
+      "utf8": "By way of comparison, I also loved the violin when I was growing up."
+    } ]
+  }, {
+    "tStartMs": 271980,
+    "dDurationMs": 3100,
+    "segs": [ {
+      "utf8": "And let's take a moment to imagine two distinct music students."
+    } ]
+  }, {
+    "tStartMs": 275460,
+    "dDurationMs": 1900,
+    "segs": [ {
+      "utf8": "I'm going to name them Paganini and Taylor."
+    } ]
+  }, {
+    "tStartMs": 278440,
+    "dDurationMs": 4660,
+    "segs": [ {
+      "utf8": "Both of them are talented, very talented, but Paganini pushes for technical excellence."
+    } ]
+  }, {
+    "tStartMs": 283280,
+    "dDurationMs": 2800,
+    "segs": [ {
+      "utf8": "He tries to perfect virtuosically challenging pieces."
+    } ]
+  }, {
+    "tStartMs": 286780,
+    "dDurationMs": 4840,
+    "segs": [ {
+      "utf8": "Taylor strives to write music that speaks to people, that resonates with them emotionally."
+    } ]
+  }, {
+    "tStartMs": 292400,
+    "dDurationMs": 3440,
+    "segs": [ {
+      "utf8": "Now, in a music school, Paganini is going to get the better grades every time."
+    } ]
+  }, {
+    "tStartMs": 296060,
+    "dDurationMs": 1400,
+    "segs": [ {
+      "utf8": "He's always going to get the better position."
+    } ]
+  }, {
+    "tStartMs": 297960,
+    "dDurationMs": 3140,
+    "segs": [ {
+      "utf8": "But pursuing music careers, Taylor is at the clear advantage."
+    } ]
+  }, {
+    "tStartMs": 302580,
+    "dDurationMs": 4040,
+    "segs": [ {
+      "utf8": "My first piece of advice, something I would have told myself I could go back in time "
+    } ]
+  }, {
+    "tStartMs": 306620,
+    "dDurationMs": 3897,
+    "segs": [ {
+      "utf8": "and be in the seat where you are now, is that if you have a passion that you want "
+    } ]
+  }, {
+    "tStartMs": 310517,
+    "dDurationMs": 3945,
+    "segs": [ {
+      "utf8": "to incorporate into a career, take a step back and recognize the fact that this is "
+    } ]
+  }, {
+    "tStartMs": 314462,
+    "dDurationMs": 3898,
+    "segs": [ {
+      "utf8": "a passion that grew in a time of your life when the goal was to learn and to grow."
+    } ]
+  }, {
+    "tStartMs": 318360,
+    "dDurationMs": 2305,
+    "segs": [ {
+      "utf8": "But you're transitioning to a period when the "
+    } ]
+  }, {
+    "tStartMs": 320665,
+    "dDurationMs": 2255,
+    "segs": [ {
+      "utf8": "primary aim shifts to adding value to others."
+    } ]
+  }, {
+    "tStartMs": 324020,
+    "dDurationMs": 3682,
+    "segs": [ {
+      "utf8": "The cliché to follow your dreams overlooks how critical it is that "
+    } ]
+  }, {
+    "tStartMs": 327702,
+    "dDurationMs": 3518,
+    "segs": [ {
+      "utf8": "the dreams you have are about something more than just yourself."
+    } ]
+  }, {
+    "tStartMs": 332360,
+    "dDurationMs": 3050,
+    "segs": [ {
+      "utf8": "Those who excel in their first jobs are the ones who make life easier for "
+    } ]
+  }, {
+    "tStartMs": 335410,
+    "dDurationMs": 3010,
+    "segs": [ {
+      "utf8": "everyone around them, even when it involves doing things they don't love."
+    } ]
+  }, {
+    "tStartMs": 339220,
+    "dDurationMs": 3993,
+    "segs": [ {
+      "utf8": "Those who excel in PhD programs are the ones who recognize how their work fits into a "
+    } ]
+  }, {
+    "tStartMs": 343213,
+    "dDurationMs": 4087,
+    "segs": [ {
+      "utf8": "broader research community, not just the ones who view it as the next chapter in school."
+    } ]
+  }, {
+    "tStartMs": 347920,
+    "dDurationMs": 2757,
+    "segs": [ {
+      "utf8": "The successful entrepreneurs are the ones who have a relentless "
+    } ]
+  }, {
+    "tStartMs": 350677,
+    "dDurationMs": 3317,
+    "segs": [ {
+      "utf8": "focus on making sure that what they have to sell is what people want to buy, "
+    } ]
+  }, {
+    "tStartMs": 353994,
+    "dDurationMs": 2586,
+    "segs": [ {
+      "utf8": "not just those who are looking to make something impressive."
+    } ]
+  }, {
+    "tStartMs": 357720,
+    "dDurationMs": 3019,
+    "segs": [ {
+      "utf8": "Now, for some people when you hear the words follow your dreams, "
+    } ]
+  }, {
+    "tStartMs": 360739,
+    "dDurationMs": 2601,
+    "segs": [ {
+      "utf8": "it falls flat because you don't have a defining passion."
+    } ]
+  }, {
+    "tStartMs": 363700,
+    "dDurationMs": 1740,
+    "segs": [ {
+      "utf8": "Like I said earlier, that's completely okay."
+    } ]
+  }, {
+    "tStartMs": 365960,
+    "dDurationMs": 1620,
+    "segs": [ {
+      "utf8": "If anything, it might put you at an advantage."
+    } ]
+  }, {
+    "tStartMs": 368280,
+    "dDurationMs": 3899,
+    "segs": [ {
+      "utf8": "I think you'll do just as well if you start by seeking out opportunities where "
+    } ]
+  }, {
+    "tStartMs": 372179,
+    "dDurationMs": 3801,
+    "segs": [ {
+      "utf8": "the skills that you've developed here intersect with adding values to others."
+    } ]
+  }, {
+    "tStartMs": 376500,
+    "dDurationMs": 2000,
+    "segs": [ {
+      "utf8": "And from there, I promise the passion will follow."
+    } ]
+  }, {
+    "tStartMs": 379440,
+    "dDurationMs": 2880,
+    "segs": [ {
+      "utf8": "One of the best pieces of advice I remember receiving from "
+    } ]
+  }, {
+    "tStartMs": 382320,
+    "dDurationMs": 2880,
+    "segs": [ {
+      "utf8": "a friend many years ago is that action precedes motivation."
+    } ]
+  }, {
+    "tStartMs": 386340,
+    "dDurationMs": 1940,
+    "segs": [ {
+      "utf8": "This is often useful on a much smaller scale."
+    } ]
+  }, {
+    "tStartMs": 388920,
+    "dDurationMs": 2820,
+    "segs": [ {
+      "utf8": "We feel most awake after getting out of bed, not before."
+    } ]
+  }, {
+    "tStartMs": 392340,
+    "dDurationMs": 2760,
+    "segs": [ {
+      "utf8": "A drive to exercise comes from the habit of exercising."
+    } ]
+  }, {
+    "tStartMs": 395180,
+    "dDurationMs": 1260,
+    "segs": [ {
+      "utf8": "It doesn't go the other way around."
+    } ]
+  }, {
+    "tStartMs": 396980,
+    "dDurationMs": 2615,
+    "segs": [ {
+      "utf8": "But I think the idea that action precedes motivation applies "
+    } ]
+  }, {
+    "tStartMs": 399595,
+    "dDurationMs": 2745,
+    "segs": [ {
+      "utf8": "to this bigger question of finding a career doing what you love."
+    } ]
+  }, {
+    "tStartMs": 403360,
+    "dDurationMs": 3160,
+    "segs": [ {
+      "utf8": "These days, I do love making videos, and I really do love teaching."
+    } ]
+  }, {
+    "tStartMs": 406960,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "But when I was finishing college, I had no penchant or experience with videos at all."
+    } ]
+  }, {
+    "tStartMs": 412100,
+    "dDurationMs": 2462,
+    "segs": [ {
+      "utf8": "And my interest in teaching was honestly only "
+    } ]
+  }, {
+    "tStartMs": 414562,
+    "dDurationMs": 2678,
+    "segs": [ {
+      "utf8": "insofar as it scratched this itch to do more math."
+    } ]
+  }, {
+    "tStartMs": 417620,
+    "dDurationMs": 2504,
+    "segs": [ {
+      "utf8": "It was only by stumbling into a wacky career where "
+    } ]
+  }, {
+    "tStartMs": 420124,
+    "dDurationMs": 2456,
+    "segs": [ {
+      "utf8": "I was doing both of them that I came to love them."
+    } ]
+  }, {
+    "tStartMs": 423680,
+    "dDurationMs": 3425,
+    "segs": [ {
+      "utf8": "Now, in my own story, what happened after college involves a fair bit of luck, "
+    } ]
+  }, {
+    "tStartMs": 427105,
+    "dDurationMs": 1995,
+    "segs": [ {
+      "utf8": "but luck can come in a lot of different forms."
+    } ]
+  }, {
+    "tStartMs": 429360,
+    "dDurationMs": 2654,
+    "segs": [ {
+      "utf8": "And I think with a little bit of foresight, you can actually "
+    } ]
+  }, {
+    "tStartMs": 432014,
+    "dDurationMs": 2306,
+    "segs": [ {
+      "utf8": "avoid having to rely on chance in quite the same way."
+    } ]
+  }, {
+    "tStartMs": 435220,
+    "dDurationMs": 4324,
+    "segs": [ {
+      "utf8": "There's a post I like on the webcomic XKCD that shows a man standing on a stage, "
+    } ]
+  }, {
+    "tStartMs": 439544,
+    "dDurationMs": 2136,
+    "segs": [ {
+      "utf8": "and he has bags of cash surrounding him."
+    } ]
+  }, {
+    "tStartMs": 442480,
+    "dDurationMs": 2100,
+    "segs": [ {
+      "utf8": "Never stop buying lottery tickets, he says."
+    } ]
+  }, {
+    "tStartMs": 444980,
+    "dDurationMs": 3690,
+    "segs": [ {
+      "utf8": "No matter what people tell you, I failed again and again, but I never gave up, "
+    } ]
+  }, {
+    "tStartMs": 448670,
+    "dDurationMs": 2990,
+    "segs": [ {
+      "utf8": "and here I am as proof that if you put in the time, it pays off."
+    } ]
+  }, {
+    "tStartMs": 453500,
+    "dDurationMs": 2317,
+    "segs": [ {
+      "utf8": "The caption notes that every inspirational speech "
+    } ]
+  }, {
+    "tStartMs": 455817,
+    "dDurationMs": 2503,
+    "segs": [ {
+      "utf8": "should come with a disclaimer about survivorship bias."
+    } ]
+  }, {
+    "tStartMs": 460520,
+    "dDurationMs": 3640,
+    "segs": [ {
+      "utf8": "The obvious way that Follow Your Dreams is susceptible to survivorship bias "
+    } ]
+  }, {
+    "tStartMs": 464160,
+    "dDurationMs": 4262,
+    "segs": [ {
+      "utf8": "is that for all of the high-risk, high-reward paths, things like professional athletics, "
+    } ]
+  }, {
+    "tStartMs": 468422,
+    "dDurationMs": 2970,
+    "segs": [ {
+      "utf8": "starting a social media company, making a career in the arts, "
+    } ]
+  }, {
+    "tStartMs": 471392,
+    "dDurationMs": 3928,
+    "segs": [ {
+      "utf8": "it's only the few who rise to the top who are in a position to give advice at all."
+    } ]
+  }, {
+    "tStartMs": 476200,
+    "dDurationMs": 3180,
+    "segs": [ {
+      "utf8": "But there's also a more subtle way that survivorship bias applies here."
+    } ]
+  }, {
+    "tStartMs": 480500,
+    "dDurationMs": 2880,
+    "segs": [ {
+      "utf8": "It's not just about the odds of winning a particular game."
+    } ]
+  }, {
+    "tStartMs": 484020,
+    "dDurationMs": 2454,
+    "segs": [ {
+      "utf8": "It has to do with whether the game you choose to "
+    } ]
+  }, {
+    "tStartMs": 486474,
+    "dDurationMs": 2706,
+    "segs": [ {
+      "utf8": "play meshes well with the way that the future unfolds."
+    } ]
+  }, {
+    "tStartMs": 490160,
+    "dDurationMs": 2621,
+    "segs": [ {
+      "utf8": "If you were a software enthusiast in the late 1980s, "
+    } ]
+  }, {
+    "tStartMs": 492781,
+    "dDurationMs": 3859,
+    "segs": [ {
+      "utf8": "you would be well poised to ride the dot-com boom in the decade that followed."
+    } ]
+  }, {
+    "tStartMs": 497180,
+    "dDurationMs": 3508,
+    "segs": [ {
+      "utf8": "If you were someone with a niche interest and an act for film production, "
+    } ]
+  }, {
+    "tStartMs": 500688,
+    "dDurationMs": 3224,
+    "segs": [ {
+      "utf8": "you would find yourself with an unexpected opportunity when YouTube "
+    } ]
+  }, {
+    "tStartMs": 503912,
+    "dDurationMs": 2988,
+    "segs": [ {
+      "utf8": "and other film-sharing platforms started to rise in prominence."
+    } ]
+  }, {
+    "tStartMs": 507940,
+    "dDurationMs": 3271,
+    "segs": [ {
+      "utf8": "When I was finishing my undergrad, one of these ways that I scratched "
+    } ]
+  }, {
+    "tStartMs": 511211,
+    "dDurationMs": 3412,
+    "segs": [ {
+      "utf8": "that itch to do more math was to hack together a very rudimentary Python "
+    } ]
+  }, {
+    "tStartMs": 514623,
+    "dDurationMs": 3318,
+    "segs": [ {
+      "utf8": "library for making math visualizations, and I used it to make a couple "
+    } ]
+  }, {
+    "tStartMs": 517941,
+    "dDurationMs": 3598,
+    "segs": [ {
+      "utf8": "videos about neat proofs and problems that I enjoyed and posting them online."
+    } ]
+  }, {
+    "tStartMs": 522299,
+    "dDurationMs": 1801,
+    "segs": [ {
+      "utf8": "I was not planning for this to be a career."
+    } ]
+  }, {
+    "tStartMs": 524480,
+    "dDurationMs": 2945,
+    "segs": [ {
+      "utf8": "I had an appreciation for how valuable personal projects are, "
+    } ]
+  }, {
+    "tStartMs": 527425,
+    "dDurationMs": 1615,
+    "segs": [ {
+      "utf8": "but it didn't go much beyond that."
+    } ]
+  }, {
+    "tStartMs": 529500,
+    "dDurationMs": 3848,
+    "segs": [ {
+      "utf8": "This led to conversations with Khan Academy, a group I had great respect for, "
+    } ]
+  }, {
+    "tStartMs": 533348,
+    "dDurationMs": 2912,
+    "segs": [ {
+      "utf8": "and it turned into a job there, making more lessons online."
+    } ]
+  }, {
+    "tStartMs": 536960,
+    "dDurationMs": 4206,
+    "segs": [ {
+      "utf8": "In the meantime, I continued my own channel as a side hobby, and it didn't blow up, "
+    } ]
+  }, {
+    "tStartMs": 541166,
+    "dDurationMs": 3706,
+    "segs": [ {
+      "utf8": "but there was a very modest growth of others who enjoyed the same kind of "
+    } ]
+  }, {
+    "tStartMs": 544872,
+    "dDurationMs": 4308,
+    "segs": [ {
+      "utf8": "visualizations that I did, and I saw it in just a steady take-up in the audience size."
+    } ]
+  }, {
+    "tStartMs": 550100,
+    "dDurationMs": 3559,
+    "segs": [ {
+      "utf8": "Now, my original plan, I think, was to spend a year or two doing this online "
+    } ]
+  }, {
+    "tStartMs": 553659,
+    "dDurationMs": 3421,
+    "segs": [ {
+      "utf8": "education stuff, working at Khan Academy, and maybe returning to do a PhD."
+    } ]
+  }, {
+    "tStartMs": 557920,
+    "dDurationMs": 3327,
+    "segs": [ {
+      "utf8": "But as time went on, something between the gratitude that I saw from "
+    } ]
+  }, {
+    "tStartMs": 561247,
+    "dDurationMs": 3424,
+    "segs": [ {
+      "utf8": "many students around the planet for the lessons I put out and the slow "
+    } ]
+  }, {
+    "tStartMs": 564671,
+    "dDurationMs": 3473,
+    "segs": [ {
+      "utf8": "and steady growth on my own channel led me to doubling down and forming "
+    } ]
+  }, {
+    "tStartMs": 568144,
+    "dDurationMs": 3376,
+    "segs": [ {
+      "utf8": "a somewhat unorthodox career in online lessons and math visualization."
+    } ]
+  }, {
+    "tStartMs": 572580,
+    "dDurationMs": 2983,
+    "segs": [ {
+      "utf8": "Now, looking back, it would feel very incomplete if I were to "
+    } ]
+  }, {
+    "tStartMs": 575563,
+    "dDurationMs": 3128,
+    "segs": [ {
+      "utf8": "somehow ascribe the success that I found to the extent there was "
+    } ]
+  }, {
+    "tStartMs": 578691,
+    "dDurationMs": 3129,
+    "segs": [ {
+      "utf8": "any to the fact that I was following a dream, pursuing a passion."
+    } ]
+  }, {
+    "tStartMs": 582760,
+    "dDurationMs": 960,
+    "segs": [ {
+      "utf8": "Passion plays into it."
+    } ]
+  }, {
+    "tStartMs": 583820,
+    "dDurationMs": 2346,
+    "segs": [ {
+      "utf8": "You can't have good lessons without a teacher who cares, "
+    } ]
+  }, {
+    "tStartMs": 586166,
+    "dDurationMs": 1894,
+    "segs": [ {
+      "utf8": "but we can't ignore the other factors at play."
+    } ]
+  }, {
+    "tStartMs": 588920,
+    "dDurationMs": 3278,
+    "segs": [ {
+      "utf8": "I already brought up the biggest one, success is a function of the value "
+    } ]
+  }, {
+    "tStartMs": 592198,
+    "dDurationMs": 2605,
+    "segs": [ {
+      "utf8": "you bring to others, so a pursuit equally fueled by love, "
+    } ]
+  }, {
+    "tStartMs": 594803,
+    "dDurationMs": 3233,
+    "segs": [ {
+      "utf8": "but which did nothing to help or to entertain people just wouldn't have "
+    } ]
+  }, {
+    "tStartMs": 598036,
+    "dDurationMs": 944,
+    "segs": [ {
+      "utf8": "had a chance to work."
+    } ]
+  }, {
+    "tStartMs": 599880,
+    "dDurationMs": 3840,
+    "segs": [ {
+      "utf8": "But another factor I want to focus on is how I was very lucky with the timing."
+    } ]
+  }, {
+    "tStartMs": 604420,
+    "dDurationMs": 3747,
+    "segs": [ {
+      "utf8": "If I had been born 10 years earlier, I don't think I could have reached the same "
+    } ]
+  }, {
+    "tStartMs": 608167,
+    "dDurationMs": 3702,
+    "segs": [ {
+      "utf8": "number of people posting lessons on a much more infant version of the internet, "
+    } ]
+  }, {
+    "tStartMs": 611869,
+    "dDurationMs": 3794,
+    "segs": [ {
+      "utf8": "where there was less infrastructure that could have existed to help form a career "
+    } ]
+  }, {
+    "tStartMs": 615663,
+    "dDurationMs": 417,
+    "segs": [ {
+      "utf8": "doing so."
+    } ]
+  }, {
+    "tStartMs": 616500,
+    "dDurationMs": 3260,
+    "segs": [ {
+      "utf8": "If I had started 10 years later, the space would have been a lot more saturated."
+    } ]
+  }, {
+    "tStartMs": 620720,
+    "dDurationMs": 2462,
+    "segs": [ {
+      "utf8": "So another piece of advice that I'd like to offer, "
+    } ]
+  }, {
+    "tStartMs": 623182,
+    "dDurationMs": 4248,
+    "segs": [ {
+      "utf8": "another little ingredient that makes following your dreams a little more likely to work "
+    } ]
+  }, {
+    "tStartMs": 627430,
+    "dDurationMs": 4200,
+    "segs": [ {
+      "utf8": "out is to ask yourself what's possible now that wasn't possible 10 years ago and which "
+    } ]
+  }, {
+    "tStartMs": 631630,
+    "dDurationMs": 1690,
+    "segs": [ {
+      "utf8": "might get harder 10 years from now."
+    } ]
+  }, {
+    "tStartMs": 634160,
+    "dDurationMs": 2460,
+    "segs": [ {
+      "utf8": "There are more opportunities in a less crowded landscape."
+    } ]
+  }, {
+    "tStartMs": 636620,
+    "dDurationMs": 3289,
+    "segs": [ {
+      "utf8": "There are more chances to grow if you're part of a rising tide, "
+    } ]
+  }, {
+    "tStartMs": 639909,
+    "dDurationMs": 3187,
+    "segs": [ {
+      "utf8": "but this requires pushing past the inevitable discomfort that "
+    } ]
+  }, {
+    "tStartMs": 643096,
+    "dDurationMs": 3084,
+    "segs": [ {
+      "utf8": "comes from following a path that has little to no precedent."
+    } ]
+  }, {
+    "tStartMs": 648000,
+    "dDurationMs": 2750,
+    "segs": [ {
+      "utf8": "Now next, I want to take a moment to talk about whose dreams "
+    } ]
+  }, {
+    "tStartMs": 650750,
+    "dDurationMs": 2750,
+    "segs": [ {
+      "utf8": "you should be thinking about, because it's not just your own."
+    } ]
+  }, {
+    "tStartMs": 654240,
+    "dDurationMs": 2977,
+    "segs": [ {
+      "utf8": "When I was visiting Harvey Mudd last year, I had the pleasure of "
+    } ]
+  }, {
+    "tStartMs": 657217,
+    "dDurationMs": 3253,
+    "segs": [ {
+      "utf8": "talking to one of the gems in your math department, Talithia Williams, "
+    } ]
+  }, {
+    "tStartMs": 660470,
+    "dDurationMs": 3070,
+    "segs": [ {
+      "utf8": "and I asked her, hey, what made you pursue math in the first place?"
+    } ]
+  }, {
+    "tStartMs": 664140,
+    "dDurationMs": 1160,
+    "segs": [ {
+      "utf8": "She had a very clear story."
+    } ]
+  }, {
+    "tStartMs": 665300,
+    "dDurationMs": 2787,
+    "segs": [ {
+      "utf8": "She told me she hadn't thought about it very much until one "
+    } ]
+  }, {
+    "tStartMs": 668087,
+    "dDurationMs": 2973,
+    "segs": [ {
+      "utf8": "distinct day in her high school calculus class, her teacher, Mr."
+    } ]
+  }, {
+    "tStartMs": 671140,
+    "dDurationMs": 4280,
+    "segs": [ {
+      "utf8": "Dorman, pulled her aside and said, Talithia, you're really good at this."
+    } ]
+  }, {
+    "tStartMs": 675480,
+    "dDurationMs": 1260,
+    "segs": [ {
+      "utf8": "You should consider majoring in math."
+    } ]
+  }, {
+    "tStartMs": 677620,
+    "dDurationMs": 2182,
+    "segs": [ {
+      "utf8": "Evidently, she had never thought about it before, "
+    } ]
+  }, {
+    "tStartMs": 679802,
+    "dDurationMs": 2575,
+    "segs": [ {
+      "utf8": "but that one comment was enough to knock over the first in "
+    } ]
+  }, {
+    "tStartMs": 682377,
+    "dDurationMs": 3143,
+    "segs": [ {
+      "utf8": "a series of dominoes that led to a very flourishing career in the topic."
+    } ]
+  }, {
+    "tStartMs": 686440,
+    "dDurationMs": 2674,
+    "segs": [ {
+      "utf8": "Over the years, I've asked a lot of mathematicians the same question, "
+    } ]
+  }, {
+    "tStartMs": 689114,
+    "dDurationMs": 2446,
+    "segs": [ {
+      "utf8": "and you would be shocked how often I hear a very similar answer."
+    } ]
+  }, {
+    "tStartMs": 691980,
+    "dDurationMs": 4053,
+    "segs": [ {
+      "utf8": "There was this one particular teacher, and one seemingly simple thing that they did, "
+    } ]
+  }, {
+    "tStartMs": 696033,
+    "dDurationMs": 2767,
+    "segs": [ {
+      "utf8": "that was the beginning in a long series of encouragements."
+    } ]
+  }, {
+    "tStartMs": 700240,
+    "dDurationMs": 3696,
+    "segs": [ {
+      "utf8": "Never underestimate just how much influence you can have on others, "
+    } ]
+  }, {
+    "tStartMs": 703936,
+    "dDurationMs": 2664,
+    "segs": [ {
+      "utf8": "especially the ones who are younger than you are."
+    } ]
+  }, {
+    "tStartMs": 707240,
+    "dDurationMs": 4189,
+    "segs": [ {
+      "utf8": "Growing older is a process of slowly seeing the proportion of people "
+    } ]
+  }, {
+    "tStartMs": 711429,
+    "dDurationMs": 4311,
+    "segs": [ {
+      "utf8": "around you who are younger than you are rise inexorably closer to 100%."
+    } ]
+  }, {
+    "tStartMs": 717720,
+    "dDurationMs": 3800,
+    "segs": [ {
+      "utf8": "As this happens, you stand to have as much influence by shaping the "
+    } ]
+  }, {
+    "tStartMs": 721520,
+    "dDurationMs": 3800,
+    "segs": [ {
+      "utf8": "dreams of those behind you as you do by following those of your own."
+    } ]
+  }, {
+    "tStartMs": 726360,
+    "dDurationMs": 4189,
+    "segs": [ {
+      "utf8": "And as a very last point, the biggest risk in the follow your dreams "
+    } ]
+  }, {
+    "tStartMs": 730549,
+    "dDurationMs": 4251,
+    "segs": [ {
+      "utf8": "cliché is the implication that there's one static target point at all."
+    } ]
+  }, {
+    "tStartMs": 735780,
+    "dDurationMs": 4730,
+    "segs": [ {
+      "utf8": "In the next 10, 20, 30 years, the world around you is going to change a lot, "
+    } ]
+  }, {
+    "tStartMs": 740510,
+    "dDurationMs": 2950,
+    "segs": [ {
+      "utf8": "and those changes are going to be unpredictable."
+    } ]
+  }, {
+    "tStartMs": 744580,
+    "dDurationMs": 1700,
+    "segs": [ {
+      "utf8": "I hardly need to emphasize this point."
+    } ]
+  }, {
+    "tStartMs": 746420,
+    "dDurationMs": 2749,
+    "segs": [ {
+      "utf8": "You are the class who spent your formative transition "
+    } ]
+  }, {
+    "tStartMs": 749169,
+    "dDurationMs": 2291,
+    "segs": [ {
+      "utf8": "from high school to college under a pandemic."
+    } ]
+  }, {
+    "tStartMs": 751980,
+    "dDurationMs": 1940,
+    "segs": [ {
+      "utf8": "But it's not just the world around you."
+    } ]
+  }, {
+    "tStartMs": 754580,
+    "dDurationMs": 2962,
+    "segs": [ {
+      "utf8": "Tonight, when you're celebrating your graduation and hopefully "
+    } ]
+  }, {
+    "tStartMs": 757542,
+    "dDurationMs": 2210,
+    "segs": [ {
+      "utf8": "remembering to celebrate Mother's Day as well, "
+    } ]
+  }, {
+    "tStartMs": 759752,
+    "dDurationMs": 3809,
+    "segs": [ {
+      "utf8": "take a few moments to ask the people who are older than you how they've changed, "
+    } ]
+  }, {
+    "tStartMs": 763561,
+    "dDurationMs": 4139,
+    "segs": [ {
+      "utf8": "how their personalities, how their value systems have changed since they were a student."
+    } ]
+  }, {
+    "tStartMs": 768860,
+    "dDurationMs": 2593,
+    "segs": [ {
+      "utf8": "You'll notice that essentially all of them has an answer, "
+    } ]
+  }, {
+    "tStartMs": 771453,
+    "dDurationMs": 3220,
+    "segs": [ {
+      "utf8": "which suggests you have every reason to expect that there's going to be "
+    } ]
+  }, {
+    "tStartMs": 774673,
+    "dDurationMs": 3398,
+    "segs": [ {
+      "utf8": "something fundamental about you that changes as well in the coming decades, "
+    } ]
+  }, {
+    "tStartMs": 778071,
+    "dDurationMs": 1029,
+    "segs": [ {
+      "utf8": "probably unpredictably."
+    } ]
+  }, {
+    "tStartMs": 779820,
+    "dDurationMs": 3700,
+    "segs": [ {
+      "utf8": "Almost everyone I know has undergone some kind of shift since college."
+    } ]
+  }, {
+    "tStartMs": 784440,
+    "dDurationMs": 3220,
+    "segs": [ {
+      "utf8": "Some came to place more value on having a family than they used to."
+    } ]
+  }, {
+    "tStartMs": 788300,
+    "dDurationMs": 2464,
+    "segs": [ {
+      "utf8": "Some shifted from a trajectory that was oriented "
+    } ]
+  }, {
+    "tStartMs": 790764,
+    "dDurationMs": 2516,
+    "segs": [ {
+      "utf8": "towards an academic career to going into industry."
+    } ]
+  }, {
+    "tStartMs": 793840,
+    "dDurationMs": 1750,
+    "segs": [ {
+      "utf8": "Some went the other way around and after spending "
+    } ]
+  }, {
+    "tStartMs": 795590,
+    "dDurationMs": 1610,
+    "segs": [ {
+      "utf8": "some time in industry returned to grad school."
+    } ]
+  }, {
+    "tStartMs": 797720,
+    "dDurationMs": 2497,
+    "segs": [ {
+      "utf8": "And so, so many of them have jobs that simply "
+    } ]
+  }, {
+    "tStartMs": 800217,
+    "dDurationMs": 2443,
+    "segs": [ {
+      "utf8": "didn't exist at the time of their graduation."
+    } ]
+  }, {
+    "tStartMs": 803900,
+    "dDurationMs": 3788,
+    "segs": [ {
+      "utf8": "So rather than having any one particular goal that defines who you are, "
+    } ]
+  }, {
+    "tStartMs": 807688,
+    "dDurationMs": 4367,
+    "segs": [ {
+      "utf8": "you'll take better advantage of whatever the future has to offer you if you remain "
+    } ]
+  }, {
+    "tStartMs": 812055,
+    "dDurationMs": 4683,
+    "segs": [ {
+      "utf8": "nimble and if you're responsive to the changes in the world and if you anticipate change "
+    } ]
+  }, {
+    "tStartMs": 816738,
+    "dDurationMs": 842,
+    "segs": [ {
+      "utf8": "within yourself."
+    } ]
+  }, {
+    "tStartMs": 818820,
+    "dDurationMs": 3660,
+    "segs": [ {
+      "utf8": "My final piece of advice is to not treat passion as something to follow."
+    } ]
+  }, {
+    "tStartMs": 823180,
+    "dDurationMs": 2100,
+    "segs": [ {
+      "utf8": "Think of it as an initial velocity vector."
+    } ]
+  }, {
+    "tStartMs": 826060,
+    "dDurationMs": 2304,
+    "segs": [ {
+      "utf8": "It gives a clear direction to point yourself and "
+    } ]
+  }, {
+    "tStartMs": 828364,
+    "dDurationMs": 2116,
+    "segs": [ {
+      "utf8": "loving what you do can have you move quickly."
+    } ]
+  }, {
+    "tStartMs": 831180,
+    "dDurationMs": 2804,
+    "segs": [ {
+      "utf8": "But you should expect and you should even hope that the specific "
+    } ]
+  }, {
+    "tStartMs": 833984,
+    "dDurationMs": 3236,
+    "segs": [ {
+      "utf8": "direction that you're moving changes based on the force vectors around you."
+    } ]
+  }, {
+    "tStartMs": 838600,
+    "dDurationMs": 3083,
+    "segs": [ {
+      "utf8": "Now in these unpredictable decades that come, your generation is "
+    } ]
+  }, {
+    "tStartMs": 841683,
+    "dDurationMs": 3037,
+    "segs": [ {
+      "utf8": "the one that holds more sway than any other over how it unfolds."
+    } ]
+  }, {
+    "tStartMs": 845280,
+    "dDurationMs": 3130,
+    "segs": [ {
+      "utf8": "And you, the graduating class of Harvey Mudd, represent some "
+    } ]
+  }, {
+    "tStartMs": 848410,
+    "dDurationMs": 3130,
+    "segs": [ {
+      "utf8": "of the most talented and thoughtful minds in that generation."
+    } ]
+  }, {
+    "tStartMs": 852700,
+    "dDurationMs": 3082,
+    "segs": [ {
+      "utf8": "Influence is not distributed uniformly in the population and "
+    } ]
+  }, {
+    "tStartMs": 855782,
+    "dDurationMs": 3134,
+    "segs": [ {
+      "utf8": "I for one would feel a lot more comfortable if it was you who "
+    } ]
+  }, {
+    "tStartMs": 858916,
+    "dDurationMs": 3184,
+    "segs": [ {
+      "utf8": "were at the helm guiding this crazy ship that we're all riding."
+    } ]
+  }, {
+    "tStartMs": 863120,
+    "dDurationMs": 3346,
+    "segs": [ {
+      "utf8": "If you step into the next chapter of life with an implacable focus on "
+    } ]
+  }, {
+    "tStartMs": 866466,
+    "dDurationMs": 3394,
+    "segs": [ {
+      "utf8": "adding values to others, you're more likely to be the ones at the helm."
+    } ]
+  }, {
+    "tStartMs": 870620,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "If you recognize that action precedes motivation, you're more likely to be at the helm."
+    } ]
+  }, {
+    "tStartMs": 875700,
+    "dDurationMs": 2937,
+    "segs": [ {
+      "utf8": "And if you ask what's possible now that wasn't 10 years ago, "
+    } ]
+  }, {
+    "tStartMs": 878637,
+    "dDurationMs": 1783,
+    "segs": [ {
+      "utf8": "you're more likely to be at the helm."
+    } ]
+  }, {
+    "tStartMs": 880980,
+    "dDurationMs": 3355,
+    "segs": [ {
+      "utf8": "If you appreciate just how much power you have to shape the lives of "
+    } ]
+  }, {
+    "tStartMs": 884335,
+    "dDurationMs": 3405,
+    "segs": [ {
+      "utf8": "the generation that follows you, you're more likely to be at the helm."
+    } ]
+  }, {
+    "tStartMs": 888700,
+    "dDurationMs": 2633,
+    "segs": [ {
+      "utf8": "And if you remain adaptable to a changing world, "
+    } ]
+  }, {
+    "tStartMs": 891333,
+    "dDurationMs": 2848,
+    "segs": [ {
+      "utf8": "treating passion not as a destination but as a fuel, "
+    } ]
+  }, {
+    "tStartMs": 894181,
+    "dDurationMs": 4139,
+    "segs": [ {
+      "utf8": "following not dreams but opportunities, you're more likely to be at the helm."
+    } ]
+  }, {
+    "tStartMs": 899600,
+    "dDurationMs": 2854,
+    "segs": [ {
+      "utf8": "One final time, would everyone please join me in congratulating the "
+    } ]
+  }, {
+    "tStartMs": 902454,
+    "dDurationMs": 2813,
+    "segs": [ {
+      "utf8": "class of 2024 on what they've done to get here and make some noise "
+    } ]
+  }, {
+    "tStartMs": 905267,
+    "dDurationMs": 2813,
+    "segs": [ {
+      "utf8": "to let them know how excited we are to see where they go from here."
+    } ]
+  } ]
+}

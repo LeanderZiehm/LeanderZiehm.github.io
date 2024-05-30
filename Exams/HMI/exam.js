@@ -1,6 +1,4 @@
-//  console.log('exadm.js loaded');
- 
- const exam = [
+const exam = [
             {
                 "chapter": "DESIGN OF EVERYDAY THINGS",
                 "points": 29,
@@ -200,3 +198,6 @@
                 ]
             }
         ];
+
+
+const exam = {"chapters":{"1":{"title": "Design of everyday things","points":29}}, ... }

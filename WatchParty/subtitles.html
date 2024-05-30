@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video with Subtitles</title>
+    <script src="subtitles.js"></script>
+    <style>
+        video {
+            display: block;
+            margin: 0 auto;
+        }
+        #subtitles {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<video id="video" width="640" height="360" controls>
+    <source src="What Follow Your Dreams Misses  Harvey Mudd Commencement Speech 2024.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div id="subtitles"></div>
+
+<script>
+    const video = document.getElementById('video');
+    const subtitleDiv = document.getElementById('subtitles');
+
+    video.addEventListener('timeupdate', () => {
+        const currentTime = video.currentTime * 1000;
+        const subtitle = subtitles.events.find(event => currentTime >= event.tStartMs && currentTime <= event.tStartMs + event.dDurationMs);
+
+        if (subtitle) {
+            subtitleDiv.innerText = subtitle.segs.map(seg => seg.utf8).join(' ');
+        } else {
+            subtitleDiv.innerText = '';
+        }
+    });
+
+    copyJsonForGPT(subtitles);
+
+
+     function copyJsonForGPT(json) {
+            function truncateArray(arr) {
+                if (arr.length > 3) {
+                    return arr.slice(0, 3);
+                }
+                return arr;
+            }
+
+            function traverseAndTruncate(obj) {
+                if (Array.isArray(obj)) {
+                    return truncateArray(obj);
+                } else if (typeof obj === 'object' && obj !== null) {
+                    for (let key in obj) {
+                        if (obj.hasOwnProperty(key)) {
+                            obj[key] = traverseAndTruncate(obj[key]);
+                        }
+                    }
+                }
+                return obj;
+            }
+            console.log(json);
+            // let jsonObj = JSON.parse(json);
+            let truncatedObj = traverseAndTruncate(json);
+            const jsonString = JSON.stringify(truncatedObj);
+            // return JSON.stringify(truncatedObj);
+            // copy to clipboard
+            navigator.clipboard.writeText(jsonString).then(() => {
+                console.log('Copied to clipboard');
+            }, (err) => {
+                console.error('Failed to copy to clipboard', err);
+            });
+        }
+</script>
+
+</body>
+</html>

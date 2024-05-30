@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Watch Party</title>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* //disable drag */
+            user-select: none;
+
+        }
+
+        body * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .videoContainer {
+            position: relative;
+            width: 50%;
+
+        }
+
+        video {
+            width: 100%;
+            /* border-radius: 10px; */
+            cursor: pointer;
+            position: relative;
+            z-index: -1;
+        }
+
+        #subtitles {
+            position: absolute;
+            width: fit-content;
+            /* min-width: 100px; */
+            padding: 10px;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            min-height: 20px;
+            border-radius: 20px;
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: rgb(255, 255, 255);
+
+
+            text-align: center;
+        }
+
+        #speed {
+            position: absolute;
+            width: fit-content;
+            /* min-width: 100px; */
+            padding: 10px;
+            top: 10px;
+            right: 30px;
+
+            min-height: 20px;
+            border-radius: 20px;
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: rgb(255, 255, 255);
+            text-align: center;
+        }
+
+        img {
+            width: 10%;
+            pointer-events: none;
+            filter: invert(1);
+            visibility: hidden;
+            z-index: 1000;
+            cursor: pointer;
+            position: absolute;
+        }
+
+       
+        #pause,
+        #play
+         {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+         #speaker,
+        #mute{
+            width: 5%;
+            top: 10px;
+            left: 10px;
+            /* transform: translate(-50%, -50%); */
+        }
+
+    
+
+        /* // faster middle right */
+
+        #faster {
+            width: 5%;
+            top: 50%;
+            right: 15%;
+            transform: translate(0%, -50%);
+        }
+
+        /* // slower middle left */
+        #slower {
+            width: 5%;
+            top: 50%;
+            left: 15%;
+            transform: translate(0%, -50%);
+            transform: scaleX(-1);
+        }
+
+        #timeBarContainer {
+            z-index: 1000;
+            /
+        }
+
+        #timeBar {
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            background-color: rgba(0, 0, 0, 0.4);
+            bottom: 0px;
+            left: 0px;
+            /* border-radius: 10px; */
+            overflow: hidden;
+        }
+
+        #timeBarFill {
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            background-color: rgb(255, 0, 0);
+            /* border-radius: 10px; */
+        }
+
+        #timeBarCircle {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: rgba(0, 0, 0, 0);
+            /* border-radius: 50%; */
+            bottom: -5px;
+            left: 0%;
+            transform: translateX(-50%);
+            z-index: 1001;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="videoContainer">
+        <video id="video" autoplay="false" muted="true"></video>
+        <span id="subtitles"></span>
+        <span id="speed"></span>
+        <img id="speaker" src="speaker.png">
+        <img id="pause" src="pause.png">
+        <img id="play" src="play.png">
+        <img id="mute" src="mute.png">
+        <img id="faster" src="fast-forward.png">
+        <img id="slower" src="fast-forward.png">
+        <div id="timeBarContainer">
+            <div id="timeBar">
+                <div id="timeBarFill"></div>
+            </div>
+            <div id="timeBarCircle"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+        const video = document.getElementById('video');
+        const videoContainer = document.querySelector('.videoContainer');
+        const subtitlesElement = document.getElementById('subtitles');
+        const speakerIcon = document.getElementById('speaker');
+        const pauseIcon = document.getElementById('pause');
+        const playIcon = document.getElementById('play');
+        const muteIcon = document.getElementById('mute');
+        const speedElement = document.getElementById('speed');
+        const fasterIcon = document.getElementById('faster');
+        const slowerIcon = document.getElementById('slower');
+
+        const defaultSpeed = 2;
+        const seekSeconds = 10;
+        const speedChange = 0.5;
+
+        const hideJumpArrowsAferSeconds = 0.3;
+
+        let firebaseRef;
+
+        function main() {
+            setMuted(true,true);
+
+            let videoFileName = getVideoFileName();
+            video.src = videoFileName;
+
+            videoFileName = videoFileName.replace(/%20/g, '_');            
+            firebaseRef = firebaseGetRef('videoState',videoFileName);
+
+            // if child changed
+            firebaseRef.on('child_changed', (snapshot) => {
+                const key = snapshot.key;
+                const value = snapshot.val();
+                console.log('key', key, 'value', value);
+                switch (key) {
+                    case 'time':
+                        setTime(value,true);
+                        break;
+                    case 'speed':
+                        setSpeed(value,true);
+                        break;
+                    case 'paused':
+                        setPaused(value,true);
+                        break;
+                }
+            });
+            //on child added
+            firebaseRef.on('child_added', (snapshot) => {
+                const key = snapshot.key;
+                const value = snapshot.val();
+                console.log('key', key, 'value', value);
+                switch (key) {
+                    case 'time':
+                        setTime(value,true);
+                        break;
+                    case 'speed':
+                        setSpeed(value,true);
+                        break;
+                    case 'paused':
+                        setPaused(value,true);
+                        break;
+                }
+            });
+
+           firebaseRef.on('value', (snapshot) => {
+                const value = snapshot.val();
+                console.log('value', value);
+                if (!value) {
+                    firebaseRef.set({
+                        time: 0,
+                        speed: defaultSpeed,
+                        paused: true
+                    });
+                }
+                else {
+                    const { time, speed, muted, paused } = value;
+                    setTime(time,true);
+                    setSpeed(speed,true);
+                    setPaused(paused,true);
+                }
+            });
+
+
+            videoContainer.addEventListener('click', togglePlay);
+            const timeBarContainer = document.getElementById('timeBarContainer');
+            timeBarContainer.addEventListener('click', (e) => {
+                // e.preventDefault();
+                const boundingRect = timeBarContainer.getBoundingClientRect();
+                const percentage = (e.clientX - boundingRect.left) / boundingRect.width;
+                setTime(video.duration * percentage);
+            });
+            video.addEventListener('timeupdate', () => {
+                const currentTime = video.currentTime;
+                const duration = video.duration;
+                const percentage = (currentTime / duration) * 100;
+                const timeBarFill = document.getElementById('timeBarFill');
+                timeBarFill.style.width = `${percentage}%`;
+                const timeBarCircle = document.getElementById('timeBarCircle');
+                timeBarCircle.style.left = `${percentage}%`;
+            });
+            video.addEventListener('timeupdate', () => {
+                const currentTime = video.currentTime * 1000;
+
+                subtitlesElement.innerText = currentTime;
+
+                const subtitle = subtitles.events.find(event => currentTime >= event.tStartMs && currentTime <= event.tStartMs + event.dDurationMs);
+
+                if (subtitle) {
+                    subtitlesElement.innerText = subtitle.segs.map(seg => seg.utf8).join(' ');
+                } else {
+                    subtitlesElement.innerText = '';
+                }
+            });
+            //on press space down toggle play/pause
+            document.addEventListener('keydown', (e) => {
+
+                const shortcuts = ['Space', 'KeyM', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+                if (shortcuts.includes(e.code)) {
+                    e.preventDefault();
+                }
+
+                if (e.code === 'Space') {
+
+                    console.log('space');
+                    togglePlay();
+                }
+                //on m down toggle mute/unmute
+                if (e.code === 'KeyM') {
+                    toggleMute();
+                }
+
+                // on left arrow down rewind 5 seconds
+                if (e.code === 'ArrowLeft') {
+                    seekTime(-seekSeconds);
+                }
+                // on right arrow down forward 5 seconds
+                if (e.code === 'ArrowRight') {
+                    seekTime(seekSeconds);
+                }
+
+
+                // on up arrow increase speed
+                if (e.code === 'ArrowUp') {
+
+                    changeSpeed(speedChange);
+                }
+                // on down arrow decrease speed
+                if (e.code === 'ArrowDown') {
+
+                    changeSpeed(-speedChange);
+                }
+            });
+        }
+        function show(icon, shouldShow = true) {
+            // console.log('showIcon',iconID,shouldShow);
+            if (shouldShow) {
+                icon.style.visibility = 'visible';
+            } else {
+                icon.style.visibility = 'hidden';
+            }
+        }
+
+        function togglePlay() {
+            const newPaused = !video.paused;
+            setPaused(newPaused);
+            setMuted(false, true);
+        }
+        function setPaused(paused,worksWithoutFirebase = false) {
+            console.log('setPaused',paused);
+            if(!worksWithoutFirebase){
+                firebaseRef.child('time').set(video.currentTime);
+                firebaseRef.child('paused').set(paused);
+                // console.log('firebaseRef.child(paused).set(paused);',paused);
+                return;
+            }
+            if (paused) {
+                video.pause();
+                show(playIcon, true);
+            } else {
+                video.play();
+                show(playIcon, false);
+                // setMuted(false,true);
+            }
+        }
+
+        function toggleMute() {
+            const newMuted = !video.muted;
+            setMuted(newMuted,true);
+            
+            
+        }
+
+        function setMuted(muted,worksWithoutFirebase = false) {
+            // if(!worksWithoutFirebase){
+            //     firebaseRef.child('muted').set(muted);
+            //     firebaseRef.child('time').set(video.currentTime);
+            //     return;
+            // }
+            video.muted = muted;
+            if (muted) {
+                show(muteIcon, true);
+            } else {
+                show(muteIcon, false);
+            }
+        }
+
+
+
+        function seekTime(time) {
+            const newTime = video.currentTime + time;
+            setTime(newTime);
+
+            if (time < 0) {
+                show(slowerIcon, true);
+                //hide after 1 second
+                setTimeout(() => {
+                    show(slowerIcon, false);
+                }, hideJumpArrowsAferSeconds * 1000);
+
+            } else {
+                show(fasterIcon, true);
+                //hide after 1 second
+                setTimeout(() => {
+                    show(fasterIcon, false);
+                }, hideJumpArrowsAferSeconds * 1000);
+            }
+
+        }
+
+        function setTime(time,worksWithoutFirebase = false) {
+            if(!worksWithoutFirebase){
+                firebaseRef.child('time').set(time);
+            }else{
+                video.currentTime = time;
+            }
+
+        }
+        function changeSpeed(speed) {
+
+            const newSpeed = video.playbackRate + speed;
+            setSpeed(newSpeed);
+        }
+
+        function setSpeed(speed,worksWithoutFirebase = false) {
+
+            if(!worksWithoutFirebase){
+                firebaseRef.child('time').set(video.currentTime);
+                firebaseRef.child('speed').set(speed);
+
+                return;
+            }
+
+
+
+            video.playbackRate = speed;
+            if (speed === 1) {
+                show(speedElement, false)
+            } else {
+                show(speedElement, true)
+                console.log("show speed")
+            }
+            speedElement.innerText = video.playbackRate;
+
+
+        }
+
+        const scriptsToAdd = [
+            'based/app.js',
+            'based/base.js',
+            'based/firebase.js',
+            'subtitles.js'
+        ];
+        for (const script of scriptsToAdd) {
+            const scriptString = `<script src="${script}"><${''}/script>`;
+            document.write(scriptString);
+        }
+        document.addEventListener('DOMContentLoaded', main);
+
+    </script>
+</body>
+
+</html>
