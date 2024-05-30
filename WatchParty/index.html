@@ -15,6 +15,7 @@
             height: 100vh;
             /* //disable drag */
             user-select: none;
+            overflow: hidden;
 
         }
 
@@ -25,7 +26,7 @@
 
         .videoContainer {
             position: relative;
-            width: 50%;
+            width: 90%;
 
         }
 
@@ -35,11 +36,12 @@
             cursor: pointer;
             position: relative;
             z-index: -1;
+
         }
 
         #subtitles {
             position: absolute;
-            width: fit-content;
+            width: 100%;
             /* min-width: 100px; */
             padding: 10px;
             bottom: 10px;
@@ -48,7 +50,7 @@
 
             min-height: 20px;
             border-radius: 20px;
-            font-size: 20px;
+            /* font-size: 16px; */
             background-color: rgba(0, 0, 0, 0.4);
             color: rgb(255, 255, 255);
 
@@ -66,7 +68,7 @@
 
             min-height: 20px;
             border-radius: 20px;
-            font-size: 20px;
+            /* font-size: 20px; */
             background-color: rgba(0, 0, 0, 0.4);
             color: rgb(255, 255, 255);
             text-align: center;
@@ -154,6 +156,19 @@
             transform: translateX(-50%);
             z-index: 1001;
         }
+
+        /* @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+} */
     </style>
 </head>
 
@@ -178,6 +193,7 @@
     </div>
 
     <script>
+        // screen.orientation.lock('landscape');
 
         const video = document.getElementById('video');
         const videoContainer = document.querySelector('.videoContainer');
@@ -199,6 +215,7 @@
         let firebaseRef;
 
         function main() {
+            
             setMuted(true,true);
 
             let videoFileName = getVideoFileName();
