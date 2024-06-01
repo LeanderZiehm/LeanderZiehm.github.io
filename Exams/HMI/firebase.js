@@ -263,32 +263,6 @@ function en(x) {
     }
     return y;
 }
-function de(x) {
-    let y = "";
-    for (let i = 0; i < x.length; i++) {
-        let charCode = x.charCodeAt(i) - 3 - (i % 2);
-        y += String.fromCharCode(charCode);
-    }
-    return y;
-}
-
-let xf = "DM}eV}Gt]1{wZ\nrte:sD6N;5[b~05yghVxOZjP"
-xf = de(xf);
-
-
-
-const firebaseConfig = {
-    apiKey: xf,
-    authDomain: "exams-14f95.firebaseapp.com",
-    projectId: "exams-14f95",
-    storageBucket: "exams-14f95.appspot.com",
-    messagingSenderId: "761737202591",
-    appId: "1:761737202591:web:a3701795dc698e9e250baa",
-    measurementId: "G-JX10YJR8NG",
-    databaseURL: "https://exams-14f95-default-rtdb.europe-west1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
 
 
 

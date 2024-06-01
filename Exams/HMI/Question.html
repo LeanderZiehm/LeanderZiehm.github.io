@@ -3,31 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question Answer</title>
+    <title>Question Details</title>
+    <script src="imports.js"></script>
+    <style>
+        body * {
+            padding: 0;
+            margin: 0;
+        }
+       
+        .questionContainer {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .points {
+            color: #888;
+            margin-bottom: 20px;
+        }
+        .answer {
+            margin-bottom: 10px;
+        }
+        .answerInput {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 20px;
+        }
+        .submitBtn {
+            margin-top: 10px;
+        }
+        .answersContainer{
+            /* margin: 20px; */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        button{
+            border-radius: 20px;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #007BFF;
+            border: none;
+        }
+
+    #showAnswersBtn{
+        display: block;
+        margin-inline: auto;
+    }
+    </style>
 </head>
 <body>
-    <h1>Question</h1>
-    <div class="questionContainer">
-        <div class="question">
-            <p>What is the capital of France?</p>
-        </div>
-        <div class="points">
-            <p>Points: 10</p>
-        </div>
-    </div>
-    <h1>Answer</h1>
-    <div class="questionContainer">
-        <div class="question">
-            <p>Paris</p>
-        </div>
-    </div>
-    <h1>Explanation</h1>
-    <div class="questionContainer">
-        <div class="question">
-            <p>Paris is the capital of France</p>
-        </div>
+    <button id="backBtn">Back</button>
+    <div class="questionContainer" id="questionContainer">
     </div>
 
+    <button id="showAnswersBtn">Show Answers</button>
+
+    <div class="answersContainer">
+        <p id="chatgptAnswer"></p>
+        <span>(by ChatGPT)</span>
+
+    </div>
+    <script>
     
+        function getQuestionById(id) {
+            return exam.questions.find(question => question.id === id);
+        }
+
+        function main() {
+
+            const backBtn = document.getElementById('backBtn');
+            backBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+
+
+
+            console.log(answersChatGPT);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            let questionId = urlParams.get('question');
+            let question = getQuestionById(questionId);
+          
+
+            if (!question) {
+             questionId = "1a"
+             question = getQuestionById(questionId);
+            }
+
+
+            console.log(answersChatGPT);
+            const chatgptAnswerObject = answersChatGPT.find(answer => answer.id === question.id);
+            // console.log(chatgptAnswer);
+            const chatgptAnswerText = chatgptAnswerObject.answer;
+            console.log(chatgptAnswerText);
+            const chatgptAnswerElement = document.getElementById('chatgptAnswer');
+            chatgptAnswerElement.textContent = chatgptAnswerText;
+
+
+            const answersContainer = document.querySelector('.answersContainer');
+            const showAnswersBtn = document.getElementById('showAnswersBtn');
+            // with emojies arrow up and down
+            showAnswersBtn.addEventListener('click', () => {
+                if(answersContainer.style.display === 'block'){
+                    answersContainer.style.display = 'none';
+                    showAnswersBtn.textContent = 'Show Answers ▼';
+                }else{
+                    answersContainer.style.display = 'block';
+                    showAnswersBtn.textContent = 'Hide Answers ▲';
+                }
+
+            });
+            //trigger the click event
+            showAnswersBtn.click();
+            showAnswersBtn.click();
+
+                const questionContainer = document.getElementById('questionContainer');
+                const questionText = document.createElement('div');
+                questionText.classList.add('question');
+                questionText.textContent = question.question;
+                questionContainer.appendChild(questionText);
+
+                const pointsElement = document.createElement('div');
+                pointsElement.classList.add('points');
+                pointsElement.textContent = `(${question.points} points)`;
+                questionContainer.appendChild(pointsElement);
+
+                const answerInput = document.createElement('textarea');
+                answerInput.classList.add('answerInput');
+                answerInput.placeholder = 'Write your answer here...';
+                questionContainer.appendChild(answerInput);
+
+                const submitBtn = document.createElement('button');
+                submitBtn.classList.add('submitBtn');
+                submitBtn.textContent = 'Submit Answer';
+                submitBtn.addEventListener('click', () => {
+
+                    const answer = answerInput.value;
+                    const userName = getUserName();
+                    if (answer) {
+                         db.ref(`answers/${question.id}`).push({
+                            userName: userName,
+                            answer: answer,
+                            timestamp: getCurrentDateTimeString()
+                        });
+                        alert('Answer submitted!');
+                    }else{
+                        alert('Answer is empty!');
+                    }
+
+                   
+
+                });
+                questionContainer.appendChild(submitBtn);
+        }
+
+
+
+       
+            function de(x) {
+                let y = "";
+                for (let i = 0; i < x.length; i++) {
+                    let charCode = x.charCodeAt(i) - 3 - (i % 2);
+                    y += String.fromCharCode(charCode);
+                }
+                return y;
+            }
+
+            let xf = "DM}eV}Gt]1{wZ\nrte:sD6N;5[b~05yghVxOZjP"
+            xf = de(xf);
+
+
+
+            const firebaseConfig = {
+                apiKey: xf,
+                authDomain: "exams-14f95.firebaseapp.com",
+                projectId: "exams-14f95",
+                storageBucket: "exams-14f95.appspot.com",
+                messagingSenderId: "761737202591",
+                appId: "1:761737202591:web:a3701795dc698e9e250baa",
+                measurementId: "G-JX10YJR8NG",
+                databaseURL: "https://exams-14f95-default-rtdb.europe-west1.firebasedatabase.app",
+            };
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.database();
+
+
+        document.addEventListener('DOMContentLoaded', main);
+    </script>
 </body>
 </html>
