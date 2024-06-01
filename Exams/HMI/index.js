@@ -25,7 +25,7 @@ function main() {
 
                 //redirect to url on click
                 questionDiv.addEventListener('click', () => {
-                    window.location.href = `question.html?question=${question.id}`;
+                    window.location.href = `Question.html?question=${question.id}`;
                 });
             }
         });
