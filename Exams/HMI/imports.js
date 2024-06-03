@@ -15,7 +15,7 @@ const scriptsToAdd = [
     '../based/app.js',
     '../based/base.js',
     // '../based/track.js',
-    // 'firebase.js'
+    'firebase.js'
 ];
 
 
@@ -63,3 +63,4 @@ function getCurrentDateTimeString() {
     };
     return date.toLocaleString('en-GB', options);
 }
+
