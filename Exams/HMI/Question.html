@@ -39,12 +39,20 @@
         .submitBtn {
             margin-top: 10px;
         }
-        .answersContainer{
-            /* margin: 20px; */
+        #answersContainer{
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .answerContainer{
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+
         }
 
         button{
@@ -60,6 +68,22 @@
         display: block;
         margin-inline: auto;
     }
+    .likesContainer{
+        display: flex;
+        /* center them */
+        align-items: center;
+        gap: 10px;
+
+
+    }
+    #likes{
+        /* color: black    ; */
+    }
+    #likesBtn{
+        background-color: #00dc96 !important;
+        font-weight: bold;
+    }
+    
     </style>
 </head>
 <body>
@@ -69,18 +93,127 @@
 
     <button id="showAnswersBtn">Show Answers</button>
 
-    <div class="answersContainer">
-        <p id="chatgptAnswer"></p>
-        <span>(by ChatGPT)</span>
+    <div id="answersContainer">
+       
 
     </div>
     <script>
+
     
+    
+
+    function addAllChatgptAnswersToFirebase() {
+        for (let i = 0; i < answersChatGPT.length; i++) {
+            const answer = answersChatGPT[i];
+            db.ref(`answers/${answer.id}/ChatGPT`).set({
+                userName: 'ChatGPT',
+                answer: answer.answer,
+                timestamp: getCurrentDateTimeString(),
+                likes: 0
+            });
+        }
+    }
         function getQuestionById(id) {
             return exam.questions.find(question => question.id === id);
         }
 
+        function addAllAnswersToContainer(answers, questionID){
+            // order the answers by likes
+            const sortedAnswers = Object.entries(answers).sort((a, b) => {
+                const likesA = a[1].likes || 0;
+                const likesB = b[1].likes || 0;
+                return likesB - likesA;
+            });
+            //reverse the order
+            // sortedAnswers.reverse();
+            const answersContainer = document.getElementById('answersContainer');
+            answersContainer.innerHTML = '';
+
+            for (let i = 0; i < sortedAnswers.length; i++) {
+                const key = sortedAnswers[i][0];
+                const answer = sortedAnswers[i][1];
+                addAnswer(key, answer, questionID);
+            }
+
+        }
+
+         function addAnswer(key, answer, questionID) {
+
+                let answerText = answer.answer;
+                let userName = answer.userName;
+                let uploadTime = answer.timestamp;
+                let likes = answer.likes;
+
+
+                const answerContainer = document.createElement('div');
+                answerContainer.classList.add('answerContainer');
+                answerContainer.innerHTML =
+                    `<div> 
+                    ${answerText}
+                    <br> 
+                    <div>
+                        <span id="userName">${userName}</span>
+                        <span id="uploadTime"> ${uploadTime}</span>
+                    </div>
+
+                    </div>
+                    <div class="likesContainer">
+                        <span id="likes">0</span>
+                        <button id="likesBtn">Like</button>
+                    </div>`;
+                // ${getCurrentDateTimeString()}
+                const userNameElement = answerContainer.querySelector('#userName');
+                const uploadTimeElement = answerContainer.querySelector('#uploadTime');
+
+                userNameElement.innerHTML = `(by ${userName})`;
+                if (uploadTime) {
+                    uploadTimeElement.innerHTML = uploadTime;
+                } else {
+                    uploadTimeElement.style.display = 'none';
+                }
+
+                const likesElement = answerContainer.querySelector('#likes');
+
+                if (likes === 0) {
+                    likesElement.style.display = 'none';
+                } else {
+                    likesElement.textContent = likes;
+                }
+
+                const likesBtn = answerContainer.querySelector('#likesBtn');
+
+                likesBtn.addEventListener('click', () => {
+                    likesElement.style.display = 'block';
+                    likes++;
+                    likesElement.textContent = likes;
+                    db.ref(`answers/${questionID}/${key}/likes`).set(likes);
+                    //check if like exists in the database
+                    
+
+                });
+                // likesBtn.click();
+                const answersContainer = document.getElementById('answersContainer');
+                answersContainer.appendChild(answerContainer);
+            }
+
         function main() {
+
+
+            
+            // addAllChatgptAnswersToFirebase();
+            // return;
+
+
+
+
+
+
+
+
+
+
+
+
 
             const backBtn = document.getElementById('backBtn');
             backBtn.addEventListener('click', () => {
@@ -89,44 +222,72 @@
 
 
 
-            console.log(answersChatGPT);
 
             const urlParams = new URLSearchParams(window.location.search);
-            let questionId = urlParams.get('question');
-            let question = getQuestionById(questionId);
+            let questionID = urlParams.get('question');
+            let question = getQuestionById(questionID);
           
 
             if (!question) {
-             questionId = "1a"
-             question = getQuestionById(questionId);
+             questionID = "1a"
+             question = getQuestionById(questionID);
             }
 
-
-            console.log(answersChatGPT);
-            const chatgptAnswerObject = answersChatGPT.find(answer => answer.id === question.id);
-            // console.log(chatgptAnswer);
-            const chatgptAnswerText = chatgptAnswerObject.answer;
-            console.log(chatgptAnswerText);
-            const chatgptAnswerElement = document.getElementById('chatgptAnswer');
-            chatgptAnswerElement.textContent = chatgptAnswerText;
+            
 
 
-            const answersContainer = document.querySelector('.answersContainer');
+           
+          
+
+            // function addChatGPTAnswer() {
+            //     const chatgptAnswer = answersChatGPT.find(answer => answer.id === questionID);
+            //     const chatgptAnswerText = chatgptAnswer.answer;
+
+            //     const answerObject = {
+            //         userName: 'ChatGPT',
+            //         answer: chatgptAnswerText,
+            //         timestamp: getCurrentDateTimeString(),
+            //         likes: 0
+
+            //     };
+            //     const key = "ChatGPT"
+
+
+            //     addAnswer(key, answerObject);
+            // }
+
+
+            //load answers from database
+            db.ref(`answers/${questionID}`).on('value', (snapshot) => {
+                const answers = snapshot.val();
+                addAllAnswersToContainer(answers, questionID);
+            });
+
+
+
+
+             
+
+
+
+
+
+            const answersContainer = document.getElementById('answersContainer');
             const showAnswersBtn = document.getElementById('showAnswersBtn');
             // with emojies arrow up and down
             showAnswersBtn.addEventListener('click', () => {
-                if(answersContainer.style.display === 'block'){
+                if(answersContainer.style.display === 'flex'){
                     answersContainer.style.display = 'none';
                     showAnswersBtn.textContent = 'Show Answers ▼';
                 }else{
-                    answersContainer.style.display = 'block';
+                    answersContainer.style.display = 'flex';
                     showAnswersBtn.textContent = 'Hide Answers ▲';
                 }
 
             });
             //trigger the click event
             showAnswersBtn.click();
-            showAnswersBtn.click();
+            // showAnswersBtn.click();
 
                 const questionContainer = document.getElementById('questionContainer');
                 const questionText = document.createElement('div');
@@ -150,20 +311,19 @@
                 submitBtn.addEventListener('click', () => {
 
                     const answer = answerInput.value;
+                    answerInput.value = '';
                     const userName = getUserName();
                     if (answer) {
                          db.ref(`answers/${question.id}`).push({
                             userName: userName,
                             answer: answer,
-                            timestamp: getCurrentDateTimeString()
+                            timestamp: getCurrentDateTimeString(),
+                            likes: 0
                         });
-                        alert('Answer submitted!');
+                        // alert('Answer submitted!');
                     }else{
                         alert('Answer is empty!');
                     }
-
-                   
-
                 });
                 questionContainer.appendChild(submitBtn);
         }

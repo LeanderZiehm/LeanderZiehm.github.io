@@ -1,3 +1,13 @@
+//if is local file clear cache storage and set username to LeanderLocal
+const isLocal = window.location.href.includes('file://');
+if (isLocal) {
+    localStorage.clear();
+    localStorage.setItem('userName', 'LeanderLocal');
+}
+
+
+
+
 // console.log('main.js loaded');
 
 const scriptsToAdd = [
@@ -25,7 +35,8 @@ function getUserName() {
         if(userNameInput){
            userName = userNameInput;
         }else{
-            userName = 'Anonymous_' + getCurrentDateTimeString();
+            // userName = 'Anonymous_' + getCurrentDateTimeString();
+            userName = 'Anonymous' + Math.floor(Math.random() * 1000);
         }
         setUserName(userName);
     }
