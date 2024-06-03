@@ -359,6 +359,76 @@
             const db = firebase.database();
 
 
+
+
+
+
+
+
+            //
+
+            
+
+                function track() {
+                    // Add live right now
+
+                    const url = window.location.href;
+                    const currentDateTimeString = getCurrentDateTimeString();
+                    const browser = navigator.userAgent;
+
+                    const liveRightNowRef = db.ref('liveRightNow');
+                    const liveRightNow = liveRightNowRef.push();
+                    liveRightNow.set({ url: url, startedAt: currentDateTimeString, browser: browser });
+                    liveRightNow.onDisconnect().remove();
+
+                    //
+
+
+                    const usersDatabase = db.ref('users');
+                    usersDatabase.once('value', (snapshot) => {
+                        let usersValues = snapshot.val() || {};
+
+                        const userCount = Object.keys(usersValues).length;
+                        let userID = localStorage.getItem('userID');
+                        if (!userID) {
+                            userID = `(${userCount})${getCurrentDateTimeString()}`;
+                            // userID = "hi"
+                            userID = userID.replace(/[/]/g, '-');    //replace / with with -
+                            userID = userID.replace(/ /g, '');    //remove all spaces
+                            localStorage.setItem('userID', userID);
+                        }
+                        user = usersValues[userID]
+
+                        if (!user) {
+                            localStorage.setItem('userID', userID);
+                            user = {
+                                userAgent: navigator.userAgent,
+                                joinedTime: getCurrentDateTimeString(),
+                                joinedUrl: window.location.href
+                            };
+                            usersValues[userID] = user;
+                        }
+
+                        views = user.views;
+                        if (!views) {
+                            views = {};
+                            user.views = views;
+                        }
+
+
+                        let dateTimeKey = getCurrentDateTimeString();
+                        dateTimeKey = dateTimeKey.replace(/[/]/g, '-');    //replace / with with -
+                        dateTimeKey = dateTimeKey.replace(/ /g, '');
+                        views[dateTimeKey] = window.location.href;
+                        usersDatabase.set(usersValues);
+
+                    });
+
+                }
+
+                track();
+            //
+
         document.addEventListener('DOMContentLoaded', main);
     </script>
 </body>

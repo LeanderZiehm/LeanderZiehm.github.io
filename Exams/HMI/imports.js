@@ -14,6 +14,7 @@ const scriptsToAdd = [
     'exam.js',
     '../based/app.js',
     '../based/base.js',
+    // '../based/track.js',
     // 'firebase.js'
 ];
 
