@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receipt List</title>
+    <title>Receipt List without Preprocessing</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,8 +40,8 @@
 </head>
 
 <body>
-    <a href="index.html" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none;">Receipts with Preprocessing</a>
-    <h1>Receipt List</h1>
+    <a href="index.html" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none;">Go to Receipts with Preprocessing</a>
+    <h1>Receipt List without Preprocessing</h1>
     <table>
         <thead>
             <tr>
@@ -87,9 +87,9 @@
         receipts.forEach((receipt, index) => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td><a href="receipt.html?id=${index}">${receipt.storeName}</a></td>
-                <td><a href="receipt.html?id=${index}">${receipt.datetime.toLocaleString()}</a></td>
-                <td><a href="receipt.html?id=${index}">${receipt.ocrSum.toFixed(2)}</a></td>
+                <td><a href="receiptWithoutPreprocessing.html?id=${index}">${receipt.storeName}</a></td>
+                <td><a href="receiptWithoutPreprocessing.html?id=${index}">${receipt.datetime.toLocaleString()}</a></td>
+                <td><a href="receiptWithoutPreprocessing.html?id=${index}">${receipt.ocrSum.toFixed(2)}</a></td>
             `;
             // receiptList.appendChild(row);
             receiptAndRow = {

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .receipt-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .store-info, .item-list, .summary {
+            margin-bottom: 20px;
+        }
+        .store-info h2 {
+            margin: 0;
+        }
+        .item-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .item-list th, .item-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .item-list th {
+            background-color: #f4f4f4;
+        }
+        .summary div {
+            margin-bottom: 5px;
+        }
+        .backBtn {
+            /* //top left looking like a rounded button without border: ; */
+            display: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            /* border: 1px solid #ccc; */
+
+        }
+
+    </style>
+</head>
+<body>
+    <!-- backbutton to index.html -->
+    <a class="backBtn" href="receiptsWithoutPreprocessing.html">Back</a>
+
+    <div class="receipt-container">
+        <div class="store-info">
+            <h2 id="storeName"></h2>
+            <p id="storeAddress"></p>
+        </div>
+        <div class="date-time">
+            <p>Date: <span id="date"></span></p>
+            <p>Time: <span id="purchaseTime"></span></p>
+        </div>
+        <div class="item-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Price (€)</th>
+                    </tr>
+                </thead>
+                <tbody id="items"></tbody>
+            </table>
+        </div>
+        <div class="summary">
+            <div>Calculated Sum: €<span id="calculatedSum"></span></div>
+            <div>OCR Sum: €<span id="ocrSum"></span></div>
+            <div>Sum Difference: €<span id="sumDifference"></span></div>
+        </div>
+    </div>
+
+    <script src="receipts_withoutPreprocessing.js"></script>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const receiptId = getQueryParam('id');
+        const receipt = receipts[receiptId];
+
+        document.getElementById('storeName').innerText = receipt.storeName;
+        document.getElementById('storeAddress').innerText = receipt.storeAddress;
+        document.getElementById('date').innerText = receipt.date;
+        document.getElementById('purchaseTime').innerText = receipt.purchaseTime;
+
+        const itemsTable = document.getElementById('items');
+        receipt.items.forEach(item => {
+            const row = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            const priceCell = document.createElement('td');
+            nameCell.innerText = item.name;
+            priceCell.innerText = item.price.toFixed(2);
+            row.appendChild(nameCell);
+            row.appendChild(priceCell);
+            itemsTable.appendChild(row);
+        });
+
+        document.getElementById('calculatedSum').innerText = receipt.calculatedSum.toFixed(2);
+        document.getElementById('ocrSum').innerText = receipt.ocrSum.toFixed(2);
+        document.getElementById('sumDifference').innerText = receipt.sumDifference.toFixed(2);
+    </script>
+</body>
+</html>
