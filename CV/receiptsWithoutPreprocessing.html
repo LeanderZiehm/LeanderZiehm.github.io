@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        td a {
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+
+        tr:hover {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none;">Receipts with Preprocessing</a>
+    <h1>Receipt List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Store Name</th>
+                <th>Date & Time</th>
+                <th>Sum (€)</th>
+            </tr>
+        </thead>
+        <tbody id="receiptList"></tbody>
+    </table>
+
+    <script src="receipts_withoutPreprocessing.js"></script>
+    <script>
+        const receiptList = document.getElementById('receiptList');
+
+        // Combine date and time into a single datetime and sort receipts by datetime in descending order
+        // receipts.forEach(receipt => {
+        //     receipt.datetime = new Date(`${receipt.date} ${receipt.purchaseTime}`);
+
+
+        //     console.log(`receipt.datetime: ${receipt.datetime} from receipt.date: ${receipt.date} and receipt.purchaseTime: ${receipt.purchaseTime}`);
+
+        // });
+        receipts.forEach(receipt => {
+                // Convert from DD.MM.YYYY to YYYY-MM-DD
+                if (receipt.date === undefined || receipt.date === '' || receipt.date === null) {
+                    receipt.date = '01.01.1900';
+                }
+                if (receipt.purchaseTime === undefined || receipt.purchaseTime === '' || receipt.purchaseTime === null) {
+                    receipt.purchaseTime = '00:00';
+                }
+                let parts = receipt.date.split('.');
+                let formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}T${receipt.purchaseTime}:00`;
+                receipt.datetime = new Date(formattedDate);
+
+                console.log(`receipt.datetime: ${receipt.datetime} from receipt.date: ${receipt.date} and receipt.purchaseTime: ${receipt.purchaseTime}`);
+            });
+
+ 
+        let receiptsAndRows = [];
+
+        // Populate the receipt list
+        receipts.forEach((receipt, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><a href="receipt.html?id=${index}">${receipt.storeName}</a></td>
+                <td><a href="receipt.html?id=${index}">${receipt.datetime.toLocaleString()}</a></td>
+                <td><a href="receipt.html?id=${index}">${receipt.ocrSum.toFixed(2)}</a></td>
+            `;
+            // receiptList.appendChild(row);
+            receiptAndRow = {
+                receipt: receipt,
+                row: row
+            };
+            receiptsAndRows.push(receiptAndRow);
+        });
+        //    receipts.sort((a, b) => b.datetime - a.datetime);
+
+        receiptsAndRows.sort((a, b) => b.receipt.datetime - a.receipt.datetime);
+
+        receiptsAndRows.forEach(receiptAndRow => {
+            receiptList.appendChild(receiptAndRow.row);
+        });
+
+
+
+    </script>
+</body>
+
+</html>
