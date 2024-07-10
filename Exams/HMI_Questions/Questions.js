@@ -10,7 +10,7 @@
     "answer": "S: Skill-based\nR: Rule-based\nK: Knowledge-based"
   },
   {
-    "questionTitle": "Cognitive System and SRK Level",
+    "questionTitle": "Cognitive System, SRK Level",
     "question": "c) Your friend, an experienced piano player with over 10 years of experience, is playing a familiar song. Which cognitive system is she utilizing, and which level of the SRK taxonomy is impacted? Please provide the name of the cognitive system and the corresponding level on the SRK taxonomy. Additionally, include a statement explaining your selection in 1-2 sentences. (4 points)",
     "answer": "She is utilizing System 1 and the Skill-based level. This is because playing a familiar song for an experienced player is an automatic process requiring little conscious effort."
   },
@@ -25,7 +25,7 @@
     "answer": "• Lack of Feedback\n• Poor Mapping\n• Lack of Discoverability\n• Poor Mapping\n• Cultural Constraints\n• Lack of Familiarity"
   },
   {
-    "questionTitle": "Gulf of Execution and Evaluation",
+    "questionTitle": "Gulf of Execution, Evaluation",
     "question": "f) Provide the names of two interaction principles that assist in bridging the Gulf of Execution, and two interaction principles that assist in bridging the Gulf of Evaluation. (4 points)",
     "answer": "Gulf of Execution: Signifiers, Constraints\nGulf of Evaluation: Feedback, Visibility"
   },
@@ -80,17 +80,17 @@
     "answer": "S: Salience\nE: Effort\nE: Expectancy\nV: Value"
   },
   {
-    "questionTitle": "SEEV Model in Dashboard Design",
+    "questionTitle": "SEEV Model, Dashboard Design",
     "question": "INFORMATION VISUALISATION AND INFORMATION DASHBOARDS    (12 POINTS)\na) Imagine, your task is to design a student dashboard for the Deggendorf Institute of Technology (DIT). How can the SEEV model be employed in the dashboard design process? Elaborate with examples in 3-4 sentences. (4 points)",
     "answer": "The SEEV model can guide the design by ensuring important information is salient, like highlighting upcoming deadlines. Effort should be minimized by grouping related information together. Expectancy can be addressed by displaying commonly needed information, such as grades and schedules, prominently. Value is considered by including features like progress trackers that align with student goals."
   },
   {
-    "questionTitle": "Properties of an Information Dashboard",
+    "questionTitle": "Information Dashboard",
     "question": "b) Name two main properties of an information dashboard. (2 points)\n1.            \n2.            ",
     "answer": "1. Real-time data updates\n2. At-a-glance visualization"
   },
   {
-    "questionTitle": "Calculator App Design Principle",
+    "questionTitle": "Calculator",
     "question": "c) Examine the provided screenshot of a calculator app. Identify and name the design principle or approach that is evident in the visual representation. Please provide your answer in one word. (1 point)",
     "answer": "Simplicity"
   },
@@ -120,12 +120,12 @@
     "answer": "1. Consistency\n2. Feedback\n3. Error Prevention"
   },
   {
-    "questionTitle": "Elaborate on Dialogue Principle",
+    "questionTitle": "Elaborate Dialogue Principle",
     "question": "d) Elaborate on one of these principles in greater detail and provide a real-world example where this dialogue principle is implemented (3-4 sentences). (4 points)",
     "answer": "Consistency: This principle ensures that similar actions and commands are performed in the same way throughout the interface. For example, in Microsoft Word, the 'Save' function is always represented by a floppy disk icon, and it always performs the same action, regardless of the context. This consistency helps users learn and remember functions, making the interface more intuitive."
   },
   {
-    "questionTitle": "Difference Between Usability Inspection and Usability Tests",
+    "questionTitle": "Usability Inspection vs Test",
     "question": "e) What is the main difference between Usability Inspection and Usability Tests?  [< 10 words] (4 points)",
     "answer": "Inspection: Experts review; Tests: Users perform tasks."
   },
