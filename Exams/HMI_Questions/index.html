@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question Viewer</title>
+    <script src="Questions.js"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      max-width: 90%;
+      width: 600px;
+      padding: 20px;
+      text-align: center;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .header select, .header label, .header input {
+      font-size: 1em;
+    }
+    .header select {
+      padding: 8px;
+      border: 2px solid #007BFF;
+      border-radius: 5px;
+      color: #007BFF;
+      outline: none;
+    }
+    .header label {
+      margin-right: 10px;
+      color: #007BFF;
+    }
+    .question {
+      font-size: 1.2em;
+      color: #333333;
+      margin-bottom: 10px;
+    }
+    .answer {
+      display: none;
+      margin-top: 10px;
+     
+      color: rgb(56, 203, 56);
+       font-style: bold;
+       font-weight: 800;
+      font-size: 1.2em;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button:focus {
+      outline: none;
+    }
+    #currentIndex {
+      font-size: 1.2em;
+      color: #007BFF;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+   
+    <select id="questionSelector"></select>
+    <span id="currentIndex">0</span>
+    <div>
+      <label for="toggleRandom">Random:</label>
+      <input type="checkbox" id="toggleRandom">
+    </div>
+  </div>
+  <div class="question">
+    <span id="questionTitle"></span>
+    <p id="questionText"></p>
+  </div>
+  <button id="showAnswerBtn">Show Answer</button>
+  <div class="answer" id="answerText"></div>
+  <div class="controls">
+    <button id="prevQuestionBtn">Previous</button>
+    <button id="nextQuestionBtn">Next</button>
+  </div>
+</div>
+
+<script>
+  let currentIndex = 0;
+  const questionSelector = document.getElementById('questionSelector');
+  const questionTitle = document.getElementById('questionTitle');
+  const questionText = document.getElementById('questionText');
+  const answerText = document.getElementById('answerText');
+  const showAnswerBtn = document.getElementById('showAnswerBtn');
+  const prevQuestionBtn = document.getElementById('prevQuestionBtn');
+  const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+  const currentIndexSpan = document.getElementById('currentIndex');
+  const toggleRandom = document.getElementById('toggleRandom');
+
+  function populateQuestionSelector() {
+    questions.forEach((q, index) => {
+      const option = document.createElement('option');
+      option.value = index;
+      option.textContent = q.questionTitle;
+      questionSelector.appendChild(option);
+    });
+  }
+
+  function updateQuestion(index) {
+    const question = questions[index];
+    questionTitle.textContent = question.questionTitle;
+    questionText.textContent = question.question;
+    let answer = question.answer;
+    answer = answer.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    answerText.innerHTML = answer;
+    answerText.style.display = 'none';
+    currentIndexSpan.textContent = index;
+    questionSelector.value = index;
+    showAnswerBtn.style.display = 'inline';
+  }
+
+  function showAnswer() {
+    answerText.style.display = 'block';
+    showAnswerBtn.style.display = 'none';
+
+  }
+
+  function nextQuestion() {
+    if (toggleRandom.checked) {
+      currentIndex = Math.floor(Math.random() * questions.length);
+    } else {
+      currentIndex = (currentIndex + 1) % questions.length;
+    }
+    updateQuestion(currentIndex);
+  }
+
+  function prevQuestion() {
+    currentIndex = (currentIndex - 1 + questions.length) % questions.length;
+    updateQuestion(currentIndex);
+  }
+
+  toggleRandom.addEventListener('change', () => {
+    if (toggleRandom.checked) {
+      prevQuestionBtn.style.display = 'none';
+      nextQuestionBtn.textContent = 'Random';
+    } else {
+      prevQuestionBtn.style.display = 'inline-block';
+      nextQuestionBtn.textContent = 'Next';
+    }
+  });
+
+  questionSelector.addEventListener('change', () => {
+    currentIndex = parseInt(questionSelector.value);
+    updateQuestion(currentIndex);
+  });
+
+  showAnswerBtn.addEventListener('click', showAnswer);
+  nextQuestionBtn.addEventListener('click', nextQuestion);
+  prevQuestionBtn.addEventListener('click', prevQuestion);
+
+  populateQuestionSelector();
+  updateQuestion(currentIndex);
+</script>
+
+</body>
+</html>
