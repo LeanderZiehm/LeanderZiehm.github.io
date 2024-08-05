@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Exchange</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        form {
+            background: #fff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        form button {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .offer {
+            background: #fff;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .offer h3 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Skill Exchange</h1>
+    </header>
+
+    <div class="container">
+        <form id="offerForm">
+            <h2>Add Your Skill Offer</h2>
+            <label for="skillToTeach">Skill to Teach:</label>
+            <input type="text" id="skillToTeach" name="skillToTeach" required>
+
+            <label for="reward">Reward Desired:</label>
+            <input type="text" id="reward" name="reward" required>
+
+            <button type="submit">Submit Offer</button>
+        </form>
+
+        <div id="offersList">
+            <h2>Current Offers</h2>
+        </div>
+    </div>
+
+    <script src="offers.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load offers from the JavaScript variable
+            loadOffers();
+
+            // Handle form submission
+            document.getElementById('offerForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const skillToTeach = document.getElementById('skillToTeach').value;
+                const reward = document.getElementById('reward').value;
+
+                if (skillToTeach && reward) {
+                    const offersList = document.getElementById('offersList');
+
+                    const offerDiv = document.createElement('div');
+                    offerDiv.classList.add('offer');
+
+                    const skillHeader = document.createElement('h3');
+                    skillHeader.textContent = `Skill to Teach: ${skillToTeach}`;
+                    offerDiv.appendChild(skillHeader);
+
+                    const rewardParagraph = document.createElement('p');
+                    rewardParagraph.textContent = `Reward Desired: ${reward}`;
+                    offerDiv.appendChild(rewardParagraph);
+
+                    offersList.appendChild(offerDiv);
+
+                    // Clear the form
+                    document.getElementById('offerForm').reset();
+                }
+            });
+        });
+
+        function loadOffers() {
+            const offers = [
+                {
+                    "skillToTeach": "Exam Prep Speedrun",
+                    "reward": "Learn how to play guitar"
+                },
+                {
+                    "skillToTeach": "Language Exchange",
+                    "reward": "Learn how to dance Tango"
+                },
+                {
+                    "skillToTeach": "Create DJ Music FL Studio",
+                    "reward": "Learn how to dance Tango"
+                }
+            ];
+
+            const offersList = document.getElementById('offersList');
+
+            offers.forEach(offer => {
+                const offerDiv = document.createElement('div');
+                offerDiv.classList.add('offer');
+
+                const skillHeader = document.createElement('h3');
+                skillHeader.textContent = `Skill to Teach: ${offer.skillToTeach}`;
+                offerDiv.appendChild(skillHeader);
+
+                const rewardParagraph = document.createElement('p');
+                rewardParagraph.textContent = `Reward Desired: ${offer.reward}`;
+                offerDiv.appendChild(rewardParagraph);
+
+                offersList.appendChild(offerDiv);
+            });
+        }
+    </script>
+</body>
+</html>
