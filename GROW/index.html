@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegetable Meal Planner</title>
+    <style>
+        /* Reset some default styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        /* Title */
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        /* Vegetable List Container */
+        .vegetable-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        /* Vegetable Card */
+        .vegetable {
+            margin: 10px;
+            padding: 15px;
+            width: 150px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+
+        .vegetable:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Love & Hate Buttons */
+        .love, .hate {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .love {
+            background-color: #28a745; /* Green */
+            color: white;
+        }
+
+        .love:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .hate {
+            background-color: #dc3545; /* Red */
+            color: white;
+        }
+
+        .hate:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        /* Done Button */
+        #doneBtn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #doneBtn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Result Section */
+        #result {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #ffebcc;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .vegetable {
+                width: 120px;
+            }
+
+            .love, .hate {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            #doneBtn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pick Your Vegetables</h1>
+<div class="vegetable-list" id="vegetable-list"></div>
+
+<button id="doneBtn">Done</button>
+
+<div id="result"></div>
+
+<script>
+    const vegetables = [
+        {"name": "Carrot", "calories": 41, "protein_g": 0.9, "emoji": "🥕"},
+        {"name": "Broccoli", "calories": 55, "protein_g": 3.7, "emoji": "🥦"},
+        {"name": "Spinach", "calories": 23, "protein_g": 2.9, "emoji": "🥬"},
+        {"name": "Bell Pepper", "calories": 31, "protein_g": 1.0, "emoji": "🌶️"},
+        {"name": "Tomato", "calories": 18, "protein_g": 0.9, "emoji": "🍅"},
+        {"name": "Cucumber", "calories": 12, "protein_g": 0.6, "emoji": "🥒"},
+        {"name": "Cauliflower", "calories": 25, "protein_g": 1.9, "emoji": "🥦"},
+        {"name": "Kale", "calories": 49, "protein_g": 4.3, "emoji": "🥬"},
+        {"name": "Zucchini", "calories": 17, "protein_g": 1.2, "emoji": "🥒"},
+        {"name": "Asparagus", "calories": 20, "protein_g": 2.2, "emoji": "🥗"},
+        {"name": "Eggplant", "calories": 25, "protein_g": 1.0, "emoji": "🍆"},
+        {"name": "Brussels Sprouts", "calories": 43, "protein_g": 3.4, "emoji": "🥬"}
+    ];
+
+    let lovedVegetables = [];
+    let hatedVegetables = [];
+
+    const vegetableListDiv = document.getElementById('vegetable-list');
+
+    vegetables.forEach((veg, index) => {
+        const vegDiv = document.createElement('div');
+        vegDiv.className = 'vegetable';
+        vegDiv.id = `veg-${index}`;
+        vegDiv.innerHTML = `<span>${veg.emoji} ${veg.name}</span><br>
+                            <button class="love" onclick="markLove(${index})">Love</button>
+                            <button class="hate" onclick="markHate(${index})">Hate</button>`;
+        vegetableListDiv.appendChild(vegDiv);
+    });
+
+    function markLove(index) {
+        const veg = vegetables[index];
+        const vegDiv = document.getElementById(`veg-${index}`);
+        if (!lovedVegetables.includes(veg.name)) {
+            lovedVegetables.push(veg.name);
+            vegDiv.style.backgroundColor = '#d4edda'; // Light green for loved
+        }
+        hatedVegetables = hatedVegetables.filter(h => h !== veg.name); // Remove if marked hate before
+        document.getElementById(`veg-${index}`).style.backgroundColor = '#d4edda'; // Update color to green
+    }
+
+    function markHate(index) {
+        const veg = vegetables[index];
+        const vegDiv = document.getElementById(`veg-${index}`);
+        if (!hatedVegetables.includes(veg.name)) {
+            hatedVegetables.push(veg.name);
+            vegDiv.style.backgroundColor = '#f8d7da'; // Light red for hated
+        }
+        lovedVegetables = lovedVegetables.filter(l => l !== veg.name); // Remove if marked love before
+        document.getElementById(`veg-${index}`).style.backgroundColor = '#f8d7da'; // Update color to red
+    }
+
+    document.getElementById('doneBtn').addEventListener('click', () => {
+        const availableVegetables = vegetables.filter(veg => lovedVegetables.includes(veg.name) && !hatedVegetables.includes(veg.name));
+
+        if (availableVegetables.length < 5) {
+            document.getElementById('result').innerHTML = 'Not enough vegetables loved to create a meal!';
+            return;
+        }
+
+        // Pick 5 random vegetables for the meal
+        const randomVegetables = [];
+        while (randomVegetables.length < 5) {
+            const randomVeg = availableVegetables[Math.floor(Math.random() * availableVegetables.length)];
+            if (!randomVegetables.includes(randomVeg)) {
+                randomVegetables.push(randomVeg);
+            }
+        }
+
+        const totalCalories = randomVegetables.reduce((sum, veg) => sum + veg.calories, 0);
+        const totalProtein = randomVegetables.reduce((sum, veg) => sum + veg.protein_g, 0);
+
+        document.getElementById('result').innerHTML = `Your random meal includes:<br> ${randomVegetables.map(veg => veg.emoji + " " + veg.name).join(', ')}<br>
+            Total Calories: ${totalCalories} kcal<br>
+            Total Protein: ${totalProtein.toFixed(1)} g`;
+    });
+</script>
+
+</body>
+</html>
