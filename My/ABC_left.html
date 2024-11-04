@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alphabet Neighbor Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body, html {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 4rem;
+      margin: 0.5em 0;
+    }
+    .scoreboard {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.2rem;
+      color: rgb(0, 0, 0);
+      font-weight: bold;
+    }
+    .input-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      font-size: 1.5rem;
+      padding: 0.5em;
+      width: 3em;
+      text-align: center;
+    }
+    button {
+      padding: 0.5em 1em;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border: none;
+      background-color: #333;
+      color: white;
+      border-radius: 5px;
+    }
+    .correct {
+      background-color: #28a745;
+    }
+    .incorrect {
+      background-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <div class="scoreboard">
+      ✅ Correct: <span id="correct-counter">0</span> |
+      ❌ Wrong: <span id="wrong-counter">0</span>
+      <div id="solution">solution</div>
+    </div>
+    <h1 id="letter-display">A</h1>
+    <div class="input-container">
+      <input type="text" id="letter-input" maxlength="1" autofocus placeholder="?" />
+      <button onclick="checkAnswer()">Check</button>
+    </div>
+  </div>
+  <script>
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let currentIndex = Math.floor(Math.random() * 26);
+    let correctCount = 0;
+    let wrongCount = 0;
+    const letterDisplay = document.getElementById("letter-display");
+    const letterInput = document.getElementById("letter-input");
+    const correctCounter = document.getElementById("correct-counter");
+    const wrongCounter = document.getElementById("wrong-counter");
+    // Display a random letter on load
+    function displayLetter() {
+      letterDisplay.textContent = alphabet[currentIndex];
+      letterInput.value = ""; // Clear input field
+      letterInput.focus();
+    }
+    // Check if the answer is correct
+    function checkAnswer() {
+      const answer = letterInput.value.toUpperCase();
+      const correctLetterBefore = alphabet[currentIndex - 1] || "Z"; // Wrap around for 'A'
+
+      solution.textContent = correctLetterBefore+" < " + alphabet[currentIndex];
+      // const correctLetterAfter = alphabet[currentIndex + 1] || "A";  // Wrap around for 'Z'
+      // Correct if answer is either the previous or next letter
+      if (answer === correctLetterBefore) {
+        document.body.classList.add("correct");
+        document.body.classList.remove("incorrect");
+        correctCount++;
+        correctCounter.textContent = correctCount;
+      } else {
+        document.body.classList.add("incorrect");
+        document.body.classList.remove("correct");
+        wrongCount++;
+        wrongCounter.textContent = wrongCount;
+      }
+      // Display a new random letter
+      currentIndex = Math.floor(Math.random() * 26);
+      setTimeout(() => {
+        document.body.classList.remove("correct", "incorrect");
+        displayLetter();
+      }, 500);
+    }
+    // Initialize the game
+    displayLetter();
+    // Listen for Enter key to submit
+    letterInput.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        checkAnswer();
+      }
+    });
+  </script>
+</body>
+</html>

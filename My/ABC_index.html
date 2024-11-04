@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alphabet Index Game</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    .scoreboard {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 20px;
+      font-size: 1rem;
+    }
+    .scoreboard div {
+      font-weight: bold;
+    }
+    .prompt {
+      font-size: 6rem;
+      margin: 20px 0;
+      color: #333;
+    }
+    .input-field {
+      width: 80%;
+      padding: 10px;
+      font-size: 1.2rem;
+      text-align: center;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+    .input-field.correct {
+      background-color: #d4edda;
+      border-color: #28a745;
+    }
+    .input-field.wrong {
+      background-color: #f8d7da;
+      border-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="scoreboard">
+    <div id="solution"></div>
+    <div>Correct: <span id="correctCount">0</span></div>
+    <div>Wrong: <span id="wrongCount">0</span></div>
+  </div>
+ 
+  <div class="container">
+    <div class="prompt" id="prompt">A</div>
+    <input type="text" id="answerInput" class="input-field" placeholder="Enter index or letter..." autocomplete="off">
+  </div>
+  <script>
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let correctCount = 0;
+    let wrongCount = 0;
+    let currentPrompt;
+    let isLetterPrompt;
+    let correctAnswer;
+    const correctCountElem = document.getElementById('correctCount');
+    const wrongCountElem = document.getElementById('wrongCount');
+    const promptElem = document.getElementById('prompt');
+    const answerInput = document.getElementById('answerInput');
+    function generatePrompt() {
+      answerInput.value = "";
+      answerInput.classList.remove("correct", "wrong");
+      // Randomly choose between letter prompt and index prompt
+      isLetterPrompt = Math.random() < 0.5;
+      if (isLetterPrompt) {
+        // Letter prompt: show a letter, expect the index
+        currentPrompt = alphabet[Math.floor(Math.random() * alphabet.length)];
+        promptElem.textContent = currentPrompt;
+      } else {
+        // Index prompt: show a number, expect the letter
+        currentPrompt = Math.floor(Math.random() * alphabet.length) + 1;
+        promptElem.textContent = currentPrompt;
+      }
+    }
+    function checkAnswer() {
+
+    
+
+      let userAnswer = answerInput.value.trim().toUpperCase();
+      if (!userAnswer) return;
+   
+      if (isLetterPrompt) {
+        // Expecting an index for the given letter
+        correctAnswer = alphabet.indexOf(currentPrompt) + 1;
+        solution.textContent = currentPrompt+" = "+ correctAnswer;
+
+        if (parseInt(userAnswer) === correctAnswer) {
+          handleCorrect();
+        } else {
+          handleWrong();
+        }
+      } else {
+        // Expecting a letter for the given index
+        correctAnswer = alphabet[currentPrompt - 1];
+        solution.textContent = currentPrompt+" = "+ correctAnswer;
+        if (userAnswer === correctAnswer) {
+          handleCorrect();
+        } else {
+          handleWrong();
+        }
+      }
+
+
+
+    }
+    function handleCorrect() {
+      correctCount++;
+      correctCountElem.textContent = correctCount;
+      answerInput.classList.add("correct");
+      // setTimeout(generatePrompt, 1000);
+      document.body.style.backgroundColor = "green";
+      generatePrompt();
+    }
+    function handleWrong() {
+      wrongCount++;
+      wrongCountElem.textContent = wrongCount;
+      answerInput.classList.add("wrong");
+      //set website screen to red
+      document.body.style.backgroundColor = "red";
+      // setTimeout(generatePrompt, 1000);
+      generatePrompt();
+    }
+    // Event listener for Enter key to submit answer
+    answerInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        checkAnswer();
+      }
+    });
+    // Initialize the first prompt
+    generatePrompt();
+  </script>
+</body>
+</html>
