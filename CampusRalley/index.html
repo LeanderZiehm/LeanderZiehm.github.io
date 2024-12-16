@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THD Campus Treasure Hunt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            user-select: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        .question h2 {
+            margin-bottom: 10px;
+        }
+        .input-container {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .input-container span {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #fff;
+        }
+        .input-container span.correct {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background: #007BFF;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        /* #next-btn {
+            display: block;
+            margin-left: auto;
+        } */
+        .text-input {
+            position: absolute;
+            width: 90%;
+            height: 40px;
+            opacity: 0;
+        }
+        .bottom-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .currentBlock {
+            border-color: #007BFF !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="quiz"></div>
+        <div class="bottom-buttons">
+            <button id="prev-btn" class="btn">Prev</button>
+            <button id="next-btn" class="btn">Next</button>
+        </div>
+    </div>
+    <script>
+        const questions = [
+    {
+        text: "Ich stehe Mitten auf dem Campus. Ich bin kein Gebäude, aber trotzdem stabil. Wenn du hoch hinaus willst, steigst du auf mich.",
+        answer: "Campustreppe"
+    },
+    {
+        text: "Dort, wo ihr jetzt steht, könnt ihr mich nicht sehen. Ich bin ein Haus, in dem es meistens leise ist. Wenn ihr lernen müsst, braucht ihr das, was in mir wohnt. Man nennt mich auch BIBB.",
+        answer: "Bibliothek"
+    },
+    {
+        text: "Suche die richtige Fakultät! An dieser Fakultät sammelst du viel Praxiserfahrung. Ohne meine Studiengänge bzw. ohne die Menschen, die sowas lernen, gäbe es keine Bauwerke.",
+        answer: "Bau- und Umweltingenieurwesen (Gebäude D)"
+    },
+    {
+        text: "In diesem Gebäude hängt ein großes Pendel von der Decke. Man geht hinein und sieht es gleich. Das Gebäude ist das letzte im THD „ABC“.",
+        answer: "Gebäude L (Naturwissenschaften)"
+    },
+    {
+        text: "Auf dem Neucampus befinden sich Sitzgelegenheiten/Liegen in unterschiedlichen Farben. Wie viele sind es insgesamt?",
+        answer: "28"
+    },
+    {
+        text: "Das Gebäude B ist ein Verwaltungsgebäude. Hier befindet sich das Studienzentrum. Die Mitarbeiter kümmern sich um die Bewerbung und Zulassung für einen Studiengang. Findet den Terminal, an dem die Studierenden den Studentenausweis aufladen können.",
+        answer: "Studienzentrum, Gebäude B"
+    },
+    {
+        text: "Gehe in das Holzhaus am Campus – unser Campusstore. Finde das beige T-Shirt – was steht darauf?",
+        answer: "Never not Procrastinating"
+    },
+    {
+        text: "Gehe zu dem Gebäude, das ein Fernsehstudio hat, weil die Studierenden dieser Fachrichtung alles über Medien lernen.",
+        answer: "Gebäude J (Medientechnik)"
+    },
+    {
+        text: "Dieses Gebäude ist keine Fakultät. Es gibt nur Vorlesungssäle, in denen unterrichtet wird. In dem Gebäude befindet sich eine Bildergalerie. Schaue dir die Bilder genau an. Worin sitzt Dr. Wolfgang Heubisch?",
+        answer: "Fast Forest"
+    },
+    {
+        text: "Bei uns könnt ihr kostengünstig etwas Essen. Mittagsgerichte und Snacks gibt es in diesem Gebäude.",
+        answer: "Mensa"
+    }
+];
+
+const quizContainer = document.getElementById('quiz');
+    const nextButton = document.getElementById('next-btn');
+    let currentQuestionIndex = 0;
+
+    function updateInputBlocks(value, answer, inputContainer) {
+        inputContainer.innerHTML = '';
+        for (let i = 0; i < answer.length; i++) {
+            const block = document.createElement('span');
+            block.textContent = value[i] || '';
+            if (value[i]?.toLowerCase() === answer[i].toLowerCase()) {
+                block.classList.add('correct');
+            }
+            // make the current index bold
+            if (i === value.length) {
+                block.classList.add('currentBlock');
+            }
+
+            inputContainer.appendChild(block);
+        }
+    }
+
+    function handleInputEvent(input, question, inputContainer, feedback) {
+        const value = input.value;
+
+        // Limit input length to the solution length
+        if (value.length > question.answer.length) {
+            input.value = value.slice(0, question.answer.length);
+        }
+
+        // Update input blocks visually
+        updateInputBlocks(input.value, question.answer, inputContainer);
+
+        // Clear feedback while typing
+        feedback.textContent = '';
+    }
+
+    function loadQuestion(index) {
+        quizContainer.innerHTML = '';
+        const question = questions[index];
+
+        // Create elements
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question', 'active');
+        const title = document.createElement('h2');
+        title.textContent = `Frage ${index+1}`;
+        const text = document.createElement('p');
+        text.textContent = question.text;
+
+        // Input element
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = index;
+        input.placeholder = 'Type your answer here';
+        input.value = localStorage.getItem('input'+index) || ''; // 
+        input.classList.add('text-input');
+     
+
+        //on lose focus focus on input again
+        input.addEventListener('blur', () => {
+          const currentBlockFound = document.querySelector('.currentBlock');
+          //remove currentBlock class
+            if (currentBlockFound) {
+                currentBlockFound.classList.remove('currentBlock');
+            }
+        });
+
+
+        // Input container for visual feedback
+        const inputContainer = document.createElement('div');
+        inputContainer.classList.add('input-container');
+
+        const textInputAndBlocks =  document.createElement('div');
+        textInputAndBlocks.appendChild(input);
+
+        textInputAndBlocks.appendChild(inputContainer);
+   
+
+        // Feedback element
+        const feedback = document.createElement('p');
+        feedback.classList.add('feedback');
+
+        // Attach event listeners to the input
+        input.addEventListener('input', () => handleInputEvent(input, question, inputContainer, feedback));
+        input.addEventListener('blur', () => {
+        //    input.value.trim().toLowerCase()
+        // save to local storage to load again on refresh
+        localStorage.setItem('input'+index, input.value);
+        });
+        //also save on leave    
+        window.addEventListener('beforeunload', function (e) {
+            localStorage.setItem('input'+index, input.value);
+        });
+
+
+        questionDiv.appendChild(title);
+        questionDiv.appendChild(text);
+        questionDiv.appendChild(textInputAndBlocks);
+
+       
+        questionDiv.appendChild(feedback);
+        quizContainer.appendChild(questionDiv);
+
+        // Trigger initial visual update
+        input.dispatchEvent(new Event('input'));
+        // input.focus();
+    }
+
+    nextButton.addEventListener('click', () => {
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            loadQuestion(currentQuestionIndex);
+        } else {
+            alert('You have completed the quiz!');
+        }
+    });
+
+    prevButton = document.getElementById('prev-btn');
+    prevButton.addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            loadQuestion(currentQuestionIndex);
+        }
+    });
+
+    loadQuestion(currentQuestionIndex);
+    </script>
+</body>
+</html>
