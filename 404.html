@@ -2,15 +2,58 @@
 <html>
   <head>
     <meta charset=utf-8>
-    <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="1; url=index.html">
+     <title>404 – Redirecting...</title>
+    <meta http-equiv="refresh" content="0; url=/">
     <link rel="stylesheet" href="colors.css">
     <script src="test.js" type="text/javascript" charset="utf-8"></script>
     <script defer src="https://umami.leanderziehm.com/script.js" data-website-id="7d2cc013-c187-4aba-a2aa-05ea6f4868ed"></script>
+
+
+    
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background-color: #111;
+        color: #eee;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        text-align: center;
+      }
+      h1 {
+        font-size: 10rem;
+        margin: 0;
+        color: #ff5555;
+      }
+      p {
+        font-size: 1.5rem;
+        margin: 0.5em 0 1.5em 0;
+        color: #ccc;
+      }
+      a {
+        color: #4da3ff;
+        text-decoration: none;
+        border-bottom: 1px dashed #4da3ff;
+      }
+      a:hover {
+        color: #66b3ff;
+        border-bottom-color: transparent;
+      }
+    </style>
   </head>
+
   <body>
-    <a href="index.html">Click here if you are not redirected.</a>
-  <!--   <script>window.location.replace("index.html");</script> -->
-    <script> window.location.href = "index.html";</script>
+    <h1>404</h1>
+    <p>Page not found. Redirecting you to the homepage...</p>
+    
+       <script>
+      window.addEventListener("DOMContentLoaded", () => {
+
+        window.location.href = "/";
+      });
+    </script>
   </body>
 </html>
